@@ -45,6 +45,7 @@ jobs:
         env:
           PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
           NEXT_PUBLIC_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
+          NEXT_PUBLIC_SIGNATURE_SECRET: ${{ secrets.NEXT_PUBLIC_SIGNATURE_SECRET }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
