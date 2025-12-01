@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { CATEGORY_LABELS, CATEGORY_ICONS } from '@/lib/constants';
 import type { Question } from '@/lib/types';
+import { getQuestionsPath } from '@/lib/paths';
 
 interface CategoryStats {
   name: string;
@@ -24,8 +25,14 @@ export default function QuestionsStatsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/questions/all.json')
-      .then(res => res.json())
+    const questionsPath = getQuestionsPath();
+    fetch(questionsPath)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data: Question[]) => {
         setQuestions(data);
         setLoading(false);
