@@ -12,8 +12,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: 'Test your JavaScript knowledge with deep-dive questions',
     start_url: `${basePath}/`,
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#2563eb',
+    background_color: '#0a0f1a',
+    theme_color: '#22d3ee',
     orientation: 'portrait-primary',
     icons: [
       {

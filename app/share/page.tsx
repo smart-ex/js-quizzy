@@ -53,6 +53,42 @@ function ShareContent() {
       const valid = await verifyShareUrl(user, score, ts, signature);
       setIsValid(valid);
       setIsVerifying(false);
+
+      // Update meta tags for social sharing
+      if (valid) {
+        const percentage = Math.round((correct / total) * 100);
+        const categoryLabel = CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS] || category;
+        const siteUrl = typeof window !== 'undefined' ? window.location.origin : '';
+        const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+        
+        // Update document title
+        document.title = `Scored ${score} (${percentage}%) on ${categoryLabel} Quiz - JS Quizzy`;
+        
+        // Update or create meta tags
+        const updateMetaTag = (property: string, content: string) => {
+          let meta = document.querySelector(`meta[property="${property}"]`) || 
+                     document.querySelector(`meta[name="${property}"]`);
+          if (!meta) {
+            meta = document.createElement('meta');
+            meta.setAttribute('property', property);
+            document.head.appendChild(meta);
+          }
+          meta.setAttribute('content', content);
+        };
+
+        const description = `I scored ${score} (${percentage}%) on ${categoryLabel} quiz! Can you beat my score?`;
+        
+        updateMetaTag('og:title', `Scored ${score} (${percentage}%) on ${categoryLabel} Quiz`);
+        updateMetaTag('og:description', description);
+        updateMetaTag('og:type', 'website');
+        updateMetaTag('og:url', typeof window !== 'undefined' ? window.location.href : '');
+        updateMetaTag('og:image', `${siteUrl}${basePath}/og-image.png`);
+        
+        updateMetaTag('twitter:card', 'summary_large_image');
+        updateMetaTag('twitter:title', `Scored ${score} (${percentage}%) on ${categoryLabel} Quiz`);
+        updateMetaTag('twitter:description', description);
+        updateMetaTag('twitter:image', `${siteUrl}${basePath}/og-image.png`);
+      }
     };
 
     verify();
@@ -207,31 +243,42 @@ function ShareContent() {
 
   const successLevel = getSuccessLevel();
 
+  // Get emoji based on performance
+  const getPerformanceEmoji = () => {
+    if (percentage >= 90) return '🎉';
+    if (percentage >= 70) return '👍';
+    if (percentage >= 50) return '💪';
+    return '📚';
+  };
+
+  const performanceEmoji = getPerformanceEmoji();
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navigation />
       
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="glass-card p-8 md:p-12 text-center animate-fadeIn">
-          {/* Success Icon */}
-          <div className="mb-6">
+      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 flex items-center">
+        <div className="glass-card p-6 md:p-8 text-center animate-fadeInUp w-full">
+          {/* Compact Header with Emoji and Icon */}
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div className="text-5xl">{performanceEmoji}</div>
             <div 
-              className="w-20 h-20 mx-auto rounded-2xl flex items-center justify-center mb-4"
+              className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
               style={{
                 background: successLevel.bgGradient,
-                border: `1px solid ${successLevel.borderColor}`
+                border: `2px solid ${successLevel.borderColor}`
               }}
             >
               {percentage >= 90 ? (
-                <svg className="w-10 h-10" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-8 h-8" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               ) : percentage >= 70 ? (
-                <svg className="w-10 h-10" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-8 h-8" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               ) : (
-                <svg className="w-10 h-10" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-8 h-8" style={{ color: successLevel.color }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               )}
@@ -239,35 +286,66 @@ function ShareContent() {
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-[var(--text-primary)]">
+          <h1 className="text-2xl md:text-3xl font-bold mb-3 text-[var(--text-primary)]">
             Quiz Results
           </h1>
           
-          {/* Score Display */}
-          <div className="mb-8">
-            <div 
-              className="text-6xl md:text-7xl font-bold mb-3"
-              style={{ 
-                background: successLevel.gradient,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text'
-              }}
-            >
-              {score}
-            </div>
-            <div className="text-2xl md:text-3xl text-[var(--text-secondary)] font-semibold">
-              {percentage}% Accuracy
+          {/* Compact Score Display with Circular Progress */}
+          <div className="mb-4 relative inline-block">
+            <div className="relative w-32 h-32 mx-auto">
+              <svg className="w-full h-full -rotate-90">
+                <circle
+                  cx="64"
+                  cy="64"
+                  r="56"
+                  fill="none"
+                  stroke="var(--bg-tertiary)"
+                  strokeWidth="8"
+                />
+                <circle
+                  cx="64"
+                  cy="64"
+                  r="56"
+                  fill="none"
+                  stroke={successLevel.color}
+                  strokeWidth="8"
+                  strokeDasharray={`${percentage * 3.52} 352`}
+                  strokeLinecap="round"
+                  className="transition-all duration-1000 ease-out"
+                />
+              </svg>
+              <div className="absolute inset-0 flex flex-col items-center justify-center">
+                <div 
+                  className="text-3xl md:text-4xl font-bold mb-0.5"
+                  style={{ 
+                    background: successLevel.gradient,
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}
+                >
+                  {score}
+                </div>
+                <div className="text-sm text-[var(--text-muted)] font-medium">
+                  {percentage}%
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Category Info */}
-          <div className="glass-card p-6 mb-8 max-w-md mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-4">
+          {/* Compact Challenge Section */}
+          <div className="mb-4 p-4 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border-2 border-[var(--accent-primary)]/20">
+            <h2 className="text-lg font-bold text-[var(--text-primary)] mb-1">
+              🎯 Challenge Your Friends!
+            </h2>
+            <p className="text-sm text-[var(--text-secondary)] mb-2">
+              Share this result and see if they can beat your score of <span className="font-bold text-[var(--accent-primary)]">{score}</span>!
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
               {categoryIcon && (
-                <div className="icon-container w-12 h-12">
+                <div className="icon-container w-6 h-6">
                   <svg 
-                    className="w-6 h-6 text-[var(--accent-primary)]" 
+                    className="w-4 h-4 text-[var(--accent-primary)]" 
                     fill="none" 
                     viewBox="0 0 24 24" 
                     stroke="currentColor" 
@@ -281,44 +359,37 @@ function ShareContent() {
                   </svg>
                 </div>
               )}
-              <div className="text-left">
-                <p className="text-sm text-[var(--text-muted)] mb-1">Category</p>
-                <p className="text-lg font-semibold text-[var(--text-primary)]">
-                  {categoryLabel}
-                </p>
-              </div>
-            </div>
-            {date && (
-              <div className="pt-4 border-t border-[var(--border-subtle)]">
-                <p className="text-sm text-[var(--text-muted)] mb-1">Date</p>
-                <p className="text-base text-[var(--text-secondary)]">
+              <span className="px-2 py-0.5 rounded-full bg-[var(--bg-tertiary)]">
+                {categoryLabel}
+              </span>
+              {date && (
+                <span className="px-2 py-0.5 rounded-full bg-[var(--bg-tertiary)]">
                   {new Date(date).toLocaleDateString('en-US', { 
-                    year: 'numeric', 
-                    month: 'long', 
-                    day: 'numeric' 
+                    month: 'short', 
+                    day: 'numeric'
                   })}
-                </p>
-              </div>
-            )}
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Compact Action Buttons */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
             <Link
-              href="/quiz"
-              className="glow-button text-lg px-8 py-4 flex items-center gap-3"
+              href={`/quiz/${category}`}
+              className="glow-button text-base px-6 py-3 flex items-center justify-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Try Yourself
+              Try This Quiz
             </Link>
             <Link
               href="/"
-              className="px-8 py-4 rounded-xl border-2 border-[var(--border-medium)] text-[var(--text-secondary)] font-semibold text-lg hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all flex items-center gap-3"
+              className="px-6 py-3 rounded-xl border-2 border-[var(--border-medium)] text-[var(--text-secondary)] font-semibold text-base hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all flex items-center justify-center gap-2"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               Back to Home

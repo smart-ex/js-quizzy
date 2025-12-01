@@ -100,8 +100,18 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
             </div>
           </div>
 
-          {/* Share Button */}
-          <ShareButton session={session} />
+          {/* Share Section - Enhanced */}
+          <div className="mb-6 p-6 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border-2 border-[var(--accent-primary)]/20">
+            <div className="text-center mb-4">
+              <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
+                🎯 Challenge Your Friends!
+              </h3>
+              <p className="text-sm text-[var(--text-secondary)]">
+                Share your score and see if they can beat it!
+              </p>
+            </div>
+            <ShareButton session={session} />
+          </div>
         </div>
 
         {/* Review Section */}

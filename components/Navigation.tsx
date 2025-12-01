@@ -2,11 +2,50 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>;
+}
 
 export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setIsInstalled(window.matchMedia('(display-mode: standalone)').matches);
+
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e as BeforeInstallPromptEvent);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstall = async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    if (outcome === 'accepted') {
+      setIsInstalled(true);
+    }
+    
+    setDeferredPrompt(null);
+  };
+
+  const showInstallButton = mounted && deferredPrompt && !isInstalled;
 
   const links = [
     { href: '/', label: 'Home', icon: HomeIcon },
@@ -48,8 +87,30 @@ export function Navigation() {
             </div>
           </div>
           
-          {/* GitHub link */}
+          {/* PWA Install & GitHub links */}
           <div className="flex items-center gap-2">
+            {/* PWA Install Button */}
+            {showInstallButton && (
+              <button
+                onClick={handleInstall}
+                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25 transition-all group"
+                aria-label="Install PWA"
+              >
+                <InstallIcon className="w-4 h-4" />
+                <span className="text-sm font-medium">Install</span>
+              </button>
+            )}
+            {showInstallButton && (
+              <button
+                onClick={handleInstall}
+                className="sm:hidden p-2 rounded-lg text-[var(--accent-primary)] hover:bg-[var(--bg-card)] transition-colors"
+                aria-label="Install PWA"
+              >
+                <InstallIcon className="w-5 h-5" />
+              </button>
+            )}
+            
+            {/* GitHub link */}
             <a
               href="https://github.com/smart-ex/js-quizzy"
               target="_blank"
@@ -163,6 +224,14 @@ function AboutIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  );
+}
+
+function InstallIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3m-3 3l-3-3m3 3h6M3 13.5h10.5m-10.5 0V19.5A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5V13.5m-16.5 0V6a1.5 1.5 0 011.5-1.5h15A1.5 1.5 0 0121 6v7.5" />
     </svg>
   );
 }
