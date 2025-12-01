@@ -120,7 +120,7 @@ function formatCategoryName(category: Category): string {
 // Export default categories for backwards compatibility
 export const CATEGORIES = DEFAULT_CATEGORIES;
 
-export const DATA_VERSION = '1.0.1';
+export const DATA_VERSION = '1.1.0';
 
 export const QUESTIONS_PER_QUIZ = 10;
 
