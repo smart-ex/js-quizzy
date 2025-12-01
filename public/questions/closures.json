@@ -1,0 +1,382 @@
+[
+  {
+    "id": "q1_closures_basic",
+    "category": "closures",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Closure",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  let x = 10;\n  function inner() {\n    console.log(x);\n  }\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The inner function forms a closure over the variable x from the outer scope, allowing it to access x even after outer() has finished executing.",
+    "tags": ["closures", "scope", "lexical"],
+    "created_at": 1733046100000
+  },
+  {
+    "id": "q2_closures_loop",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Closure in Loop",
+    "question": "What will be printed?",
+    "code": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "undefined, undefined, undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var is function-scoped, so all closures share the same i variable. By the time setTimeout callbacks execute, i is 3. Use let to fix this.",
+    "tags": ["closures", "loop", "var", "let"],
+    "created_at": 1733046101000
+  },
+  {
+    "id": "q3_closures_let",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Closure with let",
+    "question": "What is the output?",
+    "code": "for (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "undefined, undefined, undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let is block-scoped. Each iteration creates a new binding, so each closure captures its own i value.",
+    "tags": ["closures", "let", "block-scope"],
+    "created_at": 1733046102000
+  },
+  {
+    "id": "q4_closures_private",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Private Variables",
+    "question": "What will be logged?",
+    "code": "function createCounter() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    getCount: () => count\n  };\n}\n\nconst counter = createCounter();\ncounter.increment();\nconsole.log(counter.getCount());",
+    "options": [
+      "0",
+      "1",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The closure allows count to be private. Only the returned methods can access it, creating an encapsulation pattern.",
+    "tags": ["closures", "private", "encapsulation"],
+    "created_at": 1733046103000
+  },
+  {
+    "id": "q5_closures_iife",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "IIFE and Closures",
+    "question": "What is the output?",
+    "code": "const arr = [];\nfor (var i = 0; i < 3; i++) {\n  arr.push((function(j) {\n    return function() { return j; };\n  })(i));\n}\nconsole.log(arr.map(fn => fn()));",
+    "options": [
+      "[0, 1, 2]",
+      "[3, 3, 3]",
+      "[undefined, undefined, undefined]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The IIFE creates a new scope for each iteration, capturing the current value of i in the parameter j. Each closure captures a different j value.",
+    "tags": ["closures", "iife", "pattern"],
+    "created_at": 1733046104000
+  },
+  {
+    "id": "q6_closures_scope_chain",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Scope Chain",
+    "question": "What will be logged?",
+    "code": "let x = 1;\nfunction outer() {\n  let x = 2;\n  function inner() {\n    console.log(x);\n  }\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The closure captures the nearest x in the scope chain. inner() accesses x from outer(), not the global x.",
+    "tags": ["closures", "scope-chain"],
+    "created_at": 1733046105000
+  },
+  {
+    "id": "q7_closures_memory",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Memory Leaks",
+    "question": "When can closures cause memory leaks?",
+    "options": [
+      "Never, closures are always garbage collected",
+      "When they hold references to large objects that are no longer needed",
+      "Only in older browsers",
+      "When using arrow functions"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Closures keep references to their outer scope. If a closure holds a reference to a large object, it prevents garbage collection even if the object is no longer used.",
+    "tags": ["closures", "memory", "leak"],
+    "created_at": 1733046106000
+  },
+  {
+    "id": "q8_closures_module",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Module Pattern",
+    "question": "What is the output?",
+    "code": "const module = (function() {\n  let _value = 0;\n  return {\n    get: () => _value,\n    set: (val) => { _value = val; }\n  };\n})();\n\nmodule.set(42);\nconsole.log(module.get());",
+    "options": [
+      "0",
+      "42",
+      "undefined",
+      "Error: private is not defined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This is the module pattern. The IIFE creates a closure that keeps private variables inaccessible from outside, while exposing a public API.",
+    "tags": ["closures", "module-pattern", "iife"],
+    "created_at": 1733046107000
+  },
+  {
+    "id": "q9_closures_currying",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Currying with Closures",
+    "question": "What is the result?",
+    "code": "function add(a) {\n  return function(b) {\n    return a + b;\n  };\n}\n\nconst add5 = add(5);\nconsole.log(add5(3));",
+    "options": [
+      "8",
+      "53",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "This is currying. add(5) returns a function that closes over a=5. When called with 3, it returns 5+3=8.",
+    "tags": ["closures", "currying", "functional"],
+    "created_at": 1733046108000
+  },
+  {
+    "id": "q10_closures_partial",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Partial Application",
+    "question": "What will be logged?",
+    "code": "function multiply(a, b, c) {\n  return a * b * c;\n}\n\nfunction partial(fn, ...args) {\n  return function(...rest) {\n    return fn(...args, ...rest);\n  };\n}\n\nconst multiplyBy2 = partial(multiply, 2);\nconsole.log(multiplyBy2(3, 4));",
+    "options": [
+      "24",
+      "12",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Partial application uses closures to 'pre-fill' some arguments. multiplyBy2(3, 4) becomes multiply(2, 3, 4) = 24.",
+    "tags": ["closures", "partial-application", "functional"],
+    "created_at": 1733046109000
+  },
+  {
+    "id": "q11_closures_arrow",
+    "category": "closures",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Arrow Functions and Closures",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return () => this.name;\n  }\n};\n\nconst fn = obj.getName();\nconsole.log(fn());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions don't have their own this. The arrow function closes over this from getName, which refers to obj.",
+    "tags": ["closures", "arrow-functions", "this"],
+    "created_at": 1733046110000
+  },
+  {
+    "id": "q12_closures_async_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async Closure",
+    "question": "What will be logged?",
+    "code": "function createAsync() {\n  let count = 0;\n  return async function() {\n    count++;\n    await Promise.resolve();\n    return count;\n  };\n}\n\nconst fn = createAsync();\nfn().then(console.log);\nfn().then(console.log);",
+    "options": [
+      "1, 2",
+      "2, 2",
+      "1, 1",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each call to fn() shares the same closure over count. The first call increments to 1, the second to 2. Both await, then return their respective values.",
+    "tags": ["closures", "async", "await"],
+    "created_at": 1733046111000
+  },
+  {
+    "id": "q13_closures_stale_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Stale Closure Problem",
+    "question": "What will be logged after 2 seconds?",
+    "code": "function createTimer() {\n  let count = 0;\n  setInterval(() => {\n    count++;\n  }, 500);\n  \n  return () => count;\n}\n\nconst getCount = createTimer();\nsetTimeout(() => console.log(getCount()), 2000);",
+    "options": [
+      "0",
+      "4",
+      "3",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The getCount function closes over the same count variable that setInterval modifies. After 2 seconds (4 intervals of 500ms), count is 4. This is NOT a stale closure because we're accessing the live variable.",
+    "tags": ["closures", "stale-closure", "setinterval"],
+    "created_at": 1733046112000
+  },
+  {
+    "id": "q14_closures_gc_prevention",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure and Garbage Collection",
+    "question": "Will the largeData be garbage collected after createHandler() is called?",
+    "code": "function createHandler() {\n  const largeData = new Array(1000000).fill('x');\n  const id = 42;\n  \n  return function handler() {\n    console.log(id);\n  };\n}\n\nconst handler = createHandler();",
+    "options": [
+      "Yes, largeData will be garbage collected",
+      "No, largeData stays in memory because of the closure",
+      "Depends on the JavaScript engine",
+      "Error: Cannot allocate memory"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Modern JS engines (V8, SpiderMonkey) optimize closures. If a variable isn't referenced in the returned function, it can be garbage collected. But this is engine-specific behavior.",
+    "tags": ["closures", "garbage-collection", "optimization"],
+    "created_at": 1733046113000
+  },
+  {
+    "id": "q15_closures_eval_with_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Eval Prevents Optimization",
+    "question": "What is the output?",
+    "code": "function test() {\n  let x = 'outer';\n  \n  return function() {\n    let x = 'inner';\n    return eval('x');\n  };\n}\n\nconsole.log(test()());",
+    "options": [
+      "outer",
+      "inner",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "eval() uses the scope of the function it's called in. The inner function has its own x='inner', so eval('x') returns 'inner'. Direct eval() has access to local scope.",
+    "tags": ["closures", "eval", "scope"],
+    "created_at": 1733046114000
+  },
+  {
+    "id": "q16_closures_memoization",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Memoization Pattern",
+    "question": "How many times will 'Computing...' be logged?",
+    "code": "function memoize(fn) {\n  const cache = new Map();\n  return function(...args) {\n    const key = JSON.stringify(args);\n    if (!cache.has(key)) {\n      console.log('Computing...');\n      cache.set(key, fn(...args));\n    }\n    return cache.get(key);\n  };\n}\n\nconst add = memoize((a, b) => a + b);\nadd(1, 2);\nadd(1, 2);\nadd(2, 1);\nadd(1, 2);",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "1"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Memoization uses closures to cache results. add(1,2) computes once, add(2,1) has a different key '[2,1]' so computes again. Total: 2 computations.",
+    "tags": ["closures", "memoization", "functional"],
+    "created_at": 1733046115000
+  },
+  {
+    "id": "q17_closures_generator_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Generator with Closure",
+    "question": "What will be logged?",
+    "code": "function createIdGenerator() {\n  let id = 0;\n  return function* () {\n    while (true) {\n      yield ++id;\n    }\n  };\n}\n\nconst genFn = createIdGenerator();\nconst gen1 = genFn();\nconst gen2 = genFn();\n\nconsole.log(gen1.next().value);\nconsole.log(gen2.next().value);\nconsole.log(gen1.next().value);",
+    "options": [
+      "1, 1, 2",
+      "1, 2, 3",
+      "1, 2, 2",
+      "1, 1, 1"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both generators share the same closure over id. Each next() call increments the shared id: gen1→1, gen2→2, gen1→3.",
+    "tags": ["closures", "generator", "shared-state"],
+    "created_at": 1733046116000
+  },
+  {
+    "id": "q18_closures_hoisting_trap",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure and Hoisting Trap",
+    "question": "What will be logged?",
+    "code": "var x = 10;\nfunction outer() {\n  console.log(x);\n  var x = 20;\n  function inner() {\n    console.log(x);\n  }\n  inner();\n}\nouter();",
+    "options": [
+      "10, 20",
+      "undefined, 20",
+      "10, 10",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The local var x is hoisted within outer(), shadowing the global x. First console.log sees undefined (hoisted but not yet assigned). After assignment, inner() sees 20.",
+    "tags": ["closures", "hoisting", "shadowing"],
+    "created_at": 1733046117000
+  },
+  {
+    "id": "q19_closures_factory_pattern",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Factory with Closure",
+    "question": "What is the output?",
+    "code": "function createMultiplier(factor) {\n  return {\n    multiply: (x) => x * factor,\n    setFactor: (f) => { factor = f; }\n  };\n}\n\nconst double = createMultiplier(2);\nconsole.log(double.multiply(5));\ndouble.setFactor(3);\nconsole.log(double.multiply(5));",
+    "options": [
+      "10, 10",
+      "10, 15",
+      "10, undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both methods close over the same 'factor' variable. setFactor modifies it, affecting future multiply calls. 5*2=10, then factor becomes 3, so 5*3=15.",
+    "tags": ["closures", "factory", "mutable-state"],
+    "created_at": 1733046118000
+  },
+  {
+    "id": "q20_closures_recursive",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Recursive Closure",
+    "question": "What will be logged?",
+    "code": "function createRecursive() {\n  let calls = 0;\n  return function recurse(n) {\n    calls++;\n    if (n <= 1) return calls;\n    return recurse(n - 1);\n  };\n}\n\nconst fn = createRecursive();\nconsole.log(fn(5));\nconsole.log(fn(3));",
+    "options": [
+      "5, 3",
+      "5, 8",
+      "1, 1",
+      "5, 5"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 'calls' variable persists across all invocations. First fn(5) makes 5 calls (calls=5). Then fn(3) adds 3 more (calls=8).",
+    "tags": ["closures", "recursion", "persistent-state"],
+    "created_at": 1733046119000
+  }
+]
+

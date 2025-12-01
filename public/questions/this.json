@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_this_basic",
+    "category": "this",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic This Binding",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconsole.log(obj.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a function is called as a method (obj.method()), this refers to the object that owns the method.",
+    "tags": ["this", "method", "binding"],
+    "created_at": 1733046300000
+  },
+  {
+    "id": "q2_this_lost",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Lost This Context",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconst getName = obj.getName;\nconsole.log(getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Window object name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When you extract a method and call it as a standalone function, this loses its binding. In strict mode, this is undefined. In non-strict mode, it's the global object.",
+    "tags": ["this", "context", "lost"],
+    "created_at": 1733046301000
+  },
+  {
+    "id": "q3_this_arrow",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Functions and This",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: () => {\n    return this.name;\n  }\n};\n\nconsole.log(obj.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Window object name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't have their own this. They inherit this from the enclosing lexical scope, which in this case is the global scope.",
+    "tags": ["this", "arrow-functions"],
+    "created_at": 1733046302000
+  },
+  {
+    "id": "q4_this_bind",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Using Bind",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconst getName = obj.getName.bind(obj);\nconsole.log(getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "bind() creates a new function with this permanently bound to the specified object. Even when called standalone, this remains bound.",
+    "tags": ["this", "bind"],
+    "created_at": 1733046303000
+  },
+  {
+    "id": "q5_this_call_apply",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Call and Apply",
+    "question": "What is the output?",
+    "code": "function greet(greeting) {\n  return greeting + ' ' + this.name;\n}\n\nconst obj = { name: 'JS' };\nconsole.log(greet.call(obj, 'Hello'));",
+    "options": [
+      "Hello JS",
+      "Hello undefined",
+      "ReferenceError",
+      "undefined JS"
+    ],
+    "correctAnswer": 0,
+    "explanation": "call() and apply() allow you to explicitly set this when calling a function. call() takes arguments individually, apply() takes an array.",
+    "tags": ["this", "call", "apply"],
+    "created_at": 1733046304000
+  },
+  {
+    "id": "q6_this_constructor",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Constructor",
+    "question": "What will be logged?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = new Person('JS');\nconsole.log(person.name);",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a function is called with new, this refers to the newly created instance. The constructor sets properties on this instance.",
+    "tags": ["this", "constructor", "new"],
+    "created_at": 1733046305000
+  },
+  {
+    "id": "q7_this_nested",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Functions",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  outer: function() {\n    console.log(this.name);\n    function inner() {\n      console.log(this.name);\n    }\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "JS, JS",
+      "JS, undefined",
+      "undefined, undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "inner() is called as a standalone function, so this is undefined (strict mode) or the global object. Only outer() has this bound to obj.",
+    "tags": ["this", "nested", "function"],
+    "created_at": 1733046306000
+  },
+  {
+    "id": "q8_this_arrow_nested",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Arrow Function in Method",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  outer: function() {\n    console.log(this.name);\n    const inner = () => {\n      console.log(this.name);\n    };\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "JS, JS",
+      "JS, undefined",
+      "undefined, undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions inherit this from the enclosing scope. Since outer() has this bound to obj, inner() also has this bound to obj.",
+    "tags": ["this", "arrow-functions", "nested"],
+    "created_at": 1733046307000
+  },
+  {
+    "id": "q9_this_class",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Class Methods",
+    "question": "What is the output?",
+    "code": "class Person {\n  constructor(name) {\n    this.name = name;\n  }\n  getName() {\n    return this.name;\n  }\n}\n\nconst person = new Person('JS');\nconsole.log(person.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a method is called on an instance (person.getName()), this refers to that instance. Note: class methods are NOT automatically bound - extracting them loses the context.",
+    "tags": ["this", "class", "methods"],
+    "created_at": 1733046308000
+  },
+  {
+    "id": "q10_this_strict",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Strict Mode and This",
+    "question": "What happens in strict mode?",
+    "code": "'use strict';\n\nfunction test() {\n  return this;\n}\n\nconsole.log(test());",
+    "options": [
+      "Returns the global object",
+      "Returns undefined",
+      "Returns null",
+      "Throws ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In strict mode, when a function is called without a context, this is undefined instead of the global object. This prevents accidental global variable creation.",
+    "tags": ["this", "strict-mode"],
+    "created_at": 1733046309000
+  },
+  {
+    "id": "q11_this_settimeout",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in setTimeout",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    setTimeout(function() {\n      console.log(this.name);\n    }, 0);\n  }\n};\n\nobj.getName();",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Nothing"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The callback function passed to setTimeout loses its this context. It's called as a standalone function, so this is undefined or the global object.",
+    "tags": ["this", "settimeout", "callback"],
+    "created_at": 1733046310000
+  },
+  {
+    "id": "q12_this_prototype",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Prototype Methods",
+    "question": "What is the output?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nPerson.prototype.getName = function() {\n  return this.name;\n};\n\nconst person = new Person('JS');\nconsole.log(person.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a method is called on an instance, this refers to that instance, regardless of whether the method is defined on the instance or the prototype.",
+    "tags": ["this", "prototype", "inheritance"],
+    "created_at": 1733046311000
+  },
+  {
+    "id": "q13_this_class_field_arrow",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Class Field Arrow Functions",
+    "question": "What will be logged?",
+    "code": "class Button {\n  text = 'Click me';\n  handleClick = () => {\n    console.log(this.text);\n  };\n}\n\nconst btn = new Button();\nconst handler = btn.handleClick;\nhandler();",
+    "options": [
+      "Click me",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions in class fields are bound to the instance at creation time. Even when extracted, handler() retains 'this' bound to btn.",
+    "tags": ["this", "class-fields", "arrow-functions"],
+    "created_at": 1733046312000
+  },
+  {
+    "id": "q14_this_new_target",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "new.target Meta-property",
+    "question": "What is the output?",
+    "code": "function Base() {\n  console.log(new.target?.name);\n}\n\nfunction Derived() {\n  Base.call(this);\n}\n\nnew Base();\nnew Derived();\nBase();",
+    "options": [
+      "Base, Derived, undefined",
+      "Base, Base, undefined",
+      "Base, undefined, undefined",
+      "Base, Derived, Base"
+    ],
+    "correctAnswer": 2,
+    "explanation": "new.target is set when called with 'new'. Base.call(this) doesn't set new.target. Regular function call has new.target as undefined.",
+    "tags": ["this", "new.target", "constructor"],
+    "created_at": 1733046313000
+  },
+  {
+    "id": "q15_this_symbol_unscopables",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Explicit Binding Precedence",
+    "question": "What will be logged?",
+    "code": "function greet() {\n  console.log(this.name);\n}\n\nconst obj = { name: 'obj' };\nconst bound = greet.bind({ name: 'bound' });\n\nbound.call(obj);\nbound.apply(obj);\nnew bound();",
+    "options": [
+      "obj, obj, undefined",
+      "bound, bound, undefined",
+      "bound, obj, undefined",
+      "obj, obj, bound"
+    ],
+    "correctAnswer": 1,
+    "explanation": "bind() creates a function with permanently bound this. call() and apply() cannot override it. 'new' creates a new object, ignoring the bound this.",
+    "tags": ["this", "bind", "call", "apply", "new"],
+    "created_at": 1733046314000
+  },
+  {
+    "id": "q16_this_proxy_handler",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Proxy Handler",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'original',\n  getName() {\n    return this.name;\n  }\n};\n\nconst proxy = new Proxy(obj, {\n  get(target, prop, receiver) {\n    if (prop === 'name') return 'proxied';\n    return Reflect.get(target, prop, receiver);\n  }\n});\n\nconsole.log(proxy.getName());",
+    "options": [
+      "original",
+      "proxied",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When getName() is called on the proxy, 'this' is the proxy. The proxy intercepts this.name and returns 'proxied'.",
+    "tags": ["this", "proxy", "reflect"],
+    "created_at": 1733046315000
+  },
+  {
+    "id": "q17_this_dom_events",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Event Handlers",
+    "question": "In a browser, what does 'this' refer to?",
+    "code": "button.addEventListener('click', function() {\n  console.log(this === button);\n});\n\nbutton.addEventListener('click', () => {\n  console.log(this === window);\n});",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In regular function handlers, 'this' is the element. Arrow functions inherit 'this' from enclosing scope (global/window in browsers at top level).",
+    "tags": ["this", "dom", "event-handlers"],
+    "created_at": 1733046316000
+  },
+  {
+    "id": "q18_this_getter_setter",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Getters/Setters",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  _value: 10,\n  get value() {\n    return this._value;\n  },\n  set value(v) {\n    this._value = v;\n  }\n};\n\nconst { value } = obj;\nconst getter = Object.getOwnPropertyDescriptor(obj, 'value').get;\n\nconsole.log(value);\nconsole.log(getter());",
+    "options": [
+      "10, 10",
+      "10, undefined",
+      "undefined, 10",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring { value } calls the getter with 'this' as obj, returning 10. Extracted getter() called standalone has no 'this', so _value is undefined.",
+    "tags": ["this", "getter", "setter", "destructuring"],
+    "created_at": 1733046317000
+  },
+  {
+    "id": "q19_this_foreach_context",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "forEach with thisArg",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  multiplier: 2,\n  multiply(arr) {\n    return arr.map(function(x) {\n      return x * this.multiplier;\n    }, this);\n  }\n};\n\nconsole.log(obj.multiply([1, 2, 3]));",
+    "options": [
+      "[2, 4, 6]",
+      "[NaN, NaN, NaN]",
+      "[undefined, undefined, undefined]",
+      "TypeError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array methods like map accept a second argument (thisArg) to set 'this' for the callback. Passing 'this' binds the callback to obj.",
+    "tags": ["this", "array-methods", "thisarg"],
+    "created_at": 1733046318000
+  },
+  {
+    "id": "q20_this_method_chaining",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Method Chaining with This",
+    "question": "What is the output?",
+    "code": "const calculator = {\n  value: 0,\n  add(n) { this.value += n; return this; },\n  multiply(n) { this.value *= n; return this; },\n  getValue() { return this.value; }\n};\n\nconsole.log(\n  calculator.add(5).multiply(2).add(3).getValue()\n);",
+    "options": [
+      "13",
+      "16",
+      "10",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each method returns 'this', enabling chaining. Operations: 0+5=5, 5*2=10, 10+3=13. This pattern is common in fluent APIs.",
+    "tags": ["this", "chaining", "fluent-api"],
+    "created_at": 1733046319000
+  }
+]
+

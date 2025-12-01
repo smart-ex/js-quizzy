@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_async_promise_basic",
+    "category": "async",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Promise",
+    "question": "What will be logged?",
+    "code": "const promise = new Promise((resolve) => {\n  console.log('1');\n  resolve('2');\n});\n\npromise.then(console.log);\nconsole.log('3');",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "3, 1, 2",
+      "2, 1, 3"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The Promise executor runs synchronously, logging '1'. The .then() callback is asynchronous (microtask), so '3' logs before '2'.",
+    "tags": ["async", "promise", "microtask"],
+    "created_at": 1733046200000
+  },
+  {
+    "id": "q2_async_await_basic",
+    "category": "async",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Async/Await",
+    "question": "What is the output?",
+    "code": "async function test() {\n  const result = await Promise.resolve('done');\n  console.log(result);\n}\n\ntest();\nconsole.log('start');",
+    "options": [
+      "done, start",
+      "start, done",
+      "done",
+      "start"
+    ],
+    "correctAnswer": 1,
+    "explanation": "await pauses the function execution, but doesn't block the main thread. 'start' logs first, then 'done' after the promise resolves.",
+    "tags": ["async", "await"],
+    "created_at": 1733046201000
+  },
+  {
+    "id": "q3_async_promise_all",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.all",
+    "question": "What will be logged?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.resolve(2);\nconst p3 = Promise.resolve(3);\n\nPromise.all([p1, p2, p3]).then(console.log);",
+    "options": [
+      "[1, 2, 3]",
+      "1, 2, 3",
+      "[Promise, Promise, Promise]",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.all resolves with an array of all resolved values in the same order as the input promises.",
+    "tags": ["async", "promise.all"],
+    "created_at": 1733046202000
+  },
+  {
+    "id": "q4_async_promise_all_reject",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.all with Rejection",
+    "question": "What happens?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.reject('error');\nconst p3 = Promise.resolve(3);\n\nPromise.all([p1, p2, p3])\n  .then(console.log)\n  .catch(console.error);",
+    "options": [
+      "Logs [1, 3]",
+      "Logs error",
+      "Logs [1, 'error', 3]",
+      "Nothing happens"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.all rejects immediately if any promise rejects. It doesn't wait for other promises to complete.",
+    "tags": ["async", "promise.all", "error"],
+    "created_at": 1733046203000
+  },
+  {
+    "id": "q5_async_promise_allSettled",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.allSettled",
+    "question": "What is the result?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.reject('error');\n\nPromise.allSettled([p1, p2]).then(console.log);",
+    "options": [
+      "[1, 'error']",
+      "Rejects with 'error'",
+      "[{status: 'fulfilled', value: 1}, {status: 'rejected', reason: 'error'}]",
+      "Nothing"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Promise.allSettled waits for all promises to settle (resolve or reject) and returns an array of result objects with status and value/reason.",
+    "tags": ["async", "promise.allsettled"],
+    "created_at": 1733046204000
+  },
+  {
+    "id": "q6_async_promise_race",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.race",
+    "question": "What will be logged?",
+    "code": "const fast = Promise.resolve('fast');\nconst slow = new Promise(resolve => setTimeout(() => resolve('slow'), 100));\n\nPromise.race([fast, slow]).then(console.log);",
+    "options": [
+      "fast",
+      "slow",
+      "Both",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.race resolves or rejects with the first promise that settles. Since fast resolves immediately, it wins the race.",
+    "tags": ["async", "promise.race"],
+    "created_at": 1733046205000
+  },
+  {
+    "id": "q7_async_await_error",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Error Handling with Async/Await",
+    "question": "What will be logged?",
+    "code": "async function test() {\n  try {\n    await Promise.reject('error');\n  } catch (e) {\n    console.log(e);\n  }\n}\n\ntest();",
+    "options": [
+      "error",
+      "Unhandled promise rejection",
+      "undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a promise rejects in an async function, it throws an exception that can be caught with try/catch.",
+    "tags": ["async", "await", "error-handling"],
+    "created_at": 1733046206000
+  },
+  {
+    "id": "q8_async_await_sequential",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Sequential vs Parallel",
+    "question": "Which approach is faster?",
+    "code": "// Approach A\nasync function sequential() {\n  await fetch('/api/1');\n  await fetch('/api/2');\n  await fetch('/api/3');\n}\n\n// Approach B\nasync function parallel() {\n  await Promise.all([\n    fetch('/api/1'),\n    fetch('/api/2'),\n    fetch('/api/3')\n  ]);\n}",
+    "options": [
+      "Sequential is faster",
+      "Parallel is faster",
+      "They are the same speed",
+      "Depends on network speed"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Parallel execution (Promise.all) runs all requests concurrently, while sequential waits for each to complete. Parallel is typically faster.",
+    "tags": ["async", "performance", "parallel"],
+    "created_at": 1733046207000
+  },
+  {
+    "id": "q9_async_promise_chain",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Chaining",
+    "question": "What is the output?",
+    "code": "Promise.resolve(1)\n  .then(val => val + 1)\n  .then(val => val * 2)\n  .then(console.log);",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Each .then() receives the return value from the previous one. 1 → +1 = 2 → *2 = 4.",
+    "tags": ["async", "promise", "chain"],
+    "created_at": 1733046208000
+  },
+  {
+    "id": "q10_async_await_return",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Returning from Async Function",
+    "question": "What will be logged?",
+    "code": "async function getValue() {\n  return Promise.resolve(42);\n}\n\ngetValue().then(console.log);",
+    "options": [
+      "42",
+      "Promise {<resolved: 42>}",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "If you return a promise from an async function, it's automatically unwrapped. The function returns the resolved value, not the promise itself.",
+    "tags": ["async", "return", "promise"],
+    "created_at": 1733046209000
+  },
+  {
+    "id": "q11_async_promise_constructor",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise Constructor",
+    "question": "What happens?",
+    "code": "new Promise((resolve, reject) => {\n  resolve(1);\n  reject(2);\n}).then(console.log).catch(console.error);",
+    "options": [
+      "Logs 1",
+      "Logs 2",
+      "Logs both 1 and 2",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Once a promise is settled (resolved or rejected), subsequent resolve/reject calls are ignored. The first resolve(1) settles the promise.",
+    "tags": ["async", "promise", "constructor"],
+    "created_at": 1733046210000
+  },
+  {
+    "id": "q12_async_await_loop",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async in Loops",
+    "question": "What is the execution order?",
+    "code": "async function process(items) {\n  for (const item of items) {\n    await processItem(item);\n  }\n}\n\nasync function processItem(item) {\n  console.log(item);\n  await Promise.resolve();\n}\n\nprocess([1, 2, 3]);",
+    "options": [
+      "1, 2, 3 (sequential)",
+      "1, 2, 3 (parallel)",
+      "3, 2, 1",
+      "Non-deterministic"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Using await in a for...of loop processes items sequentially. Each iteration waits for the previous one to complete.",
+    "tags": ["async", "await", "loop"],
+    "created_at": 1733046211000
+  },
+  {
+    "id": "q13_async_promise_any",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.any Behavior",
+    "question": "What will be logged?",
+    "code": "const p1 = Promise.reject('error1');\nconst p2 = new Promise(resolve => setTimeout(() => resolve('success'), 100));\nconst p3 = Promise.reject('error2');\n\nPromise.any([p1, p2, p3])\n  .then(console.log)\n  .catch(e => console.log(e.errors));",
+    "options": [
+      "['error1', 'error2']",
+      "success",
+      "error1",
+      "AggregateError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.any resolves with the first fulfilled promise. Even though p1 and p3 reject immediately, p2 fulfills after 100ms, so 'success' is logged.",
+    "tags": ["async", "promise.any"],
+    "created_at": 1733046212000
+  },
+  {
+    "id": "q14_async_unhandled_rejection",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Unhandled Promise Rejection",
+    "question": "What happens when this code runs?",
+    "code": "async function test() {\n  const p = Promise.reject('error');\n  await new Promise(r => setTimeout(r, 1000));\n  try {\n    await p;\n  } catch (e) {\n    console.log('Caught:', e);\n  }\n}",
+    "options": [
+      "Caught: error",
+      "Unhandled rejection warning, then 'Caught: error'",
+      "Only unhandled rejection warning",
+      "Nothing happens"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The promise rejects immediately but isn't awaited until after 1 second. Most JS environments emit an unhandledRejection warning, but then catch it.",
+    "tags": ["async", "unhandled-rejection", "warning"],
+    "created_at": 1733046213000
+  },
+  {
+    "id": "q15_async_promise_finally",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.finally Behavior",
+    "question": "What is the output?",
+    "code": "Promise.resolve('success')\n  .then(val => {\n    console.log(val);\n    return 'then';\n  })\n  .finally(() => {\n    console.log('finally');\n    return 'finally';\n  })\n  .then(console.log);",
+    "options": [
+      "success, finally, finally",
+      "success, finally, then",
+      "success, then, finally",
+      "success, finally, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "finally() doesn't receive or modify the resolved value. It passes through the previous value ('then'). The return value of finally is ignored.",
+    "tags": ["async", "promise.finally"],
+    "created_at": 1733046214000
+  },
+  {
+    "id": "q16_async_thenable",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Thenable Objects",
+    "question": "What will be logged?",
+    "code": "const thenable = {\n  then(resolve, reject) {\n    console.log('then called');\n    setTimeout(() => resolve(42), 100);\n  }\n};\n\nasync function test() {\n  console.log('before');\n  const result = await thenable;\n  console.log(result);\n}\n\ntest();\nconsole.log('after');",
+    "options": [
+      "before, after, then called, 42",
+      "before, then called, after, 42",
+      "then called, before, after, 42",
+      "before, then called, 42, after"
+    ],
+    "correctAnswer": 1,
+    "explanation": "await works with any thenable. When await encounters thenable, it calls its then method synchronously. 'then called' logs before 'after' returns to the main flow.",
+    "tags": ["async", "thenable", "await"],
+    "created_at": 1733046215000
+  },
+  {
+    "id": "q17_async_top_level_await",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Top-Level Await",
+    "question": "Where can top-level await be used?",
+    "code": "// Which context allows this?\nconst data = await fetch('/api/data');",
+    "options": [
+      "In any JavaScript file",
+      "Only in ES modules (.mjs or type='module')",
+      "Only inside async functions",
+      "In both ES modules and CommonJS"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Top-level await is only available in ES modules. It allows you to use await at the module's top level without wrapping in an async function.",
+    "tags": ["async", "top-level-await", "esm"],
+    "created_at": 1733046216000
+  },
+  {
+    "id": "q18_async_concurrent_limit",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Concurrent Execution Limit",
+    "question": "What is logged, and in what order?",
+    "code": "async function processWithLimit(items, limit, fn) {\n  const results = [];\n  const executing = [];\n  \n  for (const item of items) {\n    const p = fn(item).then(r => {\n      executing.splice(executing.indexOf(p), 1);\n      return r;\n    });\n    results.push(p);\n    executing.push(p);\n    \n    if (executing.length >= limit) {\n      await Promise.race(executing);\n    }\n  }\n  return Promise.all(results);\n}\n\nconst delay = ms => new Promise(r => setTimeout(r, ms));\nconst fn = async (x) => { await delay(100); console.log(x); return x; };\n\nprocessWithLimit([1, 2, 3, 4], 2, fn);",
+    "options": [
+      "1, 2, 3, 4 (sequential)",
+      "1, 2 then 3, 4 (in pairs)",
+      "Non-deterministic but max 2 concurrent",
+      "4, 3, 2, 1 (reverse)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "This pattern limits concurrency. At most 2 items are processed simultaneously. The exact order within groups may vary based on timing.",
+    "tags": ["async", "concurrency", "pattern"],
+    "created_at": 1733046217000
+  },
+  {
+    "id": "q19_async_abort_controller",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "AbortController with Fetch",
+    "question": "What happens when this code runs?",
+    "code": "const controller = new AbortController();\nconst signal = controller.signal;\n\nsetTimeout(() => controller.abort(), 50);\n\nfetch('/api/data', { signal })\n  .then(r => console.log('Success'))\n  .catch(e => console.log(e.name));",
+    "options": [
+      "Success",
+      "AbortError",
+      "TimeoutError",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "AbortController allows canceling fetch requests. After 50ms, abort() is called, causing the fetch to reject with an AbortError.",
+    "tags": ["async", "abort-controller", "fetch"],
+    "created_at": 1733046218000
+  },
+  {
+    "id": "q20_async_promise_resolve_thenable",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.resolve with Nested Promise",
+    "question": "What is the output?",
+    "code": "const p1 = Promise.resolve(Promise.resolve(42));\nconst p2 = Promise.resolve({ then: (cb) => cb(100) });\n\nPromise.all([p1, p2]).then(console.log);",
+    "options": [
+      "[Promise, { then: fn }]",
+      "[42, 100]",
+      "[Promise, 100]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.resolve unwraps nested promises and thenables. p1 resolves to 42 (inner promise unwrapped). p2's thenable is called, resolving to 100.",
+    "tags": ["async", "promise.resolve", "thenable"],
+    "created_at": 1733046219000
+  }
+]
+

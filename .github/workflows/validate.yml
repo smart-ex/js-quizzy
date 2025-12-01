@@ -1,0 +1,32 @@
+name: Validate Questions
+
+on:
+  pull_request:
+    paths:
+      - 'public/questions/**'
+      - 'scripts/validate-questions.ts'
+  push:
+    branches:
+      - main
+    paths:
+      - 'public/questions/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate questions
+        run: npx tsx scripts/validate-questions.ts
+

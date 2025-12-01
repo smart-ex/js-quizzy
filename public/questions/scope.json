@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_scope_global",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Global Scope",
+    "question": "What will be logged?",
+    "code": "var x = 10;\n\nfunction test() {\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Variables declared with var in the global scope are accessible from any function. x is found in the global scope.",
+    "tags": ["scope", "global", "var"],
+    "created_at": 1733048000000
+  },
+  {
+    "id": "q2_scope_function",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Function Scope",
+    "question": "What is the output?",
+    "code": "function test() {\n  var x = 5;\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "5",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var is function-scoped. x is only accessible inside test(). Accessing it outside throws ReferenceError.",
+    "tags": ["scope", "function", "var"],
+    "created_at": 1733048001000
+  },
+  {
+    "id": "q3_scope_block_let",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Block Scope with let",
+    "question": "What happens?",
+    "code": "if (true) {\n  let x = 10;\n}\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "let is block-scoped. x only exists inside the if block and is not accessible outside.",
+    "tags": ["scope", "block", "let"],
+    "created_at": 1733048002000
+  },
+  {
+    "id": "q4_scope_block_var",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in Block",
+    "question": "What will be logged?",
+    "code": "if (true) {\n  var x = 10;\n}\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "var is not block-scoped. It's hoisted to the function or global scope, so x is accessible outside the if block.",
+    "tags": ["scope", "block", "var"],
+    "created_at": 1733048003000
+  },
+  {
+    "id": "q5_scope_shadowing",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Variable Shadowing",
+    "question": "What is the output?",
+    "code": "let x = 'outer';\n\nfunction test() {\n  let x = 'inner';\n  console.log(x);\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "'inner', 'inner'",
+      "'outer', 'outer'",
+      "'inner', 'outer'",
+      "'outer', 'inner'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The inner x shadows the outer x within test(). Each scope has its own x. After test(), outer x is unchanged.",
+    "tags": ["scope", "shadowing", "let"],
+    "created_at": 1733048004000
+  },
+  {
+    "id": "q6_scope_nested",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Scopes",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  let a = 1;\n  \n  function middle() {\n    let b = 2;\n    \n    function inner() {\n      let c = 3;\n      console.log(a + b + c);\n    }\n    inner();\n  }\n  middle();\n}\n\nouter();",
+    "options": [
+      "6",
+      "3",
+      "ReferenceError",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Inner functions have access to variables in all outer scopes. inner() can access a, b, and c: 1 + 2 + 3 = 6.",
+    "tags": ["scope", "nested", "scope-chain"],
+    "created_at": 1733048005000
+  },
+  {
+    "id": "q7_scope_global_implicit",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Implicit Global",
+    "question": "In non-strict mode, what is logged?",
+    "code": "function test() {\n  x = 10;\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In non-strict mode, assigning to an undeclared variable creates an implicit global. x becomes a global variable.",
+    "tags": ["scope", "implicit-global", "non-strict"],
+    "created_at": 1733048006000
+  },
+  {
+    "id": "q8_scope_strict_mode",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Strict Mode Scope",
+    "question": "What happens in strict mode?",
+    "code": "'use strict';\n\nfunction test() {\n  x = 10;\n}\n\ntest();",
+    "options": [
+      "Creates global x",
+      "ReferenceError",
+      "undefined",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Strict mode prevents implicit globals. Assigning to an undeclared variable throws ReferenceError.",
+    "tags": ["scope", "strict-mode"],
+    "created_at": 1733048007000
+  },
+  {
+    "id": "q9_scope_module",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Module Scope",
+    "question": "What is the scope of top-level variables in ES modules?",
+    "code": "// module.js\nlet x = 10;\nvar y = 20;",
+    "options": [
+      "Both are global (window)",
+      "Both are module-scoped",
+      "let is module-scoped, var is global",
+      "Both throw errors in modules"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In ES modules, top-level variables (both let and var) are module-scoped, not global. They don't attach to window.",
+    "tags": ["scope", "module", "esm"],
+    "created_at": 1733048008000
+  },
+  {
+    "id": "q10_scope_loop_closure",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Loop Scope with let",
+    "question": "What is logged after 100ms?",
+    "code": "for (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "0, 0, 0",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let creates a new binding for each iteration. Each setTimeout callback captures its own i value: 0, 1, 2.",
+    "tags": ["scope", "loop", "let", "closure"],
+    "created_at": 1733048009000
+  },
+  {
+    "id": "q11_scope_lexical",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Lexical Scope",
+    "question": "What will be logged?",
+    "code": "let x = 'global';\n\nfunction outer() {\n  let x = 'outer';\n  return function inner() {\n    console.log(x);\n  };\n}\n\nconst fn = outer();\nlet x = 'changed';\nfn();",
+    "options": [
+      "'global'",
+      "'outer'",
+      "'changed'",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "JavaScript uses lexical (static) scoping. inner() looks up x in its definition scope (outer), not where it's called.",
+    "tags": ["scope", "lexical", "closure"],
+    "created_at": 1733048010000
+  },
+  {
+    "id": "q12_scope_eval",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "eval and Scope",
+    "question": "What is the output?",
+    "code": "function test() {\n  eval('var x = 10');\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "SyntaxError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Direct eval() can modify the local scope. var x = 10 is created in test()'s scope, so x is accessible.",
+    "tags": ["scope", "eval", "dynamic"],
+    "created_at": 1733048011000
+  },
+  {
+    "id": "q13_scope_with",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "with Statement Scope",
+    "question": "In non-strict mode, what is logged?",
+    "code": "const obj = { a: 1, b: 2 };\nlet a = 10;\n\nwith (obj) {\n  console.log(a);\n  console.log(b);\n}",
+    "options": [
+      "10, 2",
+      "1, 2",
+      "10, ReferenceError",
+      "1, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "with adds obj to the scope chain. a and b are found on obj first (1, 2), shadowing the outer a.",
+    "tags": ["scope", "with", "legacy"],
+    "created_at": 1733048012000
+  },
+  {
+    "id": "q14_scope_catch_param",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Catch Block Scope",
+    "question": "What happens?",
+    "code": "try {\n  throw new Error('test');\n} catch (error) {\n  let x = 'caught';\n}\n\nconsole.log(typeof error);\nconsole.log(typeof x);",
+    "options": [
+      "'object', 'string'",
+      "'undefined', 'undefined'",
+      "'undefined', 'string'",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both catch parameter (error) and let x are block-scoped to the catch block. Neither is accessible outside.",
+    "tags": ["scope", "catch", "block"],
+    "created_at": 1733048013000
+  },
+  {
+    "id": "q15_scope_switch",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Switch Block Scope",
+    "question": "What is the result?",
+    "code": "switch (1) {\n  case 1:\n    let x = 'one';\n    break;\n  case 2:\n    let x = 'two';\n    break;\n}\n\nconsole.log('done');",
+    "options": [
+      "'done'",
+      "SyntaxError: x already declared",
+      "'one'",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The entire switch statement is one block. Declaring let x in multiple cases causes redeclaration error. Use {} for each case to create separate blocks.",
+    "tags": ["scope", "switch", "let"],
+    "created_at": 1733048014000
+  },
+  {
+    "id": "q16_scope_iife",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "IIFE Scope Isolation",
+    "question": "What will be logged?",
+    "code": "var x = 'outer';\n\n(function() {\n  var x = 'inner';\n  console.log(x);\n})();\n\nconsole.log(x);",
+    "options": [
+      "'inner', 'inner'",
+      "'outer', 'outer'",
+      "'inner', 'outer'",
+      "'outer', 'inner'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "IIFE creates its own function scope. Inner x shadows outer x within IIFE. Outer x remains unchanged.",
+    "tags": ["scope", "iife", "isolation"],
+    "created_at": 1733048015000
+  },
+  {
+    "id": "q17_scope_const_object",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "const with Objects",
+    "question": "What is the output?",
+    "code": "const obj = { x: 1 };\nobj.x = 2;\nconsole.log(obj.x);",
+    "options": [
+      "1",
+      "2",
+      "TypeError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "const prevents reassignment of the variable, not mutation of the object. obj.x can be modified; only obj = something would fail.",
+    "tags": ["scope", "const", "mutation"],
+    "created_at": 1733048016000
+  },
+  {
+    "id": "q18_scope_arrow_no_binding",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Arrow Function arguments",
+    "question": "What is logged?",
+    "code": "function outer() {\n  const inner = () => {\n    console.log(arguments[0]);\n  };\n  inner('inner');\n}\n\nouter('outer');",
+    "options": [
+      "'inner'",
+      "'outer'",
+      "ReferenceError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't have their own arguments. They inherit it from the enclosing function scope. arguments[0] is 'outer'.",
+    "tags": ["scope", "arrow-function", "arguments"],
+    "created_at": 1733048017000
+  },
+  {
+    "id": "q19_scope_for_in",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "for-in Scope",
+    "question": "What is logged?",
+    "code": "const obj = { a: 1, b: 2 };\n\nfor (let key in obj) {\n  // loop\n}\n\nconsole.log(typeof key);",
+    "options": [
+      "'string'",
+      "'undefined'",
+      "ReferenceError",
+      "'object'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "let key is block-scoped to the for-in loop. Outside the loop, key is not accessible, so typeof returns 'undefined'.",
+    "tags": ["scope", "for-in", "let"],
+    "created_at": 1733048018000
+  },
+  {
+    "id": "q20_scope_temporal",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function in TDZ",
+    "question": "What happens?",
+    "code": "function test() {\n  function inner() {\n    return x;\n  }\n  console.log(inner());\n  let x = 10;\n}\n\ntest();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Even though inner() is called after x is in scope, x is still in TDZ when inner() tries to access it. ReferenceError is thrown.",
+    "tags": ["scope", "tdz", "function"],
+    "created_at": 1733048019000
+  }
+]
+

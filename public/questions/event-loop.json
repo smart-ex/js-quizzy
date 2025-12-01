@@ -1,0 +1,380 @@
+[
+  {
+    "id": "q1_event_loop_basics",
+    "category": "event-loop",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Event Loop Basics",
+    "question": "What will be logged to the console?",
+    "code": "console.log('1');\nsetTimeout(() => console.log('2'), 0);\nconsole.log('3');",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "2, 1, 3",
+      "3, 1, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Synchronous code (console.log) runs first. setTimeout callbacks go to the macrotask queue and execute after the call stack is empty.",
+    "tags": ["event-loop", "setTimeout", "timing"],
+    "created_at": 1733046000000
+  },
+  {
+    "id": "q2_event_loop_promise",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise vs setTimeout",
+    "question": "What is the output order?",
+    "code": "console.log('1');\nsetTimeout(() => console.log('2'), 0);\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');",
+    "options": [
+      "1, 2, 3, 4",
+      "1, 4, 3, 2",
+      "1, 4, 2, 3",
+      "1, 3, 4, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promises (microtasks) have higher priority than setTimeout (macrotasks). Order: sync code → microtasks → macrotasks.",
+    "tags": ["event-loop", "promise", "microtask", "macrotask"],
+    "created_at": 1733046001000
+  },
+  {
+    "id": "q3_event_loop_nested",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Async Operations",
+    "question": "What will be the output?",
+    "code": "console.log('start');\nsetTimeout(() => {\n  console.log('timeout1');\n  Promise.resolve().then(() => console.log('promise1'));\n}, 0);\nPromise.resolve().then(() => {\n  console.log('promise2');\n  setTimeout(() => console.log('timeout2'), 0);\n});\nconsole.log('end');",
+    "options": [
+      "start, end, promise2, timeout1, promise1, timeout2",
+      "start, end, timeout1, promise2, promise1, timeout2",
+      "start, end, promise2, timeout1, timeout2, promise1",
+      "start, end, timeout1, promise1, promise2, timeout2"
+    ],
+    "correctAnswer": 0,
+    "explanation": "All microtasks (promises) complete before any macrotask (setTimeout). Nested async operations follow the same priority rules.",
+    "tags": ["event-loop", "nested", "microtask", "macrotask"],
+    "created_at": 1733046002000
+  },
+  {
+    "id": "q4_event_loop_async_await",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Async/Await and Event Loop",
+    "question": "What is the execution order?",
+    "code": "async function test() {\n  console.log('1');\n  await Promise.resolve();\n  console.log('2');\n}\nconsole.log('3');\ntest();\nconsole.log('4');",
+    "options": [
+      "3, 1, 4, 2",
+      "1, 3, 4, 2",
+      "3, 4, 1, 2",
+      "1, 2, 3, 4"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Code before await runs synchronously. Code after await runs as a microtask. The function call is synchronous, but the await pauses execution.",
+    "tags": ["event-loop", "async", "await"],
+    "created_at": 1733046003000
+  },
+  {
+    "id": "q5_event_loop_queue",
+    "category": "event-loop",
+    "difficulty": "easy",
+    "type": "multiple-choice",
+    "title": "Task Queue Priority",
+    "question": "Which queue has the highest priority in the event loop?",
+    "options": [
+      "Macrotask queue",
+      "Microtask queue",
+      "Animation frame queue",
+      "They all have equal priority"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Microtasks (Promises, queueMicrotask) are processed before macrotasks (setTimeout, setInterval). This ensures promise callbacks execute as soon as possible.",
+    "tags": ["event-loop", "queue", "priority"],
+    "created_at": 1733046004000
+  },
+  {
+    "id": "q6_event_loop_callstack",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Call Stack Behavior",
+    "question": "What happens when the call stack is empty?",
+    "options": [
+      "The event loop stops",
+      "Microtasks are processed first, then macrotasks",
+      "Macrotasks are processed first, then microtasks",
+      "The program terminates"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When the call stack is empty, the event loop processes the microtask queue first (completely), then moves to the macrotask queue.",
+    "tags": ["event-loop", "call-stack"],
+    "created_at": 1733046005000
+  },
+  {
+    "id": "q7_event_loop_setimmediate",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "setImmediate vs setTimeout",
+    "question": "In Node.js, what is the output? (Note: setImmediate is Node.js specific)",
+    "code": "setTimeout(() => console.log('timeout'), 0);\nsetImmediate(() => console.log('immediate'));",
+    "options": [
+      "timeout, immediate (always)",
+      "immediate, timeout (always)",
+      "Order is non-deterministic",
+      "Only one will execute"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The order between setTimeout(fn, 0) and setImmediate is non-deterministic in Node.js, depending on the event loop phase when they are called.",
+    "tags": ["event-loop", "nodejs", "setimmediate"],
+    "created_at": 1733046006000
+  },
+  {
+    "id": "q8_event_loop_blocking",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Blocking the Event Loop",
+    "question": "What happens if you have a long-running synchronous operation?",
+    "options": [
+      "The event loop pauses and resumes after",
+      "Microtasks can still execute during the operation",
+      "All queued tasks wait until the operation completes",
+      "The operation is automatically moved to a worker thread"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Synchronous code blocks the event loop. All queued tasks (microtasks and macrotasks) must wait until the call stack is empty.",
+    "tags": ["event-loop", "blocking"],
+    "created_at": 1733046007000
+  },
+  {
+    "id": "q9_event_loop_requestanimationframe",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "requestAnimationFrame Timing",
+    "question": "In the browser, what is the execution order?",
+    "code": "console.log('1');\nrequestAnimationFrame(() => console.log('2'));\nPromise.resolve().then(() => console.log('3'));\nsetTimeout(() => console.log('4'), 0);\nconsole.log('5');",
+    "options": [
+      "1, 5, 3, 2, 4",
+      "1, 5, 3, 4, 2",
+      "1, 5, 2, 3, 4",
+      "1, 5, 4, 3, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Order: sync → microtasks → setTimeout(0) → rAF (before paint). Note: exact rAF/setTimeout timing can vary by browser and system load.",
+    "tags": ["event-loop", "requestanimationframe", "browser"],
+    "created_at": 1733046008000
+  },
+  {
+    "id": "q10_event_loop_async_function",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Async Function Execution",
+    "question": "What is the output?",
+    "code": "async function foo() {\n  console.log('foo start');\n  await bar();\n  console.log('foo end');\n}\n\nasync function bar() {\n  console.log('bar');\n}\n\nconsole.log('start');\nfoo();\nconsole.log('end');",
+    "options": [
+      "start, foo start, bar, foo end, end",
+      "start, end, foo start, bar, foo end",
+      "start, foo start, end, bar, foo end",
+      "start, foo start, bar, end, foo end"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Code before await runs synchronously. The 'end' logs before 'foo end' because 'foo end' is after the await and runs as a microtask.",
+    "tags": ["event-loop", "async", "await"],
+    "created_at": 1733046009000
+  },
+  {
+    "id": "q11_event_loop_multiple_promises",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Multiple Promise Chains",
+    "question": "What is the execution order?",
+    "code": "Promise.resolve()\n  .then(() => console.log('1'))\n  .then(() => console.log('2'));\n\nPromise.resolve()\n  .then(() => console.log('3'))\n  .then(() => console.log('4'));\n\nconsole.log('5');",
+    "options": [
+      "5, 1, 2, 3, 4",
+      "5, 1, 3, 2, 4",
+      "1, 2, 3, 4, 5",
+      "5, 3, 1, 4, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "All first-level .then() callbacks execute before second-level ones. Within the same level, they execute in the order they were added.",
+    "tags": ["event-loop", "promise", "chain"],
+    "created_at": 1733046010000
+  },
+  {
+    "id": "q12_event_loop_queueMicrotask",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "queueMicrotask vs Promise",
+    "question": "What is the output order?",
+    "code": "console.log('1');\nqueueMicrotask(() => console.log('2'));\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');",
+    "options": [
+      "1, 4, 2, 3",
+      "1, 4, 3, 2",
+      "1, 2, 4, 3",
+      "1, 3, 4, 2"
+    ],
+    "correctAnswer": 0,
+    "explanation": "queueMicrotask and Promise.resolve().then() both add to the microtask queue. They execute in the order they were queued.",
+    "tags": ["event-loop", "queuemicrotask", "promise"],
+    "created_at": 1733046011000
+  },
+  {
+    "id": "q13_event_loop_microtask_flood",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Microtask Queue Starvation",
+    "question": "What happens when this code runs?",
+    "code": "function flood() {\n  Promise.resolve().then(flood);\n}\n\nflood();\nsetTimeout(() => console.log('timeout'), 0);",
+    "options": [
+      "'timeout' is logged after some time",
+      "'timeout' is never logged - infinite microtask loop",
+      "Stack overflow error",
+      "Browser/Node terminates the script"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Microtasks are processed until the queue is empty. Each flood() adds another microtask, creating an infinite loop. Macrotasks (setTimeout) never run.",
+    "tags": ["event-loop", "microtask", "starvation"],
+    "created_at": 1733046012000
+  },
+  {
+    "id": "q14_event_loop_mutation_observer",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "MutationObserver Priority",
+    "question": "In the browser, what is the execution order?",
+    "code": "const div = document.createElement('div');\nconst observer = new MutationObserver(() => console.log('mutation'));\nobserver.observe(div, { attributes: true });\n\nPromise.resolve().then(() => console.log('promise'));\ndiv.setAttribute('id', 'test');\nqueueMicrotask(() => console.log('microtask'));\nconsole.log('sync');",
+    "options": [
+      "sync, promise, mutation, microtask",
+      "sync, mutation, promise, microtask",
+      "sync, promise, microtask, mutation",
+      "sync, mutation, microtask, promise"
+    ],
+    "correctAnswer": 0,
+    "explanation": "All are microtasks. Order: sync first, then microtasks in queue order: promise (added first), mutation (triggered by setAttribute), microtask (added last).",
+    "tags": ["event-loop", "mutation-observer", "microtask"],
+    "created_at": 1733046013000
+  },
+  {
+    "id": "q15_event_loop_process_nexttick",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "process.nextTick in Node.js",
+    "question": "In Node.js, what is the output order?",
+    "code": "Promise.resolve().then(() => console.log('promise'));\nprocess.nextTick(() => console.log('nextTick'));\nsetImmediate(() => console.log('immediate'));\nconsole.log('sync');",
+    "options": [
+      "sync, promise, nextTick, immediate",
+      "sync, nextTick, promise, immediate",
+      "sync, immediate, nextTick, promise",
+      "sync, nextTick, immediate, promise"
+    ],
+    "correctAnswer": 1,
+    "explanation": "process.nextTick runs before other microtasks. Order: sync → nextTick queue → microtask queue → macrotasks (setImmediate).",
+    "tags": ["event-loop", "nodejs", "nexttick"],
+    "created_at": 1733046014000
+  },
+  {
+    "id": "q16_event_loop_postmessage",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "postMessage Timing",
+    "question": "In the browser, what is the execution order?",
+    "code": "console.log('1');\nwindow.postMessage('msg', '*');\nwindow.addEventListener('message', () => console.log('2'));\nsetTimeout(() => console.log('3'), 0);\nPromise.resolve().then(() => console.log('4'));\nconsole.log('5');",
+    "options": [
+      "1, 5, 4, 2, 3",
+      "1, 5, 4, 3, 2",
+      "1, 5, 2, 4, 3",
+      "1, 5, 4, 2 and 3 (order varies)"
+    ],
+    "correctAnswer": 3,
+    "explanation": "postMessage creates a macrotask. Microtasks (4) run first. Both postMessage handler and setTimeout are macrotasks; their order may vary.",
+    "tags": ["event-loop", "postmessage", "macrotask"],
+    "created_at": 1733046015000
+  },
+  {
+    "id": "q17_event_loop_reentrant",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Re-entrant Async Operations",
+    "question": "What is the execution order?",
+    "code": "async function test() {\n  console.log('A');\n  await null;\n  console.log('B');\n  await null;\n  console.log('C');\n}\n\ntest();\nPromise.resolve().then(() => console.log('D'));\nconsole.log('E');",
+    "options": [
+      "A, E, B, D, C",
+      "A, E, D, B, C",
+      "A, E, B, C, D",
+      "A, B, C, E, D"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Each await null schedules continuation as microtask. Order: A→E (sync), then microtasks: D, B (first await), C (second await).",
+    "tags": ["event-loop", "async", "await"],
+    "created_at": 1733046016000
+  },
+  {
+    "id": "q18_event_loop_nested_settimeout",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Nested setTimeout Minimum Delay",
+    "question": "What is the minimum delay for deeply nested setTimeout in browsers?",
+    "code": "function nested(depth) {\n  if (depth > 0) {\n    setTimeout(() => nested(depth - 1), 0);\n  }\n}",
+    "options": [
+      "Always 0ms as specified",
+      "1ms for all levels",
+      "4ms after 5 levels of nesting",
+      "Depends on browser; no standard"
+    ],
+    "correctAnswer": 2,
+    "explanation": "HTML spec requires 4ms minimum delay after 5 levels of nesting. This prevents tight setTimeout loops from consuming too much CPU.",
+    "tags": ["event-loop", "settimeout", "spec"],
+    "created_at": 1733046017000
+  },
+  {
+    "id": "q19_event_loop_promise_executor",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Executor Timing",
+    "question": "What is the output order?",
+    "code": "console.log('A');\n\nnew Promise((resolve) => {\n  console.log('B');\n  resolve();\n  console.log('C');\n}).then(() => console.log('D'));\n\nconsole.log('E');",
+    "options": [
+      "A, B, C, E, D",
+      "A, B, E, C, D",
+      "A, E, B, C, D",
+      "A, B, D, C, E"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The Promise executor runs synchronously. 'B' and 'C' are logged during construction. resolve() schedules 'D' as microtask. 'E' logs, then 'D'.",
+    "tags": ["event-loop", "promise", "executor"],
+    "created_at": 1733046018000
+  },
+  {
+    "id": "q20_event_loop_async_iteration",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async Iteration Order",
+    "question": "What is the execution order?",
+    "code": "async function* gen() {\n  yield 1;\n  yield 2;\n}\n\n(async () => {\n  console.log('start');\n  for await (const x of gen()) {\n    console.log(x);\n  }\n  console.log('end');\n})();\n\nconsole.log('sync');",
+    "options": [
+      "start, 1, 2, end, sync",
+      "sync, start, 1, 2, end",
+      "start, sync, 1, 2, end",
+      "start, 1, sync, 2, end"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The async IIFE starts, logs 'start', then hits for-await which yields. Control returns to main, 'sync' logs. Then async resumes: 1, 2, end.",
+    "tags": ["event-loop", "async-generator", "for-await"],
+    "created_at": 1733046019000
+  }
+]
+

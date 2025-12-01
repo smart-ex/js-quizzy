@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_prototypes_basic",
+    "category": "prototypes",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Prototype Chain",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconsole.log(arr.hasOwnProperty('length'));\nconsole.log(arr.hasOwnProperty('map'));",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "length is an own property of the array instance. map is inherited from Array.prototype, not an own property.",
+    "tags": ["prototypes", "inheritance", "hasownproperty"],
+    "created_at": 1733046500000
+  },
+  {
+    "id": "q2_prototypes_constructor",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Constructor Property",
+    "question": "What is the output?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = new Person('JS');\nconsole.log(person.constructor === Person);",
+    "options": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The constructor property points to the function that created the instance. person.constructor is Person because person was created with new Person().",
+    "tags": ["prototypes", "constructor"],
+    "created_at": 1733046501000
+  },
+  {
+    "id": "q3_prototypes_inheritance",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Prototype Inheritance",
+    "question": "What will be logged?",
+    "code": "function Animal(name) {\n  this.name = name;\n}\n\nAnimal.prototype.speak = function() {\n  return this.name + ' makes a sound';\n};\n\nconst dog = new Animal('Dog');\nconsole.log(dog.speak());",
+    "options": [
+      "Dog makes a sound",
+      "undefined makes a sound",
+      "ReferenceError",
+      "null makes a sound"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Methods added to the prototype are shared by all instances. When dog.speak() is called, JavaScript looks up the prototype chain and finds speak on Animal.prototype.",
+    "tags": ["prototypes", "inheritance", "methods"],
+    "created_at": 1733046502000
+  },
+  {
+    "id": "q4_prototypes_chain",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Prototype Chain Lookup",
+    "question": "What is the output?",
+    "code": "const obj = {};\nconsole.log(obj.toString);\nconsole.log(obj.hasOwnProperty('toString'));",
+    "options": [
+      "function, true",
+      "function, false",
+      "undefined, false",
+      "null, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "toString is inherited from Object.prototype, not an own property of obj. JavaScript looks up the prototype chain to find it.",
+    "tags": ["prototypes", "chain", "lookup"],
+    "created_at": 1733046503000
+  },
+  {
+    "id": "q5_prototypes_object_create",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.create",
+    "question": "What will be logged?",
+    "code": "const proto = { x: 10 };\nconst obj = Object.create(proto);\nobj.y = 20;\nconsole.log(obj.x);\nconsole.log(obj.hasOwnProperty('x'));",
+    "options": [
+      "10, true",
+      "10, false",
+      "undefined, false",
+      "20, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create() creates an object with the specified prototype. obj.x is 10 (from proto), but x is not an own property of obj.",
+    "tags": ["prototypes", "object.create"],
+    "created_at": 1733046504000
+  },
+  {
+    "id": "q6_prototypes_shadowing",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Property Shadowing",
+    "question": "What is the result?",
+    "code": "function Parent() {}\nParent.prototype.value = 1;\n\nfunction Child() {}\nChild.prototype = Object.create(Parent.prototype);\nChild.prototype.value = 2;\n\nconst child = new Child();\nconsole.log(child.value);\nconsole.log(Parent.prototype.value);",
+    "options": [
+      "2, 1",
+      "1, 1",
+      "2, 2",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Setting Child.prototype.value shadows the parent's value. child.value is 2 (from Child.prototype), but Parent.prototype.value remains 1.",
+    "tags": ["prototypes", "shadowing", "inheritance"],
+    "created_at": 1733046505000
+  },
+  {
+    "id": "q7_prototypes_class",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "ES6 Classes and Prototypes",
+    "question": "What will be logged?",
+    "code": "class Animal {\n  speak() {\n    return 'sound';\n  }\n}\n\nconst dog = new Animal();\nconsole.log(dog.speak());\nconsole.log(Animal.prototype.speak === dog.speak);",
+    "options": [
+      "sound, true",
+      "sound, false",
+      "undefined, false",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES6 classes are syntactic sugar over prototypes. Methods are added to the prototype, and instances share the same method reference.",
+    "tags": ["prototypes", "class", "es6"],
+    "created_at": 1733046506000
+  },
+  {
+    "id": "q8_prototypes_instanceof",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Instanceof Operator",
+    "question": "What is the output?",
+    "code": "function Person() {}\nconst person = new Person();\nconsole.log(person instanceof Person);\nconsole.log(person instanceof Object);",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "instanceof checks the prototype chain. person is an instance of Person (direct) and Object (via prototype chain).",
+    "tags": ["prototypes", "instanceof"],
+    "created_at": 1733046507000
+  },
+  {
+    "id": "q9_prototypes_proto",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "__proto__ Property",
+    "question": "What will be logged?",
+    "code": "const obj = {};\nconst proto = { x: 10 };\nobj.__proto__ = proto;\nconsole.log(obj.x);\nconsole.log(Object.getPrototypeOf(obj) === proto);",
+    "options": [
+      "10, true",
+      "10, false",
+      "undefined, true",
+      "undefined, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "__proto__ is a deprecated way to access/set the prototype. Object.getPrototypeOf() is the standard way. Both work, but __proto__ is non-standard.",
+    "tags": ["prototypes", "__proto__", "getprototypeof"],
+    "created_at": 1733046508000
+  },
+  {
+    "id": "q10_prototypes_method_override",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Method Override",
+    "question": "What is the output?",
+    "code": "Array.prototype.sum = function() {\n  return this.reduce((a, b) => a + b, 0);\n};\n\nconst arr = [1, 2, 3];\nconsole.log(arr.sum());",
+    "options": [
+      "6",
+      "0",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "You can add methods to built-in prototypes. This adds sum() to all arrays. However, modifying built-in prototypes is generally not recommended.",
+    "tags": ["prototypes", "built-in", "override"],
+    "created_at": 1733046509000
+  },
+  {
+    "id": "q11_prototypes_hasownproperty",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "hasOwnProperty vs in",
+    "question": "What will be logged?",
+    "code": "function Person(name) {\n  this.name = name;\n}\nPerson.prototype.speak = function() {};\n\nconst person = new Person('JS');\nconsole.log('name' in person);\nconsole.log('speak' in person);\nconsole.log(person.hasOwnProperty('speak'));",
+    "options": [
+      "true, true, true",
+      "true, true, false",
+      "true, false, false",
+      "false, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 'in' operator checks the entire prototype chain. hasOwnProperty() only checks own properties. speak is inherited, not own.",
+    "tags": ["prototypes", "hasownproperty", "in-operator"],
+    "created_at": 1733046510000
+  },
+  {
+    "id": "q12_prototypes_constructor_chain",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Constructor Chain",
+    "question": "What is the result?",
+    "code": "function Parent() {}\nfunction Child() {}\nChild.prototype = Object.create(Parent.prototype);\n\nconst child = new Child();\nconsole.log(child.constructor === Child);\nconsole.log(child.constructor === Parent);",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When you replace the prototype with Object.create(), you need to set Child.prototype.constructor = Child. Otherwise, constructor points to Parent.",
+    "tags": ["prototypes", "constructor", "chain"],
+    "created_at": 1733046511000
+  },
+  {
+    "id": "q13_prototypes_null_prototype",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Null Prototype Object",
+    "question": "What will be logged?",
+    "code": "const obj = Object.create(null);\nobj.name = 'test';\n\nconsole.log(obj.toString);\nconsole.log('name' in obj);\nconsole.log(obj.hasOwnProperty);",
+    "options": [
+      "function, true, function",
+      "undefined, true, undefined",
+      "undefined, false, undefined",
+      "Error: Cannot read property"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) creates an object with no prototype. It has no inherited methods like toString or hasOwnProperty. 'name' in obj works because it's an own property.",
+    "tags": ["prototypes", "null-prototype", "object.create"],
+    "created_at": 1733046512000
+  },
+  {
+    "id": "q14_prototypes_symbol_iterator",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Custom Iterator via Prototype",
+    "question": "What is the output?",
+    "code": "function Range(start, end) {\n  this.start = start;\n  this.end = end;\n}\n\nRange.prototype[Symbol.iterator] = function* () {\n  for (let i = this.start; i <= this.end; i++) yield i;\n};\n\nconst range = new Range(1, 3);\nconsole.log([...range]);",
+    "options": [
+      "[1, 2, 3]",
+      "[]",
+      "Error: range is not iterable",
+      "[Range]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Adding Symbol.iterator to the prototype makes all instances iterable. The spread operator uses the iterator to produce [1, 2, 3].",
+    "tags": ["prototypes", "symbol", "iterator"],
+    "created_at": 1733046513000
+  },
+  {
+    "id": "q15_prototypes_species",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol.species",
+    "question": "What is logged?",
+    "code": "class MyArray extends Array {\n  static get [Symbol.species]() {\n    return Array;\n  }\n}\n\nconst arr = new MyArray(1, 2, 3);\nconst mapped = arr.map(x => x * 2);\n\nconsole.log(mapped instanceof MyArray);\nconsole.log(mapped instanceof Array);",
+    "options": [
+      "true, true",
+      "false, true",
+      "true, false",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Symbol.species controls the constructor used for derived objects. By returning Array, map() returns a regular Array, not MyArray.",
+    "tags": ["prototypes", "symbol.species", "subclass"],
+    "created_at": 1733046514000
+  },
+  {
+    "id": "q16_prototypes_reflect_getprototypeof",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Reflect.getPrototypeOf",
+    "question": "What will be logged?",
+    "code": "const proto = { x: 10 };\nconst obj = Object.create(proto);\n\nconsole.log(Reflect.getPrototypeOf(obj) === proto);\nconsole.log(Reflect.getPrototypeOf(proto) === Object.prototype);\nconsole.log(Reflect.getPrototypeOf(Object.prototype));",
+    "options": [
+      "true, true, null",
+      "true, true, Object",
+      "true, false, null",
+      "false, true, null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Reflect.getPrototypeOf returns the prototype. Object.prototype is at the top of the chain, and its prototype is null.",
+    "tags": ["prototypes", "reflect", "chain"],
+    "created_at": 1733046515000
+  },
+  {
+    "id": "q17_prototypes_frozen_prototype",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Frozen Object Prototype",
+    "question": "What happens?",
+    "code": "const proto = Object.freeze({ x: 10 });\nconst obj = Object.create(proto);\n\ntry {\n  obj.x = 20;\n  console.log(obj.x);\n} catch (e) {\n  console.log('Error');\n}",
+    "options": [
+      "20",
+      "10",
+      "Error",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In non-strict mode, assigning to obj.x silently fails (proto.x is frozen). obj.x returns 10 from the prototype. In strict mode, this throws.",
+    "tags": ["prototypes", "freeze", "assignment"],
+    "created_at": 1733046516000
+  },
+  {
+    "id": "q18_prototypes_setprototypeof_performance",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Dynamic Prototype Change",
+    "question": "Why is Object.setPrototypeOf() considered bad practice?",
+    "code": "Object.setPrototypeOf(obj, newProto);",
+    "options": [
+      "It doesn't work in all browsers",
+      "It deoptimizes the object's property access performance",
+      "It throws an error in strict mode",
+      "It can only be called once per object"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Changing an object's prototype after creation deoptimizes the object. JS engines use hidden classes for fast property access, which are invalidated by prototype changes.",
+    "tags": ["prototypes", "performance", "setprototypeof"],
+    "created_at": 1733046517000
+  },
+  {
+    "id": "q19_prototypes_getownpropertynames",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Own vs Inherited Properties",
+    "question": "What will be logged?",
+    "code": "function Parent() { this.a = 1; }\nParent.prototype.b = 2;\n\nconst child = new Parent();\nchild.c = 3;\n\nconsole.log(Object.keys(child));\nconsole.log(Object.getOwnPropertyNames(child));",
+    "options": [
+      "['a', 'b', 'c'], ['a', 'b', 'c']",
+      "['a', 'c'], ['a', 'c']",
+      "['a', 'c', 'b'], ['a', 'c']",
+      "['c'], ['a', 'c']"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.keys and getOwnPropertyNames only return own properties. 'b' is on the prototype, not on child itself. Both return ['a', 'c'].",
+    "tags": ["prototypes", "object.keys", "own-properties"],
+    "created_at": 1733046518000
+  },
+  {
+    "id": "q20_prototypes_class_static",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Static Methods Inheritance",
+    "question": "What is the output?",
+    "code": "class Animal {\n  static create() {\n    return new this();\n  }\n}\n\nclass Dog extends Animal {\n  bark() { return 'Woof!'; }\n}\n\nconst dog = Dog.create();\nconsole.log(dog instanceof Dog);\nconsole.log(dog.bark());",
+    "options": [
+      "true, 'Woof!'",
+      "false, TypeError",
+      "true, undefined",
+      "false, 'Woof!'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Static methods are inherited. When Dog.create() is called, 'this' refers to Dog class. 'new this()' creates a Dog instance, which has the bark method.",
+    "tags": ["prototypes", "static", "inheritance", "class"],
+    "created_at": 1733046519000
+  }
+]
+

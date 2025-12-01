@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_destructuring_array_basic",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Array Destructuring",
+    "question": "What will be logged?",
+    "code": "const [a, b] = [1, 2, 3];\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "[1, 2, 3] undefined",
+      "1 [2, 3]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array destructuring assigns elements by position. a gets 1, b gets 2. The extra element 3 is ignored.",
+    "tags": ["destructuring", "array", "basic"],
+    "created_at": 1733049000000
+  },
+  {
+    "id": "q2_destructuring_object_basic",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Object Destructuring",
+    "question": "What is the output?",
+    "code": "const { x, y } = { x: 1, y: 2, z: 3 };\nconsole.log(x, y);",
+    "options": [
+      "1 2",
+      "{ x: 1 } { y: 2 }",
+      "undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Object destructuring matches by property name. x gets 1, y gets 2. z is not destructured.",
+    "tags": ["destructuring", "object", "basic"],
+    "created_at": 1733049001000
+  },
+  {
+    "id": "q3_destructuring_default_values",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Default Values",
+    "question": "What will be logged?",
+    "code": "const { a = 1, b = 2 } = { a: 10 };\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "10 2",
+      "10 undefined",
+      "undefined undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default values are used when the property is undefined. a exists (10), b is undefined so uses default (2).",
+    "tags": ["destructuring", "default", "object"],
+    "created_at": 1733049002000
+  },
+  {
+    "id": "q4_destructuring_rename",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Renaming Variables",
+    "question": "What is the output?",
+    "code": "const { name: userName } = { name: 'Alice' };\nconsole.log(userName);\nconsole.log(typeof name);",
+    "options": [
+      "'Alice', 'string'",
+      "'Alice', 'undefined'",
+      "undefined, 'string'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "{ name: userName } extracts 'name' property into variable 'userName'. 'name' is not defined as a variable.",
+    "tags": ["destructuring", "rename", "alias"],
+    "created_at": 1733049003000
+  },
+  {
+    "id": "q5_destructuring_nested",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Destructuring",
+    "question": "What will be logged?",
+    "code": "const { user: { name } } = { user: { name: 'Bob', age: 30 } };\nconsole.log(name);\nconsole.log(typeof user);",
+    "options": [
+      "'Bob', 'object'",
+      "'Bob', 'undefined'",
+      "undefined, 'object'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Nested destructuring extracts name from user object. But 'user' itself is not bound as a variable.",
+    "tags": ["destructuring", "nested", "object"],
+    "created_at": 1733049004000
+  },
+  {
+    "id": "q6_destructuring_rest_array",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Rest in Array Destructuring",
+    "question": "What is the output?",
+    "code": "const [first, ...rest] = [1, 2, 3, 4];\nconsole.log(first);\nconsole.log(rest);",
+    "options": [
+      "1, [2, 3, 4]",
+      "[1], [2, 3, 4]",
+      "1, 2",
+      "1, [3, 4]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Rest element collects all remaining items into an array. first is 1, rest is [2, 3, 4].",
+    "tags": ["destructuring", "rest", "array"],
+    "created_at": 1733049005000
+  },
+  {
+    "id": "q7_destructuring_rest_object",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Rest in Object Destructuring",
+    "question": "What will be logged?",
+    "code": "const { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(rest);",
+    "options": [
+      "{ b: 2, c: 3 }",
+      "[2, 3]",
+      "{ a: 1, b: 2, c: 3 }",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Object rest collects remaining properties into a new object. rest is { b: 2, c: 3 }.",
+    "tags": ["destructuring", "rest", "object"],
+    "created_at": 1733049006000
+  },
+  {
+    "id": "q8_destructuring_swap",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Variable Swap",
+    "question": "What is the output?",
+    "code": "let a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "2 1",
+      "[2, 1] undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring allows swapping variables without a temp variable. a becomes 2, b becomes 1.",
+    "tags": ["destructuring", "swap", "trick"],
+    "created_at": 1733049007000
+  },
+  {
+    "id": "q9_destructuring_function_params",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Parameter Destructuring",
+    "question": "What will be logged?",
+    "code": "function greet({ name, age = 25 }) {\n  console.log(name, age);\n}\n\ngreet({ name: 'Alice' });",
+    "options": [
+      "'Alice' undefined",
+      "'Alice' 25",
+      "undefined 25",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function parameters can use destructuring with defaults. name is 'Alice', age uses default 25.",
+    "tags": ["destructuring", "function", "parameters"],
+    "created_at": 1733049008000
+  },
+  {
+    "id": "q10_destructuring_null",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Destructuring null/undefined",
+    "question": "What happens?",
+    "code": "const { a } = null;",
+    "options": [
+      "a is undefined",
+      "a is null",
+      "TypeError",
+      "SyntaxError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Cannot destructure null or undefined. JavaScript throws TypeError: Cannot destructure property of null.",
+    "tags": ["destructuring", "null", "error"],
+    "created_at": 1733049009000
+  },
+  {
+    "id": "q11_destructuring_default_null",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default with null",
+    "question": "What is the output?",
+    "code": "const { a = 10 } = { a: null };\nconsole.log(a);",
+    "options": [
+      "10",
+      "null",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default values only apply when the value is undefined, not null. a is explicitly null, so default is not used.",
+    "tags": ["destructuring", "default", "null"],
+    "created_at": 1733049010000
+  },
+  {
+    "id": "q12_destructuring_computed",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Computed Property Names",
+    "question": "What will be logged?",
+    "code": "const key = 'name';\nconst { [key]: value } = { name: 'Alice' };\nconsole.log(value);",
+    "options": [
+      "'Alice'",
+      "undefined",
+      "'name'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Computed property names work in destructuring. [key] evaluates to 'name', extracting 'Alice' into 'value'.",
+    "tags": ["destructuring", "computed", "dynamic"],
+    "created_at": 1733049011000
+  },
+  {
+    "id": "q13_destructuring_skip",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Skipping Elements",
+    "question": "What is the output?",
+    "code": "const [, , third] = [1, 2, 3, 4];\nconsole.log(third);",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Commas skip elements in array destructuring. We skip first two, third gets the value 3.",
+    "tags": ["destructuring", "skip", "array"],
+    "created_at": 1733049012000
+  },
+  {
+    "id": "q14_destructuring_string",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "String Destructuring",
+    "question": "What will be logged?",
+    "code": "const [a, b, c] = 'hello';\nconsole.log(a, b, c);",
+    "options": [
+      "'hello' undefined undefined",
+      "'h' 'e' 'l'",
+      "['h', 'e', 'l', 'l', 'o'] undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Strings are iterable, so array destructuring works. Each character is extracted: 'h', 'e', 'l'.",
+    "tags": ["destructuring", "string", "iterable"],
+    "created_at": 1733049013000
+  },
+  {
+    "id": "q15_destructuring_combined",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Combined Nested Destructuring",
+    "question": "What is the output?",
+    "code": "const { data: [first, { name }] } = { data: [1, { name: 'test' }] };\nconsole.log(first, name);",
+    "options": [
+      "1 'test'",
+      "[1, { name: 'test' }] undefined",
+      "undefined 'test'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Mixed object/array destructuring is possible. data is an array, first gets 1, name extracts from second element.",
+    "tags": ["destructuring", "nested", "mixed"],
+    "created_at": 1733049014000
+  },
+  {
+    "id": "q16_destructuring_assignment",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructuring Without Declaration",
+    "question": "What happens?",
+    "code": "let a, b;\n{ a, b } = { a: 1, b: 2 };\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "SyntaxError",
+      "undefined undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Without let/const, { } is parsed as a block. You need parentheses: ({ a, b } = { a: 1, b: 2 });",
+    "tags": ["destructuring", "assignment", "syntax"],
+    "created_at": 1733049015000
+  },
+  {
+    "id": "q17_destructuring_default_function",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default Value Function Call",
+    "question": "How many times is getDefault called?",
+    "code": "let count = 0;\nfunction getDefault() {\n  count++;\n  return 'default';\n}\n\nconst { a = getDefault(), b = getDefault() } = { a: 'value' };\nconsole.log(count);",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default value expressions are lazily evaluated. a has a value so getDefault() isn't called. b is undefined so getDefault() is called once.",
+    "tags": ["destructuring", "default", "lazy"],
+    "created_at": 1733049016000
+  },
+  {
+    "id": "q18_destructuring_prototype",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Destructuring Inherited Properties",
+    "question": "What will be logged?",
+    "code": "const proto = { inherited: 'yes' };\nconst obj = Object.create(proto);\nobj.own = 'mine';\n\nconst { own, inherited } = obj;\nconsole.log(own, inherited);",
+    "options": [
+      "'mine' undefined",
+      "'mine' 'yes'",
+      "undefined 'yes'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring accesses properties through the prototype chain, just like regular property access. Both own and inherited are extracted.",
+    "tags": ["destructuring", "prototype", "inherited"],
+    "created_at": 1733049017000
+  },
+  {
+    "id": "q19_destructuring_for_of",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructuring in for-of",
+    "question": "What is logged?",
+    "code": "const users = [\n  { name: 'Alice', age: 25 },\n  { name: 'Bob', age: 30 }\n];\n\nfor (const { name } of users) {\n  console.log(name);\n}",
+    "options": [
+      "{ name: 'Alice' }, { name: 'Bob' }",
+      "'Alice', 'Bob'",
+      "['Alice', 'Bob']",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring works in for-of loops. Each iteration destructures the current object, extracting name.",
+    "tags": ["destructuring", "for-of", "loop"],
+    "created_at": 1733049018000
+  },
+  {
+    "id": "q20_destructuring_regex",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Regex Match Destructuring",
+    "question": "What will be logged?",
+    "code": "const [full, year, month, day] = '2024-12-25'.match(/(\\d{4})-(\\d{2})-(\\d{2})/);\nconsole.log(year, month, day);",
+    "options": [
+      "'2024' '12' '25'",
+      "'2024-12-25' '2024' '12'",
+      "undefined undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "String.match() returns an array [fullMatch, ...groups]. Destructuring extracts capture groups into variables.",
+    "tags": ["destructuring", "regex", "match"],
+    "created_at": 1733049019000
+  }
+]
+

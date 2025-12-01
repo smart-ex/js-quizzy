@@ -6,12 +6,18 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate-questions": "tsx scripts/validate-questions.ts",
+    "generate-questions": "tsx scripts/generate-all-json.ts",
+    "prepare:build": "npm run lint && npm run validate-questions && npm run build"
   },
   "dependencies": {
+    "@types/prismjs": "^1.26.5",
     "next": "16.0.6",
+    "prismjs": "^1.30.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "zustand": "^5.0.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -21,6 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.0.6",
     "tailwindcss": "^4",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }

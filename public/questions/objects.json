@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_objects_key_coercion",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object Key Coercion",
+    "question": "What will be logged?",
+    "code": "const obj = {};\nconst a = { key: 'a' };\nconst b = { key: 'b' };\n\nobj[a] = 'valueA';\nobj[b] = 'valueB';\n\nconsole.log(obj[a]);",
+    "options": [
+      "'valueA'",
+      "'valueB'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are converted to strings. Both a and b become '[object Object]', so obj[b] overwrites obj[a]. The result is 'valueB'.",
+    "tags": ["objects", "keys", "coercion"],
+    "created_at": 1733051000000
+  },
+  {
+    "id": "q2_objects_comparison",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Object Comparison",
+    "question": "What is the output?",
+    "code": "const a = { x: 1 };\nconst b = { x: 1 };\nconst c = a;\n\nconsole.log(a === b);\nconsole.log(a === c);",
+    "options": [
+      "true, true",
+      "false, false",
+      "false, true",
+      "true, false"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Objects are compared by reference, not value. a and b are different objects (false). c points to the same object as a (true).",
+    "tags": ["objects", "comparison", "reference"],
+    "created_at": 1733051001000
+  },
+  {
+    "id": "q3_objects_freeze",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.freeze()",
+    "question": "What will be logged?",
+    "code": "const user = Object.freeze({ name: 'Alice', address: { city: 'NYC' } });\nuser.name = 'Bob';\nuser.address.city = 'LA';\n\nconsole.log(user.name, user.address.city);",
+    "options": [
+      "'Bob', 'LA'",
+      "'Alice', 'NYC'",
+      "'Alice', 'LA'",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Object.freeze() is shallow. Top-level properties can't change ('Alice'), but nested objects can still be modified ('LA').",
+    "tags": ["objects", "freeze", "shallow"],
+    "created_at": 1733051002000
+  },
+  {
+    "id": "q4_objects_shorthand",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Property Shorthand",
+    "question": "What is the output?",
+    "code": "const name = 'Alice';\nconst age = 25;\nconst user = { name, age, name: 'Bob' };\n\nconsole.log(user);",
+    "options": [
+      "{ name: 'Alice', age: 25 }",
+      "{ name: 'Bob', age: 25 }",
+      "SyntaxError",
+      "{ name: 'Alice', age: 25, name: 'Bob' }"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Later properties overwrite earlier ones with the same key. 'Bob' overwrites 'Alice'.",
+    "tags": ["objects", "shorthand", "duplicate-keys"],
+    "created_at": 1733051003000
+  },
+  {
+    "id": "q5_objects_spread_order",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Spread Order",
+    "question": "What will be logged?",
+    "code": "const defaults = { theme: 'light', lang: 'en' };\nconst userPrefs = { theme: 'dark' };\n\nconst settings = { ...defaults, ...userPrefs, lang: 'ru' };\nconsole.log(settings);",
+    "options": [
+      "{ theme: 'light', lang: 'en' }",
+      "{ theme: 'dark', lang: 'en' }",
+      "{ theme: 'dark', lang: 'ru' }",
+      "{ theme: 'light', lang: 'ru' }"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Spread properties are applied left to right. userPrefs.theme overwrites defaults.theme. lang: 'ru' overwrites defaults.lang.",
+    "tags": ["objects", "spread", "merge"],
+    "created_at": 1733051004000
+  },
+  {
+    "id": "q6_objects_computed_keys",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Computed Property Names",
+    "question": "What is the output?",
+    "code": "const prop = 'name';\nconst obj = {\n  [prop]: 'Alice',\n  [`${prop}Length`]: 5\n};\n\nconsole.log(obj);",
+    "options": [
+      "{ prop: 'Alice', propLength: 5 }",
+      "{ name: 'Alice', nameLength: 5 }",
+      "{ [prop]: 'Alice', [propLength]: 5 }",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Computed property names evaluate the expression inside []. prop becomes 'name', template literal becomes 'nameLength'.",
+    "tags": ["objects", "computed", "dynamic"],
+    "created_at": 1733051005000
+  },
+  {
+    "id": "q7_objects_seal",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.seal() vs freeze()",
+    "question": "What happens?",
+    "code": "const obj = Object.seal({ x: 1 });\nobj.x = 2;\nobj.y = 3;\ndelete obj.x;\n\nconsole.log(obj);",
+    "options": [
+      "{ x: 2, y: 3 }",
+      "{ x: 2 }",
+      "{ x: 1 }",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "seal() prevents adding/removing properties but allows modifying existing ones. x can change to 2, but y can't be added, x can't be deleted.",
+    "tags": ["objects", "seal", "freeze"],
+    "created_at": 1733051006000
+  },
+  {
+    "id": "q8_objects_entries",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Object.entries()",
+    "question": "What will be logged?",
+    "code": "const obj = { a: 1, b: 2 };\nconst entries = Object.entries(obj);\n\nconsole.log(entries);",
+    "options": [
+      "['a', 'b']",
+      "[1, 2]",
+      "[['a', 1], ['b', 2]]",
+      "{ a: 1, b: 2 }"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Object.entries() returns an array of [key, value] pairs. Each entry is a 2-element array.",
+    "tags": ["objects", "entries", "conversion"],
+    "created_at": 1733051007000
+  },
+  {
+    "id": "q9_objects_assign_mutation",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.assign() Mutation",
+    "question": "What is the output?",
+    "code": "const target = { a: 1 };\nconst source = { b: 2 };\nconst result = Object.assign(target, source);\n\nconsole.log(target === result);\nconsole.log(target);",
+    "options": [
+      "false, { a: 1 }",
+      "true, { a: 1, b: 2 }",
+      "false, { a: 1, b: 2 }",
+      "true, { a: 1 }"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.assign() mutates and returns the target object. target and result are the same object, both containing { a: 1, b: 2 }.",
+    "tags": ["objects", "assign", "mutation"],
+    "created_at": 1733051008000
+  },
+  {
+    "id": "q10_objects_symbol_key",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol as Key",
+    "question": "What will be logged?",
+    "code": "const sym = Symbol('id');\nconst obj = { [sym]: 123, name: 'test' };\n\nconsole.log(Object.keys(obj));\nconsole.log(Object.getOwnPropertySymbols(obj));",
+    "options": [
+      "['Symbol(id)', 'name'], []",
+      "['name'], [Symbol(id)]",
+      "['name', Symbol(id)], []",
+      "[], [Symbol(id)]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.keys() only returns string keys. Symbol keys require Object.getOwnPropertySymbols() to access.",
+    "tags": ["objects", "symbol", "keys"],
+    "created_at": 1733051009000
+  },
+  {
+    "id": "q11_objects_optional_chaining",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Optional Chaining",
+    "question": "What is the output?",
+    "code": "const user = { profile: null };\n\nconsole.log(user.profile?.name);\nconsole.log(user.profile?.name ?? 'Anonymous');",
+    "options": [
+      "null, null",
+      "undefined, 'Anonymous'",
+      "TypeError, TypeError",
+      "null, 'Anonymous'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Optional chaining (?.) returns undefined if the value is null/undefined. Nullish coalescing (??) provides a fallback for null/undefined.",
+    "tags": ["objects", "optional-chaining", "nullish"],
+    "created_at": 1733051010000
+  },
+  {
+    "id": "q12_objects_in_operator",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "in Operator",
+    "question": "What will be logged?",
+    "code": "const obj = { a: undefined };\n\nconsole.log('a' in obj);\nconsole.log('b' in obj);\nconsole.log(obj.a === obj.b);",
+    "options": [
+      "true, false, true",
+      "false, false, true",
+      "true, true, false",
+      "true, false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "'in' checks if property exists, not its value. 'a' exists (true), 'b' doesn't (false). Both obj.a and obj.b are undefined, so they're equal.",
+    "tags": ["objects", "in", "undefined"],
+    "created_at": 1733051011000
+  },
+  {
+    "id": "q13_objects_getter",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Getter Side Effects",
+    "question": "What is the output?",
+    "code": "let count = 0;\nconst obj = {\n  get value() {\n    return ++count;\n  }\n};\n\nconsole.log(obj.value);\nconsole.log(obj.value);\nconsole.log(obj.value);",
+    "options": [
+      "1, 1, 1",
+      "1, 2, 3",
+      "0, 1, 2",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Getters are called each time the property is accessed. Each access increments count: 1, 2, 3.",
+    "tags": ["objects", "getter", "side-effects"],
+    "created_at": 1733051012000
+  },
+  {
+    "id": "q14_objects_property_descriptor",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Property Descriptor",
+    "question": "What happens?",
+    "code": "const obj = {};\nObject.defineProperty(obj, 'x', {\n  value: 42,\n  writable: false,\n  enumerable: false\n});\n\nobj.x = 100;\nconsole.log(obj.x);\nconsole.log(Object.keys(obj));",
+    "options": [
+      "100, ['x']",
+      "42, ['x']",
+      "42, []",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "writable: false prevents modification (x stays 42). enumerable: false hides from Object.keys (empty array).",
+    "tags": ["objects", "define-property", "descriptor"],
+    "created_at": 1733051013000
+  },
+  {
+    "id": "q15_objects_fromEntries",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.fromEntries()",
+    "question": "What will be logged?",
+    "code": "const entries = [['name', 'Alice'], ['age', 25]];\nconst obj = Object.fromEntries(entries);\n\nconsole.log(obj);",
+    "options": [
+      "[['name', 'Alice'], ['age', 25]]",
+      "{ name: 'Alice', age: 25 }",
+      "{ 0: 'name', 1: 'age' }",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.fromEntries() converts an iterable of [key, value] pairs into an object. It's the inverse of Object.entries().",
+    "tags": ["objects", "fromEntries", "conversion"],
+    "created_at": 1733051014000
+  },
+  {
+    "id": "q16_objects_prototype_null",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object with null Prototype",
+    "question": "What is the output?",
+    "code": "const dict = Object.create(null);\ndict.hasOwnProperty = 'oops';\ndict.name = 'test';\n\nconsole.log(dict.hasOwnProperty);\nconsole.log(dict.toString);",
+    "options": [
+      "function, function",
+      "'oops', undefined",
+      "'oops', function",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) creates object with no prototype. No inherited methods exist, so hasOwnProperty can be a regular property. toString is undefined.",
+    "tags": ["objects", "prototype", "null"],
+    "created_at": 1733051015000
+  },
+  {
+    "id": "q17_objects_json_methods",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "toJSON Method",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Alice',\n  toJSON() {\n    return { n: this.name.toUpperCase() };\n  }\n};\n\nconsole.log(JSON.stringify(obj));",
+    "options": [
+      "'{\"name\":\"Alice\"}'",
+      "'{\"n\":\"ALICE\"}'",
+      "'{\"toJSON\":...}'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "If an object has a toJSON method, JSON.stringify calls it and uses the returned value for serialization.",
+    "tags": ["objects", "json", "tojson"],
+    "created_at": 1733051016000
+  },
+  {
+    "id": "q18_objects_number_keys",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Numeric Keys Order",
+    "question": "What is the output?",
+    "code": "const obj = { 2: 'b', 1: 'a', c: 'c', a: 'a' };\nconsole.log(Object.keys(obj));",
+    "options": [
+      "['2', '1', 'c', 'a']",
+      "['1', '2', 'c', 'a']",
+      "['a', 'c', '1', '2']",
+      "['1', '2', 'a', 'c']"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Object keys are ordered: integer keys first (ascending), then string keys in insertion order. 1, 2, then 'a', 'c' (not 'c', 'a').",
+    "tags": ["objects", "keys", "order"],
+    "created_at": 1733051017000
+  },
+  {
+    "id": "q19_objects_delete",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Delete Operator",
+    "question": "What will be logged?",
+    "code": "const obj = { a: 1, b: 2 };\nconst result = delete obj.a;\n\nconsole.log(result);\nconsole.log(obj);",
+    "options": [
+      "true, { b: 2 }",
+      "1, { b: 2 }",
+      "undefined, { a: 1, b: 2 }",
+      "true, { a: undefined, b: 2 }"
+    ],
+    "correctAnswer": 0,
+    "explanation": "delete removes a property and returns true if successful. The property is completely removed, not set to undefined.",
+    "tags": ["objects", "delete", "operator"],
+    "created_at": 1733051018000
+  },
+  {
+    "id": "q20_objects_preventExtensions",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "preventExtensions vs seal vs freeze",
+    "question": "What is true about these methods?",
+    "code": "const a = Object.preventExtensions({ x: 1 });\nconst b = Object.seal({ x: 1 });\nconst c = Object.freeze({ x: 1 });",
+    "options": [
+      "a: can add/delete/modify, b: can modify only, c: nothing allowed",
+      "a: can delete/modify, b: can modify only, c: nothing allowed",
+      "a: can modify only, b: can delete/modify, c: nothing allowed",
+      "All three are the same"
+    ],
+    "correctAnswer": 1,
+    "explanation": "preventExtensions: no new properties, can delete/modify. seal: no add/delete, can modify. freeze: nothing changeable. Strictness: freeze > seal > preventExtensions.",
+    "tags": ["objects", "prevent-extensions", "immutability"],
+    "created_at": 1733051019000
+  }
+]
+

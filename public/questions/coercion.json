@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_coercion_plus",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Plus Operator Coercion",
+    "question": "What is the result?",
+    "code": "console.log(1 + '2');",
+    "options": [
+      "3",
+      "'12'",
+      "NaN",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The + operator performs string concatenation when one operand is a string. The number 1 is coerced to '1', resulting in '12'.",
+    "tags": ["coercion", "plus", "string"],
+    "created_at": 1733046400000
+  },
+  {
+    "id": "q2_coercion_minus",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Minus Operator Coercion",
+    "question": "What is the result?",
+    "code": "console.log('5' - 2);",
+    "options": [
+      "3",
+      "'3'",
+      "NaN",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The - operator always performs numeric subtraction. The string '5' is coerced to the number 5, resulting in 3.",
+    "tags": ["coercion", "minus", "number"],
+    "created_at": 1733046401000
+  },
+  {
+    "id": "q3_coercion_truthy",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Truthy Values",
+    "question": "Which values are truthy?",
+    "code": "console.log(!!'0');\nconsole.log(!!0);\nconsole.log(!![]);\nconsole.log(!!{});",
+    "options": [
+      "true, false, true, true",
+      "true, true, false, false",
+      "false, false, false, false",
+      "true, false, false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Falsy values: false, 0, -0, 0n, '', null, undefined, NaN. Everything else is truthy, including '0', [], and {}.",
+    "tags": ["coercion", "truthy", "falsy"],
+    "created_at": 1733046402000
+  },
+  {
+    "id": "q4_coercion_equality",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Loose Equality",
+    "question": "What will be logged?",
+    "code": "console.log(1 == '1');\nconsole.log(1 === '1');",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "== performs type coercion, so 1 == '1' is true. === checks both value and type without coercion, so 1 === '1' is false.",
+    "tags": ["coercion", "equality", "==="],
+    "created_at": 1733046403000
+  },
+  {
+    "id": "q5_coercion_array_equality",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Array Equality",
+    "question": "What is the result?",
+    "code": "console.log([] == 0);\nconsole.log([] == '');\nconsole.log([] == []);",
+    "options": [
+      "true, true, true",
+      "true, true, false",
+      "false, false, false",
+      "true, false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrays are converted to strings for comparison. [] becomes '', which coerces to 0. [] == [] is false because arrays are compared by reference, not value.",
+    "tags": ["coercion", "array", "equality"],
+    "created_at": 1733046404000
+  },
+  {
+    "id": "q6_coercion_null_undefined",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Null and Undefined",
+    "question": "What will be logged?",
+    "code": "console.log(null == undefined);\nconsole.log(null === undefined);",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "null == undefined is true due to special equality rules. null === undefined is false because they are different types.",
+    "tags": ["coercion", "null", "undefined"],
+    "created_at": 1733046405000
+  },
+  {
+    "id": "q7_coercion_number",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Number Coercion",
+    "question": "What is the result?",
+    "code": "console.log(Number(''));\nconsole.log(Number(' '));\nconsole.log(Number('abc'));",
+    "options": [
+      "0, 0, 0",
+      "0, 0, NaN",
+      "NaN, NaN, NaN",
+      "0, NaN, NaN"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Number('') converts empty string to 0. Number(' ') converts whitespace to 0. Number('abc') cannot be parsed, so it's NaN.",
+    "tags": ["coercion", "number", "nan"],
+    "created_at": 1733046406000
+  },
+  {
+    "id": "q8_coercion_boolean",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Boolean Coercion",
+    "question": "What will be logged?",
+    "code": "console.log(Boolean('false'));\nconsole.log(Boolean(false));\nconsole.log(Boolean(0));",
+    "options": [
+      "true, false, false",
+      "false, false, false",
+      "true, true, true",
+      "false, false, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Boolean('false') is true because any non-empty string is truthy. Boolean(false) and Boolean(0) are false because false and 0 are falsy.",
+    "tags": ["coercion", "boolean"],
+    "created_at": 1733046407000
+  },
+  {
+    "id": "q9_coercion_string",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "String Coercion",
+    "question": "What is the output?",
+    "code": "console.log(String(null));\nconsole.log(String(undefined));\nconsole.log(String({}));",
+    "options": [
+      "'null', 'undefined', '[object Object]'",
+      "null, undefined, {}",
+      "'null', 'undefined', '{}'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "String(null) is 'null', String(undefined) is 'undefined'. Objects are converted using toString(), which for plain objects returns '[object Object]'.",
+    "tags": ["coercion", "string", "tostring"],
+    "created_at": 1733046408000
+  },
+  {
+    "id": "q10_coercion_comparison",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Comparison Operators",
+    "question": "What will be logged?",
+    "code": "console.log('10' > 9);\nconsole.log('10' < '9');\nconsole.log('10' < 9);",
+    "options": [
+      "true, false, false",
+      "true, true, false",
+      "false, true, false",
+      "true, false, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'10' > 9 coerces to numbers: 10 > 9 is true. '10' < '9' compares strings lexicographically: '1' < '9' is true. '10' < 9 coerces to numbers: 10 < 9 is false.",
+    "tags": ["coercion", "comparison", "operators"],
+    "created_at": 1733046409000
+  },
+  {
+    "id": "q11_coercion_plus_objects",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Plus with Objects",
+    "question": "What is the result?",
+    "code": "console.log({} + []);\nconsole.log([] + {});\nconsole.log({} + {});",
+    "options": [
+      "'[object Object]', '[object Object]', '[object Object][object Object]'",
+      "0, 0, NaN",
+      "Error, Error, Error",
+      "'', '', ''"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Objects are converted to strings using toString(). {} becomes '[object Object]', [] becomes ''. The + operator concatenates strings.",
+    "tags": ["coercion", "objects", "arrays", "plus"],
+    "created_at": 1733046410000
+  },
+  {
+    "id": "q12_coercion_typeof",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Typeof and Coercion",
+    "question": "What will be logged?",
+    "code": "console.log(typeof null);\nconsole.log(typeof undefined);\nconsole.log(typeof NaN);",
+    "options": [
+      "'null', 'undefined', 'NaN'",
+      "'object', 'undefined', 'number'",
+      "'object', 'object', 'number'",
+      "'null', 'undefined', 'number'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "typeof null is 'object' (a historical bug). typeof undefined is 'undefined'. typeof NaN is 'number' because NaN is a numeric value.",
+    "tags": ["coercion", "typeof", "null", "nan"],
+    "created_at": 1733046411000
+  },
+  {
+    "id": "q13_coercion_symbol_toprimitive",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol.toPrimitive",
+    "question": "What is the output?",
+    "code": "const obj = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 10;\n    if (hint === 'string') return 'hello';\n    return true;\n  }\n};\n\nconsole.log(+obj);\nconsole.log(`${obj}`);\nconsole.log(obj + '');",
+    "options": [
+      "10, 'hello', 'true'",
+      "10, 'hello', 'hello'",
+      "NaN, '[object Object]', '[object Object]'",
+      "10, 'hello', '10'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "+obj uses 'number' hint (10). Template literal uses 'string' hint ('hello'). + '' uses 'default' hint (true → 'true').",
+    "tags": ["coercion", "symbol.toprimitive", "hint"],
+    "created_at": 1733046412000
+  },
+  {
+    "id": "q14_coercion_valueOf_toString",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "valueOf vs toString Priority",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  valueOf() {\n    return 42;\n  },\n  toString() {\n    return 'hello';\n  }\n};\n\nconsole.log(obj + 1);\nconsole.log(String(obj));\nconsole.log([obj].join());",
+    "options": [
+      "43, 'hello', 'hello'",
+      "43, '42', '42'",
+      "'hello1', 'hello', 'hello'",
+      "43, 'hello', '42'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "+ prefers valueOf for numeric context (42+1=43). String() calls toString ('hello'). join() calls toString ('hello').",
+    "tags": ["coercion", "valueof", "tostring"],
+    "created_at": 1733046413000
+  },
+  {
+    "id": "q15_coercion_bigint",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "BigInt Coercion",
+    "question": "What happens?",
+    "code": "try {\n  console.log(10n + 5);\n} catch (e) {\n  console.log('Error1');\n}\n\ntry {\n  console.log(10n == 10);\n} catch (e) {\n  console.log('Error2');\n}",
+    "options": [
+      "15n, true",
+      "Error1, true",
+      "15, true",
+      "Error1, Error2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "BigInt cannot be mixed with Number in arithmetic (TypeError). But loose equality (==) allows comparison: 10n == 10 is true.",
+    "tags": ["coercion", "bigint", "mixed-types"],
+    "created_at": 1733046414000
+  },
+  {
+    "id": "q16_coercion_array_tostring",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Array Coercion",
+    "question": "What is the result?",
+    "code": "console.log([[1]] == [1]);\nconsole.log([[1]] == '1');\nconsole.log([[[1]]] == 1);",
+    "options": [
+      "false, true, true",
+      "true, true, true",
+      "false, false, false",
+      "true, false, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrays compare by reference (false). [[1]].toString() is '1' (true). [[[1]]].toString() is '1', which coerces to 1 (true).",
+    "tags": ["coercion", "array", "tostring"],
+    "created_at": 1733046415000
+  },
+  {
+    "id": "q17_coercion_nan_equality",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "NaN Comparisons",
+    "question": "What will be logged?",
+    "code": "const x = NaN;\nconsole.log(x === x);\nconsole.log(Object.is(x, x));\nconsole.log(Number.isNaN(x));\nconsole.log(isNaN('hello'));",
+    "options": [
+      "false, true, true, true",
+      "true, true, true, true",
+      "false, false, true, true",
+      "false, true, true, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "NaN !== NaN by spec. Object.is treats NaN as equal to itself. Number.isNaN is strict. Global isNaN coerces: 'hello'→NaN→true.",
+    "tags": ["coercion", "nan", "object.is"],
+    "created_at": 1733046416000
+  },
+  {
+    "id": "q18_coercion_implicit_in_conditionals",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Document.all Coercion",
+    "question": "In browsers, what is the output?",
+    "code": "// document.all is a special object\nconst all = document.all;\nconsole.log(typeof all);\nconsole.log(all ? 'truthy' : 'falsy');\nconsole.log(all == undefined);",
+    "options": [
+      "'object', 'truthy', false",
+      "'undefined', 'falsy', true",
+      "'object', 'falsy', false",
+      "'undefined', 'truthy', false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "document.all is a historical quirk. typeof is 'undefined', it's falsy in boolean context, and loosely equals undefined. This is for legacy compatibility.",
+    "tags": ["coercion", "document.all", "browser-quirk"],
+    "created_at": 1733046417000
+  },
+  {
+    "id": "q19_coercion_unary_plus",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Unary Plus Coercion",
+    "question": "What is the output?",
+    "code": "console.log(+true);\nconsole.log(+null);\nconsole.log(+undefined);\nconsole.log(+{ valueOf: () => 42 });",
+    "options": [
+      "1, 0, NaN, 42",
+      "true, null, undefined, '[object Object]'",
+      "1, 0, 0, NaN",
+      "NaN, NaN, NaN, 42"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Unary + converts to number. true→1, null→0, undefined→NaN. Objects use valueOf() if it returns a primitive: 42.",
+    "tags": ["coercion", "unary-plus", "valueof"],
+    "created_at": 1733046418000
+  },
+  {
+    "id": "q20_coercion_json_stringify",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "JSON.stringify Coercion",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  a: undefined,\n  b: function() {},\n  c: Symbol('x'),\n  d: NaN,\n  e: Infinity\n};\n\nconsole.log(JSON.stringify(obj));",
+    "options": [
+      "{\"a\":null,\"b\":null,\"c\":null,\"d\":null,\"e\":null}",
+      "{\"d\":null,\"e\":null}",
+      "{\"d\":\"NaN\",\"e\":\"Infinity\"}",
+      "{}"
+    ],
+    "correctAnswer": 1,
+    "explanation": "JSON.stringify skips undefined, functions, and Symbols. NaN and Infinity become null. Only d and e remain with null values.",
+    "tags": ["coercion", "json", "stringify"],
+    "created_at": 1733046419000
+  }
+]
+

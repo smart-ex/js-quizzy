@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_arrays_map_return",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "map() Return Value",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.map(x => x * 2);\nconsole.log(result);",
+    "options": [
+      "[2, 4, 6]",
+      "[1, 2, 3]",
+      "6",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "map() creates a new array with the results of calling the callback on each element. Each element is doubled.",
+    "tags": ["arrays", "map", "basic"],
+    "created_at": 1733050000000
+  },
+  {
+    "id": "q2_arrays_filter",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "filter() Basics",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst result = arr.filter(x => x > 3);\nconsole.log(result);",
+    "options": [
+      "[4, 5]",
+      "[1, 2, 3]",
+      "true",
+      "[true, true]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "filter() creates a new array with elements that pass the test. Only 4 and 5 are greater than 3.",
+    "tags": ["arrays", "filter", "basic"],
+    "created_at": 1733050001000
+  },
+  {
+    "id": "q3_arrays_reduce",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "reduce() Sum",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4];\nconst sum = arr.reduce((acc, val) => acc + val, 0);\nconsole.log(sum);",
+    "options": [
+      "10",
+      "[1, 2, 3, 4]",
+      "0",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "reduce() accumulates values. Starting with 0, it adds each element: 0+1+2+3+4 = 10.",
+    "tags": ["arrays", "reduce", "accumulator"],
+    "created_at": 1733050002000
+  },
+  {
+    "id": "q4_arrays_sort_numbers",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "sort() with Numbers",
+    "question": "What is the output?",
+    "code": "const arr = [10, 2, 1, 21];\narr.sort();\nconsole.log(arr);",
+    "options": [
+      "[1, 2, 10, 21]",
+      "[1, 10, 2, 21]",
+      "[21, 10, 2, 1]",
+      "[10, 2, 1, 21]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "sort() converts elements to strings by default. '1' < '10' < '2' < '21' lexicographically. Use (a, b) => a - b for numeric sort.",
+    "tags": ["arrays", "sort", "gotcha"],
+    "created_at": 1733050003000
+  },
+  {
+    "id": "q5_arrays_splice_return",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "splice() Return and Mutation",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst removed = arr.splice(1, 2);\nconsole.log(removed);\nconsole.log(arr);",
+    "options": [
+      "[2, 3], [1, 4, 5]",
+      "[1, 2], [3, 4, 5]",
+      "[2, 3], [1, 2, 3, 4, 5]",
+      "2, [1, 3, 4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "splice(1, 2) removes 2 elements starting at index 1. Returns removed elements [2, 3]. Original array is mutated to [1, 4, 5].",
+    "tags": ["arrays", "splice", "mutating"],
+    "created_at": 1733050004000
+  },
+  {
+    "id": "q6_arrays_slice",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "slice() Non-Mutating",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst sliced = arr.slice(1, 3);\nconsole.log(sliced);\nconsole.log(arr);",
+    "options": [
+      "[2, 3], [1, 2, 3, 4, 5]",
+      "[2, 3, 4], [1, 2, 3, 4, 5]",
+      "[2, 3], [1, 4, 5]",
+      "[1, 2, 3], [4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "slice(1, 3) returns elements from index 1 to 3 (exclusive). Original array is not mutated.",
+    "tags": ["arrays", "slice", "non-mutating"],
+    "created_at": 1733050005000
+  },
+  {
+    "id": "q7_arrays_find_vs_filter",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "find() vs filter()",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst found = arr.find(x => x > 2);\nconst filtered = arr.filter(x => x > 2);\nconsole.log(found, filtered);",
+    "options": [
+      "3, [3, 4, 5]",
+      "[3], [3, 4, 5]",
+      "3, 3",
+      "[3, 4, 5], [3, 4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "find() returns the first matching element (3). filter() returns all matching elements as an array [3, 4, 5].",
+    "tags": ["arrays", "find", "filter"],
+    "created_at": 1733050006000
+  },
+  {
+    "id": "q8_arrays_flat",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "flat() Depth",
+    "question": "What is the output?",
+    "code": "const arr = [1, [2, [3, [4]]]];\nconsole.log(arr.flat(2));",
+    "options": [
+      "[1, 2, 3, 4]",
+      "[1, 2, 3, [4]]",
+      "[1, 2, [3, [4]]]",
+      "[1, [2, [3, 4]]]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "flat(2) flattens up to 2 levels deep. Level 1: [1, 2, [3, [4]]]. Level 2: [1, 2, 3, [4]]. The innermost [4] remains.",
+    "tags": ["arrays", "flat", "nested"],
+    "created_at": 1733050007000
+  },
+  {
+    "id": "q9_arrays_includes_nan",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "includes() with NaN",
+    "question": "What will be logged?",
+    "code": "const arr = [1, NaN, 3];\nconsole.log(arr.includes(NaN));\nconsole.log(arr.indexOf(NaN));",
+    "options": [
+      "true, 1",
+      "false, -1",
+      "true, -1",
+      "false, 1"
+    ],
+    "correctAnswer": 2,
+    "explanation": "includes() uses SameValueZero which considers NaN equal to NaN. indexOf() uses strict equality where NaN !== NaN.",
+    "tags": ["arrays", "includes", "nan"],
+    "created_at": 1733050008000
+  },
+  {
+    "id": "q10_arrays_sparse",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Sparse Arrays",
+    "question": "What is the output?",
+    "code": "const arr = [1, , 3];\nconsole.log(arr.length);\nconsole.log(arr[1]);\nconsole.log(1 in arr);",
+    "options": [
+      "3, undefined, true",
+      "3, undefined, false",
+      "2, undefined, false",
+      "3, null, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sparse arrays have holes. Length is 3, arr[1] is undefined, but index 1 doesn't actually exist (in returns false).",
+    "tags": ["arrays", "sparse", "holes"],
+    "created_at": 1733050009000
+  },
+  {
+    "id": "q11_arrays_map_sparse",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "map() with Sparse Arrays",
+    "question": "How many times is the callback called?",
+    "code": "let count = 0;\nconst arr = [1, , 3];\narr.map(x => {\n  count++;\n  return x * 2;\n});\nconsole.log(count);",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "0"
+    ],
+    "correctAnswer": 1,
+    "explanation": "map() skips holes in sparse arrays. The callback is only called for existing elements (index 0 and 2), not the hole at index 1.",
+    "tags": ["arrays", "map", "sparse"],
+    "created_at": 1733050010000
+  },
+  {
+    "id": "q12_arrays_reduce_no_initial",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "reduce() Without Initial Value",
+    "question": "What happens?",
+    "code": "const arr = [];\nconst result = arr.reduce((acc, val) => acc + val);",
+    "options": [
+      "undefined",
+      "0",
+      "TypeError",
+      "NaN"
+    ],
+    "correctAnswer": 2,
+    "explanation": "reduce() on empty array without initial value throws TypeError. Always provide an initial value for safety.",
+    "tags": ["arrays", "reduce", "error"],
+    "created_at": 1733050011000
+  },
+  {
+    "id": "q13_arrays_from",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Array.from()",
+    "question": "What will be logged?",
+    "code": "const arr = Array.from({ length: 3 }, (_, i) => i * 2);\nconsole.log(arr);",
+    "options": [
+      "[0, 2, 4]",
+      "[undefined, undefined, undefined]",
+      "[0, 1, 2]",
+      "[]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array.from() with mapFn creates array with transformed values. Indices 0, 1, 2 become 0*2, 1*2, 2*2 = [0, 2, 4].",
+    "tags": ["arrays", "from", "creation"],
+    "created_at": 1733050012000
+  },
+  {
+    "id": "q14_arrays_concat",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "concat() and Spread",
+    "question": "What is the output?",
+    "code": "const a = [1, 2];\nconst b = [3, 4];\na[Symbol.isConcatSpreadable] = false;\nconsole.log([].concat(a, b));",
+    "options": [
+      "[1, 2, 3, 4]",
+      "[[1, 2], 3, 4]",
+      "[[1, 2], [3, 4]]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Symbol.isConcatSpreadable controls if arrays are flattened by concat. When false, a is added as a nested array.",
+    "tags": ["arrays", "concat", "symbol"],
+    "created_at": 1733050013000
+  },
+  {
+    "id": "q15_arrays_fill",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "fill() Object Reference",
+    "question": "What will be logged?",
+    "code": "const arr = new Array(3).fill({});\narr[0].x = 1;\nconsole.log(arr[1].x);",
+    "options": [
+      "undefined",
+      "1",
+      "{}",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "fill() fills with the same object reference. All elements point to the same object, so modifying one affects all.",
+    "tags": ["arrays", "fill", "reference"],
+    "created_at": 1733050014000
+  },
+  {
+    "id": "q16_arrays_findindex",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "findIndex() Not Found",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3];\nconsole.log(arr.findIndex(x => x > 5));\nconsole.log(arr.find(x => x > 5));",
+    "options": [
+      "-1, undefined",
+      "undefined, undefined",
+      "-1, -1",
+      "null, null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When no element matches: findIndex() returns -1, find() returns undefined. Different return values for 'not found'.",
+    "tags": ["arrays", "findindex", "find"],
+    "created_at": 1733050015000
+  },
+  {
+    "id": "q17_arrays_every_empty",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "every() on Empty Array",
+    "question": "What will be logged?",
+    "code": "const arr = [];\nconsole.log(arr.every(x => x > 0));\nconsole.log(arr.some(x => x > 0));",
+    "options": [
+      "false, false",
+      "true, false",
+      "true, true",
+      "false, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "every() returns true for empty arrays (vacuous truth - no elements fail the test). some() returns false (no elements pass).",
+    "tags": ["arrays", "every", "some", "empty"],
+    "created_at": 1733050016000
+  },
+  {
+    "id": "q18_arrays_at",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "at() Negative Index",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconsole.log(arr.at(-1));\nconsole.log(arr.at(-2));",
+    "options": [
+      "5, 4",
+      "undefined, undefined",
+      "1, 2",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "at() supports negative indices. -1 is the last element (5), -2 is second to last (4).",
+    "tags": ["arrays", "at", "negative-index"],
+    "created_at": 1733050017000
+  },
+  {
+    "id": "q19_arrays_flatmap",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "flatMap()",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.flatMap(x => [x, x * 2]);\nconsole.log(result);",
+    "options": [
+      "[1, 2, 2, 4, 3, 6]",
+      "[[1, 2], [2, 4], [3, 6]]",
+      "[1, 2, 3, 2, 4, 6]",
+      "[1, [2], 2, [4], 3, [6]]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "flatMap() maps each element then flattens one level. Each x becomes [x, x*2], then all are flattened into one array.",
+    "tags": ["arrays", "flatmap", "transform"],
+    "created_at": 1733050018000
+  },
+  {
+    "id": "q20_arrays_toSorted",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "toSorted() vs sort()",
+    "question": "What is the output?",
+    "code": "const arr = [3, 1, 2];\nconst sorted = arr.toSorted();\nconsole.log(sorted);\nconsole.log(arr);",
+    "options": [
+      "[1, 2, 3], [1, 2, 3]",
+      "[1, 2, 3], [3, 1, 2]",
+      "[3, 1, 2], [1, 2, 3]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "toSorted() (ES2023) returns a new sorted array without mutating the original. Unlike sort(), the original array remains unchanged.",
+    "tags": ["arrays", "tosorted", "immutable"],
+    "created_at": 1733050019000
+  }
+]
+

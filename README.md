@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# JS Quiz Master
+
+A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, and prototypes.
+
+## Features
+
+- ✅ **Offline-First**: Works completely offline after first visit
+- ✅ **72+ Questions**: Covering 6 core JavaScript categories
+- ✅ **PWA Support**: Installable on mobile and desktop
+- ✅ **Statistics Tracking**: Track your progress and performance
+- ✅ **Share Results**: Share your quiz results with friends
+- ✅ **No Backend**: 100% client-side, no server required
+- ✅ **GitHub Pages Ready**: Deploy to GitHub Pages with one click
+
+## Categories
+
+- **Event Loop**: Understanding JavaScript event loop, call stack, and task queues
+- **Closures**: Lexical scoping, closure patterns, and memory management
+- **Async/Await**: Promises, async/await, and asynchronous programming
+- **This Binding**: Context binding, arrow functions, and method invocation
+- **Type Coercion**: Type conversion, truthy/falsy values, and implicit conversions
+- **Prototypes**: Prototype chain, inheritance, and object-oriented patterns
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 20+
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/js-quizzy.git
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Building for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Build static export
+npm run build
 
-## Learn More
+# The output will be in the /out directory
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Validating Questions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Validate all question files
+npm run validate-questions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Generate all.json from category files
+npm run generate-questions
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+js-quizzy/
+├── app/                    # Next.js App Router pages
+├── components/            # React components
+├── lib/                   # Core logic and utilities
+├── public/               # Static assets and questions
+│   ├── questions/        # Question JSON files
+│   └── sw.js            # Service Worker
+├── scripts/              # Build and validation scripts
+└── docs/                 # Documentation
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Adding Questions
+
+See [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for guidelines on adding questions.
+
+Questions are stored in JSON files in `public/questions/`. Each category has its own file:
+- `event-loop.json`
+- `closures.json`
+- `async.json`
+- `this.json`
+- `coercion.json`
+- `prototypes.json`
+
+## Deployment
+
+### GitHub Pages
+
+The project includes a GitHub Actions workflow that automatically deploys to GitHub Pages on every push to `main`.
+
+1. Enable GitHub Pages in repository settings
+2. Select "GitHub Actions" as the source
+3. Push to `main` branch
+4. Site will be available at `https://yourusername.github.io/js-quizzy/`
+
+See [DEPLOYMENT.md](./docs/DEPLOYMENT.md) for detailed deployment instructions.
+
+## Documentation
+
+- [CONTRIBUTING.md](./docs/CONTRIBUTING.md) - How to contribute questions
+- [QUESTION_FORMAT.md](./docs/QUESTION_FORMAT.md) - Question JSON schema
+- [ARCHITECTURE.md](./docs/ARCHITECTURE.md) - Technical architecture
+- [DEPLOYMENT.md](./docs/DEPLOYMENT.md) - Deployment guide
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript 5
+- **State Management**: Zustand
+- **Styling**: Tailwind CSS
+- **Deployment**: GitHub Pages (static export)
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for details.
+
+## Roadmap
+
+- [ ] Interactive code playground
+- [ ] Daily challenges
+- [ ] Community question voting
+- [ ] GitHub OAuth for verified users
+- [ ] AI-powered explanations

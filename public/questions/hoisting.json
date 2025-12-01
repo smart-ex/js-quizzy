@@ -1,0 +1,383 @@
+[
+  {
+    "id": "q1_hoisting_var_basic",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic var Hoisting",
+    "question": "What will be logged?",
+    "code": "console.log(x);\nvar x = 5;\nconsole.log(x);",
+    "options": [
+      "ReferenceError, 5",
+      "undefined, 5",
+      "5, 5",
+      "null, 5"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var declarations are hoisted to the top of their scope, but not the initialization. x exists but is undefined until the assignment.",
+    "tags": ["hoisting", "var"],
+    "created_at": 1733047000000
+  },
+  {
+    "id": "q2_hoisting_let_tdz",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "let and TDZ",
+    "question": "What happens when this code runs?",
+    "code": "console.log(x);\nlet x = 5;",
+    "options": [
+      "undefined",
+      "5",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "let and const are hoisted but not initialized. Accessing them before declaration causes a ReferenceError due to the Temporal Dead Zone (TDZ).",
+    "tags": ["hoisting", "let", "tdz"],
+    "created_at": 1733047001000
+  },
+  {
+    "id": "q3_hoisting_function_declaration",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Function Declaration Hoisting",
+    "question": "What is the output?",
+    "code": "sayHello();\n\nfunction sayHello() {\n  console.log('Hello!');\n}",
+    "options": [
+      "ReferenceError",
+      "TypeError",
+      "Hello!",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Function declarations are fully hoisted - both the name and the function body. You can call them before they appear in the code.",
+    "tags": ["hoisting", "function-declaration"],
+    "created_at": 1733047002000
+  },
+  {
+    "id": "q4_hoisting_function_expression",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Expression Hoisting",
+    "question": "What happens?",
+    "code": "sayHello();\n\nvar sayHello = function() {\n  console.log('Hello!');\n};",
+    "options": [
+      "Hello!",
+      "ReferenceError",
+      "TypeError: sayHello is not a function",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var sayHello is hoisted as undefined. Calling undefined as a function throws TypeError, not ReferenceError.",
+    "tags": ["hoisting", "function-expression", "var"],
+    "created_at": 1733047003000
+  },
+  {
+    "id": "q5_hoisting_const",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "const Hoisting",
+    "question": "What is the output?",
+    "code": "const x = 1;\n\nfunction test() {\n  console.log(x);\n  const x = 2;\n}\n\ntest();",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 3,
+    "explanation": "The inner const x shadows the outer one. Due to TDZ, accessing x before its declaration in the function throws ReferenceError.",
+    "tags": ["hoisting", "const", "tdz", "shadowing"],
+    "created_at": 1733047004000
+  },
+  {
+    "id": "q6_hoisting_var_function_same_name",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "var and Function Same Name",
+    "question": "What will be logged?",
+    "code": "console.log(typeof foo);\nvar foo = 'string';\nfunction foo() {}\nconsole.log(typeof foo);",
+    "options": [
+      "'undefined', 'string'",
+      "'function', 'string'",
+      "'function', 'function'",
+      "'string', 'string'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function declarations are hoisted above var. Initially foo is the function. After execution, var foo = 'string' reassigns it.",
+    "tags": ["hoisting", "function", "var", "precedence"],
+    "created_at": 1733047005000
+  },
+  {
+    "id": "q7_hoisting_block_function",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function in Block (non-strict)",
+    "question": "In non-strict mode, what is logged?",
+    "code": "console.log(foo);\nif (true) {\n  function foo() { return 1; }\n}\nconsole.log(typeof foo);",
+    "options": [
+      "undefined, 'function'",
+      "ReferenceError",
+      "undefined, 'undefined'",
+      "function, 'function'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In non-strict mode, function declarations in blocks are partially hoisted. The name is hoisted as undefined, but the function is assigned when the block executes.",
+    "tags": ["hoisting", "block", "function"],
+    "created_at": 1733047006000
+  },
+  {
+    "id": "q8_hoisting_class",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Class Hoisting",
+    "question": "What happens?",
+    "code": "const obj = new MyClass();\n\nclass MyClass {\n  constructor() {\n    this.name = 'test';\n  }\n}",
+    "options": [
+      "Creates object with name 'test'",
+      "ReferenceError",
+      "TypeError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Classes are hoisted but not initialized (like let/const). Accessing before declaration throws ReferenceError due to TDZ.",
+    "tags": ["hoisting", "class", "tdz"],
+    "created_at": 1733047007000
+  },
+  {
+    "id": "q9_hoisting_multiple_var",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Multiple var Declarations",
+    "question": "What is the output?",
+    "code": "var x = 1;\nvar x = 2;\nvar x;\nconsole.log(x);",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Multiple var declarations of the same variable are allowed. The last assignment wins. 'var x;' without assignment doesn't reset the value.",
+    "tags": ["hoisting", "var", "redeclaration"],
+    "created_at": 1733047008000
+  },
+  {
+    "id": "q10_hoisting_let_redeclare",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "let Redeclaration",
+    "question": "What happens?",
+    "code": "let x = 1;\nlet x = 2;\nconsole.log(x);",
+    "options": [
+      "1",
+      "2",
+      "SyntaxError",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Unlike var, let and const do not allow redeclaration in the same scope. This throws a SyntaxError.",
+    "tags": ["hoisting", "let", "redeclaration"],
+    "created_at": 1733047009000
+  },
+  {
+    "id": "q11_hoisting_nested_function",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Function Hoisting",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  console.log(typeof inner);\n  return inner();\n  \n  function inner() {\n    return 'hello';\n  }\n}\n\nconsole.log(outer());",
+    "options": [
+      "'undefined', 'hello'",
+      "'function', 'hello'",
+      "TypeError",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function declarations are hoisted within their containing function. inner is available as a function from the start of outer().",
+    "tags": ["hoisting", "nested", "function"],
+    "created_at": 1733047010000
+  },
+  {
+    "id": "q12_hoisting_param_var",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Parameter and var Same Name",
+    "question": "What is the output?",
+    "code": "function test(x) {\n  console.log(x);\n  var x = 10;\n  console.log(x);\n}\n\ntest(5);",
+    "options": [
+      "undefined, 10",
+      "5, 10",
+      "5, 5",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Parameters and var declarations share the same scope. var x doesn't create a new variable, just re-declares. First log shows 5, second shows 10.",
+    "tags": ["hoisting", "parameters", "var"],
+    "created_at": 1733047011000
+  },
+  {
+    "id": "q13_hoisting_arrow_function",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Function Hoisting",
+    "question": "What happens?",
+    "code": "greet();\n\nconst greet = () => console.log('Hello');",
+    "options": [
+      "Hello",
+      "undefined",
+      "ReferenceError",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Arrow functions assigned to const/let are not hoisted. Accessing greet before declaration throws ReferenceError due to TDZ.",
+    "tags": ["hoisting", "arrow-function", "const"],
+    "created_at": 1733047012000
+  },
+  {
+    "id": "q14_hoisting_conditional",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Hoisting in Unreached Code",
+    "question": "What is logged?",
+    "code": "function test() {\n  if (false) {\n    var x = 5;\n  }\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "5",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var declarations are hoisted regardless of whether the code block executes. x is hoisted and initialized to undefined, even though the if-block never runs.",
+    "tags": ["hoisting", "var", "conditional"],
+    "created_at": 1733047013000
+  },
+  {
+    "id": "q15_hoisting_typeof_tdz",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "typeof in TDZ",
+    "question": "What is the result?",
+    "code": "console.log(typeof x);\nlet x = 5;",
+    "options": [
+      "'undefined'",
+      "'number'",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Unlike undeclared variables where typeof returns 'undefined', accessing a let/const variable in TDZ throws ReferenceError, even with typeof.",
+    "tags": ["hoisting", "typeof", "tdz"],
+    "created_at": 1733047014000
+  },
+  {
+    "id": "q16_hoisting_function_vs_var",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function Declaration Priority",
+    "question": "What will be logged?",
+    "code": "var foo = 1;\nfunction foo() {}\nconsole.log(typeof foo);",
+    "options": [
+      "'function'",
+      "'number'",
+      "'undefined'",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Functions are hoisted first, then var. But var foo = 1 executes after hoisting phase, overwriting the function with the number 1.",
+    "tags": ["hoisting", "function", "var", "order"],
+    "created_at": 1733047015000
+  },
+  {
+    "id": "q17_hoisting_default_params",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default Parameters TDZ",
+    "question": "What happens?",
+    "code": "function test(a = b, b = 1) {\n  console.log(a, b);\n}\n\ntest();",
+    "options": [
+      "undefined, 1",
+      "1, 1",
+      "ReferenceError",
+      "NaN, 1"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Default parameters are evaluated left to right. When evaluating a = b, b is not yet initialized (TDZ), causing ReferenceError.",
+    "tags": ["hoisting", "default-params", "tdz"],
+    "created_at": 1733047016000
+  },
+  {
+    "id": "q18_hoisting_catch_var",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in Catch Block",
+    "question": "What is the output?",
+    "code": "try {\n  throw new Error('oops');\n} catch (e) {\n  var x = 'caught';\n}\n\nconsole.log(x);\nconsole.log(typeof e);",
+    "options": [
+      "'caught', 'object'",
+      "'caught', 'undefined'",
+      "ReferenceError",
+      "undefined, 'undefined'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var x is hoisted out of the catch block. But catch parameter e is block-scoped to the catch block only.",
+    "tags": ["hoisting", "catch", "var"],
+    "created_at": 1733047017000
+  },
+  {
+    "id": "q19_hoisting_import",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Import Hoisting",
+    "question": "Are ES module imports hoisted?",
+    "code": "console.log(foo);\nimport { foo } from './module.js';",
+    "options": [
+      "No, this throws ReferenceError",
+      "Yes, imports are hoisted and initialized",
+      "Yes, but they're in TDZ like let",
+      "Depends on the module system"
+    ],
+    "correctAnswer": 1,
+    "explanation": "ES module imports are hoisted and linked before any code executes. You can use imported bindings before the import statement in the code.",
+    "tags": ["hoisting", "import", "esm"],
+    "created_at": 1733047018000
+  },
+  {
+    "id": "q20_hoisting_for_loop_var",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in for Loop",
+    "question": "What is logged?",
+    "code": "for (var i = 0; i < 3; i++) {\n  // loop\n}\nconsole.log(i);",
+    "options": [
+      "0",
+      "2",
+      "3",
+      "ReferenceError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var is function-scoped, not block-scoped. After the loop completes, i is 3 and accessible outside the for block.",
+    "tags": ["hoisting", "var", "for-loop"],
+    "created_at": 1733047019000
+  }
+]
+

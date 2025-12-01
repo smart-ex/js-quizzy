@@ -1,0 +1,5053 @@
+[
+  {
+    "id": "q1_arrays_map_return",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "map() Return Value",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.map(x => x * 2);\nconsole.log(result);",
+    "options": [
+      "[2, 4, 6]",
+      "[1, 2, 3]",
+      "6",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "map() creates a new array with the results of calling the callback on each element. Each element is doubled.",
+    "tags": [
+      "arrays",
+      "map",
+      "basic"
+    ],
+    "created_at": 1733050000000
+  },
+  {
+    "id": "q2_arrays_filter",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "filter() Basics",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst result = arr.filter(x => x > 3);\nconsole.log(result);",
+    "options": [
+      "[4, 5]",
+      "[1, 2, 3]",
+      "true",
+      "[true, true]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "filter() creates a new array with elements that pass the test. Only 4 and 5 are greater than 3.",
+    "tags": [
+      "arrays",
+      "filter",
+      "basic"
+    ],
+    "created_at": 1733050001000
+  },
+  {
+    "id": "q3_arrays_reduce",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "reduce() Sum",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4];\nconst sum = arr.reduce((acc, val) => acc + val, 0);\nconsole.log(sum);",
+    "options": [
+      "10",
+      "[1, 2, 3, 4]",
+      "0",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "reduce() accumulates values. Starting with 0, it adds each element: 0+1+2+3+4 = 10.",
+    "tags": [
+      "arrays",
+      "reduce",
+      "accumulator"
+    ],
+    "created_at": 1733050002000
+  },
+  {
+    "id": "q4_arrays_sort_numbers",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "sort() with Numbers",
+    "question": "What is the output?",
+    "code": "const arr = [10, 2, 1, 21];\narr.sort();\nconsole.log(arr);",
+    "options": [
+      "[1, 2, 10, 21]",
+      "[1, 10, 2, 21]",
+      "[21, 10, 2, 1]",
+      "[10, 2, 1, 21]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "sort() converts elements to strings by default. '1' < '10' < '2' < '21' lexicographically. Use (a, b) => a - b for numeric sort.",
+    "tags": [
+      "arrays",
+      "sort",
+      "gotcha"
+    ],
+    "created_at": 1733050003000
+  },
+  {
+    "id": "q5_arrays_splice_return",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "splice() Return and Mutation",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst removed = arr.splice(1, 2);\nconsole.log(removed);\nconsole.log(arr);",
+    "options": [
+      "[2, 3], [1, 4, 5]",
+      "[1, 2], [3, 4, 5]",
+      "[2, 3], [1, 2, 3, 4, 5]",
+      "2, [1, 3, 4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "splice(1, 2) removes 2 elements starting at index 1. Returns removed elements [2, 3]. Original array is mutated to [1, 4, 5].",
+    "tags": [
+      "arrays",
+      "splice",
+      "mutating"
+    ],
+    "created_at": 1733050004000
+  },
+  {
+    "id": "q6_arrays_slice",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "slice() Non-Mutating",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst sliced = arr.slice(1, 3);\nconsole.log(sliced);\nconsole.log(arr);",
+    "options": [
+      "[2, 3], [1, 2, 3, 4, 5]",
+      "[2, 3, 4], [1, 2, 3, 4, 5]",
+      "[2, 3], [1, 4, 5]",
+      "[1, 2, 3], [4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "slice(1, 3) returns elements from index 1 to 3 (exclusive). Original array is not mutated.",
+    "tags": [
+      "arrays",
+      "slice",
+      "non-mutating"
+    ],
+    "created_at": 1733050005000
+  },
+  {
+    "id": "q7_arrays_find_vs_filter",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "find() vs filter()",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconst found = arr.find(x => x > 2);\nconst filtered = arr.filter(x => x > 2);\nconsole.log(found, filtered);",
+    "options": [
+      "3, [3, 4, 5]",
+      "[3], [3, 4, 5]",
+      "3, 3",
+      "[3, 4, 5], [3, 4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "find() returns the first matching element (3). filter() returns all matching elements as an array [3, 4, 5].",
+    "tags": [
+      "arrays",
+      "find",
+      "filter"
+    ],
+    "created_at": 1733050006000
+  },
+  {
+    "id": "q8_arrays_flat",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "flat() Depth",
+    "question": "What is the output?",
+    "code": "const arr = [1, [2, [3, [4]]]];\nconsole.log(arr.flat(2));",
+    "options": [
+      "[1, 2, 3, 4]",
+      "[1, 2, 3, [4]]",
+      "[1, 2, [3, [4]]]",
+      "[1, [2, [3, 4]]]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "flat(2) flattens up to 2 levels deep. Level 1: [1, 2, [3, [4]]]. Level 2: [1, 2, 3, [4]]. The innermost [4] remains.",
+    "tags": [
+      "arrays",
+      "flat",
+      "nested"
+    ],
+    "created_at": 1733050007000
+  },
+  {
+    "id": "q9_arrays_includes_nan",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "includes() with NaN",
+    "question": "What will be logged?",
+    "code": "const arr = [1, NaN, 3];\nconsole.log(arr.includes(NaN));\nconsole.log(arr.indexOf(NaN));",
+    "options": [
+      "true, 1",
+      "false, -1",
+      "true, -1",
+      "false, 1"
+    ],
+    "correctAnswer": 2,
+    "explanation": "includes() uses SameValueZero which considers NaN equal to NaN. indexOf() uses strict equality where NaN !== NaN.",
+    "tags": [
+      "arrays",
+      "includes",
+      "nan"
+    ],
+    "created_at": 1733050008000
+  },
+  {
+    "id": "q10_arrays_sparse",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Sparse Arrays",
+    "question": "What is the output?",
+    "code": "const arr = [1, , 3];\nconsole.log(arr.length);\nconsole.log(arr[1]);\nconsole.log(1 in arr);",
+    "options": [
+      "3, undefined, true",
+      "3, undefined, false",
+      "2, undefined, false",
+      "3, null, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sparse arrays have holes. Length is 3, arr[1] is undefined, but index 1 doesn't actually exist (in returns false).",
+    "tags": [
+      "arrays",
+      "sparse",
+      "holes"
+    ],
+    "created_at": 1733050009000
+  },
+  {
+    "id": "q11_arrays_map_sparse",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "map() with Sparse Arrays",
+    "question": "How many times is the callback called?",
+    "code": "let count = 0;\nconst arr = [1, , 3];\narr.map(x => {\n  count++;\n  return x * 2;\n});\nconsole.log(count);",
+    "options": [
+      "3",
+      "2",
+      "1",
+      "0"
+    ],
+    "correctAnswer": 1,
+    "explanation": "map() skips holes in sparse arrays. The callback is only called for existing elements (index 0 and 2), not the hole at index 1.",
+    "tags": [
+      "arrays",
+      "map",
+      "sparse"
+    ],
+    "created_at": 1733050010000
+  },
+  {
+    "id": "q12_arrays_reduce_no_initial",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "reduce() Without Initial Value",
+    "question": "What happens?",
+    "code": "const arr = [];\nconst result = arr.reduce((acc, val) => acc + val);",
+    "options": [
+      "undefined",
+      "0",
+      "TypeError",
+      "NaN"
+    ],
+    "correctAnswer": 2,
+    "explanation": "reduce() on empty array without initial value throws TypeError. Always provide an initial value for safety.",
+    "tags": [
+      "arrays",
+      "reduce",
+      "error"
+    ],
+    "created_at": 1733050011000
+  },
+  {
+    "id": "q13_arrays_from",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Array.from()",
+    "question": "What will be logged?",
+    "code": "const arr = Array.from({ length: 3 }, (_, i) => i * 2);\nconsole.log(arr);",
+    "options": [
+      "[0, 2, 4]",
+      "[undefined, undefined, undefined]",
+      "[0, 1, 2]",
+      "[]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array.from() with mapFn creates array with transformed values. Indices 0, 1, 2 become 0*2, 1*2, 2*2 = [0, 2, 4].",
+    "tags": [
+      "arrays",
+      "from",
+      "creation"
+    ],
+    "created_at": 1733050012000
+  },
+  {
+    "id": "q14_arrays_concat",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "concat() and Spread",
+    "question": "What is the output?",
+    "code": "const a = [1, 2];\nconst b = [3, 4];\na[Symbol.isConcatSpreadable] = false;\nconsole.log([].concat(a, b));",
+    "options": [
+      "[1, 2, 3, 4]",
+      "[[1, 2], 3, 4]",
+      "[[1, 2], [3, 4]]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Symbol.isConcatSpreadable controls if arrays are flattened by concat. When false, a is added as a nested array.",
+    "tags": [
+      "arrays",
+      "concat",
+      "symbol"
+    ],
+    "created_at": 1733050013000
+  },
+  {
+    "id": "q15_arrays_fill",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "fill() Object Reference",
+    "question": "What will be logged?",
+    "code": "const arr = new Array(3).fill({});\narr[0].x = 1;\nconsole.log(arr[1].x);",
+    "options": [
+      "undefined",
+      "1",
+      "{}",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "fill() fills with the same object reference. All elements point to the same object, so modifying one affects all.",
+    "tags": [
+      "arrays",
+      "fill",
+      "reference"
+    ],
+    "created_at": 1733050014000
+  },
+  {
+    "id": "q16_arrays_findindex",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "findIndex() Not Found",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3];\nconsole.log(arr.findIndex(x => x > 5));\nconsole.log(arr.find(x => x > 5));",
+    "options": [
+      "-1, undefined",
+      "undefined, undefined",
+      "-1, -1",
+      "null, null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When no element matches: findIndex() returns -1, find() returns undefined. Different return values for 'not found'.",
+    "tags": [
+      "arrays",
+      "findindex",
+      "find"
+    ],
+    "created_at": 1733050015000
+  },
+  {
+    "id": "q17_arrays_every_empty",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "every() on Empty Array",
+    "question": "What will be logged?",
+    "code": "const arr = [];\nconsole.log(arr.every(x => x > 0));\nconsole.log(arr.some(x => x > 0));",
+    "options": [
+      "false, false",
+      "true, false",
+      "true, true",
+      "false, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "every() returns true for empty arrays (vacuous truth - no elements fail the test). some() returns false (no elements pass).",
+    "tags": [
+      "arrays",
+      "every",
+      "some",
+      "empty"
+    ],
+    "created_at": 1733050016000
+  },
+  {
+    "id": "q18_arrays_at",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "at() Negative Index",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\nconsole.log(arr.at(-1));\nconsole.log(arr.at(-2));",
+    "options": [
+      "5, 4",
+      "undefined, undefined",
+      "1, 2",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "at() supports negative indices. -1 is the last element (5), -2 is second to last (4).",
+    "tags": [
+      "arrays",
+      "at",
+      "negative-index"
+    ],
+    "created_at": 1733050017000
+  },
+  {
+    "id": "q19_arrays_flatmap",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "flatMap()",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.flatMap(x => [x, x * 2]);\nconsole.log(result);",
+    "options": [
+      "[1, 2, 2, 4, 3, 6]",
+      "[[1, 2], [2, 4], [3, 6]]",
+      "[1, 2, 3, 2, 4, 6]",
+      "[1, [2], 2, [4], 3, [6]]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "flatMap() maps each element then flattens one level. Each x becomes [x, x*2], then all are flattened into one array.",
+    "tags": [
+      "arrays",
+      "flatmap",
+      "transform"
+    ],
+    "created_at": 1733050018000
+  },
+  {
+    "id": "q20_arrays_toSorted",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "toSorted() vs sort()",
+    "question": "What is the output?",
+    "code": "const arr = [3, 1, 2];\nconst sorted = arr.toSorted();\nconsole.log(sorted);\nconsole.log(arr);",
+    "options": [
+      "[1, 2, 3], [1, 2, 3]",
+      "[1, 2, 3], [3, 1, 2]",
+      "[3, 1, 2], [1, 2, 3]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "toSorted() (ES2023) returns a new sorted array without mutating the original. Unlike sort(), the original array remains unchanged.",
+    "tags": [
+      "arrays",
+      "tosorted",
+      "immutable"
+    ],
+    "created_at": 1733050019000
+  },
+  {
+    "id": "q1_async_promise_basic",
+    "category": "async",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Promise",
+    "question": "What will be logged?",
+    "code": "const promise = new Promise((resolve) => {\n  console.log('1');\n  resolve('2');\n});\n\npromise.then(console.log);\nconsole.log('3');",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "3, 1, 2",
+      "2, 1, 3"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The Promise executor runs synchronously, logging '1'. The .then() callback is asynchronous (microtask), so '3' logs before '2'.",
+    "tags": [
+      "async",
+      "promise",
+      "microtask"
+    ],
+    "created_at": 1733046200000
+  },
+  {
+    "id": "q2_async_await_basic",
+    "category": "async",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Async/Await",
+    "question": "What is the output?",
+    "code": "async function test() {\n  const result = await Promise.resolve('done');\n  console.log(result);\n}\n\ntest();\nconsole.log('start');",
+    "options": [
+      "done, start",
+      "start, done",
+      "done",
+      "start"
+    ],
+    "correctAnswer": 1,
+    "explanation": "await pauses the function execution, but doesn't block the main thread. 'start' logs first, then 'done' after the promise resolves.",
+    "tags": [
+      "async",
+      "await"
+    ],
+    "created_at": 1733046201000
+  },
+  {
+    "id": "q3_async_promise_all",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.all",
+    "question": "What will be logged?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.resolve(2);\nconst p3 = Promise.resolve(3);\n\nPromise.all([p1, p2, p3]).then(console.log);",
+    "options": [
+      "[1, 2, 3]",
+      "1, 2, 3",
+      "[Promise, Promise, Promise]",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.all resolves with an array of all resolved values in the same order as the input promises.",
+    "tags": [
+      "async",
+      "promise.all"
+    ],
+    "created_at": 1733046202000
+  },
+  {
+    "id": "q4_async_promise_all_reject",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.all with Rejection",
+    "question": "What happens?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.reject('error');\nconst p3 = Promise.resolve(3);\n\nPromise.all([p1, p2, p3])\n  .then(console.log)\n  .catch(console.error);",
+    "options": [
+      "Logs [1, 3]",
+      "Logs error",
+      "Logs [1, 'error', 3]",
+      "Nothing happens"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.all rejects immediately if any promise rejects. It doesn't wait for other promises to complete.",
+    "tags": [
+      "async",
+      "promise.all",
+      "error"
+    ],
+    "created_at": 1733046203000
+  },
+  {
+    "id": "q5_async_promise_allSettled",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.allSettled",
+    "question": "What is the result?",
+    "code": "const p1 = Promise.resolve(1);\nconst p2 = Promise.reject('error');\n\nPromise.allSettled([p1, p2]).then(console.log);",
+    "options": [
+      "[1, 'error']",
+      "Rejects with 'error'",
+      "[{status: 'fulfilled', value: 1}, {status: 'rejected', reason: 'error'}]",
+      "Nothing"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Promise.allSettled waits for all promises to settle (resolve or reject) and returns an array of result objects with status and value/reason.",
+    "tags": [
+      "async",
+      "promise.allsettled"
+    ],
+    "created_at": 1733046204000
+  },
+  {
+    "id": "q6_async_promise_race",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.race",
+    "question": "What will be logged?",
+    "code": "const fast = Promise.resolve('fast');\nconst slow = new Promise(resolve => setTimeout(() => resolve('slow'), 100));\n\nPromise.race([fast, slow]).then(console.log);",
+    "options": [
+      "fast",
+      "slow",
+      "Both",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.race resolves or rejects with the first promise that settles. Since fast resolves immediately, it wins the race.",
+    "tags": [
+      "async",
+      "promise.race"
+    ],
+    "created_at": 1733046205000
+  },
+  {
+    "id": "q7_async_await_error",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Error Handling with Async/Await",
+    "question": "What will be logged?",
+    "code": "async function test() {\n  try {\n    await Promise.reject('error');\n  } catch (e) {\n    console.log(e);\n  }\n}\n\ntest();",
+    "options": [
+      "error",
+      "Unhandled promise rejection",
+      "undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a promise rejects in an async function, it throws an exception that can be caught with try/catch.",
+    "tags": [
+      "async",
+      "await",
+      "error-handling"
+    ],
+    "created_at": 1733046206000
+  },
+  {
+    "id": "q8_async_await_sequential",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Sequential vs Parallel",
+    "question": "Which approach is faster?",
+    "code": "// Approach A\nasync function sequential() {\n  await fetch('/api/1');\n  await fetch('/api/2');\n  await fetch('/api/3');\n}\n\n// Approach B\nasync function parallel() {\n  await Promise.all([\n    fetch('/api/1'),\n    fetch('/api/2'),\n    fetch('/api/3')\n  ]);\n}",
+    "options": [
+      "Sequential is faster",
+      "Parallel is faster",
+      "They are the same speed",
+      "Depends on network speed"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Parallel execution (Promise.all) runs all requests concurrently, while sequential waits for each to complete. Parallel is typically faster.",
+    "tags": [
+      "async",
+      "performance",
+      "parallel"
+    ],
+    "created_at": 1733046207000
+  },
+  {
+    "id": "q9_async_promise_chain",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Chaining",
+    "question": "What is the output?",
+    "code": "Promise.resolve(1)\n  .then(val => val + 1)\n  .then(val => val * 2)\n  .then(console.log);",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Each .then() receives the return value from the previous one. 1 → +1 = 2 → *2 = 4.",
+    "tags": [
+      "async",
+      "promise",
+      "chain"
+    ],
+    "created_at": 1733046208000
+  },
+  {
+    "id": "q10_async_await_return",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Returning from Async Function",
+    "question": "What will be logged?",
+    "code": "async function getValue() {\n  return Promise.resolve(42);\n}\n\ngetValue().then(console.log);",
+    "options": [
+      "42",
+      "Promise {<resolved: 42>}",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "If you return a promise from an async function, it's automatically unwrapped. The function returns the resolved value, not the promise itself.",
+    "tags": [
+      "async",
+      "return",
+      "promise"
+    ],
+    "created_at": 1733046209000
+  },
+  {
+    "id": "q11_async_promise_constructor",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise Constructor",
+    "question": "What happens?",
+    "code": "new Promise((resolve, reject) => {\n  resolve(1);\n  reject(2);\n}).then(console.log).catch(console.error);",
+    "options": [
+      "Logs 1",
+      "Logs 2",
+      "Logs both 1 and 2",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Once a promise is settled (resolved or rejected), subsequent resolve/reject calls are ignored. The first resolve(1) settles the promise.",
+    "tags": [
+      "async",
+      "promise",
+      "constructor"
+    ],
+    "created_at": 1733046210000
+  },
+  {
+    "id": "q12_async_await_loop",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async in Loops",
+    "question": "What is the execution order?",
+    "code": "async function process(items) {\n  for (const item of items) {\n    await processItem(item);\n  }\n}\n\nasync function processItem(item) {\n  console.log(item);\n  await Promise.resolve();\n}\n\nprocess([1, 2, 3]);",
+    "options": [
+      "1, 2, 3 (sequential)",
+      "1, 2, 3 (parallel)",
+      "3, 2, 1",
+      "Non-deterministic"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Using await in a for...of loop processes items sequentially. Each iteration waits for the previous one to complete.",
+    "tags": [
+      "async",
+      "await",
+      "loop"
+    ],
+    "created_at": 1733046211000
+  },
+  {
+    "id": "q13_async_promise_any",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.any Behavior",
+    "question": "What will be logged?",
+    "code": "const p1 = Promise.reject('error1');\nconst p2 = new Promise(resolve => setTimeout(() => resolve('success'), 100));\nconst p3 = Promise.reject('error2');\n\nPromise.any([p1, p2, p3])\n  .then(console.log)\n  .catch(e => console.log(e.errors));",
+    "options": [
+      "['error1', 'error2']",
+      "success",
+      "error1",
+      "AggregateError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.any resolves with the first fulfilled promise. Even though p1 and p3 reject immediately, p2 fulfills after 100ms, so 'success' is logged.",
+    "tags": [
+      "async",
+      "promise.any"
+    ],
+    "created_at": 1733046212000
+  },
+  {
+    "id": "q14_async_unhandled_rejection",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Unhandled Promise Rejection",
+    "question": "What happens when this code runs?",
+    "code": "async function test() {\n  const p = Promise.reject('error');\n  await new Promise(r => setTimeout(r, 1000));\n  try {\n    await p;\n  } catch (e) {\n    console.log('Caught:', e);\n  }\n}",
+    "options": [
+      "Caught: error",
+      "Unhandled rejection warning, then 'Caught: error'",
+      "Only unhandled rejection warning",
+      "Nothing happens"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The promise rejects immediately but isn't awaited until after 1 second. Most JS environments emit an unhandledRejection warning, but then catch it.",
+    "tags": [
+      "async",
+      "unhandled-rejection",
+      "warning"
+    ],
+    "created_at": 1733046213000
+  },
+  {
+    "id": "q15_async_promise_finally",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.finally Behavior",
+    "question": "What is the output?",
+    "code": "Promise.resolve('success')\n  .then(val => {\n    console.log(val);\n    return 'then';\n  })\n  .finally(() => {\n    console.log('finally');\n    return 'finally';\n  })\n  .then(console.log);",
+    "options": [
+      "success, finally, finally",
+      "success, finally, then",
+      "success, then, finally",
+      "success, finally, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "finally() doesn't receive or modify the resolved value. It passes through the previous value ('then'). The return value of finally is ignored.",
+    "tags": [
+      "async",
+      "promise.finally"
+    ],
+    "created_at": 1733046214000
+  },
+  {
+    "id": "q16_async_thenable",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Thenable Objects",
+    "question": "What will be logged?",
+    "code": "const thenable = {\n  then(resolve, reject) {\n    console.log('then called');\n    setTimeout(() => resolve(42), 100);\n  }\n};\n\nasync function test() {\n  console.log('before');\n  const result = await thenable;\n  console.log(result);\n}\n\ntest();\nconsole.log('after');",
+    "options": [
+      "before, after, then called, 42",
+      "before, then called, after, 42",
+      "then called, before, after, 42",
+      "before, then called, 42, after"
+    ],
+    "correctAnswer": 1,
+    "explanation": "await works with any thenable. When await encounters thenable, it calls its then method synchronously. 'then called' logs before 'after' returns to the main flow.",
+    "tags": [
+      "async",
+      "thenable",
+      "await"
+    ],
+    "created_at": 1733046215000
+  },
+  {
+    "id": "q17_async_top_level_await",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Top-Level Await",
+    "question": "Where can top-level await be used?",
+    "code": "// Which context allows this?\nconst data = await fetch('/api/data');",
+    "options": [
+      "In any JavaScript file",
+      "Only in ES modules (.mjs or type='module')",
+      "Only inside async functions",
+      "In both ES modules and CommonJS"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Top-level await is only available in ES modules. It allows you to use await at the module's top level without wrapping in an async function.",
+    "tags": [
+      "async",
+      "top-level-await",
+      "esm"
+    ],
+    "created_at": 1733046216000
+  },
+  {
+    "id": "q18_async_concurrent_limit",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Concurrent Execution Limit",
+    "question": "What is logged, and in what order?",
+    "code": "async function processWithLimit(items, limit, fn) {\n  const results = [];\n  const executing = [];\n  \n  for (const item of items) {\n    const p = fn(item).then(r => {\n      executing.splice(executing.indexOf(p), 1);\n      return r;\n    });\n    results.push(p);\n    executing.push(p);\n    \n    if (executing.length >= limit) {\n      await Promise.race(executing);\n    }\n  }\n  return Promise.all(results);\n}\n\nconst delay = ms => new Promise(r => setTimeout(r, ms));\nconst fn = async (x) => { await delay(100); console.log(x); return x; };\n\nprocessWithLimit([1, 2, 3, 4], 2, fn);",
+    "options": [
+      "1, 2, 3, 4 (sequential)",
+      "1, 2 then 3, 4 (in pairs)",
+      "Non-deterministic but max 2 concurrent",
+      "4, 3, 2, 1 (reverse)"
+    ],
+    "correctAnswer": 2,
+    "explanation": "This pattern limits concurrency. At most 2 items are processed simultaneously. The exact order within groups may vary based on timing.",
+    "tags": [
+      "async",
+      "concurrency",
+      "pattern"
+    ],
+    "created_at": 1733046217000
+  },
+  {
+    "id": "q19_async_abort_controller",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "AbortController with Fetch",
+    "question": "What happens when this code runs?",
+    "code": "const controller = new AbortController();\nconst signal = controller.signal;\n\nsetTimeout(() => controller.abort(), 50);\n\nfetch('/api/data', { signal })\n  .then(r => console.log('Success'))\n  .catch(e => console.log(e.name));",
+    "options": [
+      "Success",
+      "AbortError",
+      "TimeoutError",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "AbortController allows canceling fetch requests. After 50ms, abort() is called, causing the fetch to reject with an AbortError.",
+    "tags": [
+      "async",
+      "abort-controller",
+      "fetch"
+    ],
+    "created_at": 1733046218000
+  },
+  {
+    "id": "q20_async_promise_resolve_thenable",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.resolve with Nested Promise",
+    "question": "What is the output?",
+    "code": "const p1 = Promise.resolve(Promise.resolve(42));\nconst p2 = Promise.resolve({ then: (cb) => cb(100) });\n\nPromise.all([p1, p2]).then(console.log);",
+    "options": [
+      "[Promise, { then: fn }]",
+      "[42, 100]",
+      "[Promise, 100]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.resolve unwraps nested promises and thenables. p1 resolves to 42 (inner promise unwrapped). p2's thenable is called, resolving to 100.",
+    "tags": [
+      "async",
+      "promise.resolve",
+      "thenable"
+    ],
+    "created_at": 1733046219000
+  },
+  {
+    "id": "q1_closures_basic",
+    "category": "closures",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Closure",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  let x = 10;\n  function inner() {\n    console.log(x);\n  }\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The inner function forms a closure over the variable x from the outer scope, allowing it to access x even after outer() has finished executing.",
+    "tags": [
+      "closures",
+      "scope",
+      "lexical"
+    ],
+    "created_at": 1733046100000
+  },
+  {
+    "id": "q2_closures_loop",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Closure in Loop",
+    "question": "What will be printed?",
+    "code": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "undefined, undefined, undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var is function-scoped, so all closures share the same i variable. By the time setTimeout callbacks execute, i is 3. Use let to fix this.",
+    "tags": [
+      "closures",
+      "loop",
+      "var",
+      "let"
+    ],
+    "created_at": 1733046101000
+  },
+  {
+    "id": "q3_closures_let",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Closure with let",
+    "question": "What is the output?",
+    "code": "for (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "undefined, undefined, undefined",
+      "Nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let is block-scoped. Each iteration creates a new binding, so each closure captures its own i value.",
+    "tags": [
+      "closures",
+      "let",
+      "block-scope"
+    ],
+    "created_at": 1733046102000
+  },
+  {
+    "id": "q4_closures_private",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Private Variables",
+    "question": "What will be logged?",
+    "code": "function createCounter() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    getCount: () => count\n  };\n}\n\nconst counter = createCounter();\ncounter.increment();\nconsole.log(counter.getCount());",
+    "options": [
+      "0",
+      "1",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The closure allows count to be private. Only the returned methods can access it, creating an encapsulation pattern.",
+    "tags": [
+      "closures",
+      "private",
+      "encapsulation"
+    ],
+    "created_at": 1733046103000
+  },
+  {
+    "id": "q5_closures_iife",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "IIFE and Closures",
+    "question": "What is the output?",
+    "code": "const arr = [];\nfor (var i = 0; i < 3; i++) {\n  arr.push((function(j) {\n    return function() { return j; };\n  })(i));\n}\nconsole.log(arr.map(fn => fn()));",
+    "options": [
+      "[0, 1, 2]",
+      "[3, 3, 3]",
+      "[undefined, undefined, undefined]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The IIFE creates a new scope for each iteration, capturing the current value of i in the parameter j. Each closure captures a different j value.",
+    "tags": [
+      "closures",
+      "iife",
+      "pattern"
+    ],
+    "created_at": 1733046104000
+  },
+  {
+    "id": "q6_closures_scope_chain",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Scope Chain",
+    "question": "What will be logged?",
+    "code": "let x = 1;\nfunction outer() {\n  let x = 2;\n  function inner() {\n    console.log(x);\n  }\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The closure captures the nearest x in the scope chain. inner() accesses x from outer(), not the global x.",
+    "tags": [
+      "closures",
+      "scope-chain"
+    ],
+    "created_at": 1733046105000
+  },
+  {
+    "id": "q7_closures_memory",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Memory Leaks",
+    "question": "When can closures cause memory leaks?",
+    "options": [
+      "Never, closures are always garbage collected",
+      "When they hold references to large objects that are no longer needed",
+      "Only in older browsers",
+      "When using arrow functions"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Closures keep references to their outer scope. If a closure holds a reference to a large object, it prevents garbage collection even if the object is no longer used.",
+    "tags": [
+      "closures",
+      "memory",
+      "leak"
+    ],
+    "created_at": 1733046106000
+  },
+  {
+    "id": "q8_closures_module",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Module Pattern",
+    "question": "What is the output?",
+    "code": "const module = (function() {\n  let _value = 0;\n  return {\n    get: () => _value,\n    set: (val) => { _value = val; }\n  };\n})();\n\nmodule.set(42);\nconsole.log(module.get());",
+    "options": [
+      "0",
+      "42",
+      "undefined",
+      "Error: private is not defined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "This is the module pattern. The IIFE creates a closure that keeps private variables inaccessible from outside, while exposing a public API.",
+    "tags": [
+      "closures",
+      "module-pattern",
+      "iife"
+    ],
+    "created_at": 1733046107000
+  },
+  {
+    "id": "q9_closures_currying",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Currying with Closures",
+    "question": "What is the result?",
+    "code": "function add(a) {\n  return function(b) {\n    return a + b;\n  };\n}\n\nconst add5 = add(5);\nconsole.log(add5(3));",
+    "options": [
+      "8",
+      "53",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "This is currying. add(5) returns a function that closes over a=5. When called with 3, it returns 5+3=8.",
+    "tags": [
+      "closures",
+      "currying",
+      "functional"
+    ],
+    "created_at": 1733046108000
+  },
+  {
+    "id": "q10_closures_partial",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Partial Application",
+    "question": "What will be logged?",
+    "code": "function multiply(a, b, c) {\n  return a * b * c;\n}\n\nfunction partial(fn, ...args) {\n  return function(...rest) {\n    return fn(...args, ...rest);\n  };\n}\n\nconst multiplyBy2 = partial(multiply, 2);\nconsole.log(multiplyBy2(3, 4));",
+    "options": [
+      "24",
+      "12",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Partial application uses closures to 'pre-fill' some arguments. multiplyBy2(3, 4) becomes multiply(2, 3, 4) = 24.",
+    "tags": [
+      "closures",
+      "partial-application",
+      "functional"
+    ],
+    "created_at": 1733046109000
+  },
+  {
+    "id": "q11_closures_arrow",
+    "category": "closures",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Arrow Functions and Closures",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return () => this.name;\n  }\n};\n\nconst fn = obj.getName();\nconsole.log(fn());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions don't have their own this. The arrow function closes over this from getName, which refers to obj.",
+    "tags": [
+      "closures",
+      "arrow-functions",
+      "this"
+    ],
+    "created_at": 1733046110000
+  },
+  {
+    "id": "q12_closures_async_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async Closure",
+    "question": "What will be logged?",
+    "code": "function createAsync() {\n  let count = 0;\n  return async function() {\n    count++;\n    await Promise.resolve();\n    return count;\n  };\n}\n\nconst fn = createAsync();\nfn().then(console.log);\nfn().then(console.log);",
+    "options": [
+      "1, 2",
+      "2, 2",
+      "1, 1",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each call to fn() shares the same closure over count. The first call increments to 1, the second to 2. Both await, then return their respective values.",
+    "tags": [
+      "closures",
+      "async",
+      "await"
+    ],
+    "created_at": 1733046111000
+  },
+  {
+    "id": "q13_closures_stale_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Stale Closure Problem",
+    "question": "What will be logged after 2 seconds?",
+    "code": "function createTimer() {\n  let count = 0;\n  setInterval(() => {\n    count++;\n  }, 500);\n  \n  return () => count;\n}\n\nconst getCount = createTimer();\nsetTimeout(() => console.log(getCount()), 2000);",
+    "options": [
+      "0",
+      "4",
+      "3",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The getCount function closes over the same count variable that setInterval modifies. After 2 seconds (4 intervals of 500ms), count is 4. This is NOT a stale closure because we're accessing the live variable.",
+    "tags": [
+      "closures",
+      "stale-closure",
+      "setinterval"
+    ],
+    "created_at": 1733046112000
+  },
+  {
+    "id": "q14_closures_gc_prevention",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure and Garbage Collection",
+    "question": "Will the largeData be garbage collected after createHandler() is called?",
+    "code": "function createHandler() {\n  const largeData = new Array(1000000).fill('x');\n  const id = 42;\n  \n  return function handler() {\n    console.log(id);\n  };\n}\n\nconst handler = createHandler();",
+    "options": [
+      "Yes, largeData will be garbage collected",
+      "No, largeData stays in memory because of the closure",
+      "Depends on the JavaScript engine",
+      "Error: Cannot allocate memory"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Modern JS engines (V8, SpiderMonkey) optimize closures. If a variable isn't referenced in the returned function, it can be garbage collected. But this is engine-specific behavior.",
+    "tags": [
+      "closures",
+      "garbage-collection",
+      "optimization"
+    ],
+    "created_at": 1733046113000
+  },
+  {
+    "id": "q15_closures_eval_with_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Eval Prevents Optimization",
+    "question": "What is the output?",
+    "code": "function test() {\n  let x = 'outer';\n  \n  return function() {\n    let x = 'inner';\n    return eval('x');\n  };\n}\n\nconsole.log(test()());",
+    "options": [
+      "outer",
+      "inner",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "eval() uses the scope of the function it's called in. The inner function has its own x='inner', so eval('x') returns 'inner'. Direct eval() has access to local scope.",
+    "tags": [
+      "closures",
+      "eval",
+      "scope"
+    ],
+    "created_at": 1733046114000
+  },
+  {
+    "id": "q16_closures_memoization",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Memoization Pattern",
+    "question": "How many times will 'Computing...' be logged?",
+    "code": "function memoize(fn) {\n  const cache = new Map();\n  return function(...args) {\n    const key = JSON.stringify(args);\n    if (!cache.has(key)) {\n      console.log('Computing...');\n      cache.set(key, fn(...args));\n    }\n    return cache.get(key);\n  };\n}\n\nconst add = memoize((a, b) => a + b);\nadd(1, 2);\nadd(1, 2);\nadd(2, 1);\nadd(1, 2);",
+    "options": [
+      "4",
+      "2",
+      "3",
+      "1"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Memoization uses closures to cache results. add(1,2) computes once, add(2,1) has a different key '[2,1]' so computes again. Total: 2 computations.",
+    "tags": [
+      "closures",
+      "memoization",
+      "functional"
+    ],
+    "created_at": 1733046115000
+  },
+  {
+    "id": "q17_closures_generator_closure",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Generator with Closure",
+    "question": "What will be logged?",
+    "code": "function createIdGenerator() {\n  let id = 0;\n  return function* () {\n    while (true) {\n      yield ++id;\n    }\n  };\n}\n\nconst genFn = createIdGenerator();\nconst gen1 = genFn();\nconst gen2 = genFn();\n\nconsole.log(gen1.next().value);\nconsole.log(gen2.next().value);\nconsole.log(gen1.next().value);",
+    "options": [
+      "1, 1, 2",
+      "1, 2, 3",
+      "1, 2, 2",
+      "1, 1, 1"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both generators share the same closure over id. Each next() call increments the shared id: gen1→1, gen2→2, gen1→3.",
+    "tags": [
+      "closures",
+      "generator",
+      "shared-state"
+    ],
+    "created_at": 1733046116000
+  },
+  {
+    "id": "q18_closures_hoisting_trap",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure and Hoisting Trap",
+    "question": "What will be logged?",
+    "code": "var x = 10;\nfunction outer() {\n  console.log(x);\n  var x = 20;\n  function inner() {\n    console.log(x);\n  }\n  inner();\n}\nouter();",
+    "options": [
+      "10, 20",
+      "undefined, 20",
+      "10, 10",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The local var x is hoisted within outer(), shadowing the global x. First console.log sees undefined (hoisted but not yet assigned). After assignment, inner() sees 20.",
+    "tags": [
+      "closures",
+      "hoisting",
+      "shadowing"
+    ],
+    "created_at": 1733046117000
+  },
+  {
+    "id": "q19_closures_factory_pattern",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Factory with Closure",
+    "question": "What is the output?",
+    "code": "function createMultiplier(factor) {\n  return {\n    multiply: (x) => x * factor,\n    setFactor: (f) => { factor = f; }\n  };\n}\n\nconst double = createMultiplier(2);\nconsole.log(double.multiply(5));\ndouble.setFactor(3);\nconsole.log(double.multiply(5));",
+    "options": [
+      "10, 10",
+      "10, 15",
+      "10, undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both methods close over the same 'factor' variable. setFactor modifies it, affecting future multiply calls. 5*2=10, then factor becomes 3, so 5*3=15.",
+    "tags": [
+      "closures",
+      "factory",
+      "mutable-state"
+    ],
+    "created_at": 1733046118000
+  },
+  {
+    "id": "q20_closures_recursive",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Recursive Closure",
+    "question": "What will be logged?",
+    "code": "function createRecursive() {\n  let calls = 0;\n  return function recurse(n) {\n    calls++;\n    if (n <= 1) return calls;\n    return recurse(n - 1);\n  };\n}\n\nconst fn = createRecursive();\nconsole.log(fn(5));\nconsole.log(fn(3));",
+    "options": [
+      "5, 3",
+      "5, 8",
+      "1, 1",
+      "5, 5"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 'calls' variable persists across all invocations. First fn(5) makes 5 calls (calls=5). Then fn(3) adds 3 more (calls=8).",
+    "tags": [
+      "closures",
+      "recursion",
+      "persistent-state"
+    ],
+    "created_at": 1733046119000
+  },
+  {
+    "id": "q1_coercion_plus",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Plus Operator Coercion",
+    "question": "What is the result?",
+    "code": "console.log(1 + '2');",
+    "options": [
+      "3",
+      "'12'",
+      "NaN",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The + operator performs string concatenation when one operand is a string. The number 1 is coerced to '1', resulting in '12'.",
+    "tags": [
+      "coercion",
+      "plus",
+      "string"
+    ],
+    "created_at": 1733046400000
+  },
+  {
+    "id": "q2_coercion_minus",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Minus Operator Coercion",
+    "question": "What is the result?",
+    "code": "console.log('5' - 2);",
+    "options": [
+      "3",
+      "'3'",
+      "NaN",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The - operator always performs numeric subtraction. The string '5' is coerced to the number 5, resulting in 3.",
+    "tags": [
+      "coercion",
+      "minus",
+      "number"
+    ],
+    "created_at": 1733046401000
+  },
+  {
+    "id": "q3_coercion_truthy",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Truthy Values",
+    "question": "Which values are truthy?",
+    "code": "console.log(!!'0');\nconsole.log(!!0);\nconsole.log(!![]);\nconsole.log(!!{});",
+    "options": [
+      "true, false, true, true",
+      "true, true, false, false",
+      "false, false, false, false",
+      "true, false, false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Falsy values: false, 0, -0, 0n, '', null, undefined, NaN. Everything else is truthy, including '0', [], and {}.",
+    "tags": [
+      "coercion",
+      "truthy",
+      "falsy"
+    ],
+    "created_at": 1733046402000
+  },
+  {
+    "id": "q4_coercion_equality",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Loose Equality",
+    "question": "What will be logged?",
+    "code": "console.log(1 == '1');\nconsole.log(1 === '1');",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "== performs type coercion, so 1 == '1' is true. === checks both value and type without coercion, so 1 === '1' is false.",
+    "tags": [
+      "coercion",
+      "equality",
+      "==="
+    ],
+    "created_at": 1733046403000
+  },
+  {
+    "id": "q5_coercion_array_equality",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Array Equality",
+    "question": "What is the result?",
+    "code": "console.log([] == 0);\nconsole.log([] == '');\nconsole.log([] == []);",
+    "options": [
+      "true, true, true",
+      "true, true, false",
+      "false, false, false",
+      "true, false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrays are converted to strings for comparison. [] becomes '', which coerces to 0. [] == [] is false because arrays are compared by reference, not value.",
+    "tags": [
+      "coercion",
+      "array",
+      "equality"
+    ],
+    "created_at": 1733046404000
+  },
+  {
+    "id": "q6_coercion_null_undefined",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Null and Undefined",
+    "question": "What will be logged?",
+    "code": "console.log(null == undefined);\nconsole.log(null === undefined);",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "null == undefined is true due to special equality rules. null === undefined is false because they are different types.",
+    "tags": [
+      "coercion",
+      "null",
+      "undefined"
+    ],
+    "created_at": 1733046405000
+  },
+  {
+    "id": "q7_coercion_number",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Number Coercion",
+    "question": "What is the result?",
+    "code": "console.log(Number(''));\nconsole.log(Number(' '));\nconsole.log(Number('abc'));",
+    "options": [
+      "0, 0, 0",
+      "0, 0, NaN",
+      "NaN, NaN, NaN",
+      "0, NaN, NaN"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Number('') converts empty string to 0. Number(' ') converts whitespace to 0. Number('abc') cannot be parsed, so it's NaN.",
+    "tags": [
+      "coercion",
+      "number",
+      "nan"
+    ],
+    "created_at": 1733046406000
+  },
+  {
+    "id": "q8_coercion_boolean",
+    "category": "coercion",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Boolean Coercion",
+    "question": "What will be logged?",
+    "code": "console.log(Boolean('false'));\nconsole.log(Boolean(false));\nconsole.log(Boolean(0));",
+    "options": [
+      "true, false, false",
+      "false, false, false",
+      "true, true, true",
+      "false, false, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Boolean('false') is true because any non-empty string is truthy. Boolean(false) and Boolean(0) are false because false and 0 are falsy.",
+    "tags": [
+      "coercion",
+      "boolean"
+    ],
+    "created_at": 1733046407000
+  },
+  {
+    "id": "q9_coercion_string",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "String Coercion",
+    "question": "What is the output?",
+    "code": "console.log(String(null));\nconsole.log(String(undefined));\nconsole.log(String({}));",
+    "options": [
+      "'null', 'undefined', '[object Object]'",
+      "null, undefined, {}",
+      "'null', 'undefined', '{}'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "String(null) is 'null', String(undefined) is 'undefined'. Objects are converted using toString(), which for plain objects returns '[object Object]'.",
+    "tags": [
+      "coercion",
+      "string",
+      "tostring"
+    ],
+    "created_at": 1733046408000
+  },
+  {
+    "id": "q10_coercion_comparison",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Comparison Operators",
+    "question": "What will be logged?",
+    "code": "console.log('10' > 9);\nconsole.log('10' < '9');\nconsole.log('10' < 9);",
+    "options": [
+      "true, false, false",
+      "true, true, false",
+      "false, true, false",
+      "true, false, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'10' > 9 coerces to numbers: 10 > 9 is true. '10' < '9' compares strings lexicographically: '1' < '9' is true. '10' < 9 coerces to numbers: 10 < 9 is false.",
+    "tags": [
+      "coercion",
+      "comparison",
+      "operators"
+    ],
+    "created_at": 1733046409000
+  },
+  {
+    "id": "q11_coercion_plus_objects",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Plus with Objects",
+    "question": "What is the result?",
+    "code": "console.log({} + []);\nconsole.log([] + {});\nconsole.log({} + {});",
+    "options": [
+      "'[object Object]', '[object Object]', '[object Object][object Object]'",
+      "0, 0, NaN",
+      "Error, Error, Error",
+      "'', '', ''"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Objects are converted to strings using toString(). {} becomes '[object Object]', [] becomes ''. The + operator concatenates strings.",
+    "tags": [
+      "coercion",
+      "objects",
+      "arrays",
+      "plus"
+    ],
+    "created_at": 1733046410000
+  },
+  {
+    "id": "q12_coercion_typeof",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Typeof and Coercion",
+    "question": "What will be logged?",
+    "code": "console.log(typeof null);\nconsole.log(typeof undefined);\nconsole.log(typeof NaN);",
+    "options": [
+      "'null', 'undefined', 'NaN'",
+      "'object', 'undefined', 'number'",
+      "'object', 'object', 'number'",
+      "'null', 'undefined', 'number'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "typeof null is 'object' (a historical bug). typeof undefined is 'undefined'. typeof NaN is 'number' because NaN is a numeric value.",
+    "tags": [
+      "coercion",
+      "typeof",
+      "null",
+      "nan"
+    ],
+    "created_at": 1733046411000
+  },
+  {
+    "id": "q13_coercion_symbol_toprimitive",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol.toPrimitive",
+    "question": "What is the output?",
+    "code": "const obj = {\n  [Symbol.toPrimitive](hint) {\n    if (hint === 'number') return 10;\n    if (hint === 'string') return 'hello';\n    return true;\n  }\n};\n\nconsole.log(+obj);\nconsole.log(`${obj}`);\nconsole.log(obj + '');",
+    "options": [
+      "10, 'hello', 'true'",
+      "10, 'hello', 'hello'",
+      "NaN, '[object Object]', '[object Object]'",
+      "10, 'hello', '10'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "+obj uses 'number' hint (10). Template literal uses 'string' hint ('hello'). + '' uses 'default' hint (true → 'true').",
+    "tags": [
+      "coercion",
+      "symbol.toprimitive",
+      "hint"
+    ],
+    "created_at": 1733046412000
+  },
+  {
+    "id": "q14_coercion_valueOf_toString",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "valueOf vs toString Priority",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  valueOf() {\n    return 42;\n  },\n  toString() {\n    return 'hello';\n  }\n};\n\nconsole.log(obj + 1);\nconsole.log(String(obj));\nconsole.log([obj].join());",
+    "options": [
+      "43, 'hello', 'hello'",
+      "43, '42', '42'",
+      "'hello1', 'hello', 'hello'",
+      "43, 'hello', '42'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "+ prefers valueOf for numeric context (42+1=43). String() calls toString ('hello'). join() calls toString ('hello').",
+    "tags": [
+      "coercion",
+      "valueof",
+      "tostring"
+    ],
+    "created_at": 1733046413000
+  },
+  {
+    "id": "q15_coercion_bigint",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "BigInt Coercion",
+    "question": "What happens?",
+    "code": "try {\n  console.log(10n + 5);\n} catch (e) {\n  console.log('Error1');\n}\n\ntry {\n  console.log(10n == 10);\n} catch (e) {\n  console.log('Error2');\n}",
+    "options": [
+      "15n, true",
+      "Error1, true",
+      "15, true",
+      "Error1, Error2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "BigInt cannot be mixed with Number in arithmetic (TypeError). But loose equality (==) allows comparison: 10n == 10 is true.",
+    "tags": [
+      "coercion",
+      "bigint",
+      "mixed-types"
+    ],
+    "created_at": 1733046414000
+  },
+  {
+    "id": "q16_coercion_array_tostring",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Array Coercion",
+    "question": "What is the result?",
+    "code": "console.log([[1]] == [1]);\nconsole.log([[1]] == '1');\nconsole.log([[[1]]] == 1);",
+    "options": [
+      "false, true, true",
+      "true, true, true",
+      "false, false, false",
+      "true, false, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrays compare by reference (false). [[1]].toString() is '1' (true). [[[1]]].toString() is '1', which coerces to 1 (true).",
+    "tags": [
+      "coercion",
+      "array",
+      "tostring"
+    ],
+    "created_at": 1733046415000
+  },
+  {
+    "id": "q17_coercion_nan_equality",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "NaN Comparisons",
+    "question": "What will be logged?",
+    "code": "const x = NaN;\nconsole.log(x === x);\nconsole.log(Object.is(x, x));\nconsole.log(Number.isNaN(x));\nconsole.log(isNaN('hello'));",
+    "options": [
+      "false, true, true, true",
+      "true, true, true, true",
+      "false, false, true, true",
+      "false, true, true, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "NaN !== NaN by spec. Object.is treats NaN as equal to itself. Number.isNaN is strict. Global isNaN coerces: 'hello'→NaN→true.",
+    "tags": [
+      "coercion",
+      "nan",
+      "object.is"
+    ],
+    "created_at": 1733046416000
+  },
+  {
+    "id": "q18_coercion_implicit_in_conditionals",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Document.all Coercion",
+    "question": "In browsers, what is the output?",
+    "code": "// document.all is a special object\nconst all = document.all;\nconsole.log(typeof all);\nconsole.log(all ? 'truthy' : 'falsy');\nconsole.log(all == undefined);",
+    "options": [
+      "'object', 'truthy', false",
+      "'undefined', 'falsy', true",
+      "'object', 'falsy', false",
+      "'undefined', 'truthy', false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "document.all is a historical quirk. typeof is 'undefined', it's falsy in boolean context, and loosely equals undefined. This is for legacy compatibility.",
+    "tags": [
+      "coercion",
+      "document.all",
+      "browser-quirk"
+    ],
+    "created_at": 1733046417000
+  },
+  {
+    "id": "q19_coercion_unary_plus",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Unary Plus Coercion",
+    "question": "What is the output?",
+    "code": "console.log(+true);\nconsole.log(+null);\nconsole.log(+undefined);\nconsole.log(+{ valueOf: () => 42 });",
+    "options": [
+      "1, 0, NaN, 42",
+      "true, null, undefined, '[object Object]'",
+      "1, 0, 0, NaN",
+      "NaN, NaN, NaN, 42"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Unary + converts to number. true→1, null→0, undefined→NaN. Objects use valueOf() if it returns a primitive: 42.",
+    "tags": [
+      "coercion",
+      "unary-plus",
+      "valueof"
+    ],
+    "created_at": 1733046418000
+  },
+  {
+    "id": "q20_coercion_json_stringify",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "JSON.stringify Coercion",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  a: undefined,\n  b: function() {},\n  c: Symbol('x'),\n  d: NaN,\n  e: Infinity\n};\n\nconsole.log(JSON.stringify(obj));",
+    "options": [
+      "{\"a\":null,\"b\":null,\"c\":null,\"d\":null,\"e\":null}",
+      "{\"d\":null,\"e\":null}",
+      "{\"d\":\"NaN\",\"e\":\"Infinity\"}",
+      "{}"
+    ],
+    "correctAnswer": 1,
+    "explanation": "JSON.stringify skips undefined, functions, and Symbols. NaN and Infinity become null. Only d and e remain with null values.",
+    "tags": [
+      "coercion",
+      "json",
+      "stringify"
+    ],
+    "created_at": 1733046419000
+  },
+  {
+    "id": "q1_destructuring_array_basic",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Array Destructuring",
+    "question": "What will be logged?",
+    "code": "const [a, b] = [1, 2, 3];\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "[1, 2, 3] undefined",
+      "1 [2, 3]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array destructuring assigns elements by position. a gets 1, b gets 2. The extra element 3 is ignored.",
+    "tags": [
+      "destructuring",
+      "array",
+      "basic"
+    ],
+    "created_at": 1733049000000
+  },
+  {
+    "id": "q2_destructuring_object_basic",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic Object Destructuring",
+    "question": "What is the output?",
+    "code": "const { x, y } = { x: 1, y: 2, z: 3 };\nconsole.log(x, y);",
+    "options": [
+      "1 2",
+      "{ x: 1 } { y: 2 }",
+      "undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Object destructuring matches by property name. x gets 1, y gets 2. z is not destructured.",
+    "tags": [
+      "destructuring",
+      "object",
+      "basic"
+    ],
+    "created_at": 1733049001000
+  },
+  {
+    "id": "q3_destructuring_default_values",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Default Values",
+    "question": "What will be logged?",
+    "code": "const { a = 1, b = 2 } = { a: 10 };\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "10 2",
+      "10 undefined",
+      "undefined undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default values are used when the property is undefined. a exists (10), b is undefined so uses default (2).",
+    "tags": [
+      "destructuring",
+      "default",
+      "object"
+    ],
+    "created_at": 1733049002000
+  },
+  {
+    "id": "q4_destructuring_rename",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Renaming Variables",
+    "question": "What is the output?",
+    "code": "const { name: userName } = { name: 'Alice' };\nconsole.log(userName);\nconsole.log(typeof name);",
+    "options": [
+      "'Alice', 'string'",
+      "'Alice', 'undefined'",
+      "undefined, 'string'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "{ name: userName } extracts 'name' property into variable 'userName'. 'name' is not defined as a variable.",
+    "tags": [
+      "destructuring",
+      "rename",
+      "alias"
+    ],
+    "created_at": 1733049003000
+  },
+  {
+    "id": "q5_destructuring_nested",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Destructuring",
+    "question": "What will be logged?",
+    "code": "const { user: { name } } = { user: { name: 'Bob', age: 30 } };\nconsole.log(name);\nconsole.log(typeof user);",
+    "options": [
+      "'Bob', 'object'",
+      "'Bob', 'undefined'",
+      "undefined, 'object'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Nested destructuring extracts name from user object. But 'user' itself is not bound as a variable.",
+    "tags": [
+      "destructuring",
+      "nested",
+      "object"
+    ],
+    "created_at": 1733049004000
+  },
+  {
+    "id": "q6_destructuring_rest_array",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Rest in Array Destructuring",
+    "question": "What is the output?",
+    "code": "const [first, ...rest] = [1, 2, 3, 4];\nconsole.log(first);\nconsole.log(rest);",
+    "options": [
+      "1, [2, 3, 4]",
+      "[1], [2, 3, 4]",
+      "1, 2",
+      "1, [3, 4]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Rest element collects all remaining items into an array. first is 1, rest is [2, 3, 4].",
+    "tags": [
+      "destructuring",
+      "rest",
+      "array"
+    ],
+    "created_at": 1733049005000
+  },
+  {
+    "id": "q7_destructuring_rest_object",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Rest in Object Destructuring",
+    "question": "What will be logged?",
+    "code": "const { a, ...rest } = { a: 1, b: 2, c: 3 };\nconsole.log(rest);",
+    "options": [
+      "{ b: 2, c: 3 }",
+      "[2, 3]",
+      "{ a: 1, b: 2, c: 3 }",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Object rest collects remaining properties into a new object. rest is { b: 2, c: 3 }.",
+    "tags": [
+      "destructuring",
+      "rest",
+      "object"
+    ],
+    "created_at": 1733049006000
+  },
+  {
+    "id": "q8_destructuring_swap",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Variable Swap",
+    "question": "What is the output?",
+    "code": "let a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "2 1",
+      "[2, 1] undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring allows swapping variables without a temp variable. a becomes 2, b becomes 1.",
+    "tags": [
+      "destructuring",
+      "swap",
+      "trick"
+    ],
+    "created_at": 1733049007000
+  },
+  {
+    "id": "q9_destructuring_function_params",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Parameter Destructuring",
+    "question": "What will be logged?",
+    "code": "function greet({ name, age = 25 }) {\n  console.log(name, age);\n}\n\ngreet({ name: 'Alice' });",
+    "options": [
+      "'Alice' undefined",
+      "'Alice' 25",
+      "undefined 25",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function parameters can use destructuring with defaults. name is 'Alice', age uses default 25.",
+    "tags": [
+      "destructuring",
+      "function",
+      "parameters"
+    ],
+    "created_at": 1733049008000
+  },
+  {
+    "id": "q10_destructuring_null",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Destructuring null/undefined",
+    "question": "What happens?",
+    "code": "const { a } = null;",
+    "options": [
+      "a is undefined",
+      "a is null",
+      "TypeError",
+      "SyntaxError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Cannot destructure null or undefined. JavaScript throws TypeError: Cannot destructure property of null.",
+    "tags": [
+      "destructuring",
+      "null",
+      "error"
+    ],
+    "created_at": 1733049009000
+  },
+  {
+    "id": "q11_destructuring_default_null",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default with null",
+    "question": "What is the output?",
+    "code": "const { a = 10 } = { a: null };\nconsole.log(a);",
+    "options": [
+      "10",
+      "null",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default values only apply when the value is undefined, not null. a is explicitly null, so default is not used.",
+    "tags": [
+      "destructuring",
+      "default",
+      "null"
+    ],
+    "created_at": 1733049010000
+  },
+  {
+    "id": "q12_destructuring_computed",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Computed Property Names",
+    "question": "What will be logged?",
+    "code": "const key = 'name';\nconst { [key]: value } = { name: 'Alice' };\nconsole.log(value);",
+    "options": [
+      "'Alice'",
+      "undefined",
+      "'name'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Computed property names work in destructuring. [key] evaluates to 'name', extracting 'Alice' into 'value'.",
+    "tags": [
+      "destructuring",
+      "computed",
+      "dynamic"
+    ],
+    "created_at": 1733049011000
+  },
+  {
+    "id": "q13_destructuring_skip",
+    "category": "destructuring",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Skipping Elements",
+    "question": "What is the output?",
+    "code": "const [, , third] = [1, 2, 3, 4];\nconsole.log(third);",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Commas skip elements in array destructuring. We skip first two, third gets the value 3.",
+    "tags": [
+      "destructuring",
+      "skip",
+      "array"
+    ],
+    "created_at": 1733049012000
+  },
+  {
+    "id": "q14_destructuring_string",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "String Destructuring",
+    "question": "What will be logged?",
+    "code": "const [a, b, c] = 'hello';\nconsole.log(a, b, c);",
+    "options": [
+      "'hello' undefined undefined",
+      "'h' 'e' 'l'",
+      "['h', 'e', 'l', 'l', 'o'] undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Strings are iterable, so array destructuring works. Each character is extracted: 'h', 'e', 'l'.",
+    "tags": [
+      "destructuring",
+      "string",
+      "iterable"
+    ],
+    "created_at": 1733049013000
+  },
+  {
+    "id": "q15_destructuring_combined",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Combined Nested Destructuring",
+    "question": "What is the output?",
+    "code": "const { data: [first, { name }] } = { data: [1, { name: 'test' }] };\nconsole.log(first, name);",
+    "options": [
+      "1 'test'",
+      "[1, { name: 'test' }] undefined",
+      "undefined 'test'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Mixed object/array destructuring is possible. data is an array, first gets 1, name extracts from second element.",
+    "tags": [
+      "destructuring",
+      "nested",
+      "mixed"
+    ],
+    "created_at": 1733049014000
+  },
+  {
+    "id": "q16_destructuring_assignment",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructuring Without Declaration",
+    "question": "What happens?",
+    "code": "let a, b;\n{ a, b } = { a: 1, b: 2 };\nconsole.log(a, b);",
+    "options": [
+      "1 2",
+      "SyntaxError",
+      "undefined undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Without let/const, { } is parsed as a block. You need parentheses: ({ a, b } = { a: 1, b: 2 });",
+    "tags": [
+      "destructuring",
+      "assignment",
+      "syntax"
+    ],
+    "created_at": 1733049015000
+  },
+  {
+    "id": "q17_destructuring_default_function",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default Value Function Call",
+    "question": "How many times is getDefault called?",
+    "code": "let count = 0;\nfunction getDefault() {\n  count++;\n  return 'default';\n}\n\nconst { a = getDefault(), b = getDefault() } = { a: 'value' };\nconsole.log(count);",
+    "options": [
+      "0",
+      "1",
+      "2",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Default value expressions are lazily evaluated. a has a value so getDefault() isn't called. b is undefined so getDefault() is called once.",
+    "tags": [
+      "destructuring",
+      "default",
+      "lazy"
+    ],
+    "created_at": 1733049016000
+  },
+  {
+    "id": "q18_destructuring_prototype",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Destructuring Inherited Properties",
+    "question": "What will be logged?",
+    "code": "const proto = { inherited: 'yes' };\nconst obj = Object.create(proto);\nobj.own = 'mine';\n\nconst { own, inherited } = obj;\nconsole.log(own, inherited);",
+    "options": [
+      "'mine' undefined",
+      "'mine' 'yes'",
+      "undefined 'yes'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring accesses properties through the prototype chain, just like regular property access. Both own and inherited are extracted.",
+    "tags": [
+      "destructuring",
+      "prototype",
+      "inherited"
+    ],
+    "created_at": 1733049017000
+  },
+  {
+    "id": "q19_destructuring_for_of",
+    "category": "destructuring",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructuring in for-of",
+    "question": "What is logged?",
+    "code": "const users = [\n  { name: 'Alice', age: 25 },\n  { name: 'Bob', age: 30 }\n];\n\nfor (const { name } of users) {\n  console.log(name);\n}",
+    "options": [
+      "{ name: 'Alice' }, { name: 'Bob' }",
+      "'Alice', 'Bob'",
+      "['Alice', 'Bob']",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring works in for-of loops. Each iteration destructures the current object, extracting name.",
+    "tags": [
+      "destructuring",
+      "for-of",
+      "loop"
+    ],
+    "created_at": 1733049018000
+  },
+  {
+    "id": "q20_destructuring_regex",
+    "category": "destructuring",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Regex Match Destructuring",
+    "question": "What will be logged?",
+    "code": "const [full, year, month, day] = '2024-12-25'.match(/(\\d{4})-(\\d{2})-(\\d{2})/);\nconsole.log(year, month, day);",
+    "options": [
+      "'2024' '12' '25'",
+      "'2024-12-25' '2024' '12'",
+      "undefined undefined undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "String.match() returns an array [fullMatch, ...groups]. Destructuring extracts capture groups into variables.",
+    "tags": [
+      "destructuring",
+      "regex",
+      "match"
+    ],
+    "created_at": 1733049019000
+  },
+  {
+    "id": "q1_event_loop_basics",
+    "category": "event-loop",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Event Loop Basics",
+    "question": "What will be logged to the console?",
+    "code": "console.log('1');\nsetTimeout(() => console.log('2'), 0);\nconsole.log('3');",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "2, 1, 3",
+      "3, 1, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Synchronous code (console.log) runs first. setTimeout callbacks go to the macrotask queue and execute after the call stack is empty.",
+    "tags": [
+      "event-loop",
+      "setTimeout",
+      "timing"
+    ],
+    "created_at": 1733046000000
+  },
+  {
+    "id": "q2_event_loop_promise",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise vs setTimeout",
+    "question": "What is the output order?",
+    "code": "console.log('1');\nsetTimeout(() => console.log('2'), 0);\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');",
+    "options": [
+      "1, 2, 3, 4",
+      "1, 4, 3, 2",
+      "1, 4, 2, 3",
+      "1, 3, 4, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promises (microtasks) have higher priority than setTimeout (macrotasks). Order: sync code → microtasks → macrotasks.",
+    "tags": [
+      "event-loop",
+      "promise",
+      "microtask",
+      "macrotask"
+    ],
+    "created_at": 1733046001000
+  },
+  {
+    "id": "q3_event_loop_nested",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Async Operations",
+    "question": "What will be the output?",
+    "code": "console.log('start');\nsetTimeout(() => {\n  console.log('timeout1');\n  Promise.resolve().then(() => console.log('promise1'));\n}, 0);\nPromise.resolve().then(() => {\n  console.log('promise2');\n  setTimeout(() => console.log('timeout2'), 0);\n});\nconsole.log('end');",
+    "options": [
+      "start, end, promise2, timeout1, promise1, timeout2",
+      "start, end, timeout1, promise2, promise1, timeout2",
+      "start, end, promise2, timeout1, timeout2, promise1",
+      "start, end, timeout1, promise1, promise2, timeout2"
+    ],
+    "correctAnswer": 0,
+    "explanation": "All microtasks (promises) complete before any macrotask (setTimeout). Nested async operations follow the same priority rules.",
+    "tags": [
+      "event-loop",
+      "nested",
+      "microtask",
+      "macrotask"
+    ],
+    "created_at": 1733046002000
+  },
+  {
+    "id": "q4_event_loop_async_await",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Async/Await and Event Loop",
+    "question": "What is the execution order?",
+    "code": "async function test() {\n  console.log('1');\n  await Promise.resolve();\n  console.log('2');\n}\nconsole.log('3');\ntest();\nconsole.log('4');",
+    "options": [
+      "3, 1, 4, 2",
+      "1, 3, 4, 2",
+      "3, 4, 1, 2",
+      "1, 2, 3, 4"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Code before await runs synchronously. Code after await runs as a microtask. The function call is synchronous, but the await pauses execution.",
+    "tags": [
+      "event-loop",
+      "async",
+      "await"
+    ],
+    "created_at": 1733046003000
+  },
+  {
+    "id": "q5_event_loop_queue",
+    "category": "event-loop",
+    "difficulty": "easy",
+    "type": "multiple-choice",
+    "title": "Task Queue Priority",
+    "question": "Which queue has the highest priority in the event loop?",
+    "options": [
+      "Macrotask queue",
+      "Microtask queue",
+      "Animation frame queue",
+      "They all have equal priority"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Microtasks (Promises, queueMicrotask) are processed before macrotasks (setTimeout, setInterval). This ensures promise callbacks execute as soon as possible.",
+    "tags": [
+      "event-loop",
+      "queue",
+      "priority"
+    ],
+    "created_at": 1733046004000
+  },
+  {
+    "id": "q6_event_loop_callstack",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Call Stack Behavior",
+    "question": "What happens when the call stack is empty?",
+    "options": [
+      "The event loop stops",
+      "Microtasks are processed first, then macrotasks",
+      "Macrotasks are processed first, then microtasks",
+      "The program terminates"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When the call stack is empty, the event loop processes the microtask queue first (completely), then moves to the macrotask queue.",
+    "tags": [
+      "event-loop",
+      "call-stack"
+    ],
+    "created_at": 1733046005000
+  },
+  {
+    "id": "q7_event_loop_setimmediate",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "setImmediate vs setTimeout",
+    "question": "In Node.js, what is the output? (Note: setImmediate is Node.js specific)",
+    "code": "setTimeout(() => console.log('timeout'), 0);\nsetImmediate(() => console.log('immediate'));",
+    "options": [
+      "timeout, immediate (always)",
+      "immediate, timeout (always)",
+      "Order is non-deterministic",
+      "Only one will execute"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The order between setTimeout(fn, 0) and setImmediate is non-deterministic in Node.js, depending on the event loop phase when they are called.",
+    "tags": [
+      "event-loop",
+      "nodejs",
+      "setimmediate"
+    ],
+    "created_at": 1733046006000
+  },
+  {
+    "id": "q8_event_loop_blocking",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Blocking the Event Loop",
+    "question": "What happens if you have a long-running synchronous operation?",
+    "options": [
+      "The event loop pauses and resumes after",
+      "Microtasks can still execute during the operation",
+      "All queued tasks wait until the operation completes",
+      "The operation is automatically moved to a worker thread"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Synchronous code blocks the event loop. All queued tasks (microtasks and macrotasks) must wait until the call stack is empty.",
+    "tags": [
+      "event-loop",
+      "blocking"
+    ],
+    "created_at": 1733046007000
+  },
+  {
+    "id": "q9_event_loop_requestanimationframe",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "requestAnimationFrame Timing",
+    "question": "In the browser, what is the execution order?",
+    "code": "console.log('1');\nrequestAnimationFrame(() => console.log('2'));\nPromise.resolve().then(() => console.log('3'));\nsetTimeout(() => console.log('4'), 0);\nconsole.log('5');",
+    "options": [
+      "1, 5, 3, 2, 4",
+      "1, 5, 3, 4, 2",
+      "1, 5, 2, 3, 4",
+      "1, 5, 4, 3, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Order: sync → microtasks → setTimeout(0) → rAF (before paint). Note: exact rAF/setTimeout timing can vary by browser and system load.",
+    "tags": [
+      "event-loop",
+      "requestanimationframe",
+      "browser"
+    ],
+    "created_at": 1733046008000
+  },
+  {
+    "id": "q10_event_loop_async_function",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Async Function Execution",
+    "question": "What is the output?",
+    "code": "async function foo() {\n  console.log('foo start');\n  await bar();\n  console.log('foo end');\n}\n\nasync function bar() {\n  console.log('bar');\n}\n\nconsole.log('start');\nfoo();\nconsole.log('end');",
+    "options": [
+      "start, foo start, bar, foo end, end",
+      "start, end, foo start, bar, foo end",
+      "start, foo start, end, bar, foo end",
+      "start, foo start, bar, end, foo end"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Code before await runs synchronously. The 'end' logs before 'foo end' because 'foo end' is after the await and runs as a microtask.",
+    "tags": [
+      "event-loop",
+      "async",
+      "await"
+    ],
+    "created_at": 1733046009000
+  },
+  {
+    "id": "q11_event_loop_multiple_promises",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Multiple Promise Chains",
+    "question": "What is the execution order?",
+    "code": "Promise.resolve()\n  .then(() => console.log('1'))\n  .then(() => console.log('2'));\n\nPromise.resolve()\n  .then(() => console.log('3'))\n  .then(() => console.log('4'));\n\nconsole.log('5');",
+    "options": [
+      "5, 1, 2, 3, 4",
+      "5, 1, 3, 2, 4",
+      "1, 2, 3, 4, 5",
+      "5, 3, 1, 4, 2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "All first-level .then() callbacks execute before second-level ones. Within the same level, they execute in the order they were added.",
+    "tags": [
+      "event-loop",
+      "promise",
+      "chain"
+    ],
+    "created_at": 1733046010000
+  },
+  {
+    "id": "q12_event_loop_queueMicrotask",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "queueMicrotask vs Promise",
+    "question": "What is the output order?",
+    "code": "console.log('1');\nqueueMicrotask(() => console.log('2'));\nPromise.resolve().then(() => console.log('3'));\nconsole.log('4');",
+    "options": [
+      "1, 4, 2, 3",
+      "1, 4, 3, 2",
+      "1, 2, 4, 3",
+      "1, 3, 4, 2"
+    ],
+    "correctAnswer": 0,
+    "explanation": "queueMicrotask and Promise.resolve().then() both add to the microtask queue. They execute in the order they were queued.",
+    "tags": [
+      "event-loop",
+      "queuemicrotask",
+      "promise"
+    ],
+    "created_at": 1733046011000
+  },
+  {
+    "id": "q13_event_loop_microtask_flood",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Microtask Queue Starvation",
+    "question": "What happens when this code runs?",
+    "code": "function flood() {\n  Promise.resolve().then(flood);\n}\n\nflood();\nsetTimeout(() => console.log('timeout'), 0);",
+    "options": [
+      "'timeout' is logged after some time",
+      "'timeout' is never logged - infinite microtask loop",
+      "Stack overflow error",
+      "Browser/Node terminates the script"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Microtasks are processed until the queue is empty. Each flood() adds another microtask, creating an infinite loop. Macrotasks (setTimeout) never run.",
+    "tags": [
+      "event-loop",
+      "microtask",
+      "starvation"
+    ],
+    "created_at": 1733046012000
+  },
+  {
+    "id": "q14_event_loop_mutation_observer",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "MutationObserver Priority",
+    "question": "In the browser, what is the execution order?",
+    "code": "const div = document.createElement('div');\nconst observer = new MutationObserver(() => console.log('mutation'));\nobserver.observe(div, { attributes: true });\n\nPromise.resolve().then(() => console.log('promise'));\ndiv.setAttribute('id', 'test');\nqueueMicrotask(() => console.log('microtask'));\nconsole.log('sync');",
+    "options": [
+      "sync, promise, mutation, microtask",
+      "sync, mutation, promise, microtask",
+      "sync, promise, microtask, mutation",
+      "sync, mutation, microtask, promise"
+    ],
+    "correctAnswer": 0,
+    "explanation": "All are microtasks. Order: sync first, then microtasks in queue order: promise (added first), mutation (triggered by setAttribute), microtask (added last).",
+    "tags": [
+      "event-loop",
+      "mutation-observer",
+      "microtask"
+    ],
+    "created_at": 1733046013000
+  },
+  {
+    "id": "q15_event_loop_process_nexttick",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "process.nextTick in Node.js",
+    "question": "In Node.js, what is the output order?",
+    "code": "Promise.resolve().then(() => console.log('promise'));\nprocess.nextTick(() => console.log('nextTick'));\nsetImmediate(() => console.log('immediate'));\nconsole.log('sync');",
+    "options": [
+      "sync, promise, nextTick, immediate",
+      "sync, nextTick, promise, immediate",
+      "sync, immediate, nextTick, promise",
+      "sync, nextTick, immediate, promise"
+    ],
+    "correctAnswer": 1,
+    "explanation": "process.nextTick runs before other microtasks. Order: sync → nextTick queue → microtask queue → macrotasks (setImmediate).",
+    "tags": [
+      "event-loop",
+      "nodejs",
+      "nexttick"
+    ],
+    "created_at": 1733046014000
+  },
+  {
+    "id": "q16_event_loop_postmessage",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "postMessage Timing",
+    "question": "In the browser, what is the execution order?",
+    "code": "console.log('1');\nwindow.postMessage('msg', '*');\nwindow.addEventListener('message', () => console.log('2'));\nsetTimeout(() => console.log('3'), 0);\nPromise.resolve().then(() => console.log('4'));\nconsole.log('5');",
+    "options": [
+      "1, 5, 4, 2, 3",
+      "1, 5, 4, 3, 2",
+      "1, 5, 2, 4, 3",
+      "1, 5, 4, 2 and 3 (order varies)"
+    ],
+    "correctAnswer": 3,
+    "explanation": "postMessage creates a macrotask. Microtasks (4) run first. Both postMessage handler and setTimeout are macrotasks; their order may vary.",
+    "tags": [
+      "event-loop",
+      "postmessage",
+      "macrotask"
+    ],
+    "created_at": 1733046015000
+  },
+  {
+    "id": "q17_event_loop_reentrant",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Re-entrant Async Operations",
+    "question": "What is the execution order?",
+    "code": "async function test() {\n  console.log('A');\n  await null;\n  console.log('B');\n  await null;\n  console.log('C');\n}\n\ntest();\nPromise.resolve().then(() => console.log('D'));\nconsole.log('E');",
+    "options": [
+      "A, E, B, D, C",
+      "A, E, D, B, C",
+      "A, E, B, C, D",
+      "A, B, C, E, D"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Each await null schedules continuation as microtask. Order: A→E (sync), then microtasks: D, B (first await), C (second await).",
+    "tags": [
+      "event-loop",
+      "async",
+      "await"
+    ],
+    "created_at": 1733046016000
+  },
+  {
+    "id": "q18_event_loop_nested_settimeout",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Nested setTimeout Minimum Delay",
+    "question": "What is the minimum delay for deeply nested setTimeout in browsers?",
+    "code": "function nested(depth) {\n  if (depth > 0) {\n    setTimeout(() => nested(depth - 1), 0);\n  }\n}",
+    "options": [
+      "Always 0ms as specified",
+      "1ms for all levels",
+      "4ms after 5 levels of nesting",
+      "Depends on browser; no standard"
+    ],
+    "correctAnswer": 2,
+    "explanation": "HTML spec requires 4ms minimum delay after 5 levels of nesting. This prevents tight setTimeout loops from consuming too much CPU.",
+    "tags": [
+      "event-loop",
+      "settimeout",
+      "spec"
+    ],
+    "created_at": 1733046017000
+  },
+  {
+    "id": "q19_event_loop_promise_executor",
+    "category": "event-loop",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Executor Timing",
+    "question": "What is the output order?",
+    "code": "console.log('A');\n\nnew Promise((resolve) => {\n  console.log('B');\n  resolve();\n  console.log('C');\n}).then(() => console.log('D'));\n\nconsole.log('E');",
+    "options": [
+      "A, B, C, E, D",
+      "A, B, E, C, D",
+      "A, E, B, C, D",
+      "A, B, D, C, E"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The Promise executor runs synchronously. 'B' and 'C' are logged during construction. resolve() schedules 'D' as microtask. 'E' logs, then 'D'.",
+    "tags": [
+      "event-loop",
+      "promise",
+      "executor"
+    ],
+    "created_at": 1733046018000
+  },
+  {
+    "id": "q20_event_loop_async_iteration",
+    "category": "event-loop",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Async Iteration Order",
+    "question": "What is the execution order?",
+    "code": "async function* gen() {\n  yield 1;\n  yield 2;\n}\n\n(async () => {\n  console.log('start');\n  for await (const x of gen()) {\n    console.log(x);\n  }\n  console.log('end');\n})();\n\nconsole.log('sync');",
+    "options": [
+      "start, 1, 2, end, sync",
+      "sync, start, 1, 2, end",
+      "start, sync, 1, 2, end",
+      "start, 1, sync, 2, end"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The async IIFE starts, logs 'start', then hits for-await which yields. Control returns to main, 'sync' logs. Then async resumes: 1, 2, end.",
+    "tags": [
+      "event-loop",
+      "async-generator",
+      "for-await"
+    ],
+    "created_at": 1733046019000
+  },
+  {
+    "id": "q1_hoisting_var_basic",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic var Hoisting",
+    "question": "What will be logged?",
+    "code": "console.log(x);\nvar x = 5;\nconsole.log(x);",
+    "options": [
+      "ReferenceError, 5",
+      "undefined, 5",
+      "5, 5",
+      "null, 5"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var declarations are hoisted to the top of their scope, but not the initialization. x exists but is undefined until the assignment.",
+    "tags": [
+      "hoisting",
+      "var"
+    ],
+    "created_at": 1733047000000
+  },
+  {
+    "id": "q2_hoisting_let_tdz",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "let and TDZ",
+    "question": "What happens when this code runs?",
+    "code": "console.log(x);\nlet x = 5;",
+    "options": [
+      "undefined",
+      "5",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "let and const are hoisted but not initialized. Accessing them before declaration causes a ReferenceError due to the Temporal Dead Zone (TDZ).",
+    "tags": [
+      "hoisting",
+      "let",
+      "tdz"
+    ],
+    "created_at": 1733047001000
+  },
+  {
+    "id": "q3_hoisting_function_declaration",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Function Declaration Hoisting",
+    "question": "What is the output?",
+    "code": "sayHello();\n\nfunction sayHello() {\n  console.log('Hello!');\n}",
+    "options": [
+      "ReferenceError",
+      "TypeError",
+      "Hello!",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Function declarations are fully hoisted - both the name and the function body. You can call them before they appear in the code.",
+    "tags": [
+      "hoisting",
+      "function-declaration"
+    ],
+    "created_at": 1733047002000
+  },
+  {
+    "id": "q4_hoisting_function_expression",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Expression Hoisting",
+    "question": "What happens?",
+    "code": "sayHello();\n\nvar sayHello = function() {\n  console.log('Hello!');\n};",
+    "options": [
+      "Hello!",
+      "ReferenceError",
+      "TypeError: sayHello is not a function",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var sayHello is hoisted as undefined. Calling undefined as a function throws TypeError, not ReferenceError.",
+    "tags": [
+      "hoisting",
+      "function-expression",
+      "var"
+    ],
+    "created_at": 1733047003000
+  },
+  {
+    "id": "q5_hoisting_const",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "const Hoisting",
+    "question": "What is the output?",
+    "code": "const x = 1;\n\nfunction test() {\n  console.log(x);\n  const x = 2;\n}\n\ntest();",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 3,
+    "explanation": "The inner const x shadows the outer one. Due to TDZ, accessing x before its declaration in the function throws ReferenceError.",
+    "tags": [
+      "hoisting",
+      "const",
+      "tdz",
+      "shadowing"
+    ],
+    "created_at": 1733047004000
+  },
+  {
+    "id": "q6_hoisting_var_function_same_name",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "var and Function Same Name",
+    "question": "What will be logged?",
+    "code": "console.log(typeof foo);\nvar foo = 'string';\nfunction foo() {}\nconsole.log(typeof foo);",
+    "options": [
+      "'undefined', 'string'",
+      "'function', 'string'",
+      "'function', 'function'",
+      "'string', 'string'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function declarations are hoisted above var. Initially foo is the function. After execution, var foo = 'string' reassigns it.",
+    "tags": [
+      "hoisting",
+      "function",
+      "var",
+      "precedence"
+    ],
+    "created_at": 1733047005000
+  },
+  {
+    "id": "q7_hoisting_block_function",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function in Block (non-strict)",
+    "question": "In non-strict mode, what is logged?",
+    "code": "console.log(foo);\nif (true) {\n  function foo() { return 1; }\n}\nconsole.log(typeof foo);",
+    "options": [
+      "undefined, 'function'",
+      "ReferenceError",
+      "undefined, 'undefined'",
+      "function, 'function'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In non-strict mode, function declarations in blocks are partially hoisted. The name is hoisted as undefined, but the function is assigned when the block executes.",
+    "tags": [
+      "hoisting",
+      "block",
+      "function"
+    ],
+    "created_at": 1733047006000
+  },
+  {
+    "id": "q8_hoisting_class",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Class Hoisting",
+    "question": "What happens?",
+    "code": "const obj = new MyClass();\n\nclass MyClass {\n  constructor() {\n    this.name = 'test';\n  }\n}",
+    "options": [
+      "Creates object with name 'test'",
+      "ReferenceError",
+      "TypeError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Classes are hoisted but not initialized (like let/const). Accessing before declaration throws ReferenceError due to TDZ.",
+    "tags": [
+      "hoisting",
+      "class",
+      "tdz"
+    ],
+    "created_at": 1733047007000
+  },
+  {
+    "id": "q9_hoisting_multiple_var",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Multiple var Declarations",
+    "question": "What is the output?",
+    "code": "var x = 1;\nvar x = 2;\nvar x;\nconsole.log(x);",
+    "options": [
+      "1",
+      "2",
+      "undefined",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Multiple var declarations of the same variable are allowed. The last assignment wins. 'var x;' without assignment doesn't reset the value.",
+    "tags": [
+      "hoisting",
+      "var",
+      "redeclaration"
+    ],
+    "created_at": 1733047008000
+  },
+  {
+    "id": "q10_hoisting_let_redeclare",
+    "category": "hoisting",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "let Redeclaration",
+    "question": "What happens?",
+    "code": "let x = 1;\nlet x = 2;\nconsole.log(x);",
+    "options": [
+      "1",
+      "2",
+      "SyntaxError",
+      "undefined"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Unlike var, let and const do not allow redeclaration in the same scope. This throws a SyntaxError.",
+    "tags": [
+      "hoisting",
+      "let",
+      "redeclaration"
+    ],
+    "created_at": 1733047009000
+  },
+  {
+    "id": "q11_hoisting_nested_function",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Function Hoisting",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  console.log(typeof inner);\n  return inner();\n  \n  function inner() {\n    return 'hello';\n  }\n}\n\nconsole.log(outer());",
+    "options": [
+      "'undefined', 'hello'",
+      "'function', 'hello'",
+      "TypeError",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Function declarations are hoisted within their containing function. inner is available as a function from the start of outer().",
+    "tags": [
+      "hoisting",
+      "nested",
+      "function"
+    ],
+    "created_at": 1733047010000
+  },
+  {
+    "id": "q12_hoisting_param_var",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Parameter and var Same Name",
+    "question": "What is the output?",
+    "code": "function test(x) {\n  console.log(x);\n  var x = 10;\n  console.log(x);\n}\n\ntest(5);",
+    "options": [
+      "undefined, 10",
+      "5, 10",
+      "5, 5",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Parameters and var declarations share the same scope. var x doesn't create a new variable, just re-declares. First log shows 5, second shows 10.",
+    "tags": [
+      "hoisting",
+      "parameters",
+      "var"
+    ],
+    "created_at": 1733047011000
+  },
+  {
+    "id": "q13_hoisting_arrow_function",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Function Hoisting",
+    "question": "What happens?",
+    "code": "greet();\n\nconst greet = () => console.log('Hello');",
+    "options": [
+      "Hello",
+      "undefined",
+      "ReferenceError",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Arrow functions assigned to const/let are not hoisted. Accessing greet before declaration throws ReferenceError due to TDZ.",
+    "tags": [
+      "hoisting",
+      "arrow-function",
+      "const"
+    ],
+    "created_at": 1733047012000
+  },
+  {
+    "id": "q14_hoisting_conditional",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Hoisting in Unreached Code",
+    "question": "What is logged?",
+    "code": "function test() {\n  if (false) {\n    var x = 5;\n  }\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "5",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var declarations are hoisted regardless of whether the code block executes. x is hoisted and initialized to undefined, even though the if-block never runs.",
+    "tags": [
+      "hoisting",
+      "var",
+      "conditional"
+    ],
+    "created_at": 1733047013000
+  },
+  {
+    "id": "q15_hoisting_typeof_tdz",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "typeof in TDZ",
+    "question": "What is the result?",
+    "code": "console.log(typeof x);\nlet x = 5;",
+    "options": [
+      "'undefined'",
+      "'number'",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Unlike undeclared variables where typeof returns 'undefined', accessing a let/const variable in TDZ throws ReferenceError, even with typeof.",
+    "tags": [
+      "hoisting",
+      "typeof",
+      "tdz"
+    ],
+    "created_at": 1733047014000
+  },
+  {
+    "id": "q16_hoisting_function_vs_var",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function Declaration Priority",
+    "question": "What will be logged?",
+    "code": "var foo = 1;\nfunction foo() {}\nconsole.log(typeof foo);",
+    "options": [
+      "'function'",
+      "'number'",
+      "'undefined'",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Functions are hoisted first, then var. But var foo = 1 executes after hoisting phase, overwriting the function with the number 1.",
+    "tags": [
+      "hoisting",
+      "function",
+      "var",
+      "order"
+    ],
+    "created_at": 1733047015000
+  },
+  {
+    "id": "q17_hoisting_default_params",
+    "category": "hoisting",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Default Parameters TDZ",
+    "question": "What happens?",
+    "code": "function test(a = b, b = 1) {\n  console.log(a, b);\n}\n\ntest();",
+    "options": [
+      "undefined, 1",
+      "1, 1",
+      "ReferenceError",
+      "NaN, 1"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Default parameters are evaluated left to right. When evaluating a = b, b is not yet initialized (TDZ), causing ReferenceError.",
+    "tags": [
+      "hoisting",
+      "default-params",
+      "tdz"
+    ],
+    "created_at": 1733047016000
+  },
+  {
+    "id": "q18_hoisting_catch_var",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in Catch Block",
+    "question": "What is the output?",
+    "code": "try {\n  throw new Error('oops');\n} catch (e) {\n  var x = 'caught';\n}\n\nconsole.log(x);\nconsole.log(typeof e);",
+    "options": [
+      "'caught', 'object'",
+      "'caught', 'undefined'",
+      "ReferenceError",
+      "undefined, 'undefined'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var x is hoisted out of the catch block. But catch parameter e is block-scoped to the catch block only.",
+    "tags": [
+      "hoisting",
+      "catch",
+      "var"
+    ],
+    "created_at": 1733047017000
+  },
+  {
+    "id": "q19_hoisting_import",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Import Hoisting",
+    "question": "Are ES module imports hoisted?",
+    "code": "console.log(foo);\nimport { foo } from './module.js';",
+    "options": [
+      "No, this throws ReferenceError",
+      "Yes, imports are hoisted and initialized",
+      "Yes, but they're in TDZ like let",
+      "Depends on the module system"
+    ],
+    "correctAnswer": 1,
+    "explanation": "ES module imports are hoisted and linked before any code executes. You can use imported bindings before the import statement in the code.",
+    "tags": [
+      "hoisting",
+      "import",
+      "esm"
+    ],
+    "created_at": 1733047018000
+  },
+  {
+    "id": "q20_hoisting_for_loop_var",
+    "category": "hoisting",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in for Loop",
+    "question": "What is logged?",
+    "code": "for (var i = 0; i < 3; i++) {\n  // loop\n}\nconsole.log(i);",
+    "options": [
+      "0",
+      "2",
+      "3",
+      "ReferenceError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var is function-scoped, not block-scoped. After the loop completes, i is 3 and accessible outside the for block.",
+    "tags": [
+      "hoisting",
+      "var",
+      "for-loop"
+    ],
+    "created_at": 1733047019000
+  },
+  {
+    "id": "q1_objects_key_coercion",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object Key Coercion",
+    "question": "What will be logged?",
+    "code": "const obj = {};\nconst a = { key: 'a' };\nconst b = { key: 'b' };\n\nobj[a] = 'valueA';\nobj[b] = 'valueB';\n\nconsole.log(obj[a]);",
+    "options": [
+      "'valueA'",
+      "'valueB'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are converted to strings. Both a and b become '[object Object]', so obj[b] overwrites obj[a]. The result is 'valueB'.",
+    "tags": [
+      "objects",
+      "keys",
+      "coercion"
+    ],
+    "created_at": 1733051000000
+  },
+  {
+    "id": "q2_objects_comparison",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Object Comparison",
+    "question": "What is the output?",
+    "code": "const a = { x: 1 };\nconst b = { x: 1 };\nconst c = a;\n\nconsole.log(a === b);\nconsole.log(a === c);",
+    "options": [
+      "true, true",
+      "false, false",
+      "false, true",
+      "true, false"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Objects are compared by reference, not value. a and b are different objects (false). c points to the same object as a (true).",
+    "tags": [
+      "objects",
+      "comparison",
+      "reference"
+    ],
+    "created_at": 1733051001000
+  },
+  {
+    "id": "q3_objects_freeze",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.freeze()",
+    "question": "What will be logged?",
+    "code": "const user = Object.freeze({ name: 'Alice', address: { city: 'NYC' } });\nuser.name = 'Bob';\nuser.address.city = 'LA';\n\nconsole.log(user.name, user.address.city);",
+    "options": [
+      "'Bob', 'LA'",
+      "'Alice', 'NYC'",
+      "'Alice', 'LA'",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Object.freeze() is shallow. Top-level properties can't change ('Alice'), but nested objects can still be modified ('LA').",
+    "tags": [
+      "objects",
+      "freeze",
+      "shallow"
+    ],
+    "created_at": 1733051002000
+  },
+  {
+    "id": "q4_objects_shorthand",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Property Shorthand",
+    "question": "What is the output?",
+    "code": "const name = 'Alice';\nconst age = 25;\nconst user = { name, age, name: 'Bob' };\n\nconsole.log(user);",
+    "options": [
+      "{ name: 'Alice', age: 25 }",
+      "{ name: 'Bob', age: 25 }",
+      "SyntaxError",
+      "{ name: 'Alice', age: 25, name: 'Bob' }"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Later properties overwrite earlier ones with the same key. 'Bob' overwrites 'Alice'.",
+    "tags": [
+      "objects",
+      "shorthand",
+      "duplicate-keys"
+    ],
+    "created_at": 1733051003000
+  },
+  {
+    "id": "q5_objects_spread_order",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Spread Order",
+    "question": "What will be logged?",
+    "code": "const defaults = { theme: 'light', lang: 'en' };\nconst userPrefs = { theme: 'dark' };\n\nconst settings = { ...defaults, ...userPrefs, lang: 'ru' };\nconsole.log(settings);",
+    "options": [
+      "{ theme: 'light', lang: 'en' }",
+      "{ theme: 'dark', lang: 'en' }",
+      "{ theme: 'dark', lang: 'ru' }",
+      "{ theme: 'light', lang: 'ru' }"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Spread properties are applied left to right. userPrefs.theme overwrites defaults.theme. lang: 'ru' overwrites defaults.lang.",
+    "tags": [
+      "objects",
+      "spread",
+      "merge"
+    ],
+    "created_at": 1733051004000
+  },
+  {
+    "id": "q6_objects_computed_keys",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Computed Property Names",
+    "question": "What is the output?",
+    "code": "const prop = 'name';\nconst obj = {\n  [prop]: 'Alice',\n  [`${prop}Length`]: 5\n};\n\nconsole.log(obj);",
+    "options": [
+      "{ prop: 'Alice', propLength: 5 }",
+      "{ name: 'Alice', nameLength: 5 }",
+      "{ [prop]: 'Alice', [propLength]: 5 }",
+      "SyntaxError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Computed property names evaluate the expression inside []. prop becomes 'name', template literal becomes 'nameLength'.",
+    "tags": [
+      "objects",
+      "computed",
+      "dynamic"
+    ],
+    "created_at": 1733051005000
+  },
+  {
+    "id": "q7_objects_seal",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.seal() vs freeze()",
+    "question": "What happens?",
+    "code": "const obj = Object.seal({ x: 1 });\nobj.x = 2;\nobj.y = 3;\ndelete obj.x;\n\nconsole.log(obj);",
+    "options": [
+      "{ x: 2, y: 3 }",
+      "{ x: 2 }",
+      "{ x: 1 }",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "seal() prevents adding/removing properties but allows modifying existing ones. x can change to 2, but y can't be added, x can't be deleted.",
+    "tags": [
+      "objects",
+      "seal",
+      "freeze"
+    ],
+    "created_at": 1733051006000
+  },
+  {
+    "id": "q8_objects_entries",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Object.entries()",
+    "question": "What will be logged?",
+    "code": "const obj = { a: 1, b: 2 };\nconst entries = Object.entries(obj);\n\nconsole.log(entries);",
+    "options": [
+      "['a', 'b']",
+      "[1, 2]",
+      "[['a', 1], ['b', 2]]",
+      "{ a: 1, b: 2 }"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Object.entries() returns an array of [key, value] pairs. Each entry is a 2-element array.",
+    "tags": [
+      "objects",
+      "entries",
+      "conversion"
+    ],
+    "created_at": 1733051007000
+  },
+  {
+    "id": "q9_objects_assign_mutation",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.assign() Mutation",
+    "question": "What is the output?",
+    "code": "const target = { a: 1 };\nconst source = { b: 2 };\nconst result = Object.assign(target, source);\n\nconsole.log(target === result);\nconsole.log(target);",
+    "options": [
+      "false, { a: 1 }",
+      "true, { a: 1, b: 2 }",
+      "false, { a: 1, b: 2 }",
+      "true, { a: 1 }"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.assign() mutates and returns the target object. target and result are the same object, both containing { a: 1, b: 2 }.",
+    "tags": [
+      "objects",
+      "assign",
+      "mutation"
+    ],
+    "created_at": 1733051008000
+  },
+  {
+    "id": "q10_objects_symbol_key",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol as Key",
+    "question": "What will be logged?",
+    "code": "const sym = Symbol('id');\nconst obj = { [sym]: 123, name: 'test' };\n\nconsole.log(Object.keys(obj));\nconsole.log(Object.getOwnPropertySymbols(obj));",
+    "options": [
+      "['Symbol(id)', 'name'], []",
+      "['name'], [Symbol(id)]",
+      "['name', Symbol(id)], []",
+      "[], [Symbol(id)]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.keys() only returns string keys. Symbol keys require Object.getOwnPropertySymbols() to access.",
+    "tags": [
+      "objects",
+      "symbol",
+      "keys"
+    ],
+    "created_at": 1733051009000
+  },
+  {
+    "id": "q11_objects_optional_chaining",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Optional Chaining",
+    "question": "What is the output?",
+    "code": "const user = { profile: null };\n\nconsole.log(user.profile?.name);\nconsole.log(user.profile?.name ?? 'Anonymous');",
+    "options": [
+      "null, null",
+      "undefined, 'Anonymous'",
+      "TypeError, TypeError",
+      "null, 'Anonymous'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Optional chaining (?.) returns undefined if the value is null/undefined. Nullish coalescing (??) provides a fallback for null/undefined.",
+    "tags": [
+      "objects",
+      "optional-chaining",
+      "nullish"
+    ],
+    "created_at": 1733051010000
+  },
+  {
+    "id": "q12_objects_in_operator",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "in Operator",
+    "question": "What will be logged?",
+    "code": "const obj = { a: undefined };\n\nconsole.log('a' in obj);\nconsole.log('b' in obj);\nconsole.log(obj.a === obj.b);",
+    "options": [
+      "true, false, true",
+      "false, false, true",
+      "true, true, false",
+      "true, false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "'in' checks if property exists, not its value. 'a' exists (true), 'b' doesn't (false). Both obj.a and obj.b are undefined, so they're equal.",
+    "tags": [
+      "objects",
+      "in",
+      "undefined"
+    ],
+    "created_at": 1733051011000
+  },
+  {
+    "id": "q13_objects_getter",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Getter Side Effects",
+    "question": "What is the output?",
+    "code": "let count = 0;\nconst obj = {\n  get value() {\n    return ++count;\n  }\n};\n\nconsole.log(obj.value);\nconsole.log(obj.value);\nconsole.log(obj.value);",
+    "options": [
+      "1, 1, 1",
+      "1, 2, 3",
+      "0, 1, 2",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Getters are called each time the property is accessed. Each access increments count: 1, 2, 3.",
+    "tags": [
+      "objects",
+      "getter",
+      "side-effects"
+    ],
+    "created_at": 1733051012000
+  },
+  {
+    "id": "q14_objects_property_descriptor",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Property Descriptor",
+    "question": "What happens?",
+    "code": "const obj = {};\nObject.defineProperty(obj, 'x', {\n  value: 42,\n  writable: false,\n  enumerable: false\n});\n\nobj.x = 100;\nconsole.log(obj.x);\nconsole.log(Object.keys(obj));",
+    "options": [
+      "100, ['x']",
+      "42, ['x']",
+      "42, []",
+      "TypeError"
+    ],
+    "correctAnswer": 2,
+    "explanation": "writable: false prevents modification (x stays 42). enumerable: false hides from Object.keys (empty array).",
+    "tags": [
+      "objects",
+      "define-property",
+      "descriptor"
+    ],
+    "created_at": 1733051013000
+  },
+  {
+    "id": "q15_objects_fromEntries",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.fromEntries()",
+    "question": "What will be logged?",
+    "code": "const entries = [['name', 'Alice'], ['age', 25]];\nconst obj = Object.fromEntries(entries);\n\nconsole.log(obj);",
+    "options": [
+      "[['name', 'Alice'], ['age', 25]]",
+      "{ name: 'Alice', age: 25 }",
+      "{ 0: 'name', 1: 'age' }",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.fromEntries() converts an iterable of [key, value] pairs into an object. It's the inverse of Object.entries().",
+    "tags": [
+      "objects",
+      "fromEntries",
+      "conversion"
+    ],
+    "created_at": 1733051014000
+  },
+  {
+    "id": "q16_objects_prototype_null",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object with null Prototype",
+    "question": "What is the output?",
+    "code": "const dict = Object.create(null);\ndict.hasOwnProperty = 'oops';\ndict.name = 'test';\n\nconsole.log(dict.hasOwnProperty);\nconsole.log(dict.toString);",
+    "options": [
+      "function, function",
+      "'oops', undefined",
+      "'oops', function",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) creates object with no prototype. No inherited methods exist, so hasOwnProperty can be a regular property. toString is undefined.",
+    "tags": [
+      "objects",
+      "prototype",
+      "null"
+    ],
+    "created_at": 1733051015000
+  },
+  {
+    "id": "q17_objects_json_methods",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "toJSON Method",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Alice',\n  toJSON() {\n    return { n: this.name.toUpperCase() };\n  }\n};\n\nconsole.log(JSON.stringify(obj));",
+    "options": [
+      "'{\"name\":\"Alice\"}'",
+      "'{\"n\":\"ALICE\"}'",
+      "'{\"toJSON\":...}'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "If an object has a toJSON method, JSON.stringify calls it and uses the returned value for serialization.",
+    "tags": [
+      "objects",
+      "json",
+      "tojson"
+    ],
+    "created_at": 1733051016000
+  },
+  {
+    "id": "q18_objects_number_keys",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Numeric Keys Order",
+    "question": "What is the output?",
+    "code": "const obj = { 2: 'b', 1: 'a', c: 'c', a: 'a' };\nconsole.log(Object.keys(obj));",
+    "options": [
+      "['2', '1', 'c', 'a']",
+      "['1', '2', 'c', 'a']",
+      "['a', 'c', '1', '2']",
+      "['1', '2', 'a', 'c']"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Object keys are ordered: integer keys first (ascending), then string keys in insertion order. 1, 2, then 'a', 'c' (not 'c', 'a').",
+    "tags": [
+      "objects",
+      "keys",
+      "order"
+    ],
+    "created_at": 1733051017000
+  },
+  {
+    "id": "q19_objects_delete",
+    "category": "objects",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Delete Operator",
+    "question": "What will be logged?",
+    "code": "const obj = { a: 1, b: 2 };\nconst result = delete obj.a;\n\nconsole.log(result);\nconsole.log(obj);",
+    "options": [
+      "true, { b: 2 }",
+      "1, { b: 2 }",
+      "undefined, { a: 1, b: 2 }",
+      "true, { a: undefined, b: 2 }"
+    ],
+    "correctAnswer": 0,
+    "explanation": "delete removes a property and returns true if successful. The property is completely removed, not set to undefined.",
+    "tags": [
+      "objects",
+      "delete",
+      "operator"
+    ],
+    "created_at": 1733051018000
+  },
+  {
+    "id": "q20_objects_preventExtensions",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "preventExtensions vs seal vs freeze",
+    "question": "What is true about these methods?",
+    "code": "const a = Object.preventExtensions({ x: 1 });\nconst b = Object.seal({ x: 1 });\nconst c = Object.freeze({ x: 1 });",
+    "options": [
+      "a: can add/delete/modify, b: can modify only, c: nothing allowed",
+      "a: can delete/modify, b: can modify only, c: nothing allowed",
+      "a: can modify only, b: can delete/modify, c: nothing allowed",
+      "All three are the same"
+    ],
+    "correctAnswer": 1,
+    "explanation": "preventExtensions: no new properties, can delete/modify. seal: no add/delete, can modify. freeze: nothing changeable. Strictness: freeze > seal > preventExtensions.",
+    "tags": [
+      "objects",
+      "prevent-extensions",
+      "immutability"
+    ],
+    "created_at": 1733051019000
+  },
+  {
+    "id": "q1_prototypes_basic",
+    "category": "prototypes",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Prototype Chain",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3];\nconsole.log(arr.hasOwnProperty('length'));\nconsole.log(arr.hasOwnProperty('map'));",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "length is an own property of the array instance. map is inherited from Array.prototype, not an own property.",
+    "tags": [
+      "prototypes",
+      "inheritance",
+      "hasownproperty"
+    ],
+    "created_at": 1733046500000
+  },
+  {
+    "id": "q2_prototypes_constructor",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Constructor Property",
+    "question": "What is the output?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = new Person('JS');\nconsole.log(person.constructor === Person);",
+    "options": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "The constructor property points to the function that created the instance. person.constructor is Person because person was created with new Person().",
+    "tags": [
+      "prototypes",
+      "constructor"
+    ],
+    "created_at": 1733046501000
+  },
+  {
+    "id": "q3_prototypes_inheritance",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Prototype Inheritance",
+    "question": "What will be logged?",
+    "code": "function Animal(name) {\n  this.name = name;\n}\n\nAnimal.prototype.speak = function() {\n  return this.name + ' makes a sound';\n};\n\nconst dog = new Animal('Dog');\nconsole.log(dog.speak());",
+    "options": [
+      "Dog makes a sound",
+      "undefined makes a sound",
+      "ReferenceError",
+      "null makes a sound"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Methods added to the prototype are shared by all instances. When dog.speak() is called, JavaScript looks up the prototype chain and finds speak on Animal.prototype.",
+    "tags": [
+      "prototypes",
+      "inheritance",
+      "methods"
+    ],
+    "created_at": 1733046502000
+  },
+  {
+    "id": "q4_prototypes_chain",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Prototype Chain Lookup",
+    "question": "What is the output?",
+    "code": "const obj = {};\nconsole.log(obj.toString);\nconsole.log(obj.hasOwnProperty('toString'));",
+    "options": [
+      "function, true",
+      "function, false",
+      "undefined, false",
+      "null, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "toString is inherited from Object.prototype, not an own property of obj. JavaScript looks up the prototype chain to find it.",
+    "tags": [
+      "prototypes",
+      "chain",
+      "lookup"
+    ],
+    "created_at": 1733046503000
+  },
+  {
+    "id": "q5_prototypes_object_create",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.create",
+    "question": "What will be logged?",
+    "code": "const proto = { x: 10 };\nconst obj = Object.create(proto);\nobj.y = 20;\nconsole.log(obj.x);\nconsole.log(obj.hasOwnProperty('x'));",
+    "options": [
+      "10, true",
+      "10, false",
+      "undefined, false",
+      "20, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create() creates an object with the specified prototype. obj.x is 10 (from proto), but x is not an own property of obj.",
+    "tags": [
+      "prototypes",
+      "object.create"
+    ],
+    "created_at": 1733046504000
+  },
+  {
+    "id": "q6_prototypes_shadowing",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Property Shadowing",
+    "question": "What is the result?",
+    "code": "function Parent() {}\nParent.prototype.value = 1;\n\nfunction Child() {}\nChild.prototype = Object.create(Parent.prototype);\nChild.prototype.value = 2;\n\nconst child = new Child();\nconsole.log(child.value);\nconsole.log(Parent.prototype.value);",
+    "options": [
+      "2, 1",
+      "1, 1",
+      "2, 2",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Setting Child.prototype.value shadows the parent's value. child.value is 2 (from Child.prototype), but Parent.prototype.value remains 1.",
+    "tags": [
+      "prototypes",
+      "shadowing",
+      "inheritance"
+    ],
+    "created_at": 1733046505000
+  },
+  {
+    "id": "q7_prototypes_class",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "ES6 Classes and Prototypes",
+    "question": "What will be logged?",
+    "code": "class Animal {\n  speak() {\n    return 'sound';\n  }\n}\n\nconst dog = new Animal();\nconsole.log(dog.speak());\nconsole.log(Animal.prototype.speak === dog.speak);",
+    "options": [
+      "sound, true",
+      "sound, false",
+      "undefined, false",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES6 classes are syntactic sugar over prototypes. Methods are added to the prototype, and instances share the same method reference.",
+    "tags": [
+      "prototypes",
+      "class",
+      "es6"
+    ],
+    "created_at": 1733046506000
+  },
+  {
+    "id": "q8_prototypes_instanceof",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Instanceof Operator",
+    "question": "What is the output?",
+    "code": "function Person() {}\nconst person = new Person();\nconsole.log(person instanceof Person);\nconsole.log(person instanceof Object);",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "instanceof checks the prototype chain. person is an instance of Person (direct) and Object (via prototype chain).",
+    "tags": [
+      "prototypes",
+      "instanceof"
+    ],
+    "created_at": 1733046507000
+  },
+  {
+    "id": "q9_prototypes_proto",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "__proto__ Property",
+    "question": "What will be logged?",
+    "code": "const obj = {};\nconst proto = { x: 10 };\nobj.__proto__ = proto;\nconsole.log(obj.x);\nconsole.log(Object.getPrototypeOf(obj) === proto);",
+    "options": [
+      "10, true",
+      "10, false",
+      "undefined, true",
+      "undefined, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "__proto__ is a deprecated way to access/set the prototype. Object.getPrototypeOf() is the standard way. Both work, but __proto__ is non-standard.",
+    "tags": [
+      "prototypes",
+      "__proto__",
+      "getprototypeof"
+    ],
+    "created_at": 1733046508000
+  },
+  {
+    "id": "q10_prototypes_method_override",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Method Override",
+    "question": "What is the output?",
+    "code": "Array.prototype.sum = function() {\n  return this.reduce((a, b) => a + b, 0);\n};\n\nconst arr = [1, 2, 3];\nconsole.log(arr.sum());",
+    "options": [
+      "6",
+      "0",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "You can add methods to built-in prototypes. This adds sum() to all arrays. However, modifying built-in prototypes is generally not recommended.",
+    "tags": [
+      "prototypes",
+      "built-in",
+      "override"
+    ],
+    "created_at": 1733046509000
+  },
+  {
+    "id": "q11_prototypes_hasownproperty",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "hasOwnProperty vs in",
+    "question": "What will be logged?",
+    "code": "function Person(name) {\n  this.name = name;\n}\nPerson.prototype.speak = function() {};\n\nconst person = new Person('JS');\nconsole.log('name' in person);\nconsole.log('speak' in person);\nconsole.log(person.hasOwnProperty('speak'));",
+    "options": [
+      "true, true, true",
+      "true, true, false",
+      "true, false, false",
+      "false, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The 'in' operator checks the entire prototype chain. hasOwnProperty() only checks own properties. speak is inherited, not own.",
+    "tags": [
+      "prototypes",
+      "hasownproperty",
+      "in-operator"
+    ],
+    "created_at": 1733046510000
+  },
+  {
+    "id": "q12_prototypes_constructor_chain",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Constructor Chain",
+    "question": "What is the result?",
+    "code": "function Parent() {}\nfunction Child() {}\nChild.prototype = Object.create(Parent.prototype);\n\nconst child = new Child();\nconsole.log(child.constructor === Child);\nconsole.log(child.constructor === Parent);",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When you replace the prototype with Object.create(), you need to set Child.prototype.constructor = Child. Otherwise, constructor points to Parent.",
+    "tags": [
+      "prototypes",
+      "constructor",
+      "chain"
+    ],
+    "created_at": 1733046511000
+  },
+  {
+    "id": "q13_prototypes_null_prototype",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Null Prototype Object",
+    "question": "What will be logged?",
+    "code": "const obj = Object.create(null);\nobj.name = 'test';\n\nconsole.log(obj.toString);\nconsole.log('name' in obj);\nconsole.log(obj.hasOwnProperty);",
+    "options": [
+      "function, true, function",
+      "undefined, true, undefined",
+      "undefined, false, undefined",
+      "Error: Cannot read property"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) creates an object with no prototype. It has no inherited methods like toString or hasOwnProperty. 'name' in obj works because it's an own property.",
+    "tags": [
+      "prototypes",
+      "null-prototype",
+      "object.create"
+    ],
+    "created_at": 1733046512000
+  },
+  {
+    "id": "q14_prototypes_symbol_iterator",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Custom Iterator via Prototype",
+    "question": "What is the output?",
+    "code": "function Range(start, end) {\n  this.start = start;\n  this.end = end;\n}\n\nRange.prototype[Symbol.iterator] = function* () {\n  for (let i = this.start; i <= this.end; i++) yield i;\n};\n\nconst range = new Range(1, 3);\nconsole.log([...range]);",
+    "options": [
+      "[1, 2, 3]",
+      "[]",
+      "Error: range is not iterable",
+      "[Range]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Adding Symbol.iterator to the prototype makes all instances iterable. The spread operator uses the iterator to produce [1, 2, 3].",
+    "tags": [
+      "prototypes",
+      "symbol",
+      "iterator"
+    ],
+    "created_at": 1733046513000
+  },
+  {
+    "id": "q15_prototypes_species",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol.species",
+    "question": "What is logged?",
+    "code": "class MyArray extends Array {\n  static get [Symbol.species]() {\n    return Array;\n  }\n}\n\nconst arr = new MyArray(1, 2, 3);\nconst mapped = arr.map(x => x * 2);\n\nconsole.log(mapped instanceof MyArray);\nconsole.log(mapped instanceof Array);",
+    "options": [
+      "true, true",
+      "false, true",
+      "true, false",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Symbol.species controls the constructor used for derived objects. By returning Array, map() returns a regular Array, not MyArray.",
+    "tags": [
+      "prototypes",
+      "symbol.species",
+      "subclass"
+    ],
+    "created_at": 1733046514000
+  },
+  {
+    "id": "q16_prototypes_reflect_getprototypeof",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Reflect.getPrototypeOf",
+    "question": "What will be logged?",
+    "code": "const proto = { x: 10 };\nconst obj = Object.create(proto);\n\nconsole.log(Reflect.getPrototypeOf(obj) === proto);\nconsole.log(Reflect.getPrototypeOf(proto) === Object.prototype);\nconsole.log(Reflect.getPrototypeOf(Object.prototype));",
+    "options": [
+      "true, true, null",
+      "true, true, Object",
+      "true, false, null",
+      "false, true, null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Reflect.getPrototypeOf returns the prototype. Object.prototype is at the top of the chain, and its prototype is null.",
+    "tags": [
+      "prototypes",
+      "reflect",
+      "chain"
+    ],
+    "created_at": 1733046515000
+  },
+  {
+    "id": "q17_prototypes_frozen_prototype",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Frozen Object Prototype",
+    "question": "What happens?",
+    "code": "const proto = Object.freeze({ x: 10 });\nconst obj = Object.create(proto);\n\ntry {\n  obj.x = 20;\n  console.log(obj.x);\n} catch (e) {\n  console.log('Error');\n}",
+    "options": [
+      "20",
+      "10",
+      "Error",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In non-strict mode, assigning to obj.x silently fails (proto.x is frozen). obj.x returns 10 from the prototype. In strict mode, this throws.",
+    "tags": [
+      "prototypes",
+      "freeze",
+      "assignment"
+    ],
+    "created_at": 1733046516000
+  },
+  {
+    "id": "q18_prototypes_setprototypeof_performance",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "multiple-choice",
+    "title": "Dynamic Prototype Change",
+    "question": "Why is Object.setPrototypeOf() considered bad practice?",
+    "code": "Object.setPrototypeOf(obj, newProto);",
+    "options": [
+      "It doesn't work in all browsers",
+      "It deoptimizes the object's property access performance",
+      "It throws an error in strict mode",
+      "It can only be called once per object"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Changing an object's prototype after creation deoptimizes the object. JS engines use hidden classes for fast property access, which are invalidated by prototype changes.",
+    "tags": [
+      "prototypes",
+      "performance",
+      "setprototypeof"
+    ],
+    "created_at": 1733046517000
+  },
+  {
+    "id": "q19_prototypes_getownpropertynames",
+    "category": "prototypes",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Own vs Inherited Properties",
+    "question": "What will be logged?",
+    "code": "function Parent() { this.a = 1; }\nParent.prototype.b = 2;\n\nconst child = new Parent();\nchild.c = 3;\n\nconsole.log(Object.keys(child));\nconsole.log(Object.getOwnPropertyNames(child));",
+    "options": [
+      "['a', 'b', 'c'], ['a', 'b', 'c']",
+      "['a', 'c'], ['a', 'c']",
+      "['a', 'c', 'b'], ['a', 'c']",
+      "['c'], ['a', 'c']"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.keys and getOwnPropertyNames only return own properties. 'b' is on the prototype, not on child itself. Both return ['a', 'c'].",
+    "tags": [
+      "prototypes",
+      "object.keys",
+      "own-properties"
+    ],
+    "created_at": 1733046518000
+  },
+  {
+    "id": "q20_prototypes_class_static",
+    "category": "prototypes",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Static Methods Inheritance",
+    "question": "What is the output?",
+    "code": "class Animal {\n  static create() {\n    return new this();\n  }\n}\n\nclass Dog extends Animal {\n  bark() { return 'Woof!'; }\n}\n\nconst dog = Dog.create();\nconsole.log(dog instanceof Dog);\nconsole.log(dog.bark());",
+    "options": [
+      "true, 'Woof!'",
+      "false, TypeError",
+      "true, undefined",
+      "false, 'Woof!'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Static methods are inherited. When Dog.create() is called, 'this' refers to Dog class. 'new this()' creates a Dog instance, which has the bark method.",
+    "tags": [
+      "prototypes",
+      "static",
+      "inheritance",
+      "class"
+    ],
+    "created_at": 1733046519000
+  },
+  {
+    "id": "q1_scope_global",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Global Scope",
+    "question": "What will be logged?",
+    "code": "var x = 10;\n\nfunction test() {\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Variables declared with var in the global scope are accessible from any function. x is found in the global scope.",
+    "tags": [
+      "scope",
+      "global",
+      "var"
+    ],
+    "created_at": 1733048000000
+  },
+  {
+    "id": "q2_scope_function",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Function Scope",
+    "question": "What is the output?",
+    "code": "function test() {\n  var x = 5;\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "5",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "var is function-scoped. x is only accessible inside test(). Accessing it outside throws ReferenceError.",
+    "tags": [
+      "scope",
+      "function",
+      "var"
+    ],
+    "created_at": 1733048001000
+  },
+  {
+    "id": "q3_scope_block_let",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Block Scope with let",
+    "question": "What happens?",
+    "code": "if (true) {\n  let x = 10;\n}\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "let is block-scoped. x only exists inside the if block and is not accessible outside.",
+    "tags": [
+      "scope",
+      "block",
+      "let"
+    ],
+    "created_at": 1733048002000
+  },
+  {
+    "id": "q4_scope_block_var",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "var in Block",
+    "question": "What will be logged?",
+    "code": "if (true) {\n  var x = 10;\n}\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "var is not block-scoped. It's hoisted to the function or global scope, so x is accessible outside the if block.",
+    "tags": [
+      "scope",
+      "block",
+      "var"
+    ],
+    "created_at": 1733048003000
+  },
+  {
+    "id": "q5_scope_shadowing",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Variable Shadowing",
+    "question": "What is the output?",
+    "code": "let x = 'outer';\n\nfunction test() {\n  let x = 'inner';\n  console.log(x);\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "'inner', 'inner'",
+      "'outer', 'outer'",
+      "'inner', 'outer'",
+      "'outer', 'inner'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "The inner x shadows the outer x within test(). Each scope has its own x. After test(), outer x is unchanged.",
+    "tags": [
+      "scope",
+      "shadowing",
+      "let"
+    ],
+    "created_at": 1733048004000
+  },
+  {
+    "id": "q6_scope_nested",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Nested Scopes",
+    "question": "What will be logged?",
+    "code": "function outer() {\n  let a = 1;\n  \n  function middle() {\n    let b = 2;\n    \n    function inner() {\n      let c = 3;\n      console.log(a + b + c);\n    }\n    inner();\n  }\n  middle();\n}\n\nouter();",
+    "options": [
+      "6",
+      "3",
+      "ReferenceError",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Inner functions have access to variables in all outer scopes. inner() can access a, b, and c: 1 + 2 + 3 = 6.",
+    "tags": [
+      "scope",
+      "nested",
+      "scope-chain"
+    ],
+    "created_at": 1733048005000
+  },
+  {
+    "id": "q7_scope_global_implicit",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Implicit Global",
+    "question": "In non-strict mode, what is logged?",
+    "code": "function test() {\n  x = 10;\n}\n\ntest();\nconsole.log(x);",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In non-strict mode, assigning to an undeclared variable creates an implicit global. x becomes a global variable.",
+    "tags": [
+      "scope",
+      "implicit-global",
+      "non-strict"
+    ],
+    "created_at": 1733048006000
+  },
+  {
+    "id": "q8_scope_strict_mode",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Strict Mode Scope",
+    "question": "What happens in strict mode?",
+    "code": "'use strict';\n\nfunction test() {\n  x = 10;\n}\n\ntest();",
+    "options": [
+      "Creates global x",
+      "ReferenceError",
+      "undefined",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Strict mode prevents implicit globals. Assigning to an undeclared variable throws ReferenceError.",
+    "tags": [
+      "scope",
+      "strict-mode"
+    ],
+    "created_at": 1733048007000
+  },
+  {
+    "id": "q9_scope_module",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Module Scope",
+    "question": "What is the scope of top-level variables in ES modules?",
+    "code": "// module.js\nlet x = 10;\nvar y = 20;",
+    "options": [
+      "Both are global (window)",
+      "Both are module-scoped",
+      "let is module-scoped, var is global",
+      "Both throw errors in modules"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In ES modules, top-level variables (both let and var) are module-scoped, not global. They don't attach to window.",
+    "tags": [
+      "scope",
+      "module",
+      "esm"
+    ],
+    "created_at": 1733048008000
+  },
+  {
+    "id": "q10_scope_loop_closure",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Loop Scope with let",
+    "question": "What is logged after 100ms?",
+    "code": "for (let i = 0; i < 3; i++) {\n  setTimeout(() => console.log(i), 100);\n}",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "0, 0, 0",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let creates a new binding for each iteration. Each setTimeout callback captures its own i value: 0, 1, 2.",
+    "tags": [
+      "scope",
+      "loop",
+      "let",
+      "closure"
+    ],
+    "created_at": 1733048009000
+  },
+  {
+    "id": "q11_scope_lexical",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Lexical Scope",
+    "question": "What will be logged?",
+    "code": "let x = 'global';\n\nfunction outer() {\n  let x = 'outer';\n  return function inner() {\n    console.log(x);\n  };\n}\n\nconst fn = outer();\nlet x = 'changed';\nfn();",
+    "options": [
+      "'global'",
+      "'outer'",
+      "'changed'",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "JavaScript uses lexical (static) scoping. inner() looks up x in its definition scope (outer), not where it's called.",
+    "tags": [
+      "scope",
+      "lexical",
+      "closure"
+    ],
+    "created_at": 1733048010000
+  },
+  {
+    "id": "q12_scope_eval",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "eval and Scope",
+    "question": "What is the output?",
+    "code": "function test() {\n  eval('var x = 10');\n  console.log(x);\n}\n\ntest();",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "SyntaxError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Direct eval() can modify the local scope. var x = 10 is created in test()'s scope, so x is accessible.",
+    "tags": [
+      "scope",
+      "eval",
+      "dynamic"
+    ],
+    "created_at": 1733048011000
+  },
+  {
+    "id": "q13_scope_with",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "with Statement Scope",
+    "question": "In non-strict mode, what is logged?",
+    "code": "const obj = { a: 1, b: 2 };\nlet a = 10;\n\nwith (obj) {\n  console.log(a);\n  console.log(b);\n}",
+    "options": [
+      "10, 2",
+      "1, 2",
+      "10, ReferenceError",
+      "1, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "with adds obj to the scope chain. a and b are found on obj first (1, 2), shadowing the outer a.",
+    "tags": [
+      "scope",
+      "with",
+      "legacy"
+    ],
+    "created_at": 1733048012000
+  },
+  {
+    "id": "q14_scope_catch_param",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Catch Block Scope",
+    "question": "What happens?",
+    "code": "try {\n  throw new Error('test');\n} catch (error) {\n  let x = 'caught';\n}\n\nconsole.log(typeof error);\nconsole.log(typeof x);",
+    "options": [
+      "'object', 'string'",
+      "'undefined', 'undefined'",
+      "'undefined', 'string'",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Both catch parameter (error) and let x are block-scoped to the catch block. Neither is accessible outside.",
+    "tags": [
+      "scope",
+      "catch",
+      "block"
+    ],
+    "created_at": 1733048013000
+  },
+  {
+    "id": "q15_scope_switch",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Switch Block Scope",
+    "question": "What is the result?",
+    "code": "switch (1) {\n  case 1:\n    let x = 'one';\n    break;\n  case 2:\n    let x = 'two';\n    break;\n}\n\nconsole.log('done');",
+    "options": [
+      "'done'",
+      "SyntaxError: x already declared",
+      "'one'",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The entire switch statement is one block. Declaring let x in multiple cases causes redeclaration error. Use {} for each case to create separate blocks.",
+    "tags": [
+      "scope",
+      "switch",
+      "let"
+    ],
+    "created_at": 1733048014000
+  },
+  {
+    "id": "q16_scope_iife",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "IIFE Scope Isolation",
+    "question": "What will be logged?",
+    "code": "var x = 'outer';\n\n(function() {\n  var x = 'inner';\n  console.log(x);\n})();\n\nconsole.log(x);",
+    "options": [
+      "'inner', 'inner'",
+      "'outer', 'outer'",
+      "'inner', 'outer'",
+      "'outer', 'inner'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "IIFE creates its own function scope. Inner x shadows outer x within IIFE. Outer x remains unchanged.",
+    "tags": [
+      "scope",
+      "iife",
+      "isolation"
+    ],
+    "created_at": 1733048015000
+  },
+  {
+    "id": "q17_scope_const_object",
+    "category": "scope",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "const with Objects",
+    "question": "What is the output?",
+    "code": "const obj = { x: 1 };\nobj.x = 2;\nconsole.log(obj.x);",
+    "options": [
+      "1",
+      "2",
+      "TypeError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "const prevents reassignment of the variable, not mutation of the object. obj.x can be modified; only obj = something would fail.",
+    "tags": [
+      "scope",
+      "const",
+      "mutation"
+    ],
+    "created_at": 1733048016000
+  },
+  {
+    "id": "q18_scope_arrow_no_binding",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Arrow Function arguments",
+    "question": "What is logged?",
+    "code": "function outer() {\n  const inner = () => {\n    console.log(arguments[0]);\n  };\n  inner('inner');\n}\n\nouter('outer');",
+    "options": [
+      "'inner'",
+      "'outer'",
+      "ReferenceError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't have their own arguments. They inherit it from the enclosing function scope. arguments[0] is 'outer'.",
+    "tags": [
+      "scope",
+      "arrow-function",
+      "arguments"
+    ],
+    "created_at": 1733048017000
+  },
+  {
+    "id": "q19_scope_for_in",
+    "category": "scope",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "for-in Scope",
+    "question": "What is logged?",
+    "code": "const obj = { a: 1, b: 2 };\n\nfor (let key in obj) {\n  // loop\n}\n\nconsole.log(typeof key);",
+    "options": [
+      "'string'",
+      "'undefined'",
+      "ReferenceError",
+      "'object'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "let key is block-scoped to the for-in loop. Outside the loop, key is not accessible, so typeof returns 'undefined'.",
+    "tags": [
+      "scope",
+      "for-in",
+      "let"
+    ],
+    "created_at": 1733048018000
+  },
+  {
+    "id": "q20_scope_temporal",
+    "category": "scope",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Function in TDZ",
+    "question": "What happens?",
+    "code": "function test() {\n  function inner() {\n    return x;\n  }\n  console.log(inner());\n  let x = 10;\n}\n\ntest();",
+    "options": [
+      "undefined",
+      "10",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Even though inner() is called after x is in scope, x is still in TDZ when inner() tries to access it. ReferenceError is thrown.",
+    "tags": [
+      "scope",
+      "tdz",
+      "function"
+    ],
+    "created_at": 1733048019000
+  },
+  {
+    "id": "q1_this_basic",
+    "category": "this",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Basic This Binding",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconsole.log(obj.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a function is called as a method (obj.method()), this refers to the object that owns the method.",
+    "tags": [
+      "this",
+      "method",
+      "binding"
+    ],
+    "created_at": 1733046300000
+  },
+  {
+    "id": "q2_this_lost",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Lost This Context",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconst getName = obj.getName;\nconsole.log(getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Window object name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When you extract a method and call it as a standalone function, this loses its binding. In strict mode, this is undefined. In non-strict mode, it's the global object.",
+    "tags": [
+      "this",
+      "context",
+      "lost"
+    ],
+    "created_at": 1733046301000
+  },
+  {
+    "id": "q3_this_arrow",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Functions and This",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: () => {\n    return this.name;\n  }\n};\n\nconsole.log(obj.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Window object name"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't have their own this. They inherit this from the enclosing lexical scope, which in this case is the global scope.",
+    "tags": [
+      "this",
+      "arrow-functions"
+    ],
+    "created_at": 1733046302000
+  },
+  {
+    "id": "q4_this_bind",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Using Bind",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    return this.name;\n  }\n};\n\nconst getName = obj.getName.bind(obj);\nconsole.log(getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "bind() creates a new function with this permanently bound to the specified object. Even when called standalone, this remains bound.",
+    "tags": [
+      "this",
+      "bind"
+    ],
+    "created_at": 1733046303000
+  },
+  {
+    "id": "q5_this_call_apply",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Call and Apply",
+    "question": "What is the output?",
+    "code": "function greet(greeting) {\n  return greeting + ' ' + this.name;\n}\n\nconst obj = { name: 'JS' };\nconsole.log(greet.call(obj, 'Hello'));",
+    "options": [
+      "Hello JS",
+      "Hello undefined",
+      "ReferenceError",
+      "undefined JS"
+    ],
+    "correctAnswer": 0,
+    "explanation": "call() and apply() allow you to explicitly set this when calling a function. call() takes arguments individually, apply() takes an array.",
+    "tags": [
+      "this",
+      "call",
+      "apply"
+    ],
+    "created_at": 1733046304000
+  },
+  {
+    "id": "q6_this_constructor",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Constructor",
+    "question": "What will be logged?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = new Person('JS');\nconsole.log(person.name);",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a function is called with new, this refers to the newly created instance. The constructor sets properties on this instance.",
+    "tags": [
+      "this",
+      "constructor",
+      "new"
+    ],
+    "created_at": 1733046305000
+  },
+  {
+    "id": "q7_this_nested",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Functions",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'JS',\n  outer: function() {\n    console.log(this.name);\n    function inner() {\n      console.log(this.name);\n    }\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "JS, JS",
+      "JS, undefined",
+      "undefined, undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "inner() is called as a standalone function, so this is undefined (strict mode) or the global object. Only outer() has this bound to obj.",
+    "tags": [
+      "this",
+      "nested",
+      "function"
+    ],
+    "created_at": 1733046306000
+  },
+  {
+    "id": "q8_this_arrow_nested",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Arrow Function in Method",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  outer: function() {\n    console.log(this.name);\n    const inner = () => {\n      console.log(this.name);\n    };\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "JS, JS",
+      "JS, undefined",
+      "undefined, undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions inherit this from the enclosing scope. Since outer() has this bound to obj, inner() also has this bound to obj.",
+    "tags": [
+      "this",
+      "arrow-functions",
+      "nested"
+    ],
+    "created_at": 1733046307000
+  },
+  {
+    "id": "q9_this_class",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Class Methods",
+    "question": "What is the output?",
+    "code": "class Person {\n  constructor(name) {\n    this.name = name;\n  }\n  getName() {\n    return this.name;\n  }\n}\n\nconst person = new Person('JS');\nconsole.log(person.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a method is called on an instance (person.getName()), this refers to that instance. Note: class methods are NOT automatically bound - extracting them loses the context.",
+    "tags": [
+      "this",
+      "class",
+      "methods"
+    ],
+    "created_at": 1733046308000
+  },
+  {
+    "id": "q10_this_strict",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Strict Mode and This",
+    "question": "What happens in strict mode?",
+    "code": "'use strict';\n\nfunction test() {\n  return this;\n}\n\nconsole.log(test());",
+    "options": [
+      "Returns the global object",
+      "Returns undefined",
+      "Returns null",
+      "Throws ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "In strict mode, when a function is called without a context, this is undefined instead of the global object. This prevents accidental global variable creation.",
+    "tags": [
+      "this",
+      "strict-mode"
+    ],
+    "created_at": 1733046309000
+  },
+  {
+    "id": "q11_this_settimeout",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in setTimeout",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'JS',\n  getName: function() {\n    setTimeout(function() {\n      console.log(this.name);\n    }, 0);\n  }\n};\n\nobj.getName();",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Nothing"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The callback function passed to setTimeout loses its this context. It's called as a standalone function, so this is undefined or the global object.",
+    "tags": [
+      "this",
+      "settimeout",
+      "callback"
+    ],
+    "created_at": 1733046310000
+  },
+  {
+    "id": "q12_this_prototype",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Prototype Methods",
+    "question": "What is the output?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nPerson.prototype.getName = function() {\n  return this.name;\n};\n\nconst person = new Person('JS');\nconsole.log(person.getName());",
+    "options": [
+      "JS",
+      "undefined",
+      "ReferenceError",
+      "Person"
+    ],
+    "correctAnswer": 0,
+    "explanation": "When a method is called on an instance, this refers to that instance, regardless of whether the method is defined on the instance or the prototype.",
+    "tags": [
+      "this",
+      "prototype",
+      "inheritance"
+    ],
+    "created_at": 1733046311000
+  },
+  {
+    "id": "q13_this_class_field_arrow",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Class Field Arrow Functions",
+    "question": "What will be logged?",
+    "code": "class Button {\n  text = 'Click me';\n  handleClick = () => {\n    console.log(this.text);\n  };\n}\n\nconst btn = new Button();\nconst handler = btn.handleClick;\nhandler();",
+    "options": [
+      "Click me",
+      "undefined",
+      "ReferenceError",
+      "null"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Arrow functions in class fields are bound to the instance at creation time. Even when extracted, handler() retains 'this' bound to btn.",
+    "tags": [
+      "this",
+      "class-fields",
+      "arrow-functions"
+    ],
+    "created_at": 1733046312000
+  },
+  {
+    "id": "q14_this_new_target",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "new.target Meta-property",
+    "question": "What is the output?",
+    "code": "function Base() {\n  console.log(new.target?.name);\n}\n\nfunction Derived() {\n  Base.call(this);\n}\n\nnew Base();\nnew Derived();\nBase();",
+    "options": [
+      "Base, Derived, undefined",
+      "Base, Base, undefined",
+      "Base, undefined, undefined",
+      "Base, Derived, Base"
+    ],
+    "correctAnswer": 2,
+    "explanation": "new.target is set when called with 'new'. Base.call(this) doesn't set new.target. Regular function call has new.target as undefined.",
+    "tags": [
+      "this",
+      "new.target",
+      "constructor"
+    ],
+    "created_at": 1733046313000
+  },
+  {
+    "id": "q15_this_symbol_unscopables",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Explicit Binding Precedence",
+    "question": "What will be logged?",
+    "code": "function greet() {\n  console.log(this.name);\n}\n\nconst obj = { name: 'obj' };\nconst bound = greet.bind({ name: 'bound' });\n\nbound.call(obj);\nbound.apply(obj);\nnew bound();",
+    "options": [
+      "obj, obj, undefined",
+      "bound, bound, undefined",
+      "bound, obj, undefined",
+      "obj, obj, bound"
+    ],
+    "correctAnswer": 1,
+    "explanation": "bind() creates a function with permanently bound this. call() and apply() cannot override it. 'new' creates a new object, ignoring the bound this.",
+    "tags": [
+      "this",
+      "bind",
+      "call",
+      "apply",
+      "new"
+    ],
+    "created_at": 1733046314000
+  },
+  {
+    "id": "q16_this_proxy_handler",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Proxy Handler",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'original',\n  getName() {\n    return this.name;\n  }\n};\n\nconst proxy = new Proxy(obj, {\n  get(target, prop, receiver) {\n    if (prop === 'name') return 'proxied';\n    return Reflect.get(target, prop, receiver);\n  }\n});\n\nconsole.log(proxy.getName());",
+    "options": [
+      "original",
+      "proxied",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "When getName() is called on the proxy, 'this' is the proxy. The proxy intercepts this.name and returns 'proxied'.",
+    "tags": [
+      "this",
+      "proxy",
+      "reflect"
+    ],
+    "created_at": 1733046315000
+  },
+  {
+    "id": "q17_this_dom_events",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "This in Event Handlers",
+    "question": "In a browser, what does 'this' refer to?",
+    "code": "button.addEventListener('click', function() {\n  console.log(this === button);\n});\n\nbutton.addEventListener('click', () => {\n  console.log(this === window);\n});",
+    "options": [
+      "true, true",
+      "true, false",
+      "false, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "In regular function handlers, 'this' is the element. Arrow functions inherit 'this' from enclosing scope (global/window in browsers at top level).",
+    "tags": [
+      "this",
+      "dom",
+      "event-handlers"
+    ],
+    "created_at": 1733046316000
+  },
+  {
+    "id": "q18_this_getter_setter",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "This in Getters/Setters",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  _value: 10,\n  get value() {\n    return this._value;\n  },\n  set value(v) {\n    this._value = v;\n  }\n};\n\nconst { value } = obj;\nconst getter = Object.getOwnPropertyDescriptor(obj, 'value').get;\n\nconsole.log(value);\nconsole.log(getter());",
+    "options": [
+      "10, 10",
+      "10, undefined",
+      "undefined, 10",
+      "undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring { value } calls the getter with 'this' as obj, returning 10. Extracted getter() called standalone has no 'this', so _value is undefined.",
+    "tags": [
+      "this",
+      "getter",
+      "setter",
+      "destructuring"
+    ],
+    "created_at": 1733046317000
+  },
+  {
+    "id": "q19_this_foreach_context",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "forEach with thisArg",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  multiplier: 2,\n  multiply(arr) {\n    return arr.map(function(x) {\n      return x * this.multiplier;\n    }, this);\n  }\n};\n\nconsole.log(obj.multiply([1, 2, 3]));",
+    "options": [
+      "[2, 4, 6]",
+      "[NaN, NaN, NaN]",
+      "[undefined, undefined, undefined]",
+      "TypeError"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array methods like map accept a second argument (thisArg) to set 'this' for the callback. Passing 'this' binds the callback to obj.",
+    "tags": [
+      "this",
+      "array-methods",
+      "thisarg"
+    ],
+    "created_at": 1733046318000
+  },
+  {
+    "id": "q20_this_method_chaining",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Method Chaining with This",
+    "question": "What is the output?",
+    "code": "const calculator = {\n  value: 0,\n  add(n) { this.value += n; return this; },\n  multiply(n) { this.value *= n; return this; },\n  getValue() { return this.value; }\n};\n\nconsole.log(\n  calculator.add(5).multiply(2).add(3).getValue()\n);",
+    "options": [
+      "13",
+      "16",
+      "10",
+      "NaN"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each method returns 'this', enabling chaining. Operations: 0+5=5, 5*2=10, 10+3=13. This pattern is common in fluent APIs.",
+    "tags": [
+      "this",
+      "chaining",
+      "fluent-api"
+    ],
+    "created_at": 1733046319000
+  }
+]
