@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import type { Question, Category } from './types';
+import type { Question, Category, Difficulty } from './types';
 import { useStorage } from './useStorage';
 import { DATA_VERSION } from './constants';
 import { logger } from './utils';
@@ -97,6 +97,10 @@ export function useQuestions() {
     return questions.filter(q => q.category === category);
   }, [questions]);
 
+  const getQuestionsByDifficulty = useCallback((difficulty: Difficulty): Question[] => {
+    return questions.filter(q => q.difficulty === difficulty);
+  }, [questions]);
+
   useEffect(() => {
     loadQuestions();
   }, [loadQuestions]);
@@ -109,6 +113,7 @@ export function useQuestions() {
     loadQuestions,
     refreshQuestions,
     getQuestionsByCategory,
+    getQuestionsByDifficulty,
   };
 }
 

@@ -5,19 +5,21 @@ import { Navigation } from '@/components/Navigation';
 import { StatsDashboard } from '@/components/StatsDashboard';
 import { useStorage } from '@/lib/useStorage';
 import Link from 'next/link';
-import type { UserStats } from '@/lib/types';
+import type { UserStats, QuizSession } from '@/lib/types';
 
 export default function StatsPage() {
-  const { getStats } = useStorage();
+  const { getStats, getAllSessions } = useStorage();
   
   // Defer localStorage access until after hydration to prevent mismatch
   const [stats, setStats] = useState<UserStats | null>(null);
+  const [sessions, setSessions] = useState<QuizSession[]>([]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
     setStats(getStats());
-  }, [getStats]);
+    setSessions(getAllSessions());
+  }, [getStats, getAllSessions]);
 
   return (
     <div className="min-h-screen">
@@ -40,7 +42,7 @@ export default function StatsPage() {
             <p className="text-[var(--text-secondary)]">Loading statistics...</p>
           </div>
         ) : stats && stats.totalQuizzes > 0 ? (
-          <StatsDashboard stats={stats} />
+          <StatsDashboard stats={stats} sessions={sessions} />
         ) : (
           <div className="glass-card p-12 text-center animate-fadeIn">
             <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">

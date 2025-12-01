@@ -31,7 +31,18 @@ export const useQuizStore = create<QuizState>((set, get) => ({
   isActive: false,
 
   startQuiz: (questions: Question[], category: string) => {
-    const selectedQuestions = questions.slice(0, QUESTIONS_PER_QUIZ);
+    // Validate input
+    if (!questions || questions.length === 0) {
+      console.warn('startQuiz called with empty questions array');
+      return;
+    }
+
+    // For comprehensive quiz, use all questions (up to 20, already limited by ComprehensiveQuizClient)
+    // For category quizzes, limit to QUESTIONS_PER_QUIZ (10)
+    const maxQuestions = category === 'comprehensive' 
+      ? questions.length 
+      : Math.min(QUESTIONS_PER_QUIZ, questions.length);
+    const selectedQuestions = questions.slice(0, maxQuestions);
     const session: QuizSession = {
       id: generateId(),
       date: Date.now(),

@@ -30,15 +30,30 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     previousQuestion,
     updateTimer,
     endQuiz,
+    reset,
   } = useQuizStore();
 
   const [showFeedback, setShowFeedback] = useState(false);
 
   useEffect(() => {
-    if (questions.length > 0 && !currentSession) {
-      startQuiz(questions, category);
+    if (questions.length > 0) {
+      // Check if we need to recreate the session
+      // Compare by category, question count, and first question ID (as questions are shuffled)
+      const needsNewSession = !currentSession 
+        || currentSession.category !== category 
+        || currentSession.questions.length !== questions.length
+        || (questions.length > 0 && currentSession.questions.length > 0 && questions[0].id !== currentSession.questions[0]);
+      
+      if (needsNewSession) {
+        // Reset store state before starting new quiz
+        // startQuiz() will create a new session, but reset() ensures clean state
+        if (currentSession) {
+          reset();
+        }
+        startQuiz(questions, category);
+      }
     }
-  }, [questions, category, currentSession, startQuiz]);
+  }, [questions, category, currentSession, startQuiz, reset]);
 
   // Compute current question directly instead of storing in state
   const currentQuestion = currentSession && questions.length > 0

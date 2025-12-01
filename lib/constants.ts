@@ -37,6 +37,7 @@ export const CATEGORY_LABELS: Record<string, string> = {
   destructuring: 'Destructuring',
   arrays: 'Arrays',
   objects: 'Objects',
+  comprehensive: 'Comprehensive Quiz',
 };
 
 // Category descriptions mapping
@@ -52,6 +53,7 @@ export const CATEGORY_DESCRIPTIONS: Record<string, string> = {
   destructuring: 'Object and array destructuring, rest/spread patterns',
   arrays: 'Array methods, iteration, and common gotchas',
   objects: 'Object manipulation, property descriptors, and edge cases',
+  comprehensive: 'Mixed questions from all categories at selected difficulty level',
 };
 
 // Category icons (SVG paths) - used with viewBox="0 0 24 24"
@@ -123,6 +125,8 @@ export const CATEGORIES = DEFAULT_CATEGORIES;
 export const DATA_VERSION = '1.1.0';
 
 export const QUESTIONS_PER_QUIZ = 10;
+
+export const COMPREHENSIVE_QUIZ_QUESTIONS = 20;
 
 export const QUIZ_TIMER_DEFAULT = 600; // 10 minutes in seconds
 
