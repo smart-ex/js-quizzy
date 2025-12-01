@@ -377,6 +377,196 @@
     "explanation": "The 'calls' variable persists across all invocations. First fn(5) makes 5 calls (calls=5). Then fn(3) adds 3 more (calls=8).",
     "tags": ["closures", "recursion", "persistent-state"],
     "created_at": 1733046119000
+  },
+  {
+    "id": "q21_closures_settimeout_let",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "setTimeout with Different Scopes",
+    "question": "What will be logged?",
+    "code": "for (let i = 1; i <= 3; i++) {\n  const log = () => {\n    console.log(i);\n  };\n  setTimeout(log, i * 1000);\n}",
+    "options": [
+      "1, 2, 3 (at 1s, 2s, 3s)",
+      "4, 4, 4",
+      "3, 3, 3",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let creates a new binding per iteration. Each closure captures its own i value. Logs 1 at 1s, 2 at 2s, 3 at 3s.",
+    "tags": ["closures", "settimeout", "let"],
+    "created_at": 1733046120000
+  },
+  {
+    "id": "q22_closures_function_factory",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Factory",
+    "question": "What is the output?",
+    "code": "function createGreeter(greeting) {\n  return function(name) {\n    return `${greeting}, ${name}!`;\n  };\n}\n\nconst sayHello = createGreeter('Hello');\nconst sayHi = createGreeter('Hi');\n\nconsole.log(sayHello('Alice'));\nconsole.log(sayHi('Bob'));",
+    "options": [
+      "'Hello, Alice!', 'Hi, Bob!'",
+      "'Hi, Alice!', 'Hi, Bob!'",
+      "'Hello, Alice!', 'Hello, Bob!'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each createGreeter call creates a new closure with its own greeting. sayHello closes over 'Hello', sayHi closes over 'Hi'.",
+    "tags": ["closures", "factory", "scope"],
+    "created_at": 1733046121000
+  },
+  {
+    "id": "q23_closures_shared_state",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Shared Closure State",
+    "question": "What will be logged?",
+    "code": "function createFunctions() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    getCount: () => count\n  };\n}\n\nconst counter1 = createFunctions();\nconst counter2 = createFunctions();\n\ncounter1.increment();\ncounter1.increment();\ncounter2.decrement();\n\nconsole.log(counter1.getCount(), counter2.getCount());",
+    "options": [
+      "2, -1",
+      "1, 1",
+      "2, 2",
+      "1, -1"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each createFunctions() call creates a new closure with its own count. counter1 and counter2 have independent state.",
+    "tags": ["closures", "state", "independence"],
+    "created_at": 1733046122000
+  },
+  {
+    "id": "q24_closures_reassignment",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure Variable Reassignment",
+    "question": "What is the output?",
+    "code": "function outer() {\n  let x = 'original';\n  \n  function inner() {\n    console.log(x);\n  }\n  \n  x = 'changed';\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "'original'",
+      "'changed'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Closures capture variable references, not values. When inner() runs, x has already been changed to 'changed'.",
+    "tags": ["closures", "reference", "reassignment"],
+    "created_at": 1733046123000
+  },
+  {
+    "id": "q25_closures_array_functions",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Array of Closures",
+    "question": "What will be logged?",
+    "code": "const funcs = [];\n\nfor (var i = 0; i < 3; i++) {\n  funcs.push(() => i);\n}\n\nconsole.log(funcs[0]());\nconsole.log(funcs[1]());\nconsole.log(funcs[2]());",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "2, 2, 2",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var is function-scoped. All closures share the same i reference. When called, i is 3 (loop finished). All return 3.",
+    "tags": ["closures", "var", "loop"],
+    "created_at": 1733046124000
+  },
+  {
+    "id": "q26_closures_parameter_capture",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Parameter Closure",
+    "question": "What is the output?",
+    "code": "function multiply(x) {\n  return function(y) {\n    return function(z) {\n      return x * y * z;\n    };\n  };\n}\n\nconsole.log(multiply(2)(3)(4));",
+    "options": [
+      "24",
+      "9",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each function closes over its parameter. multiply(2) returns fn(y), multiply(2)(3) returns fn(z), finally 2*3*4=24.",
+    "tags": ["closures", "currying", "nested"],
+    "created_at": 1733046125000
+  },
+  {
+    "id": "q27_closures_immediate_invoke",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure in Event Handler",
+    "question": "What will be logged when button is clicked?",
+    "code": "function setup() {\n  let count = 0;\n  \n  document.getElementById('btn').onclick = function() {\n    count++;\n    console.log(count);\n  };\n}\n\nsetup();\n// User clicks button 3 times",
+    "options": [
+      "1, 1, 1",
+      "1, 2, 3",
+      "0, 0, 0",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The click handler closes over count. Each click increments the same count variable. Logs 1, 2, 3 for three clicks.",
+    "tags": ["closures", "event-handler", "persistence"],
+    "created_at": 1733046126000
+  },
+  {
+    "id": "q28_closures_block_scope",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Block Scope Closure",
+    "question": "What is the output?",
+    "code": "function test() {\n  if (true) {\n    let x = 'block';\n    var y = 'function';\n  }\n  \n  return () => {\n    console.log(y);\n  };\n}\n\ntest()();",
+    "options": [
+      "'block'",
+      "'function'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "let x is block-scoped (not accessible). var y is function-scoped and accessible. The closure captures y = 'function'.",
+    "tags": ["closures", "block-scope", "let-vs-var"],
+    "created_at": 1733046127000
+  },
+  {
+    "id": "q29_closures_debounce",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Debounce Implementation",
+    "question": "How many times will 'executed' be logged?",
+    "code": "function debounce(fn, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => fn(...args), delay);\n  };\n}\n\nconst log = debounce(() => console.log('executed'), 100);\n\nlog();\nlog();\nlog();\n// Wait 200ms",
+    "options": [
+      "3",
+      "1",
+      "0",
+      "2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Debounce uses closure to track timeoutId. Each call clears the previous timeout. Only the last call executes after 100ms. Result: 1.",
+    "tags": ["closures", "debounce", "timeout"],
+    "created_at": 1733046128000
+  },
+  {
+    "id": "q30_closures_once",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Once Function",
+    "question": "What will be logged?",
+    "code": "function once(fn) {\n  let called = false;\n  let result;\n  return function(...args) {\n    if (!called) {\n      called = true;\n      result = fn(...args);\n    }\n    return result;\n  };\n}\n\nconst addOnce = once((a, b) => a + b);\n\nconsole.log(addOnce(1, 2));\nconsole.log(addOnce(3, 4));\nconsole.log(addOnce(5, 6));",
+    "options": [
+      "3, 7, 11",
+      "3, 3, 3",
+      "3, undefined, undefined",
+      "3, null, null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The once closure tracks if fn was called. First call computes 1+2=3 and caches it. Subsequent calls return cached result (3).",
+    "tags": ["closures", "once", "memoization"],
+    "created_at": 1733046129000
   }
 ]
 

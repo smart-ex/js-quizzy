@@ -378,6 +378,196 @@
     "explanation": "Each method returns 'this', enabling chaining. Operations: 0+5=5, 5*2=10, 10+3=13. This pattern is common in fluent APIs.",
     "tags": ["this", "chaining", "fluent-api"],
     "created_at": 1733046319000
+  },
+  {
+    "id": "q21_this_arrow_email",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Function Method",
+    "question": "What will be logged?",
+    "code": "const user = {\n  email: 'my@email.com',\n  updateEmail: email => {\n    this.email = email;\n  }\n};\n\nuser.updateEmail('new@email.com');\nconsole.log(user.email);",
+    "options": [
+      "'new@email.com'",
+      "'my@email.com'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't bind their own this. this refers to the enclosing scope (global/undefined). user.email is unchanged.",
+    "tags": ["this", "arrow-function", "method"],
+    "created_at": 1733046320000
+  },
+  {
+    "id": "q22_this_function_constructor",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Constructor Without new",
+    "question": "What happens?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = Person('Alice');\nconsole.log(person);\nconsole.log(typeof window !== 'undefined' ? window.name : global.name);",
+    "options": [
+      "Person { name: 'Alice' }, undefined",
+      "undefined, 'Alice'",
+      "{ name: 'Alice' }, undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Without new, Person() returns undefined. this refers to global object, polluting it with name='Alice'.",
+    "tags": ["this", "constructor", "new"],
+    "created_at": 1733046321000
+  },
+  {
+    "id": "q23_this_bind_twice",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Double Bind",
+    "question": "What is the output?",
+    "code": "function greet() {\n  return this.name;\n}\n\nconst obj1 = { name: 'Alice' };\nconst obj2 = { name: 'Bob' };\n\nconst bound = greet.bind(obj1).bind(obj2);\nconsole.log(bound());",
+    "options": [
+      "'Bob'",
+      "'Alice'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "bind() can only bind once. The second bind() has no effect. The function remains bound to obj1 ('Alice').",
+    "tags": ["this", "bind", "immutable"],
+    "created_at": 1733046322000
+  },
+  {
+    "id": "q24_this_callback_array",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Array Method Callback",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  values: [1, 2, 3],\n  multiplier: 2,\n  getMultiplied() {\n    return this.values.map(function(val) {\n      return val * this.multiplier;\n    });\n  }\n};\n\nconsole.log(obj.getMultiplied());",
+    "options": [
+      "[2, 4, 6]",
+      "[NaN, NaN, NaN]",
+      "[undefined, undefined, undefined]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Regular function callback loses this context. this.multiplier is undefined. undefined * number = NaN for each element.",
+    "tags": ["this", "callback", "array-methods"],
+    "created_at": 1733046323000
+  },
+  {
+    "id": "q25_this_implicit_binding",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Implicit Binding Loss",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'Alice',\n  greet() {\n    return this.name;\n  }\n};\n\nconst greet = obj.greet;\nconst objGreet = obj.greet.bind(obj);\n\nconsole.log(greet());\nconsole.log(objGreet());\nconsole.log((obj.greet)());",
+    "options": [
+      "undefined, 'Alice', 'Alice'",
+      "'Alice', 'Alice', 'Alice'",
+      "undefined, 'Alice', undefined",
+      "'Alice', undefined, 'Alice'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "greet() loses context (undefined). objGreet() is bound. (obj.greet)() still has implicit binding because obj is the caller.",
+    "tags": ["this", "implicit-binding", "parentheses"],
+    "created_at": 1733046324000
+  },
+  {
+    "id": "q26_this_nested_arrow",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Arrow Functions",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Object',\n  outer: function() {\n    const inner = () => {\n      const deepInner = () => {\n        console.log(this.name);\n      };\n      deepInner();\n    };\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "undefined",
+      "'Object'",
+      "ReferenceError",
+      "''(empty string)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions inherit this from their lexical scope. Both inner and deepInner inherit this from outer(), which is bound to obj.",
+    "tags": ["this", "arrow-function", "nested"],
+    "created_at": 1733046325000
+  },
+  {
+    "id": "q27_this_computed_method",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Computed Method Name",
+    "question": "What is the output?",
+    "code": "const methodName = 'greet';\nconst obj = {\n  name: 'Alice',\n  [methodName]() {\n    return this.name;\n  }\n};\n\nconsole.log(obj.greet());\nconsole.log(obj[methodName]());",
+    "options": [
+      "'Alice', undefined",
+      "'Alice', 'Alice'",
+      "undefined, 'Alice'",
+      "Error, Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Computed method names work like regular methods. Both obj.greet() and obj[methodName]() call the same method with this bound to obj.",
+    "tags": ["this", "computed", "method"],
+    "created_at": 1733046326000
+  },
+  {
+    "id": "q28_this_promise_then",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "this in Promise.then",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Alice',\n  async getName() {\n    return this.name;\n  },\n  getNameThen() {\n    return Promise.resolve().then(function() {\n      return this.name;\n    });\n  }\n};\n\nobj.getName().then(console.log);\nobj.getNameThen().then(console.log);",
+    "options": [
+      "'Alice', 'Alice'",
+      "'Alice', undefined",
+      "undefined, undefined",
+      "undefined, 'Alice'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "async functions preserve this ('Alice'). Regular function in .then() loses this context (undefined). Use arrow function to fix.",
+    "tags": ["this", "promise", "async"],
+    "created_at": 1733046327000
+  },
+  {
+    "id": "q29_this_call_null",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "call with null",
+    "question": "What is the output? (non-strict mode)",
+    "code": "function getName() {\n  return this.name;\n}\n\nconst obj = { name: 'Alice' };\n\nconsole.log(getName.call(null));\nconsole.log(getName.call(obj));",
+    "options": [
+      "undefined, 'Alice'",
+      "null, 'Alice'",
+      "'', 'Alice' (or window.name)",
+      "Error, 'Alice'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "In non-strict mode, call(null) sets this to global object (window). window.name is usually '' or the window name. In strict mode, it's null.",
+    "tags": ["this", "call", "null"],
+    "created_at": 1733046328000
+  },
+  {
+    "id": "q30_this_super_this",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "super and this",
+    "question": "What will be logged?",
+    "code": "class Parent {\n  constructor() {\n    this.name = 'Parent';\n  }\n  getName() {\n    return this.name;\n  }\n}\n\nclass Child extends Parent {\n  constructor() {\n    super();\n    this.name = 'Child';\n  }\n  getParentName() {\n    return super.getName();\n  }\n}\n\nconst child = new Child();\nconsole.log(child.getParentName());",
+    "options": [
+      "'Parent'",
+      "'Child'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "super.getName() calls Parent's method but this still refers to the child instance. this.name is 'Child' after constructor runs.",
+    "tags": ["this", "super", "inheritance"],
+    "created_at": 1733046329000
   }
 ]
 

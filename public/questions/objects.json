@@ -378,6 +378,196 @@
     "explanation": "preventExtensions: no new properties, can delete/modify. seal: no add/delete, can modify. freeze: nothing changeable. Strictness: freeze > seal > preventExtensions.",
     "tags": ["objects", "prevent-extensions", "immutability"],
     "created_at": 1733051019000
+  },
+  {
+    "id": "q21_objects_animals_key",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Objects as Keys",
+    "question": "What will be logged?",
+    "code": "const animals = {};\nlet dog = { emoji: '🐶' };\nlet cat = { emoji: '🐈' };\n\nanimals[dog] = { ...dog, name: 'Mara' };\nanimals[cat] = { ...cat, name: 'Sara' };\n\nconsole.log(animals[dog]);",
+    "options": [
+      "{ emoji: '🐶', name: 'Mara' }",
+      "{ emoji: '🐈', name: 'Sara' }",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are converted to strings. Both dog and cat become '[object Object]', so animals[cat] overwrites animals[dog]. Result is Sara's object.",
+    "tags": ["objects", "keys", "coercion", "stringify"],
+    "created_at": 1733051020000
+  },
+  {
+    "id": "q22_objects_new_number",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Primitive vs Object Wrapper",
+    "question": "What is the output?",
+    "code": "let a = 3;\nlet b = new Number(3);\nlet c = 3;\n\nconsole.log(a == b);\nconsole.log(a === b);\nconsole.log(b === c);",
+    "options": [
+      "true, true, true",
+      "true, false, false",
+      "false, false, false",
+      "true, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "new Number(3) creates an object wrapper. == coerces so a == b is true. === checks type, and object !== number, so both are false.",
+    "tags": ["objects", "wrapper", "comparison"],
+    "created_at": 1733051021000
+  },
+  {
+    "id": "q23_objects_colorconfig",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructured Object Mutation",
+    "question": "What will be logged?",
+    "code": "const colorConfig = {\n  red: true,\n  blue: false,\n  green: true\n};\n\nconst { red: r, ...rest } = colorConfig;\nrest.blue = true;\n\nconsole.log(colorConfig.blue);",
+    "options": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object rest creates a shallow copy. Modifying rest.blue doesn't affect colorConfig.blue. Original value (false) remains.",
+    "tags": ["objects", "destructuring", "mutation"],
+    "created_at": 1733051022000
+  },
+  {
+    "id": "q24_objects_person_symbol",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol Description",
+    "question": "What is the output?",
+    "code": "const id1 = Symbol('id');\nconst id2 = Symbol('id');\n\nconsole.log(id1 === id2);\nconsole.log(id1.description === id2.description);",
+    "options": [
+      "true, true",
+      "false, false",
+      "false, true",
+      "true, false"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Every Symbol() call creates a unique symbol, even with same description. Symbols are unique (false), but descriptions can match (true).",
+    "tags": ["objects", "symbol", "unique"],
+    "created_at": 1733051023000
+  },
+  {
+    "id": "q25_objects_nested_spread",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Object Spread",
+    "question": "What will be logged?",
+    "code": "const user = {\n  name: 'Alice',\n  address: { city: 'NYC' }\n};\n\nconst copy = { ...user };\ncopy.address.city = 'LA';\n\nconsole.log(user.address.city);",
+    "options": [
+      "'NYC'",
+      "'LA'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Spread creates a shallow copy. Nested objects share the same reference. Changing copy.address.city also changes user.address.city.",
+    "tags": ["objects", "spread", "shallow-copy"],
+    "created_at": 1733051024000
+  },
+  {
+    "id": "q26_objects_property_order",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Mixed Key Order",
+    "question": "What is the output?",
+    "code": "const obj = {\n  b: 'b',\n  1: '1',\n  a: 'a',\n  2: '2'\n};\n\nconsole.log(Object.keys(obj));",
+    "options": [
+      "['b', '1', 'a', '2']",
+      "['1', '2', 'b', 'a']",
+      "['1', '2', 'a', 'b']",
+      "['a', 'b', '1', '2']"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are ordered: integer keys first (ascending), then string keys in insertion order. So: '1', '2', then 'b', 'a'.",
+    "tags": ["objects", "keys", "order"],
+    "created_at": 1733051025000
+  },
+  {
+    "id": "q27_objects_function_property",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function as Object Property",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  count: 10,\n  getCount: function() {\n    return this.count;\n  }\n};\n\nconst { getCount } = obj;\nconsole.log(getCount());",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring extracts the function without its context. When called standalone, this is undefined (strict mode), so this.count is undefined.",
+    "tags": ["objects", "destructuring", "this"],
+    "created_at": 1733051026000
+  },
+  {
+    "id": "q28_objects_hasown",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.hasOwn vs hasOwnProperty",
+    "question": "What is the output?",
+    "code": "const obj = Object.create(null);\nobj.name = 'test';\n\nconsole.log(Object.hasOwn(obj, 'name'));\ntry {\n  console.log(obj.hasOwnProperty('name'));\n} catch (e) {\n  console.log('Error');\n}",
+    "options": [
+      "true, true",
+      "true, Error",
+      "false, Error",
+      "Error, Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) has no prototype. Object.hasOwn() works (static method). hasOwnProperty() fails because obj has no inherited methods.",
+    "tags": ["objects", "hasown", "prototype"],
+    "created_at": 1733051027000
+  },
+  {
+    "id": "q29_objects_getter_setter",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Getter Setter Combo",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  _name: 'Alice',\n  get name() {\n    return this._name.toUpperCase();\n  },\n  set name(val) {\n    this._name = val.trim();\n  }\n};\n\nobj.name = '  Bob  ';\nconsole.log(obj.name);\nconsole.log(obj._name);",
+    "options": [
+      "'BOB', 'Bob'",
+      "'  BOB  ', '  Bob  '",
+      "'BOB', '  Bob  '",
+      "'Bob', 'Bob'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Setter trims the input ('Bob'). Getter returns uppercase ('BOB'). _name stores the trimmed value 'Bob'.",
+    "tags": ["objects", "getter", "setter"],
+    "created_at": 1733051028000
+  },
+  {
+    "id": "q30_objects_object_is",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.is() Edge Cases",
+    "question": "What is the output?",
+    "code": "console.log(Object.is(NaN, NaN));\nconsole.log(NaN === NaN);\nconsole.log(Object.is(0, -0));\nconsole.log(0 === -0);",
+    "options": [
+      "true, true, true, true",
+      "true, false, false, true",
+      "false, false, true, true",
+      "true, false, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.is() treats NaN as equal to NaN (true), but === doesn't (false). Object.is() distinguishes +0/-0 (false), but === treats them equal (true).",
+    "tags": ["objects", "object-is", "nan", "zero"],
+    "created_at": 1733051029000
   }
 ]
 

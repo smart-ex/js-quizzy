@@ -461,6 +461,237 @@
     "created_at": 1733050019000
   },
   {
+    "id": "q21_arrays_fruit_mutations",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Array Method Chain",
+    "question": "What will be logged?",
+    "code": "const fruit = ['🍌', '🍊', '🍎'];\n\nfruit.slice(0, 1);\nfruit.splice(0, 1);\nfruit.unshift('🍇');\n\nconsole.log(fruit);",
+    "options": [
+      "['🍌', '🍊', '🍎']",
+      "['🍊', '🍎']",
+      "['🍇', '🍊', '🍎']",
+      "['🍇', '🍌', '🍊', '🍎']"
+    ],
+    "correctAnswer": 2,
+    "explanation": "slice() doesn't modify the array. splice(0, 1) removes the banana. unshift('🍇') adds grape at the start. Result: ['🍇', '🍊', '🍎'].",
+    "tags": [
+      "arrays",
+      "slice",
+      "splice",
+      "unshift"
+    ],
+    "created_at": 1733050020000
+  },
+  {
+    "id": "q22_arrays_push_return",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "push() Return Value",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3];\nconst result = arr.push(4);\nconsole.log(result);",
+    "options": [
+      "[1, 2, 3, 4]",
+      "4",
+      "3",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "push() returns the new length of the array, not the array itself. After pushing 4, the length is 4.",
+    "tags": [
+      "arrays",
+      "push",
+      "return-value"
+    ],
+    "created_at": 1733050021000
+  },
+  {
+    "id": "q23_arrays_spread_vs_concat",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Spread with Holes",
+    "question": "What will be logged?",
+    "code": "const arr = [1, , 3];\nconst spread = [...arr];\nconst concatted = [].concat(arr);\n\nconsole.log(spread[1]);\nconsole.log(concatted[1]);",
+    "options": [
+      "undefined, undefined",
+      "empty, empty",
+      "undefined, empty (hole preserved)",
+      "Both log nothing"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Spread operator fills holes with undefined. concat preserves holes but accessing them returns undefined anyway. Both log undefined.",
+    "tags": [
+      "arrays",
+      "spread",
+      "holes"
+    ],
+    "created_at": 1733050022000
+  },
+  {
+    "id": "q24_arrays_reverse_mutation",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "reverse() Mutation",
+    "question": "What is logged?",
+    "code": "const arr = [1, 2, 3];\nconst reversed = arr.reverse();\n\nconsole.log(arr === reversed);\nconsole.log(arr);",
+    "options": [
+      "false, [1, 2, 3]",
+      "true, [3, 2, 1]",
+      "false, [3, 2, 1]",
+      "true, [1, 2, 3]"
+    ],
+    "correctAnswer": 1,
+    "explanation": "reverse() mutates the original array and returns the same array reference. arr and reversed point to the same array [3, 2, 1].",
+    "tags": [
+      "arrays",
+      "reverse",
+      "mutation"
+    ],
+    "created_at": 1733050023000
+  },
+  {
+    "id": "q25_arrays_pop_empty",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "pop() on Empty Array",
+    "question": "What will be logged?",
+    "code": "const arr = [];\nconst popped = arr.pop();\n\nconsole.log(popped);\nconsole.log(arr.length);",
+    "options": [
+      "undefined, 0",
+      "null, 0",
+      "Error",
+      "undefined, -1"
+    ],
+    "correctAnswer": 0,
+    "explanation": "pop() on an empty array returns undefined (no element to remove). The array length remains 0.",
+    "tags": [
+      "arrays",
+      "pop",
+      "empty"
+    ],
+    "created_at": 1733050024000
+  },
+  {
+    "id": "q26_arrays_index_out_of_bounds",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Out of Bounds Access",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3];\nconsole.log(arr[10]);\nconsole.log(arr[-1]);",
+    "options": [
+      "Error, Error",
+      "undefined, undefined",
+      "undefined, 3",
+      "null, null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "JavaScript doesn't throw for out-of-bounds array access. Both return undefined. Use arr.at(-1) for negative indexing.",
+    "tags": [
+      "arrays",
+      "index",
+      "bounds"
+    ],
+    "created_at": 1733050025000
+  },
+  {
+    "id": "q27_arrays_typeof",
+    "category": "arrays",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "typeof Array",
+    "question": "What will be logged?",
+    "code": "console.log(typeof []);\nconsole.log(Array.isArray([]));\nconsole.log([] instanceof Array);",
+    "options": [
+      "'array', true, true",
+      "'object', true, true",
+      "'object', false, true",
+      "'Array', true, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "typeof [] returns 'object' (arrays are objects). Use Array.isArray() or instanceof for reliable array detection.",
+    "tags": [
+      "arrays",
+      "typeof",
+      "detection"
+    ],
+    "created_at": 1733050026000
+  },
+  {
+    "id": "q28_arrays_join_undefined",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "join() with null/undefined",
+    "question": "What is the output?",
+    "code": "const arr = [1, null, undefined, 2];\nconsole.log(arr.join('-'));",
+    "options": [
+      "'1-null-undefined-2'",
+      "'1---2'",
+      "'1-2'",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "join() converts null and undefined to empty strings, not their string representations. Result: '1---2'.",
+    "tags": [
+      "arrays",
+      "join",
+      "null"
+    ],
+    "created_at": 1733050027000
+  },
+  {
+    "id": "q29_arrays_copywithin",
+    "category": "arrays",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "copyWithin() Method",
+    "question": "What will be logged?",
+    "code": "const arr = [1, 2, 3, 4, 5];\narr.copyWithin(0, 3);\nconsole.log(arr);",
+    "options": [
+      "[4, 5, 3, 4, 5]",
+      "[1, 2, 3, 4, 5]",
+      "[4, 5, 4, 5, 5]",
+      "[3, 4, 5, 4, 5]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "copyWithin(target, start) copies elements from index 3 to the end (4, 5) to position 0. Array becomes [4, 5, 3, 4, 5].",
+    "tags": [
+      "arrays",
+      "copywithin",
+      "mutation"
+    ],
+    "created_at": 1733050028000
+  },
+  {
+    "id": "q30_arrays_length_truncate",
+    "category": "arrays",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Setting Array Length",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3, 4, 5];\narr.length = 2;\nconsole.log(arr);\narr.length = 4;\nconsole.log(arr);",
+    "options": [
+      "[1, 2], [1, 2, 3, 4]",
+      "[1, 2], [1, 2, undefined, undefined]",
+      "[1, 2], [1, 2, empty × 2]",
+      "Error"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Setting length truncates the array. Increasing it creates sparse slots (holes), not undefined values. Console shows 'empty × 2'.",
+    "tags": [
+      "arrays",
+      "length",
+      "sparse"
+    ],
+    "created_at": 1733050029000
+  },
+  {
     "id": "q1_async_promise_basic",
     "category": "async",
     "difficulty": "easy",
@@ -913,6 +1144,236 @@
       "thenable"
     ],
     "created_at": 1733046219000
+  },
+  {
+    "id": "q21_async_promise_all_reject_order",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.all Rejection",
+    "question": "What will be logged?",
+    "code": "const promise1 = Promise.resolve('First');\nconst promise2 = Promise.resolve('Second');\nconst promise3 = Promise.reject('Third');\nconst promise4 = Promise.resolve('Fourth');\n\nconst runPromises = async () => {\n  const res1 = await Promise.all([promise1, promise2]);\n  const res2 = await Promise.all([promise3, promise4]);\n  return [res1, res2];\n};\n\nrunPromises()\n  .then(res => console.log(res))\n  .catch(err => console.log(err));",
+    "options": [
+      "[['First', 'Second'], ['Fourth']]",
+      "[['First', 'Second'], ['Third', 'Fourth']]",
+      "[['First', 'Second']]",
+      "'Third'"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Promise.all rejects if any promise rejects. res1 succeeds with ['First', 'Second']. res2 throws because promise3 rejects. 'Third' is caught.",
+    "tags": [
+      "async",
+      "promise.all",
+      "rejection"
+    ],
+    "created_at": 1733046220000
+  },
+  {
+    "id": "q22_async_return_await",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "return vs return await",
+    "question": "What is the difference?",
+    "code": "async function f1() {\n  try {\n    return Promise.reject('error');\n  } catch (e) {\n    return 'caught';\n  }\n}\n\nasync function f2() {\n  try {\n    return await Promise.reject('error');\n  } catch (e) {\n    return 'caught';\n  }\n}\n\nf1().then(console.log).catch(console.log);\nf2().then(console.log).catch(console.log);",
+    "options": [
+      "'caught', 'caught'",
+      "'error', 'caught'",
+      "'error', 'error'",
+      "'caught', 'error'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "return Promise.reject() doesn't trigger catch - the promise is returned directly. return await waits and triggers the local catch block.",
+    "tags": [
+      "async",
+      "return-await",
+      "error-handling"
+    ],
+    "created_at": 1733046221000
+  },
+  {
+    "id": "q23_async_foreach_await",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "forEach with async",
+    "question": "What will be logged first?",
+    "code": "const nums = [1, 2, 3];\n\nnums.forEach(async (num) => {\n  const result = await Promise.resolve(num * 2);\n  console.log(result);\n});\n\nconsole.log('Done');",
+    "options": [
+      "2, 4, 6, 'Done'",
+      "'Done', 2, 4, 6",
+      "'Done' (then 2, 4, 6 in parallel)",
+      "2, 'Done', 4, 6"
+    ],
+    "correctAnswer": 2,
+    "explanation": "forEach doesn't await async callbacks. It fires all async functions immediately. 'Done' logs first, then results in non-deterministic order.",
+    "tags": [
+      "async",
+      "foreach",
+      "gotcha"
+    ],
+    "created_at": 1733046222000
+  },
+  {
+    "id": "q24_async_promise_resolve_chain",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.resolve Chain",
+    "question": "What is the output?",
+    "code": "Promise.resolve(5)\n  .then(x => x * 2)\n  .then(x => {\n    throw new Error('oops');\n  })\n  .then(x => x + 1)\n  .catch(e => 0)\n  .then(x => console.log(x));",
+    "options": [
+      "11",
+      "0",
+      "Error: oops",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "5*2=10, then throws error. Error skips next .then(). catch returns 0. Final .then() logs 0.",
+    "tags": [
+      "async",
+      "promise-chain",
+      "error"
+    ],
+    "created_at": 1733046223000
+  },
+  {
+    "id": "q25_async_microtask_order",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Microtask Queue Order",
+    "question": "What is the output order?",
+    "code": "async function async1() {\n  console.log('async1 start');\n  await async2();\n  console.log('async1 end');\n}\n\nasync function async2() {\n  console.log('async2');\n}\n\nconsole.log('script start');\nasync1();\nconsole.log('script end');",
+    "options": [
+      "script start, async1 start, async2, script end, async1 end",
+      "script start, script end, async1 start, async2, async1 end",
+      "script start, async1 start, async2, async1 end, script end",
+      "script start, async1 start, script end, async2, async1 end"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sync code runs first. async1 logs, calls async2 (logs), await pauses. 'script end' logs. Then microtask 'async1 end' runs.",
+    "tags": [
+      "async",
+      "microtask",
+      "execution-order"
+    ],
+    "created_at": 1733046224000
+  },
+  {
+    "id": "q26_async_promise_constructor_sync",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Constructor Executor",
+    "question": "What will be logged?",
+    "code": "const promise = new Promise((resolve, reject) => {\n  console.log(1);\n  resolve(2);\n  console.log(3);\n});\n\npromise.then(val => console.log(val));",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "1, 2",
+      "2, 1, 3"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise executor runs synchronously. 1 logs, resolve queues callback, 3 logs. Then microtask (2) runs.",
+    "tags": [
+      "async",
+      "promise",
+      "executor"
+    ],
+    "created_at": 1733046225000
+  },
+  {
+    "id": "q27_async_sleep_implementation",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Sleep Function",
+    "question": "What is logged and when?",
+    "code": "const sleep = ms => new Promise(r => setTimeout(r, ms));\n\nasync function test() {\n  console.log('start');\n  await sleep(1000);\n  console.log('end');\n}\n\ntest();\nconsole.log('after call');",
+    "options": [
+      "start, end, after call (all immediate)",
+      "start, after call, end (end after 1s)",
+      "start, after call, end (all immediate)",
+      "after call, start, end"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'start' logs, await pauses test(). 'after call' logs immediately. After 1 second, 'end' logs.",
+    "tags": [
+      "async",
+      "sleep",
+      "timing"
+    ],
+    "created_at": 1733046226000
+  },
+  {
+    "id": "q28_async_catch_rethrow",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Catch and Rethrow",
+    "question": "What is logged?",
+    "code": "Promise.reject('error')\n  .catch(e => {\n    console.log('caught:', e);\n    throw e;\n  })\n  .then(() => console.log('then'))\n  .catch(() => console.log('caught again'));",
+    "options": [
+      "caught: error",
+      "caught: error, then",
+      "caught: error, caught again",
+      "then, caught again"
+    ],
+    "correctAnswer": 2,
+    "explanation": "First catch logs 'caught: error' then rethrows. Rethrown error skips .then() and hits second .catch().",
+    "tags": [
+      "async",
+      "catch",
+      "rethrow"
+    ],
+    "created_at": 1733046227000
+  },
+  {
+    "id": "q29_async_promise_any_all_reject",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.any All Reject",
+    "question": "What happens?",
+    "code": "Promise.any([\n  Promise.reject('a'),\n  Promise.reject('b'),\n  Promise.reject('c')\n])\n  .then(v => console.log('value:', v))\n  .catch(e => console.log('errors:', e.errors));",
+    "options": [
+      "value: 'a'",
+      "errors: ['a', 'b', 'c']",
+      "errors: 'a'",
+      "Unhandled rejection"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.any rejects with AggregateError when all promises reject. e.errors contains all rejection reasons ['a', 'b', 'c'].",
+    "tags": [
+      "async",
+      "promise.any",
+      "aggregateerror"
+    ],
+    "created_at": 1733046228000
+  },
+  {
+    "id": "q30_async_settimeout_promise",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "setTimeout vs Promise Order",
+    "question": "What is the output order?",
+    "code": "setTimeout(() => console.log('timeout'), 0);\n\nPromise.resolve()\n  .then(() => console.log('promise1'))\n  .then(() => console.log('promise2'));\n\nconsole.log('sync');",
+    "options": [
+      "sync, timeout, promise1, promise2",
+      "sync, promise1, promise2, timeout",
+      "sync, promise1, timeout, promise2",
+      "timeout, sync, promise1, promise2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sync code first ('sync'). Microtasks (promises) next ('promise1', 'promise2'). Macrotasks (setTimeout) last ('timeout').",
+    "tags": [
+      "async",
+      "settimeout",
+      "microtask"
+    ],
+    "created_at": 1733046229000
   },
   {
     "id": "q1_closures_basic",
@@ -1374,6 +1835,236 @@
     "created_at": 1733046119000
   },
   {
+    "id": "q21_closures_settimeout_let",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "setTimeout with Different Scopes",
+    "question": "What will be logged?",
+    "code": "for (let i = 1; i <= 3; i++) {\n  const log = () => {\n    console.log(i);\n  };\n  setTimeout(log, i * 1000);\n}",
+    "options": [
+      "1, 2, 3 (at 1s, 2s, 3s)",
+      "4, 4, 4",
+      "3, 3, 3",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "let creates a new binding per iteration. Each closure captures its own i value. Logs 1 at 1s, 2 at 2s, 3 at 3s.",
+    "tags": [
+      "closures",
+      "settimeout",
+      "let"
+    ],
+    "created_at": 1733046120000
+  },
+  {
+    "id": "q22_closures_function_factory",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function Factory",
+    "question": "What is the output?",
+    "code": "function createGreeter(greeting) {\n  return function(name) {\n    return `${greeting}, ${name}!`;\n  };\n}\n\nconst sayHello = createGreeter('Hello');\nconst sayHi = createGreeter('Hi');\n\nconsole.log(sayHello('Alice'));\nconsole.log(sayHi('Bob'));",
+    "options": [
+      "'Hello, Alice!', 'Hi, Bob!'",
+      "'Hi, Alice!', 'Hi, Bob!'",
+      "'Hello, Alice!', 'Hello, Bob!'",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each createGreeter call creates a new closure with its own greeting. sayHello closes over 'Hello', sayHi closes over 'Hi'.",
+    "tags": [
+      "closures",
+      "factory",
+      "scope"
+    ],
+    "created_at": 1733046121000
+  },
+  {
+    "id": "q23_closures_shared_state",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Shared Closure State",
+    "question": "What will be logged?",
+    "code": "function createFunctions() {\n  let count = 0;\n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    getCount: () => count\n  };\n}\n\nconst counter1 = createFunctions();\nconst counter2 = createFunctions();\n\ncounter1.increment();\ncounter1.increment();\ncounter2.decrement();\n\nconsole.log(counter1.getCount(), counter2.getCount());",
+    "options": [
+      "2, -1",
+      "1, 1",
+      "2, 2",
+      "1, -1"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each createFunctions() call creates a new closure with its own count. counter1 and counter2 have independent state.",
+    "tags": [
+      "closures",
+      "state",
+      "independence"
+    ],
+    "created_at": 1733046122000
+  },
+  {
+    "id": "q24_closures_reassignment",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure Variable Reassignment",
+    "question": "What is the output?",
+    "code": "function outer() {\n  let x = 'original';\n  \n  function inner() {\n    console.log(x);\n  }\n  \n  x = 'changed';\n  return inner;\n}\n\nconst fn = outer();\nfn();",
+    "options": [
+      "'original'",
+      "'changed'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Closures capture variable references, not values. When inner() runs, x has already been changed to 'changed'.",
+    "tags": [
+      "closures",
+      "reference",
+      "reassignment"
+    ],
+    "created_at": 1733046123000
+  },
+  {
+    "id": "q25_closures_array_functions",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Array of Closures",
+    "question": "What will be logged?",
+    "code": "const funcs = [];\n\nfor (var i = 0; i < 3; i++) {\n  funcs.push(() => i);\n}\n\nconsole.log(funcs[0]());\nconsole.log(funcs[1]());\nconsole.log(funcs[2]());",
+    "options": [
+      "0, 1, 2",
+      "3, 3, 3",
+      "2, 2, 2",
+      "undefined, undefined, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "var is function-scoped. All closures share the same i reference. When called, i is 3 (loop finished). All return 3.",
+    "tags": [
+      "closures",
+      "var",
+      "loop"
+    ],
+    "created_at": 1733046124000
+  },
+  {
+    "id": "q26_closures_parameter_capture",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Parameter Closure",
+    "question": "What is the output?",
+    "code": "function multiply(x) {\n  return function(y) {\n    return function(z) {\n      return x * y * z;\n    };\n  };\n}\n\nconsole.log(multiply(2)(3)(4));",
+    "options": [
+      "24",
+      "9",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Each function closes over its parameter. multiply(2) returns fn(y), multiply(2)(3) returns fn(z), finally 2*3*4=24.",
+    "tags": [
+      "closures",
+      "currying",
+      "nested"
+    ],
+    "created_at": 1733046125000
+  },
+  {
+    "id": "q27_closures_immediate_invoke",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Closure in Event Handler",
+    "question": "What will be logged when button is clicked?",
+    "code": "function setup() {\n  let count = 0;\n  \n  document.getElementById('btn').onclick = function() {\n    count++;\n    console.log(count);\n  };\n}\n\nsetup();\n// User clicks button 3 times",
+    "options": [
+      "1, 1, 1",
+      "1, 2, 3",
+      "0, 0, 0",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The click handler closes over count. Each click increments the same count variable. Logs 1, 2, 3 for three clicks.",
+    "tags": [
+      "closures",
+      "event-handler",
+      "persistence"
+    ],
+    "created_at": 1733046126000
+  },
+  {
+    "id": "q28_closures_block_scope",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Block Scope Closure",
+    "question": "What is the output?",
+    "code": "function test() {\n  if (true) {\n    let x = 'block';\n    var y = 'function';\n  }\n  \n  return () => {\n    console.log(y);\n  };\n}\n\ntest()();",
+    "options": [
+      "'block'",
+      "'function'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "let x is block-scoped (not accessible). var y is function-scoped and accessible. The closure captures y = 'function'.",
+    "tags": [
+      "closures",
+      "block-scope",
+      "let-vs-var"
+    ],
+    "created_at": 1733046127000
+  },
+  {
+    "id": "q29_closures_debounce",
+    "category": "closures",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Debounce Implementation",
+    "question": "How many times will 'executed' be logged?",
+    "code": "function debounce(fn, delay) {\n  let timeoutId;\n  return function(...args) {\n    clearTimeout(timeoutId);\n    timeoutId = setTimeout(() => fn(...args), delay);\n  };\n}\n\nconst log = debounce(() => console.log('executed'), 100);\n\nlog();\nlog();\nlog();\n// Wait 200ms",
+    "options": [
+      "3",
+      "1",
+      "0",
+      "2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Debounce uses closure to track timeoutId. Each call clears the previous timeout. Only the last call executes after 100ms. Result: 1.",
+    "tags": [
+      "closures",
+      "debounce",
+      "timeout"
+    ],
+    "created_at": 1733046128000
+  },
+  {
+    "id": "q30_closures_once",
+    "category": "closures",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Once Function",
+    "question": "What will be logged?",
+    "code": "function once(fn) {\n  let called = false;\n  let result;\n  return function(...args) {\n    if (!called) {\n      called = true;\n      result = fn(...args);\n    }\n    return result;\n  };\n}\n\nconst addOnce = once((a, b) => a + b);\n\nconsole.log(addOnce(1, 2));\nconsole.log(addOnce(3, 4));\nconsole.log(addOnce(5, 6));",
+    "options": [
+      "3, 7, 11",
+      "3, 3, 3",
+      "3, undefined, undefined",
+      "3, null, null"
+    ],
+    "correctAnswer": 1,
+    "explanation": "The once closure tracks if fn was called. First call computes 1+2=3 and caches it. Subsequent calls return cached result (3).",
+    "tags": [
+      "closures",
+      "once",
+      "memoization"
+    ],
+    "created_at": 1733046129000
+  },
+  {
     "id": "q1_coercion_plus",
     "category": "coercion",
     "difficulty": "easy",
@@ -1833,6 +2524,237 @@
       "stringify"
     ],
     "created_at": 1733046419000
+  },
+  {
+    "id": "q21_coercion_double_negation",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Double Negation Coercion",
+    "question": "What will be logged?",
+    "code": "console.log(!!null);\nconsole.log(!!'');\nconsole.log(!!1);\nconsole.log(!!'false');",
+    "options": [
+      "false, false, true, false",
+      "false, false, true, true",
+      "null, '', true, 'false'",
+      "true, true, true, true"
+    ],
+    "correctAnswer": 1,
+    "explanation": "!! converts to boolean. null→false, ''→false (empty string is falsy), 1→true, 'false'→true (non-empty string is truthy).",
+    "tags": [
+      "coercion",
+      "boolean",
+      "double-negation"
+    ],
+    "created_at": 1733046420000
+  },
+  {
+    "id": "q22_coercion_plus_string",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Plus with Strings",
+    "question": "What is the output?",
+    "code": "console.log('5' + 3);\nconsole.log('5' - 3);\nconsole.log('5' * '3');\nconsole.log('5' / '2');",
+    "options": [
+      "'53', 2, 15, 2.5",
+      "8, 2, 15, 2.5",
+      "'53', '2', '15', '2.5'",
+      "8, 2, '15', '2.5'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "+ with string concatenates ('53'). Other operators (-, *, /) convert to numbers: 5-3=2, 5*3=15, 5/2=2.5.",
+    "tags": [
+      "coercion",
+      "operators",
+      "string"
+    ],
+    "created_at": 1733046421000
+  },
+  {
+    "id": "q23_coercion_add_objects",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Adding Arrays",
+    "question": "What will be logged?",
+    "code": "console.log([1, 2] + [3, 4]);",
+    "options": [
+      "[1, 2, 3, 4]",
+      "'1,23,4'",
+      "10",
+      "NaN"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrays are converted to strings for + operation. [1,2] becomes '1,2' and [3,4] becomes '3,4'. Concatenated: '1,23,4'.",
+    "tags": [
+      "coercion",
+      "array",
+      "plus"
+    ],
+    "created_at": 1733046422000
+  },
+  {
+    "id": "q24_coercion_random_value",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "typeof and Negation",
+    "question": "What is the output?",
+    "code": "let randomValue = { name: 'Lydia' };\nrandomValue = 23;\n\nif (!typeof randomValue === 'string') {\n  console.log(\"It's not a string!\");\n} else {\n  console.log(\"Yay it's a string!\");\n}",
+    "options": [
+      "It's not a string!",
+      "Yay it's a string!",
+      "TypeError",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "typeof randomValue is 'number'. !typeof evaluates first: !'number' = false. false === 'string' is false, so else branch runs.",
+    "tags": [
+      "coercion",
+      "typeof",
+      "operator-precedence"
+    ],
+    "created_at": 1733046423000
+  },
+  {
+    "id": "q25_coercion_falsy_all",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "All Falsy Values",
+    "question": "How many values are falsy?",
+    "code": "const values = [0, '', null, undefined, NaN, false, -0, 0n];\nconst falsyCount = values.filter(v => !v).length;\nconsole.log(falsyCount);",
+    "options": [
+      "6",
+      "7",
+      "8",
+      "5"
+    ],
+    "correctAnswer": 2,
+    "explanation": "All 8 values are falsy in JavaScript: 0, '', null, undefined, NaN, false, -0, and 0n (BigInt zero). All pass the !v test.",
+    "tags": [
+      "coercion",
+      "falsy",
+      "filter"
+    ],
+    "created_at": 1733046424000
+  },
+  {
+    "id": "q26_coercion_empty_array_bool",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Empty Array Boolean",
+    "question": "What will be logged?",
+    "code": "console.log([] == false);\nconsole.log([] == ![]);\nconsole.log(!![] == true);",
+    "options": [
+      "true, true, true",
+      "false, false, true",
+      "true, false, false",
+      "false, true, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "[] converts to '' then 0, false converts to 0: 0==0 (true). ![] is false, []==false (true). !![] is true (arrays are truthy).",
+    "tags": [
+      "coercion",
+      "array",
+      "boolean"
+    ],
+    "created_at": 1733046425000
+  },
+  {
+    "id": "q27_coercion_parseInt",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "parseInt Gotchas",
+    "question": "What is the output?",
+    "code": "console.log(parseInt('7'));\nconsole.log(parseInt('7*6'));\nconsole.log(parseInt('7.9'));\nconsole.log(parseInt('0x10'));",
+    "options": [
+      "7, NaN, 7, 16",
+      "7, 42, 7.9, 10",
+      "7, NaN, 7.9, NaN",
+      "7, NaN, 7, 10"
+    ],
+    "correctAnswer": 0,
+    "explanation": "parseInt stops at non-numeric chars. '7'→7, '7*6'→7 (stops at *), '7.9'→7 (stops at .), '0x10' is hex→16.",
+    "tags": [
+      "coercion",
+      "parseint",
+      "parsing"
+    ],
+    "created_at": 1733046426000
+  },
+  {
+    "id": "q28_coercion_template_literal",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Template Literal Coercion",
+    "question": "What will be logged?",
+    "code": "const obj = { toString: () => 'Hello' };\nconst arr = [1, 2, 3];\n\nconsole.log(`${obj}`);\nconsole.log(`${arr}`);",
+    "options": [
+      "'[object Object]', '[object Array]'",
+      "'Hello', '1,2,3'",
+      "'Hello', '[1, 2, 3]'",
+      "Error, Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Template literals call toString(). Custom toString returns 'Hello'. Array's default toString returns comma-separated values: '1,2,3'.",
+    "tags": [
+      "coercion",
+      "template-literal",
+      "tostring"
+    ],
+    "created_at": 1733046427000
+  },
+  {
+    "id": "q29_coercion_spaceship",
+    "category": "coercion",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Comparison Chain",
+    "question": "What is the output?",
+    "code": "console.log(3 > 2 > 1);\nconsole.log(1 < 2 < 3);",
+    "options": [
+      "true, true",
+      "false, true",
+      "true, false",
+      "false, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "3>2 is true, then true>1 → 1>1 is false. 1<2 is true, then true<3 → 1<3 is true. Chained comparisons don't work as expected!",
+    "tags": [
+      "coercion",
+      "comparison",
+      "chain"
+    ],
+    "created_at": 1733046428000
+  },
+  {
+    "id": "q30_coercion_null_math",
+    "category": "coercion",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "null in Math Operations",
+    "question": "What will be logged?",
+    "code": "console.log(null + 1);\nconsole.log(undefined + 1);\nconsole.log('' + 1);",
+    "options": [
+      "1, NaN, '1'",
+      "null1, undefined1, '1'",
+      "1, 1, 1",
+      "NaN, NaN, '1'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "null converts to 0 in numeric context (0+1=1). undefined converts to NaN (NaN+1=NaN). '' triggers string concatenation (''+1='1').",
+    "tags": [
+      "coercion",
+      "null",
+      "undefined",
+      "math"
+    ],
+    "created_at": 1733046429000
   },
   {
     "id": "q1_destructuring_array_basic",
@@ -3673,6 +4595,238 @@
     "created_at": 1733051019000
   },
   {
+    "id": "q21_objects_animals_key",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Objects as Keys",
+    "question": "What will be logged?",
+    "code": "const animals = {};\nlet dog = { emoji: '🐶' };\nlet cat = { emoji: '🐈' };\n\nanimals[dog] = { ...dog, name: 'Mara' };\nanimals[cat] = { ...cat, name: 'Sara' };\n\nconsole.log(animals[dog]);",
+    "options": [
+      "{ emoji: '🐶', name: 'Mara' }",
+      "{ emoji: '🐈', name: 'Sara' }",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are converted to strings. Both dog and cat become '[object Object]', so animals[cat] overwrites animals[dog]. Result is Sara's object.",
+    "tags": [
+      "objects",
+      "keys",
+      "coercion",
+      "stringify"
+    ],
+    "created_at": 1733051020000
+  },
+  {
+    "id": "q22_objects_new_number",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Primitive vs Object Wrapper",
+    "question": "What is the output?",
+    "code": "let a = 3;\nlet b = new Number(3);\nlet c = 3;\n\nconsole.log(a == b);\nconsole.log(a === b);\nconsole.log(b === c);",
+    "options": [
+      "true, true, true",
+      "true, false, false",
+      "false, false, false",
+      "true, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "new Number(3) creates an object wrapper. == coerces so a == b is true. === checks type, and object !== number, so both are false.",
+    "tags": [
+      "objects",
+      "wrapper",
+      "comparison"
+    ],
+    "created_at": 1733051021000
+  },
+  {
+    "id": "q23_objects_colorconfig",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Destructured Object Mutation",
+    "question": "What will be logged?",
+    "code": "const colorConfig = {\n  red: true,\n  blue: false,\n  green: true\n};\n\nconst { red: r, ...rest } = colorConfig;\nrest.blue = true;\n\nconsole.log(colorConfig.blue);",
+    "options": [
+      "true",
+      "false",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object rest creates a shallow copy. Modifying rest.blue doesn't affect colorConfig.blue. Original value (false) remains.",
+    "tags": [
+      "objects",
+      "destructuring",
+      "mutation"
+    ],
+    "created_at": 1733051022000
+  },
+  {
+    "id": "q24_objects_person_symbol",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Symbol Description",
+    "question": "What is the output?",
+    "code": "const id1 = Symbol('id');\nconst id2 = Symbol('id');\n\nconsole.log(id1 === id2);\nconsole.log(id1.description === id2.description);",
+    "options": [
+      "true, true",
+      "false, false",
+      "false, true",
+      "true, false"
+    ],
+    "correctAnswer": 2,
+    "explanation": "Every Symbol() call creates a unique symbol, even with same description. Symbols are unique (false), but descriptions can match (true).",
+    "tags": [
+      "objects",
+      "symbol",
+      "unique"
+    ],
+    "created_at": 1733051023000
+  },
+  {
+    "id": "q25_objects_nested_spread",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Object Spread",
+    "question": "What will be logged?",
+    "code": "const user = {\n  name: 'Alice',\n  address: { city: 'NYC' }\n};\n\nconst copy = { ...user };\ncopy.address.city = 'LA';\n\nconsole.log(user.address.city);",
+    "options": [
+      "'NYC'",
+      "'LA'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Spread creates a shallow copy. Nested objects share the same reference. Changing copy.address.city also changes user.address.city.",
+    "tags": [
+      "objects",
+      "spread",
+      "shallow-copy"
+    ],
+    "created_at": 1733051024000
+  },
+  {
+    "id": "q26_objects_property_order",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Mixed Key Order",
+    "question": "What is the output?",
+    "code": "const obj = {\n  b: 'b',\n  1: '1',\n  a: 'a',\n  2: '2'\n};\n\nconsole.log(Object.keys(obj));",
+    "options": [
+      "['b', '1', 'a', '2']",
+      "['1', '2', 'b', 'a']",
+      "['1', '2', 'a', 'b']",
+      "['a', 'b', '1', '2']"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object keys are ordered: integer keys first (ascending), then string keys in insertion order. So: '1', '2', then 'b', 'a'.",
+    "tags": [
+      "objects",
+      "keys",
+      "order"
+    ],
+    "created_at": 1733051025000
+  },
+  {
+    "id": "q27_objects_function_property",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Function as Object Property",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  count: 10,\n  getCount: function() {\n    return this.count;\n  }\n};\n\nconst { getCount } = obj;\nconsole.log(getCount());",
+    "options": [
+      "10",
+      "undefined",
+      "ReferenceError",
+      "TypeError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Destructuring extracts the function without its context. When called standalone, this is undefined (strict mode), so this.count is undefined.",
+    "tags": [
+      "objects",
+      "destructuring",
+      "this"
+    ],
+    "created_at": 1733051026000
+  },
+  {
+    "id": "q28_objects_hasown",
+    "category": "objects",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Object.hasOwn vs hasOwnProperty",
+    "question": "What is the output?",
+    "code": "const obj = Object.create(null);\nobj.name = 'test';\n\nconsole.log(Object.hasOwn(obj, 'name'));\ntry {\n  console.log(obj.hasOwnProperty('name'));\n} catch (e) {\n  console.log('Error');\n}",
+    "options": [
+      "true, true",
+      "true, Error",
+      "false, Error",
+      "Error, Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.create(null) has no prototype. Object.hasOwn() works (static method). hasOwnProperty() fails because obj has no inherited methods.",
+    "tags": [
+      "objects",
+      "hasown",
+      "prototype"
+    ],
+    "created_at": 1733051027000
+  },
+  {
+    "id": "q29_objects_getter_setter",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Getter Setter Combo",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  _name: 'Alice',\n  get name() {\n    return this._name.toUpperCase();\n  },\n  set name(val) {\n    this._name = val.trim();\n  }\n};\n\nobj.name = '  Bob  ';\nconsole.log(obj.name);\nconsole.log(obj._name);",
+    "options": [
+      "'BOB', 'Bob'",
+      "'  BOB  ', '  Bob  '",
+      "'BOB', '  Bob  '",
+      "'Bob', 'Bob'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Setter trims the input ('Bob'). Getter returns uppercase ('BOB'). _name stores the trimmed value 'Bob'.",
+    "tags": [
+      "objects",
+      "getter",
+      "setter"
+    ],
+    "created_at": 1733051028000
+  },
+  {
+    "id": "q30_objects_object_is",
+    "category": "objects",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Object.is() Edge Cases",
+    "question": "What is the output?",
+    "code": "console.log(Object.is(NaN, NaN));\nconsole.log(NaN === NaN);\nconsole.log(Object.is(0, -0));\nconsole.log(0 === -0);",
+    "options": [
+      "true, true, true, true",
+      "true, false, false, true",
+      "false, false, true, true",
+      "true, false, true, false"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Object.is() treats NaN as equal to NaN (true), but === doesn't (false). Object.is() distinguishes +0/-0 (false), but === treats them equal (true).",
+    "tags": [
+      "objects",
+      "object-is",
+      "nan",
+      "zero"
+    ],
+    "created_at": 1733051029000
+  },
+  {
     "id": "q1_prototypes_basic",
     "category": "prototypes",
     "difficulty": "easy",
@@ -5049,5 +6203,235 @@
       "fluent-api"
     ],
     "created_at": 1733046319000
+  },
+  {
+    "id": "q21_this_arrow_email",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Arrow Function Method",
+    "question": "What will be logged?",
+    "code": "const user = {\n  email: 'my@email.com',\n  updateEmail: email => {\n    this.email = email;\n  }\n};\n\nuser.updateEmail('new@email.com');\nconsole.log(user.email);",
+    "options": [
+      "'new@email.com'",
+      "'my@email.com'",
+      "undefined",
+      "ReferenceError"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions don't bind their own this. this refers to the enclosing scope (global/undefined). user.email is unchanged.",
+    "tags": [
+      "this",
+      "arrow-function",
+      "method"
+    ],
+    "created_at": 1733046320000
+  },
+  {
+    "id": "q22_this_function_constructor",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Constructor Without new",
+    "question": "What happens?",
+    "code": "function Person(name) {\n  this.name = name;\n}\n\nconst person = Person('Alice');\nconsole.log(person);\nconsole.log(typeof window !== 'undefined' ? window.name : global.name);",
+    "options": [
+      "Person { name: 'Alice' }, undefined",
+      "undefined, 'Alice'",
+      "{ name: 'Alice' }, undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Without new, Person() returns undefined. this refers to global object, polluting it with name='Alice'.",
+    "tags": [
+      "this",
+      "constructor",
+      "new"
+    ],
+    "created_at": 1733046321000
+  },
+  {
+    "id": "q23_this_bind_twice",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Double Bind",
+    "question": "What is the output?",
+    "code": "function greet() {\n  return this.name;\n}\n\nconst obj1 = { name: 'Alice' };\nconst obj2 = { name: 'Bob' };\n\nconst bound = greet.bind(obj1).bind(obj2);\nconsole.log(bound());",
+    "options": [
+      "'Bob'",
+      "'Alice'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "bind() can only bind once. The second bind() has no effect. The function remains bound to obj1 ('Alice').",
+    "tags": [
+      "this",
+      "bind",
+      "immutable"
+    ],
+    "created_at": 1733046322000
+  },
+  {
+    "id": "q24_this_callback_array",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Array Method Callback",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  values: [1, 2, 3],\n  multiplier: 2,\n  getMultiplied() {\n    return this.values.map(function(val) {\n      return val * this.multiplier;\n    });\n  }\n};\n\nconsole.log(obj.getMultiplied());",
+    "options": [
+      "[2, 4, 6]",
+      "[NaN, NaN, NaN]",
+      "[undefined, undefined, undefined]",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Regular function callback loses this context. this.multiplier is undefined. undefined * number = NaN for each element.",
+    "tags": [
+      "this",
+      "callback",
+      "array-methods"
+    ],
+    "created_at": 1733046323000
+  },
+  {
+    "id": "q25_this_implicit_binding",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Implicit Binding Loss",
+    "question": "What is the output?",
+    "code": "const obj = {\n  name: 'Alice',\n  greet() {\n    return this.name;\n  }\n};\n\nconst greet = obj.greet;\nconst objGreet = obj.greet.bind(obj);\n\nconsole.log(greet());\nconsole.log(objGreet());\nconsole.log((obj.greet)());",
+    "options": [
+      "undefined, 'Alice', 'Alice'",
+      "'Alice', 'Alice', 'Alice'",
+      "undefined, 'Alice', undefined",
+      "'Alice', undefined, 'Alice'"
+    ],
+    "correctAnswer": 0,
+    "explanation": "greet() loses context (undefined). objGreet() is bound. (obj.greet)() still has implicit binding because obj is the caller.",
+    "tags": [
+      "this",
+      "implicit-binding",
+      "parentheses"
+    ],
+    "created_at": 1733046324000
+  },
+  {
+    "id": "q26_this_nested_arrow",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Nested Arrow Functions",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Object',\n  outer: function() {\n    const inner = () => {\n      const deepInner = () => {\n        console.log(this.name);\n      };\n      deepInner();\n    };\n    inner();\n  }\n};\n\nobj.outer();",
+    "options": [
+      "undefined",
+      "'Object'",
+      "ReferenceError",
+      "''(empty string)"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Arrow functions inherit this from their lexical scope. Both inner and deepInner inherit this from outer(), which is bound to obj.",
+    "tags": [
+      "this",
+      "arrow-function",
+      "nested"
+    ],
+    "created_at": 1733046325000
+  },
+  {
+    "id": "q27_this_computed_method",
+    "category": "this",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Computed Method Name",
+    "question": "What is the output?",
+    "code": "const methodName = 'greet';\nconst obj = {\n  name: 'Alice',\n  [methodName]() {\n    return this.name;\n  }\n};\n\nconsole.log(obj.greet());\nconsole.log(obj[methodName]());",
+    "options": [
+      "'Alice', undefined",
+      "'Alice', 'Alice'",
+      "undefined, 'Alice'",
+      "Error, Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Computed method names work like regular methods. Both obj.greet() and obj[methodName]() call the same method with this bound to obj.",
+    "tags": [
+      "this",
+      "computed",
+      "method"
+    ],
+    "created_at": 1733046326000
+  },
+  {
+    "id": "q28_this_promise_then",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "this in Promise.then",
+    "question": "What will be logged?",
+    "code": "const obj = {\n  name: 'Alice',\n  async getName() {\n    return this.name;\n  },\n  getNameThen() {\n    return Promise.resolve().then(function() {\n      return this.name;\n    });\n  }\n};\n\nobj.getName().then(console.log);\nobj.getNameThen().then(console.log);",
+    "options": [
+      "'Alice', 'Alice'",
+      "'Alice', undefined",
+      "undefined, undefined",
+      "undefined, 'Alice'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "async functions preserve this ('Alice'). Regular function in .then() loses this context (undefined). Use arrow function to fix.",
+    "tags": [
+      "this",
+      "promise",
+      "async"
+    ],
+    "created_at": 1733046327000
+  },
+  {
+    "id": "q29_this_call_null",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "call with null",
+    "question": "What is the output? (non-strict mode)",
+    "code": "function getName() {\n  return this.name;\n}\n\nconst obj = { name: 'Alice' };\n\nconsole.log(getName.call(null));\nconsole.log(getName.call(obj));",
+    "options": [
+      "undefined, 'Alice'",
+      "null, 'Alice'",
+      "'', 'Alice' (or window.name)",
+      "Error, 'Alice'"
+    ],
+    "correctAnswer": 2,
+    "explanation": "In non-strict mode, call(null) sets this to global object (window). window.name is usually '' or the window name. In strict mode, it's null.",
+    "tags": [
+      "this",
+      "call",
+      "null"
+    ],
+    "created_at": 1733046328000
+  },
+  {
+    "id": "q30_this_super_this",
+    "category": "this",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "super and this",
+    "question": "What will be logged?",
+    "code": "class Parent {\n  constructor() {\n    this.name = 'Parent';\n  }\n  getName() {\n    return this.name;\n  }\n}\n\nclass Child extends Parent {\n  constructor() {\n    super();\n    this.name = 'Child';\n  }\n  getParentName() {\n    return super.getName();\n  }\n}\n\nconst child = new Child();\nconsole.log(child.getParentName());",
+    "options": [
+      "'Parent'",
+      "'Child'",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 1,
+    "explanation": "super.getName() calls Parent's method but this still refers to the child instance. this.name is 'Child' after constructor runs.",
+    "tags": [
+      "this",
+      "super",
+      "inheritance"
+    ],
+    "created_at": 1733046329000
   }
 ]

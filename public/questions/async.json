@@ -378,6 +378,196 @@
     "explanation": "Promise.resolve unwraps nested promises and thenables. p1 resolves to 42 (inner promise unwrapped). p2's thenable is called, resolving to 100.",
     "tags": ["async", "promise.resolve", "thenable"],
     "created_at": 1733046219000
+  },
+  {
+    "id": "q21_async_promise_all_reject_order",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.all Rejection",
+    "question": "What will be logged?",
+    "code": "const promise1 = Promise.resolve('First');\nconst promise2 = Promise.resolve('Second');\nconst promise3 = Promise.reject('Third');\nconst promise4 = Promise.resolve('Fourth');\n\nconst runPromises = async () => {\n  const res1 = await Promise.all([promise1, promise2]);\n  const res2 = await Promise.all([promise3, promise4]);\n  return [res1, res2];\n};\n\nrunPromises()\n  .then(res => console.log(res))\n  .catch(err => console.log(err));",
+    "options": [
+      "[['First', 'Second'], ['Fourth']]",
+      "[['First', 'Second'], ['Third', 'Fourth']]",
+      "[['First', 'Second']]",
+      "'Third'"
+    ],
+    "correctAnswer": 3,
+    "explanation": "Promise.all rejects if any promise rejects. res1 succeeds with ['First', 'Second']. res2 throws because promise3 rejects. 'Third' is caught.",
+    "tags": ["async", "promise.all", "rejection"],
+    "created_at": 1733046220000
+  },
+  {
+    "id": "q22_async_return_await",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "return vs return await",
+    "question": "What is the difference?",
+    "code": "async function f1() {\n  try {\n    return Promise.reject('error');\n  } catch (e) {\n    return 'caught';\n  }\n}\n\nasync function f2() {\n  try {\n    return await Promise.reject('error');\n  } catch (e) {\n    return 'caught';\n  }\n}\n\nf1().then(console.log).catch(console.log);\nf2().then(console.log).catch(console.log);",
+    "options": [
+      "'caught', 'caught'",
+      "'error', 'caught'",
+      "'error', 'error'",
+      "'caught', 'error'"
+    ],
+    "correctAnswer": 1,
+    "explanation": "return Promise.reject() doesn't trigger catch - the promise is returned directly. return await waits and triggers the local catch block.",
+    "tags": ["async", "return-await", "error-handling"],
+    "created_at": 1733046221000
+  },
+  {
+    "id": "q23_async_foreach_await",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "forEach with async",
+    "question": "What will be logged first?",
+    "code": "const nums = [1, 2, 3];\n\nnums.forEach(async (num) => {\n  const result = await Promise.resolve(num * 2);\n  console.log(result);\n});\n\nconsole.log('Done');",
+    "options": [
+      "2, 4, 6, 'Done'",
+      "'Done', 2, 4, 6",
+      "'Done' (then 2, 4, 6 in parallel)",
+      "2, 'Done', 4, 6"
+    ],
+    "correctAnswer": 2,
+    "explanation": "forEach doesn't await async callbacks. It fires all async functions immediately. 'Done' logs first, then results in non-deterministic order.",
+    "tags": ["async", "foreach", "gotcha"],
+    "created_at": 1733046222000
+  },
+  {
+    "id": "q24_async_promise_resolve_chain",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.resolve Chain",
+    "question": "What is the output?",
+    "code": "Promise.resolve(5)\n  .then(x => x * 2)\n  .then(x => {\n    throw new Error('oops');\n  })\n  .then(x => x + 1)\n  .catch(e => 0)\n  .then(x => console.log(x));",
+    "options": [
+      "11",
+      "0",
+      "Error: oops",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "5*2=10, then throws error. Error skips next .then(). catch returns 0. Final .then() logs 0.",
+    "tags": ["async", "promise-chain", "error"],
+    "created_at": 1733046223000
+  },
+  {
+    "id": "q25_async_microtask_order",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Microtask Queue Order",
+    "question": "What is the output order?",
+    "code": "async function async1() {\n  console.log('async1 start');\n  await async2();\n  console.log('async1 end');\n}\n\nasync function async2() {\n  console.log('async2');\n}\n\nconsole.log('script start');\nasync1();\nconsole.log('script end');",
+    "options": [
+      "script start, async1 start, async2, script end, async1 end",
+      "script start, script end, async1 start, async2, async1 end",
+      "script start, async1 start, async2, async1 end, script end",
+      "script start, async1 start, script end, async2, async1 end"
+    ],
+    "correctAnswer": 0,
+    "explanation": "sync code runs first. async1 logs, calls async2 (logs), await pauses. 'script end' logs. Then microtask 'async1 end' runs.",
+    "tags": ["async", "microtask", "execution-order"],
+    "created_at": 1733046224000
+  },
+  {
+    "id": "q26_async_promise_constructor_sync",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise Constructor Executor",
+    "question": "What will be logged?",
+    "code": "const promise = new Promise((resolve, reject) => {\n  console.log(1);\n  resolve(2);\n  console.log(3);\n});\n\npromise.then(val => console.log(val));",
+    "options": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "1, 2",
+      "2, 1, 3"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise executor runs synchronously. 1 logs, resolve queues callback, 3 logs. Then microtask (2) runs.",
+    "tags": ["async", "promise", "executor"],
+    "created_at": 1733046225000
+  },
+  {
+    "id": "q27_async_sleep_implementation",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Sleep Function",
+    "question": "What is logged and when?",
+    "code": "const sleep = ms => new Promise(r => setTimeout(r, ms));\n\nasync function test() {\n  console.log('start');\n  await sleep(1000);\n  console.log('end');\n}\n\ntest();\nconsole.log('after call');",
+    "options": [
+      "start, end, after call (all immediate)",
+      "start, after call, end (end after 1s)",
+      "start, after call, end (all immediate)",
+      "after call, start, end"
+    ],
+    "correctAnswer": 1,
+    "explanation": "'start' logs, await pauses test(). 'after call' logs immediately. After 1 second, 'end' logs.",
+    "tags": ["async", "sleep", "timing"],
+    "created_at": 1733046226000
+  },
+  {
+    "id": "q28_async_catch_rethrow",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Catch and Rethrow",
+    "question": "What is logged?",
+    "code": "Promise.reject('error')\n  .catch(e => {\n    console.log('caught:', e);\n    throw e;\n  })\n  .then(() => console.log('then'))\n  .catch(() => console.log('caught again'));",
+    "options": [
+      "caught: error",
+      "caught: error, then",
+      "caught: error, caught again",
+      "then, caught again"
+    ],
+    "correctAnswer": 2,
+    "explanation": "First catch logs 'caught: error' then rethrows. Rethrown error skips .then() and hits second .catch().",
+    "tags": ["async", "catch", "rethrow"],
+    "created_at": 1733046227000
+  },
+  {
+    "id": "q29_async_promise_any_all_reject",
+    "category": "async",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.any All Reject",
+    "question": "What happens?",
+    "code": "Promise.any([\n  Promise.reject('a'),\n  Promise.reject('b'),\n  Promise.reject('c')\n])\n  .then(v => console.log('value:', v))\n  .catch(e => console.log('errors:', e.errors));",
+    "options": [
+      "value: 'a'",
+      "errors: ['a', 'b', 'c']",
+      "errors: 'a'",
+      "Unhandled rejection"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Promise.any rejects with AggregateError when all promises reject. e.errors contains all rejection reasons ['a', 'b', 'c'].",
+    "tags": ["async", "promise.any", "aggregateerror"],
+    "created_at": 1733046228000
+  },
+  {
+    "id": "q30_async_settimeout_promise",
+    "category": "async",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "setTimeout vs Promise Order",
+    "question": "What is the output order?",
+    "code": "setTimeout(() => console.log('timeout'), 0);\n\nPromise.resolve()\n  .then(() => console.log('promise1'))\n  .then(() => console.log('promise2'));\n\nconsole.log('sync');",
+    "options": [
+      "sync, timeout, promise1, promise2",
+      "sync, promise1, promise2, timeout",
+      "sync, promise1, timeout, promise2",
+      "timeout, sync, promise1, promise2"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Sync code first ('sync'). Microtasks (promises) next ('promise1', 'promise2'). Macrotasks (setTimeout) last ('timeout').",
+    "tags": ["async", "settimeout", "microtask"],
+    "created_at": 1733046229000
   }
 ]
 
