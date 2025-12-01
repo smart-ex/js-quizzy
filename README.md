@@ -1,25 +1,32 @@
 # JS Quiz Master
 
-A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, and prototypes.
+A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, prototypes, and more.
 
 ## Features
 
-- ✅ **Offline-First**: Works completely offline after first visit
-- ✅ **72+ Questions**: Covering 6 core JavaScript categories
-- ✅ **PWA Support**: Installable on mobile and desktop
-- ✅ **Statistics Tracking**: Track your progress and performance
-- ✅ **Share Results**: Share your quiz results with friends
-- ✅ **No Backend**: 100% client-side, no server required
-- ✅ **GitHub Pages Ready**: Deploy to GitHub Pages with one click
+- **Offline-First**: Works completely offline after first visit
+- **220+ Questions**: Covering 11 core JavaScript categories
+- **PWA Support**: Installable on mobile and desktop
+- **Statistics Tracking**: Track your progress and performance
+- **Share Results**: Share your quiz results with friends
+- **No Backend**: 100% client-side, no server required
+- **GitHub Pages Ready**: Deploy to GitHub Pages with one click
 
 ## Categories
 
-- **Event Loop**: Understanding JavaScript event loop, call stack, and task queues
-- **Closures**: Lexical scoping, closure patterns, and memory management
-- **Async/Await**: Promises, async/await, and asynchronous programming
-- **This Binding**: Context binding, arrow functions, and method invocation
-- **Type Coercion**: Type conversion, truthy/falsy values, and implicit conversions
-- **Prototypes**: Prototype chain, inheritance, and object-oriented patterns
+| Category | Description |
+|----------|-------------|
+| **Event Loop** | Understanding JavaScript event loop, call stack, and task queues |
+| **Closures** | Lexical scoping, closure patterns, and memory management |
+| **Async/Await** | Promises, async/await, and asynchronous programming |
+| **This Binding** | Context binding, arrow functions, and method invocation |
+| **Type Coercion** | Type conversion, truthy/falsy values, and implicit conversions |
+| **Prototypes** | Prototype chain, inheritance, and object-oriented patterns |
+| **Hoisting** | Variable and function hoisting, temporal dead zone |
+| **Scope** | Block, function, and global scope, scope chain |
+| **Destructuring** | Object and array destructuring, rest/spread patterns |
+| **Arrays** | Array methods, iteration, and common gotchas |
+| **Objects** | Object manipulation, property descriptors, and edge cases |
 
 ## Getting Started
 
@@ -32,7 +39,7 @@ A 100% open source, offline-first Progressive Web App (PWA) for testing your Jav
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/js-quizzy.git
+git clone https://github.com/xseman/js-quizzy.git
 
 # Install dependencies
 npm install
@@ -67,13 +74,13 @@ npm run generate-questions
 ```
 js-quizzy/
 ├── app/                    # Next.js App Router pages
-├── components/            # React components
-├── lib/                   # Core logic and utilities
-├── public/               # Static assets and questions
-│   ├── questions/        # Question JSON files
-│   └── sw.js            # Service Worker
-├── scripts/              # Build and validation scripts
-└── docs/                 # Documentation
+├── components/             # React components
+├── lib/                    # Core logic and utilities
+├── public/                 # Static assets and questions
+│   ├── questions/          # Question JSON files
+│   └── sw.js               # Service Worker
+├── scripts/                # Build and validation scripts
+└── docs/                   # Documentation
 ```
 
 ## Adding Questions
@@ -81,12 +88,18 @@ js-quizzy/
 See [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for guidelines on adding questions.
 
 Questions are stored in JSON files in `public/questions/`. Each category has its own file:
+
 - `event-loop.json`
 - `closures.json`
 - `async.json`
 - `this.json`
 - `coercion.json`
 - `prototypes.json`
+- `hoisting.json`
+- `scope.json`
+- `destructuring.json`
+- `arrays.json`
+- `objects.json`
 
 ## Deployment
 
