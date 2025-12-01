@@ -124,46 +124,36 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const answeredCount = answers.size;
 
   return (
-    <div className="min-h-screen py-6 px-4">
+    <div className="min-h-screen py-3 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Quiz Header */}
-        <div className="quiz-header mb-6 animate-fadeIn">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-            <div className="flex items-center gap-4">
+        {/* Quiz Header - Compact */}
+        <div className="quiz-header mb-4 animate-fadeIn">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
               <Link 
                 href="/quiz"
-                className="p-2 rounded-lg bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                className="p-1.5 rounded-lg bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </Link>
-              <div>
-                <span className="text-sm text-[var(--text-muted)]">Category</span>
-                <h1 className="text-xl font-bold text-[var(--text-primary)]">
-                  {getCategoryLabel(category)}
-                </h1>
-              </div>
+              <h1 className="text-base font-bold text-[var(--text-primary)]">
+                {getCategoryLabel(category)}
+              </h1>
+              <span className="text-sm text-[var(--text-muted)]">
+                {currentQuestionIndex + 1}/{currentSession.questions.length}
+              </span>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="timer-display">
-                <span className="text-sm text-[var(--text-muted)] mr-2">⏱</span>
-                {formatTime(elapsedTime)}
-              </div>
+            <div className="timer-display-compact">
+              <span className="text-xs text-[var(--text-muted)] mr-1">⏱</span>
+              {formatTime(elapsedTime)}
             </div>
           </div>
           
           {/* Progress Bar */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-[var(--text-secondary)]">
-                Question <span className="text-[var(--text-primary)] font-semibold">{currentQuestionIndex + 1}</span> of {currentSession.questions.length}
-              </span>
-              <span className="text-[var(--text-muted)]">
-                {answeredCount} answered
-              </span>
-            </div>
-            <div className="progress-bar">
+          <div className="mt-2">
+            <div className="progress-bar h-1.5">
               <div
                 className="progress-bar-fill"
                 style={{ width: `${progress}%` }}
@@ -172,7 +162,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
           </div>
 
           {/* Question Navigator */}
-          <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-2">
+          <div className="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1">
             {currentSession.questions.map((qId, idx) => {
               const isAnswered = answers.has(qId);
               const isCurrent = idx === currentQuestionIndex;
@@ -192,7 +182,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
                   }}
                   disabled={idx > currentQuestionIndex && !isAnswered}
                   className={`
-                    w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-semibold transition-all flex-shrink-0
+                    w-7 h-7 rounded-md flex items-center justify-center font-mono text-xs font-semibold transition-all flex-shrink-0
                     ${isCurrent 
                       ? 'bg-[var(--accent-primary)] text-[var(--bg-primary)]' 
                       : isAnswered 
@@ -210,7 +200,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
         </div>
 
         {/* Question Card */}
-        <div className="glass-card p-6 md:p-8 mb-6 animate-fadeInUp">
+        <div className="glass-card p-4 md:p-6 mb-4 animate-fadeInUp">
           <QuestionRenderer
             question={currentQuestion}
             selectedAnswer={selectedAnswer}
