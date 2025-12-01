@@ -1,10 +1,10 @@
 # Architecture Documentation
 
-This document describes the technical architecture and design decisions for JS Quiz Master.
+This document describes the technical architecture and design decisions for JS Quizzy.
 
 ## Overview
 
-JS Quiz Master is a fully client-side, offline-first Progressive Web App (PWA) built with Next.js 16. It requires no backend and works entirely in the browser using localStorage for persistence.
+JS Quizzy is a fully client-side, offline-first Progressive Web App (PWA) built with Next.js 16. It requires no backend and works entirely in the browser using localStorage for persistence.
 
 ## Tech Stack
 

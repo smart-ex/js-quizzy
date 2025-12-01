@@ -120,15 +120,16 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
             const iconPath = CATEGORY_ICONS[category] || 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253';
 
             return (
-              <div 
-                key={category} 
-                className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50 border border-[var(--border-subtle)] hover:border-[var(--border-medium)] transition-all"
+              <Link
+                key={category}
+                href={`/quiz/${category}`}
+                className="block p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border-subtle)] hover:border-[var(--accent-primary)] hover:bg-[var(--bg-tertiary)] transition-all cursor-pointer group"
               >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-[var(--bg-card)] flex items-center justify-center">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <div className="w-8 h-8 rounded-lg bg-[var(--bg-card)] flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--accent-primary)]/10 transition-colors">
                       <svg 
-                        className="w-5 h-5 text-[var(--accent-primary)]" 
+                        className="w-4 h-4 text-[var(--accent-primary)]" 
                         fill="none" 
                         viewBox="0 0 24 24" 
                         stroke="currentColor" 
@@ -137,23 +138,26 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
                         <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
                       </svg>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-[var(--text-primary)]">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-sm font-semibold text-[var(--text-primary)] truncate group-hover:text-[var(--accent-primary)] transition-colors">
                         {CATEGORY_LABELS[category as keyof typeof CATEGORY_LABELS] || category}
                       </h3>
                       <p className="text-xs text-[var(--text-muted)]">
-                        {catStats.attempted} quiz{catStats.attempted !== 1 ? 'zes' : ''} taken
+                        {catStats.attempted} quiz{catStats.attempted !== 1 ? 'zes' : ''}
                       </p>
                     </div>
                   </div>
-                  <div className="text-right">
-                    <span className={`text-2xl font-bold ${accuracy >= 70 ? 'text-[var(--accent-success)]' : accuracy >= 40 ? 'text-[var(--accent-warning)]' : 'text-[var(--accent-error)]'}`}>
+                  <div className="text-right flex-shrink-0 ml-2 flex items-center gap-1">
+                    <span className={`text-lg font-bold ${accuracy >= 70 ? 'text-[var(--accent-success)]' : accuracy >= 40 ? 'text-[var(--accent-warning)]' : 'text-[var(--accent-error)]'}`}>
                       {accuracy}%
                     </span>
+                    <svg className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--accent-primary)] group-hover:translate-x-0.5 transition-all" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
                   </div>
                 </div>
                 
-                <div className="progress-bar mb-3">
+                <div className="progress-bar mb-2" style={{ height: '4px' }}>
                   <div
                     className="progress-bar-fill"
                     style={{ 
@@ -168,10 +172,10 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
                 </div>
                 
                 <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
-                  <span>{catStats.correct} correct answers</span>
-                  <span>Avg: {formatTime(catStats.avgTime)}</span>
+                  <span className="truncate">{catStats.correct} correct</span>
+                  <span className="ml-2 flex-shrink-0">Avg: {formatTime(catStats.avgTime)}</span>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -190,7 +194,7 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
           </h2>
         </div>
         
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {(['easy', 'medium', 'hard'] as const).map(difficulty => {
             const diffStats = stats.difficulties[difficulty];
             const accuracy =

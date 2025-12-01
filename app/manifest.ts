@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   
   return {
-    name: 'JS Quiz Master',
+    name: 'JS Quizzy',
     short_name: 'JS Quiz',
     description: 'Test your JavaScript knowledge with deep-dive questions',
     start_url: `${basePath}/`,

@@ -18,12 +18,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "JS Quiz Master - Test Your JavaScript Knowledge",
+  title: "JS Quizzy - Test Your JavaScript Knowledge",
   description: "Offline-first PWA quiz application for testing deep JavaScript concepts including event loop, closures, async/await, this binding, type coercion, and prototypes.",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "JS Quiz Master",
+    title: "JS Quizzy",
   },
 };
 

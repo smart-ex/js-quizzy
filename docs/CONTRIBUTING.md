@@ -1,6 +1,6 @@
-# Contributing to JS Quiz Master
+# Contributing to JS Quizzy
 
-Thank you for your interest in contributing to JS Quiz Master! This document provides guidelines for contributing questions and code.
+Thank you for your interest in contributing to JS Quizzy! This document provides guidelines for contributing questions and code.
 
 ## Adding Questions
 

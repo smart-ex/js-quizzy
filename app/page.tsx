@@ -224,7 +224,7 @@ export default function Home() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center">
                 <span className="text-white font-bold text-sm">JS</span>
               </div>
-              <span className="text-sm text-[var(--text-muted)]">JS Quiz Master</span>
+              <span className="text-sm text-[var(--text-muted)]">JS Quizzy</span>
             </div>
             <p className="text-sm text-[var(--text-muted)]">
               Built for JavaScript enthusiasts

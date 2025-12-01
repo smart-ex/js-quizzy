@@ -1,4 +1,4 @@
-# JS Quiz Master
+# JS Quizzy
 
 A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, prototypes, and more.
 

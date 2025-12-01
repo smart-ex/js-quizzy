@@ -82,7 +82,7 @@ export function PWAStatus() {
               <span className="text-white font-bold text-sm">JS</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">Install JS Quiz Master</p>
+              <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">Install JS Quizzy</p>
               <p className="text-xs text-[var(--text-muted)] mb-3">Add to your home screen for quick access</p>
               <div className="flex items-center gap-2">
                 <button

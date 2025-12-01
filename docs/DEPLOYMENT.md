@@ -1,6 +1,6 @@
 # Deployment Guide
 
-This guide explains how to deploy JS Quiz Master to GitHub Pages.
+This guide explains how to deploy JS Quizzy to GitHub Pages.
 
 ## Prerequisites
 
