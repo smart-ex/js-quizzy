@@ -37,14 +37,15 @@ export function useUser() {
 
   const getShareUrl = useCallback((session: QuizSession): string => {
     const user = getOrCreateUser();
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
     const params = new URLSearchParams({
       user: user.id,
       score: `${session.score}/${session.answers.length}`,
       category: session.category,
       date: new Date(session.date).toISOString().split('T')[0],
     });
-    return `${baseUrl}/share?${params.toString()}`;
+    return `${origin}${basePath}/share?${params.toString()}`;
   }, [getOrCreateUser]);
 
   return {

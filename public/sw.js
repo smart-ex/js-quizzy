@@ -1,6 +1,6 @@
-const CACHE_NAME = 'js-quiz-v1';
-const STATIC_CACHE = 'js-quiz-static-v1';
-const QUESTIONS_CACHE = 'js-quiz-questions-v1';
+const CACHE_NAME = 'js-quiz-v2';
+const STATIC_CACHE = 'js-quiz-static-v2';
+const QUESTIONS_CACHE = 'js-quiz-questions-v2';
 
 // Get basePath from service worker location
 // For GitHub Pages: /repo-name
@@ -25,9 +25,23 @@ self.addEventListener('install', (event) => {
   console.log('Service Worker installing...');
   event.waitUntil(
     caches.open(STATIC_CACHE).then((cache) => {
-      return cache.addAll(STATIC_ASSETS);
+      // Use addAll but catch errors for individual files
+      return cache.addAll(STATIC_ASSETS).catch((err) => {
+        console.warn('Some assets failed to cache:', err);
+        // Try to cache assets individually
+        return Promise.allSettled(
+          STATIC_ASSETS.map(url => 
+            fetch(url).then(response => {
+              if (response.ok && response.status !== 206) {
+                return cache.put(url, response);
+              }
+            }).catch(() => {})
+          )
+        );
+      });
     })
   );
+  // Force activation of new service worker
   self.skipWaiting();
 });
 
@@ -61,12 +75,22 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          if (response.ok) {
+          // Only cache successful full responses (not 206 Partial Content)
+          // Cache API doesn't support partial responses
+          if (response.ok && response.status !== 206) {
             const responseClone = response.clone();
             caches.open(QUESTIONS_CACHE).then((cache) => {
-              cache.put(request, responseClone);
+              cache.put(request, responseClone).catch((err) => {
+                console.warn('Failed to cache response:', err);
+              });
             });
             return response;
+          }
+          // For 206 or other non-ok responses, try cache first
+          if (response.status === 206) {
+            return caches.match(request).then((cachedResponse) => {
+              return cachedResponse || response;
+            });
           }
           throw new Error('Network response not ok');
         })
@@ -98,10 +122,14 @@ self.addEventListener('fetch', (event) => {
           return cachedResponse;
         }
         return fetch(request).then((response) => {
-          if (response.ok) {
+          // Only cache successful full responses (not 206 Partial Content)
+          // Cache API doesn't support partial responses
+          if (response.ok && response.status !== 206) {
             const responseClone = response.clone();
             caches.open(STATIC_CACHE).then((cache) => {
-              cache.put(request, responseClone);
+              cache.put(request, responseClone).catch((err) => {
+                console.warn('Failed to cache response:', err);
+              });
             });
           }
           return response;

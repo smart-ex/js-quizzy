@@ -53,6 +53,14 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     return () => clearInterval(interval);
   }, [isActive, updateTimer]);
 
+  // Restore feedback state when navigating to a question that already has an answer
+  useEffect(() => {
+    if (currentQuestion) {
+      const hasAnswer = answers.has(currentQuestion.id);
+      setShowFeedback(hasAnswer);
+    }
+  }, [currentQuestion?.id, currentQuestionIndex, answers]);
+
   const handleSelectAnswer = (index: number) => {
     if (!currentQuestion) return;
     selectAnswer(currentQuestion.id, index);
@@ -61,14 +69,12 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
 
   const handleNext = () => {
     if (currentQuestionIndex < (currentSession?.questions.length || 0) - 1) {
-      setShowFeedback(false);
       nextQuestion();
     }
   };
 
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
-      setShowFeedback(false);
       previousQuestion();
     }
   };
