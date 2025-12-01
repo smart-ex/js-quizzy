@@ -2,11 +2,22 @@ const CACHE_NAME = 'js-quiz-v1';
 const STATIC_CACHE = 'js-quiz-static-v1';
 const QUESTIONS_CACHE = 'js-quiz-questions-v1';
 
+// Get basePath from service worker location
+// For GitHub Pages: /repo-name
+function getBasePath() {
+  const pathname = self.location.pathname;
+  // Extract basePath (e.g., /js-quizzy from /js-quizzy/sw.js)
+  const match = pathname.match(/^(\/[^/]+)/);
+  return match ? match[1] : '';
+}
+
+const basePath = getBasePath();
+
 const STATIC_ASSETS = [
-  '/',
-  '/quiz',
-  '/stats',
-  '/manifest.json',
+  `${basePath}/`,
+  `${basePath}/quiz`,
+  `${basePath}/stats`,
+  `${basePath}/manifest.json`,
 ];
 
 // Install event - cache static assets
@@ -45,7 +56,8 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
 
   // Questions JSON - network first, fallback to cache
-  if (url.pathname.startsWith('/questions/')) {
+  const questionsPath = `${basePath}/questions/`;
+  if (url.pathname.startsWith(questionsPath) || url.pathname.startsWith('/questions/')) {
     event.respondWith(
       fetch(request)
         .then((response) => {
@@ -64,8 +76,12 @@ self.addEventListener('fetch', (event) => {
               return cachedResponse;
             }
             // Fallback to all.json if specific file not found
-            if (url.pathname !== '/questions/all.json') {
-              return caches.match('/questions/all.json');
+            const allJsonPath = `${basePath}/questions/all.json`;
+            if (url.pathname !== allJsonPath && url.pathname !== '/questions/all.json') {
+              return caches.match(allJsonPath).then(cached => {
+                if (cached) return cached;
+                return caches.match('/questions/all.json');
+              });
             }
             return new Response('Questions not available', { status: 404 });
           });

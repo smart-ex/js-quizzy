@@ -1,15 +1,14 @@
 import type { NextConfig } from "next";
 
 // Support GitHub Pages deployment with basePath
-// Set GITHUB_REPOSITORY environment variable in GitHub Actions
-// Format: owner/repo-name -> basePath: /repo-name
+// PAGES_BASE_PATH is set automatically by GitHub Actions (actions/configure-pages)
+// For local development, you can set NEXT_PUBLIC_BASE_PATH manually
 const getBasePath = (): string | undefined => {
-  const repo = process.env.GITHUB_REPOSITORY;
-  if (repo) {
-    const repoName = repo.split('/')[1];
-    return `/${repoName}`;
+  // PAGES_BASE_PATH is set by GitHub Actions during build
+  if (process.env.PAGES_BASE_PATH) {
+    return process.env.PAGES_BASE_PATH;
   }
-  // Allow manual override via NEXT_PUBLIC_BASE_PATH
+  // Fallback for local development or manual override
   return process.env.NEXT_PUBLIC_BASE_PATH;
 };
 

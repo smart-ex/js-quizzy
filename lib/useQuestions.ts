@@ -5,6 +5,7 @@ import type { Question, Category } from './types';
 import { useStorage } from './useStorage';
 import { DATA_VERSION } from './constants';
 import { logger } from './utils';
+import { getQuestionsPath } from './paths';
 
 export function useQuestions() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -32,7 +33,8 @@ export function useQuestions() {
 
       // Try to fetch from network
       try {
-        const response = await fetch('/questions/all.json');
+        const questionsPath = getQuestionsPath();
+        const response = await fetch(questionsPath);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -69,7 +71,8 @@ export function useQuestions() {
   const refreshQuestions = useCallback(async (): Promise<void> => {
     // Force refresh by clearing cache version
     try {
-      const response = await fetch('/questions/all.json');
+      const questionsPath = getQuestionsPath();
+      const response = await fetch(questionsPath);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

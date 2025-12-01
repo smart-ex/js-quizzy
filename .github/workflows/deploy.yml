@@ -1,16 +1,21 @@
-name: Deploy to GitHub Pages
+name: Deploy Next.js site to Pages
 
 on:
+  # Runs on pushes targeting the main branch
   push:
     branches:
       - main
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -31,15 +36,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: npm run build
-
       - name: Setup Pages
-        uses: actions/configure-pages@v4
-        with:
-          enablement: true
+        id: setup_pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Next.js
+        run: npm run build
+        env:
+          PAGES_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.setup_pages.outputs.base_path }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

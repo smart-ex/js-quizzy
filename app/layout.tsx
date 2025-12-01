@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { getIconPath } from "@/lib/paths";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const iconPath = `${basePath}/icons/icon-192.png`;
+  
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/icons/icon-192.png" />
+        <link rel="icon" href={iconPath} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
