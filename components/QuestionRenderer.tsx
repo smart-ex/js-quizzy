@@ -28,20 +28,49 @@ export function QuestionRenderer({
     }
   }, [question.code]);
 
+  // Difficulty badge color
+  const getDifficultyBadge = (difficulty: string) => {
+    switch (difficulty) {
+      case 'easy':
+        return 'badge badge-easy';
+      case 'medium':
+        return 'badge badge-medium';
+      case 'hard':
+        return 'badge badge-hard';
+      default:
+        return 'badge badge-medium';
+    }
+  };
+
   return (
     <div className="space-y-6">
+      {/* Question Header */}
       <div>
-        <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-gray-100">
+        <div className="flex items-center gap-3 mb-3">
+          <span className={getDifficultyBadge(question.difficulty)}>
+            {question.difficulty}
+          </span>
+        </div>
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 text-[var(--text-primary)] leading-tight">
           {question.title}
         </h2>
-        <p className="text-lg text-gray-700 dark:text-gray-300">
+        <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
           {question.question}
         </p>
       </div>
 
+      {/* Code Block */}
       {question.code && (
-        <div className="rounded-lg p-4 overflow-x-auto">
-          <pre className="text-sm font-mono">
+        <div className="rounded-xl overflow-hidden border border-[var(--border-subtle)]">
+          <div className="flex items-center gap-2 px-4 py-2 bg-[var(--bg-tertiary)] border-b border-[var(--border-subtle)]">
+            <div className="flex gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-red-500/60" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500/60" />
+              <span className="w-3 h-3 rounded-full bg-green-500/60" />
+            </div>
+            <span className="text-xs text-[var(--text-muted)] font-mono ml-2">JavaScript</span>
+          </div>
+          <pre className="!m-0 !rounded-none !border-0 overflow-x-auto">
             <code ref={codeRef} className="language-javascript">
               {question.code}
             </code>
@@ -49,27 +78,22 @@ export function QuestionRenderer({
         </div>
       )}
 
-      <div className="space-y-3">
+      {/* Options */}
+      <div className="space-y-3 pt-2">
         {question.options.map((option, index) => {
           const isSelected = selectedAnswer === index;
           const isCorrect = index === question.correctAnswer;
-          const showFeedback = showCorrect && isSelected;
-
-          let bgColor = 'bg-white dark:bg-gray-800';
-          let borderColor = 'border-gray-300 dark:border-gray-600';
-          const textColor = 'text-gray-900 dark:text-gray-100';
-
+          
+          let buttonClass = 'option-button';
+          
           if (disabled || showCorrect) {
             if (isCorrect) {
-              bgColor = 'bg-green-100 dark:bg-green-900';
-              borderColor = 'border-green-500 dark:border-green-600';
+              buttonClass += ' correct';
             } else if (isSelected && !isCorrect) {
-              bgColor = 'bg-red-100 dark:bg-red-900';
-              borderColor = 'border-red-500 dark:border-red-600';
+              buttonClass += ' incorrect';
             }
           } else if (isSelected) {
-            bgColor = 'bg-blue-100 dark:bg-blue-900';
-            borderColor = 'border-blue-500 dark:border-blue-600';
+            buttonClass += ' selected';
           }
 
           return (
@@ -77,23 +101,26 @@ export function QuestionRenderer({
               key={index}
               onClick={() => !disabled && onSelectAnswer?.(index)}
               disabled={disabled}
-              className={`
-                w-full text-left p-4 rounded-lg border-2 transition-all
-                ${bgColor} ${borderColor} ${textColor}
-                ${!disabled ? 'hover:border-blue-400 dark:hover:border-blue-500 cursor-pointer' : 'cursor-not-allowed'}
-                ${isSelected ? 'ring-2 ring-offset-2 ring-blue-500 dark:ring-blue-400' : ''}
-              `}
+              className={buttonClass}
             >
-              <div className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center font-semibold">
+              <div className="flex items-center gap-4">
+                <span className={`option-letter ${isSelected || (showCorrect && isCorrect) ? '!bg-current !text-[var(--bg-primary)]' : ''}`}>
                   {String.fromCharCode(65 + index)}
                 </span>
-                <span className="flex-1">{option}</span>
+                <span className="flex-1 text-left">{option}</span>
                 {showCorrect && isCorrect && (
-                  <span className="text-green-600 dark:text-green-400 font-semibold">✓</span>
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--accent-success)]/20">
+                    <svg className="w-5 h-5 text-[var(--accent-success)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
                 )}
-                {showFeedback && !isCorrect && (
-                  <span className="text-red-600 dark:text-red-400 font-semibold">✗</span>
+                {showCorrect && isSelected && !isCorrect && (
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--accent-error)]/20">
+                    <svg className="w-5 h-5 text-[var(--accent-error)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </span>
                 )}
               </div>
             </button>
@@ -101,12 +128,16 @@ export function QuestionRenderer({
         })}
       </div>
 
+      {/* Explanation */}
       {showCorrect && question.explanation && (
-        <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
-          <p className="text-sm font-semibold text-blue-900 dark:text-blue-200 mb-2">
-            Explanation:
-          </p>
-          <p className="text-sm text-blue-800 dark:text-blue-300">
+        <div className="mt-8 p-5 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border border-[var(--accent-primary)]/20 animate-fadeIn">
+          <div className="flex items-center gap-2 mb-3">
+            <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span className="font-semibold text-[var(--accent-primary)]">Explanation</span>
+          </div>
+          <p className="text-[var(--text-secondary)] leading-relaxed">
             {question.explanation}
           </p>
         </div>
@@ -114,4 +145,3 @@ export function QuestionRenderer({
     </div>
   );
 }
-

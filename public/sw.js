@@ -1,6 +1,6 @@
-const CACHE_NAME = 'js-quiz-v2';
-const STATIC_CACHE = 'js-quiz-static-v2';
-const QUESTIONS_CACHE = 'js-quiz-questions-v2';
+const CACHE_NAME = 'js-quiz-v3';
+const STATIC_CACHE = 'js-quiz-static-v3';
+const QUESTIONS_CACHE = 'js-quiz-questions-v3';
 
 // Get basePath from service worker location
 // For GitHub Pages: /repo-name
@@ -114,7 +114,36 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Static assets - cache first, fallback to network
+  // HTML pages - network first, fallback to cache (to prevent hydration mismatches)
+  if (url.origin === self.location.origin && (
+    request.mode === 'navigate' || 
+    url.pathname === '/' || 
+    url.pathname.endsWith('/') ||
+    !url.pathname.includes('.')
+  )) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response.ok && response.status !== 206) {
+            const responseClone = response.clone();
+            caches.open(STATIC_CACHE).then((cache) => {
+              cache.put(request, responseClone).catch((err) => {
+                console.warn('Failed to cache response:', err);
+              });
+            });
+          }
+          return response;
+        })
+        .catch(() => {
+          return caches.match(request).then((cachedResponse) => {
+            return cachedResponse || new Response('Offline', { status: 503 });
+          });
+        })
+    );
+    return;
+  }
+
+  // Static assets (JS, CSS, images) - cache first, fallback to network
   if (url.origin === self.location.origin) {
     event.respondWith(
       caches.match(request).then((cachedResponse) => {

@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import type { Question } from '@/lib/types';
 import { useQuizStore } from '@/lib/store';
 import { useStorage } from '@/lib/useStorage';
 import { formatTime, calculateScore } from '@/lib/utils';
 import { QuestionRenderer } from './QuestionRenderer';
+import { getCategoryLabel } from '@/lib/constants';
 
 interface QuizInterfaceProps {
   questions: Question[];
@@ -107,10 +109,10 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
 
   if (!currentSession || !currentQuestion) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-400">Loading quiz...</p>
+          <div className="spinner mx-auto mb-4" />
+          <p className="text-[var(--text-secondary)]">Preparing your quiz...</p>
         </div>
       </div>
     );
@@ -119,30 +121,96 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const progress = ((currentQuestionIndex + 1) / currentSession.questions.length) * 100;
   const selectedAnswer = answers.get(currentQuestion.id);
   const canFinish = currentQuestionIndex === currentSession.questions.length - 1 && selectedAnswer !== undefined;
+  const answeredCount = answers.size;
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4">
+    <div className="min-h-screen py-6 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-              Question {currentQuestionIndex + 1} of {currentSession.questions.length}
-            </h1>
-            <div className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-              {formatTime(elapsedTime)}
+        {/* Quiz Header */}
+        <div className="quiz-header mb-6 animate-fadeIn">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <div className="flex items-center gap-4">
+              <Link 
+                href="/quiz"
+                className="p-2 rounded-lg bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </Link>
+              <div>
+                <span className="text-sm text-[var(--text-muted)]">Category</span>
+                <h1 className="text-xl font-bold text-[var(--text-primary)]">
+                  {getCategoryLabel(category)}
+                </h1>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="timer-display">
+                <span className="text-sm text-[var(--text-muted)] mr-2">⏱</span>
+                {formatTime(elapsedTime)}
+              </div>
             </div>
           </div>
-          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-            <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${progress}%` }}
-            />
+          
+          {/* Progress Bar */}
+          <div className="space-y-2">
+            <div className="flex items-center justify-between text-sm">
+              <span className="text-[var(--text-secondary)]">
+                Question <span className="text-[var(--text-primary)] font-semibold">{currentQuestionIndex + 1}</span> of {currentSession.questions.length}
+              </span>
+              <span className="text-[var(--text-muted)]">
+                {answeredCount} answered
+              </span>
+            </div>
+            <div className="progress-bar">
+              <div
+                className="progress-bar-fill"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Question Navigator */}
+          <div className="flex items-center gap-2 mt-4 overflow-x-auto pb-2">
+            {currentSession.questions.map((qId, idx) => {
+              const isAnswered = answers.has(qId);
+              const isCurrent = idx === currentQuestionIndex;
+              return (
+                <button
+                  key={qId}
+                  onClick={() => {
+                    if (idx < currentQuestionIndex) {
+                      for (let i = 0; i < currentQuestionIndex - idx; i++) {
+                        previousQuestion();
+                      }
+                    } else if (idx > currentQuestionIndex && isAnswered) {
+                      for (let i = 0; i < idx - currentQuestionIndex; i++) {
+                        nextQuestion();
+                      }
+                    }
+                  }}
+                  disabled={idx > currentQuestionIndex && !isAnswered}
+                  className={`
+                    w-10 h-10 rounded-lg flex items-center justify-center font-mono text-sm font-semibold transition-all flex-shrink-0
+                    ${isCurrent 
+                      ? 'bg-[var(--accent-primary)] text-[var(--bg-primary)]' 
+                      : isAnswered 
+                        ? 'bg-[var(--accent-success)]/20 text-[var(--accent-success)] border border-[var(--accent-success)]/30' 
+                        : 'bg-[var(--bg-tertiary)] text-[var(--text-muted)]'
+                    }
+                    ${idx > currentQuestionIndex && !isAnswered ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
+                  `}
+                >
+                  {idx + 1}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Question */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6">
+        {/* Question Card */}
+        <div className="glass-card p-6 md:p-8 mb-6 animate-fadeInUp">
           <QuestionRenderer
             question={currentQuestion}
             selectedAnswer={selectedAnswer}
@@ -152,35 +220,57 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
           />
         </div>
 
-        {/* Navigation */}
-        <div className="flex items-center justify-between">
+        {/* Navigation Buttons */}
+        <div className="flex items-center justify-between gap-4">
           <button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}
-            className="px-6 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+            className={`
+              flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all
+              ${currentQuestionIndex === 0
+                ? 'bg-[var(--bg-tertiary)] text-[var(--text-muted)] cursor-not-allowed'
+                : 'bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)]'
+              }
+            `}
           >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
             Previous
           </button>
 
-          {canFinish ? (
-            <button
-              onClick={handleFinish}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-            >
-              Finish Quiz
-            </button>
-          ) : (
-            <button
-              onClick={handleNext}
-              disabled={selectedAnswer === undefined || showFeedback === false}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-700 transition-colors"
-            >
-              Next
-            </button>
-          )}
+          <div className="flex items-center gap-3">
+            {canFinish ? (
+              <button
+                onClick={handleFinish}
+                className="glow-button flex items-center gap-2 !bg-gradient-to-r !from-green-500 !to-emerald-600 !shadow-green-500/30"
+              >
+                Finish Quiz
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </button>
+            ) : (
+              <button
+                onClick={handleNext}
+                disabled={selectedAnswer === undefined || !showFeedback}
+                className={`
+                  flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all
+                  ${selectedAnswer === undefined || !showFeedback
+                    ? 'bg-[var(--bg-tertiary)] text-[var(--text-muted)] cursor-not-allowed'
+                    : 'glow-button'
+                  }
+                `}
+              >
+                Next
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

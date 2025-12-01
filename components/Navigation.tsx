@@ -9,32 +9,36 @@ export function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
-    { href: '/', label: 'Home' },
-    { href: '/quiz', label: 'Quiz' },
-    { href: '/stats', label: 'Stats' },
+    { href: '/', label: 'Home', icon: HomeIcon },
+    { href: '/quiz', label: 'Quiz', icon: QuizIcon },
+    { href: '/stats', label: 'Stats', icon: StatsIcon },
   ];
 
   return (
-    <nav className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+    <nav className="nav-glass sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
-            <Link href="/" className="flex items-center px-2 py-2 text-xl font-bold text-gray-900 dark:text-gray-100">
-              JS Quiz Master
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center gap-3 group">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-shadow">
+                <span className="text-white font-bold text-lg">JS</span>
+              </div>
+              <span className="text-xl font-bold text-[var(--text-primary)] hidden sm:block">
+                Quiz Master
+              </span>
             </Link>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <div className="hidden sm:ml-10 sm:flex sm:items-center sm:gap-1">
               {links.map(link => {
-                const isActive = pathname === link.href;
+                const isActive = pathname === link.href || 
+                  (link.href === '/quiz' && pathname.startsWith('/quiz'));
+                const Icon = link.icon;
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
-                      isActive
-                        ? 'border-blue-500 text-gray-900 dark:text-gray-100'
-                        : 'border-transparent text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-700 dark:hover:text-gray-300'
-                    }`}
+                    className={`nav-link flex items-center gap-2 ${isActive ? 'active' : ''}`}
                   >
+                    <Icon className="w-4 h-4" />
                     {link.label}
                   </Link>
                 );
@@ -46,43 +50,19 @@ export function Navigation() {
           <div className="flex items-center sm:hidden">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="inline-flex items-center justify-center p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)] transition-colors"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={mobileMenuOpen}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg
-                  className="block h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
+                <svg className="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
               )}
             </button>
@@ -92,21 +72,24 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="pt-2 pb-3 space-y-1 border-t border-gray-200 dark:border-gray-700">
+        <div className="sm:hidden animate-fadeIn" id="mobile-menu">
+          <div className="px-4 pt-2 pb-4 space-y-1 border-t border-[var(--border-subtle)]">
             {links.map(link => {
-              const isActive = pathname === link.href;
+              const isActive = pathname === link.href ||
+                (link.href === '/quiz' && pathname.startsWith('/quiz'));
+              const Icon = link.icon;
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium ${
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
-                      ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-500 text-blue-700 dark:text-blue-400'
-                      : 'border-transparent text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-300 dark:hover:border-gray-600 hover:text-gray-800 dark:hover:text-gray-200'
+                      ? 'bg-[var(--bg-card)] text-[var(--accent-primary)] border border-[var(--accent-primary)]/20'
+                      : 'text-[var(--text-secondary)] hover:bg-[var(--bg-card)] hover:text-[var(--text-primary)]'
                   }`}
                 >
+                  <Icon className="w-5 h-5" />
                   {link.label}
                 </Link>
               );
@@ -118,3 +101,27 @@ export function Navigation() {
   );
 }
 
+// Icon components
+function HomeIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+    </svg>
+  );
+}
+
+function QuizIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+    </svg>
+  );
+}
+
+function StatsIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+    </svg>
+  );
+}
