@@ -177,7 +177,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
           </div>
 
           {/* Question Navigator */}
-          <div className="flex items-center gap-1.5 mt-2 overflow-x-auto pb-1">
+          <div className="flex items-center justify-center gap-1.5 mt-2 overflow-x-auto pb-1">
             {currentSession.questions.map((qId, idx) => {
               const isAnswered = answers.has(qId);
               const isCurrent = idx === currentQuestionIndex;

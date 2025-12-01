@@ -429,6 +429,16 @@ code, pre, .font-mono {
   color: var(--bg-primary);
 }
 
+.option-button-compact.correct .option-letter-compact {
+  background: var(--accent-success);
+  color: var(--bg-primary);
+}
+
+.option-button-compact.incorrect .option-letter-compact {
+  background: var(--accent-error);
+  color: var(--bg-primary);
+}
+
 /* Navigation */
 .nav-glass {
   background: rgba(10, 15, 26, 0.8);

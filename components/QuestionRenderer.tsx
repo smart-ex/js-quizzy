@@ -110,7 +110,7 @@ export function QuestionRenderer({
               className={buttonClass}
             >
               <div className="flex items-center gap-3">
-                <span className={`option-letter-compact ${isSelected || (showCorrect && isCorrect) ? '!bg-current !text-[var(--bg-primary)]' : ''}`}>
+                <span className="option-letter-compact">
                   {String.fromCharCode(65 + index)}
                 </span>
                 <span className="flex-1 text-left text-sm">{option}</span>

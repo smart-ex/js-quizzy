@@ -18,13 +18,29 @@ export function Navigation() {
 
   useEffect(() => {
     setMounted(true);
-    setIsInstalled(window.matchMedia('(display-mode: standalone)').matches);
+    
+    // Check if already installed
+    const checkInstalled = () => {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      const isInStandaloneMode = (window.navigator as any).standalone === true;
+      const installed = isStandalone || isInStandaloneMode;
+      setIsInstalled(installed);
+      if (installed) {
+        console.log('PWA already installed');
+      }
+      return installed;
+    };
+    
+    const installed = checkInstalled();
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
-      setDeferredPrompt(e as BeforeInstallPromptEvent);
+      const promptEvent = e as BeforeInstallPromptEvent;
+      setDeferredPrompt(promptEvent);
+      console.log('PWA install prompt available');
     };
 
+    // Listen for beforeinstallprompt event
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     return () => {
@@ -33,19 +49,41 @@ export function Navigation() {
   }, []);
 
   const handleInstall = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      console.log('No install prompt available');
+      return;
+    }
 
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    
-    if (outcome === 'accepted') {
-      setIsInstalled(true);
+    try {
+      await deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      
+      console.log('Install prompt outcome:', outcome);
+      
+      if (outcome === 'accepted') {
+        setIsInstalled(true);
+      }
+    } catch (error) {
+      console.error('Error showing install prompt:', error);
     }
     
     setDeferredPrompt(null);
   };
 
-  const showInstallButton = mounted && deferredPrompt && !isInstalled;
+  // Show button if mounted, not installed, and prompt is available
+  // Debug logging
+  useEffect(() => {
+    if (mounted) {
+      console.log('PWA Install Status:', {
+        mounted,
+        isInstalled,
+        hasPrompt: deferredPrompt !== null,
+        showButton: mounted && !isInstalled && deferredPrompt !== null
+      });
+    }
+  }, [mounted, isInstalled, deferredPrompt]);
+
+  const showInstallButton = mounted && !isInstalled && deferredPrompt !== null;
 
   const links = [
     { href: '/', label: 'Home', icon: HomeIcon },
@@ -90,25 +128,25 @@ export function Navigation() {
           {/* PWA Install & GitHub links */}
           <div className="flex items-center gap-2">
             {/* PWA Install Button */}
-            {showInstallButton && (
-              <button
-                onClick={handleInstall}
-                className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25 transition-all group"
-                aria-label="Install PWA"
-              >
-                <InstallIcon className="w-4 h-4" />
-                <span className="text-sm font-medium">Install</span>
-              </button>
-            )}
-            {showInstallButton && (
-              <button
-                onClick={handleInstall}
-                className="sm:hidden p-2 rounded-lg text-[var(--accent-primary)] hover:bg-[var(--bg-card)] transition-colors"
-                aria-label="Install PWA"
-              >
-                <InstallIcon className="w-5 h-5" />
-              </button>
-            )}
+            {showInstallButton ? (
+              <>
+                <button
+                  onClick={handleInstall}
+                  className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25 transition-all group"
+                  aria-label="Install PWA"
+                >
+                  <InstallIcon className="w-4 h-4" />
+                  <span className="text-sm font-medium">Install</span>
+                </button>
+                <button
+                  onClick={handleInstall}
+                  className="sm:hidden p-2 rounded-lg text-[var(--accent-primary)] hover:bg-[var(--bg-card)] transition-colors"
+                  aria-label="Install PWA"
+                >
+                  <InstallIcon className="w-5 h-5" />
+                </button>
+              </>
+            ) : null}
             
             {/* GitHub link */}
             <a
