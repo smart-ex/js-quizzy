@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { QuizSession } from '@/lib/types';
 import { useUser } from '@/lib/useUser';
 
@@ -10,8 +10,16 @@ interface ShareButtonProps {
 
 export function ShareButton({ session }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+  const [loading, setLoading] = useState(true);
   const { getShareUrl } = useUser();
-  const shareUrl = getShareUrl(session);
+
+  useEffect(() => {
+    getShareUrl(session).then(url => {
+      setShareUrl(url);
+      setLoading(false);
+    });
+  }, [session, getShareUrl]);
 
   const handleCopy = async () => {
     try {
@@ -33,17 +41,19 @@ export function ShareButton({ session }: ShareButtonProps) {
       </div>
       <input
         type="text"
-        value={shareUrl}
+        value={loading ? 'Generating link...' : shareUrl}
         readOnly
-        className="flex-1 px-4 py-2.5 bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-lg border border-[var(--border-subtle)] text-sm font-mono focus:outline-none focus:border-[var(--accent-primary)]"
+        disabled={loading}
+        className="flex-1 px-4 py-2.5 bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-lg border border-[var(--border-subtle)] text-sm font-mono focus:outline-none focus:border-[var(--accent-primary)] disabled:opacity-50"
       />
       <button
         onClick={handleCopy}
+        disabled={loading || !shareUrl}
         className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 flex-shrink-0 ${
           copied
             ? 'bg-[var(--accent-success)] text-white'
             : 'bg-[var(--accent-primary)] text-[var(--bg-primary)] hover:shadow-lg hover:shadow-[var(--accent-primary)]/25'
-        }`}
+        } disabled:opacity-50 disabled:cursor-not-allowed`}
       >
         {copied ? (
           <>

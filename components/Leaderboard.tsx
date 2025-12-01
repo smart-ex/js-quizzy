@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import type { Leaderboard as LeaderboardType, LeaderboardEntry } from '@/lib/types';
 import { CATEGORY_LABELS } from '@/lib/constants';
+import { verifyShareUrl, isTimestampValid } from '@/lib/signature';
 
 export function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardType | null>(null);
@@ -12,8 +13,55 @@ export function Leaderboard() {
   useEffect(() => {
     fetch('/leaderboard.json')
       .then(res => res.json())
-      .then((data: LeaderboardType) => {
-        setLeaderboard(data);
+      .then(async (data: LeaderboardType) => {
+        // Verify signatures for all entries
+        const verifiedData: LeaderboardType = {
+          daily: [],
+          weekly: [],
+          allTime: [],
+        };
+
+        // Verify entries in parallel for better performance
+        for (const period of ['daily', 'weekly', 'allTime'] as const) {
+          const entries = data[period] || [];
+          
+          // Verify all entries in parallel
+          const verificationPromises = entries.map(async (entry) => {
+            // If entry has signature, verify it; otherwise include for backward compatibility
+            if (entry.signature && entry.timestamp) {
+              const score = `${entry.score}/${entry.total}`;
+              const isValid = await verifyShareUrl(
+                entry.userId,
+                score,
+                entry.timestamp,
+                entry.signature
+              );
+              
+              // Only include entries with valid signatures and timestamps
+              if (isValid && isTimestampValid(entry.timestamp)) {
+                return entry;
+              }
+              return null; // Invalid signature, exclude
+            } else {
+              // For backward compatibility, include entries without signatures
+              // (assuming they were added before signature system was implemented)
+              return entry;
+            }
+          });
+          
+          const verifiedEntries = (await Promise.all(verificationPromises))
+            .filter((entry): entry is LeaderboardEntry => entry !== null);
+          
+          // Sort by score descending
+          verifiedData[period] = verifiedEntries.sort((a, b) => {
+            const aRatio = a.score / a.total;
+            const bRatio = b.score / b.total;
+            if (aRatio !== bRatio) return bRatio - aRatio;
+            return b.score - a.score;
+          });
+        }
+
+        setLeaderboard(verifiedData);
         setLoading(false);
       })
       .catch(() => {

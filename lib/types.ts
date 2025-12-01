@@ -88,6 +88,8 @@ export interface LeaderboardEntry {
   category: Category;
   date: number;
   githubUsername?: string;
+  timestamp?: number;
+  signature?: string;
 }
 
 export interface Leaderboard {
