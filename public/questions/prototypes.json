@@ -320,6 +320,7 @@
     "correctAnswer": 1,
     "explanation": "In non-strict mode, assigning to obj.x silently fails (proto.x is frozen). obj.x returns 10 from the prototype. In strict mode, this throws.",
     "tags": ["prototypes", "freeze", "assignment"],
+    "nonStrictMode": true,
     "created_at": 1733046516000
   },
   {

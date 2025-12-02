@@ -744,3 +744,44 @@ a:focus-visible {
   outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
+
+/* Sandpack Code Playground Styles */
+.code-playground-wrapper {
+  background: var(--bg-secondary);
+}
+
+.code-playground-wrapper .sp-wrapper-custom {
+  border-radius: 0;
+  border: none;
+  background: var(--bg-secondary);
+}
+
+.code-playground-wrapper .sp-layout-custom {
+  border: none;
+  background: var(--bg-secondary);
+}
+
+.code-playground-wrapper .sp-editor-custom {
+  background: var(--bg-secondary);
+}
+
+.code-playground-wrapper .sp-console-custom {
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border-subtle);
+}
+
+.code-playground-wrapper .hidden-preview {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+.code-playground-wrapper .hidden-preview .sp-preview-container {
+  display: none !important;
+}

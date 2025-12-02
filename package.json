@@ -9,9 +9,10 @@
     "lint": "eslint",
     "validate-questions": "tsx scripts/validate-questions.ts",
     "generate-questions": "tsx scripts/generate-all-json.ts",
-    "prepare:build": "npm run lint && npm run validate-questions && npm run build"
+    "prepare:build": "npm run lint && npm run validate-questions && npm run generate-questions && npm run build"
   },
   "dependencies": {
+    "@codesandbox/sandpack-react": "^2.20.0",
     "@types/prismjs": "^1.26.5",
     "next": "16.0.6",
     "prismjs": "^1.30.0",

@@ -18,20 +18,21 @@ interface QuizInterfaceProps {
 export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const router = useRouter();
   const { saveSession, updateStats } = useStorage();
-  const {
-    currentSession,
-    currentQuestionIndex,
-    answers,
-    elapsedTime,
-    isActive,
-    startQuiz,
-    selectAnswer,
-    nextQuestion,
-    previousQuestion,
-    updateTimer,
-    endQuiz,
-    reset,
-  } = useQuizStore();
+  
+  const currentSession = useQuizStore((state) => state.currentSession);
+  const currentQuestionIndex = useQuizStore((state) => state.currentQuestionIndex);
+  const elapsedTime = useQuizStore((state) => state.elapsedTime);
+  const isActive = useQuizStore((state) => state.isActive);
+  const answers = useQuizStore((state) => state.answers);
+  
+  const startQuiz = useQuizStore((state) => state.startQuiz);
+  const selectAnswer = useQuizStore((state) => state.selectAnswer);
+  const nextQuestion = useQuizStore((state) => state.nextQuestion);
+  const previousQuestion = useQuizStore((state) => state.previousQuestion);
+  const goToQuestion = useQuizStore((state) => state.goToQuestion);
+  const updateTimer = useQuizStore((state) => state.updateTimer);
+  const endQuiz = useQuizStore((state) => state.endQuiz);
+  const reset = useQuizStore((state) => state.reset);
 
   const [showFeedback, setShowFeedback] = useState(false);
 
@@ -185,14 +186,9 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
                 <button
                   key={qId}
                   onClick={() => {
-                    if (idx < currentQuestionIndex) {
-                      for (let i = 0; i < currentQuestionIndex - idx; i++) {
-                        previousQuestion();
-                      }
-                    } else if (idx > currentQuestionIndex && isAnswered) {
-                      for (let i = 0; i < idx - currentQuestionIndex; i++) {
-                        nextQuestion();
-                      }
+                    // Allow backward navigation always, forward only if answered
+                    if (idx < currentQuestionIndex || (idx > currentQuestionIndex && isAnswered)) {
+                      goToQuestion(idx);
                     }
                   }}
                   disabled={idx > currentQuestionIndex && !isAnswered}

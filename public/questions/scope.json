@@ -130,6 +130,7 @@
     "correctAnswer": 0,
     "explanation": "In non-strict mode, assigning to an undeclared variable creates an implicit global. x becomes a global variable.",
     "tags": ["scope", "implicit-global", "non-strict"],
+    "nonStrictMode": true,
     "created_at": 1733048006000
   },
   {
@@ -244,6 +245,7 @@
     "correctAnswer": 1,
     "explanation": "with adds obj to the scope chain. a and b are found on obj first (1, 2), shadowing the outer a.",
     "tags": ["scope", "with", "legacy"],
+    "nonStrictMode": true,
     "created_at": 1733048012000
   },
   {

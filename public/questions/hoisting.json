@@ -130,6 +130,7 @@
     "correctAnswer": 0,
     "explanation": "In non-strict mode, function declarations in blocks are partially hoisted. The name is hoisted as undefined, but the function is assigned when the block executes.",
     "tags": ["hoisting", "block", "function"],
+    "nonStrictMode": true,
     "created_at": 1733047006000
   },
   {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { UserStats, QuizSession } from '@/lib/types';
-import { CATEGORY_LABELS, QUESTIONS_PER_QUIZ, CATEGORY_ICONS } from '@/lib/constants';
+import { CATEGORY_LABELS, CATEGORY_ICONS } from '@/lib/constants';
 import { formatTime, calculateAccuracy } from '@/lib/utils';
 import { useUser } from '@/lib/useUser';
 
@@ -13,9 +13,21 @@ interface StatsDashboardProps {
 }
 
 export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
+  // Calculate total questions answered from all sessions
+  const totalQuestions = sessions.reduce((sum, session) => sum + session.answers.length, 0);
+  
+  // Calculate total questions per category from actual sessions
+  const categoryQuestionCounts = sessions.reduce((acc, session) => {
+    if (!acc[session.category]) {
+      acc[session.category] = 0;
+    }
+    acc[session.category] += session.answers.length;
+    return acc;
+  }, {} as Record<string, number>);
+  
   const overallAccuracy =
-    stats.totalQuizzes > 0
-      ? Math.round((stats.totalCorrect / (stats.totalQuizzes * QUESTIONS_PER_QUIZ)) * 100)
+    totalQuestions > 0
+      ? Math.min(100, Math.round((stats.totalCorrect / totalQuestions) * 100))
       : 0;
 
   // Sort sessions by date (newest first)
@@ -107,7 +119,8 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {Object.entries(stats.byCategory)
             .map(([category, catStats]) => {
-              const totalQuestions = catStats.attempted * QUESTIONS_PER_QUIZ;
+              // Use actual question count from sessions, not constant * attempts
+              const totalQuestions = categoryQuestionCounts[category] || 0;
               const accuracy =
                 totalQuestions > 0
                   ? Math.min(100, Math.round((catStats.correct / totalQuestions) * 100))

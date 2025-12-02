@@ -18,6 +18,7 @@ export interface Question {
   correctAnswer: number;
   explanation: string;
   tags: string[];
+  nonStrictMode?: boolean; // If true, code requires non-strict mode and won't work in Sandpack
   difficulty_votes?: {
     up: number;
     down: number;

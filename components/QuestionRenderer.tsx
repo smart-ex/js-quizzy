@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import type { Question } from '@/lib/types';
+import { CodePlayground } from './CodePlayground';
 
 interface QuestionRendererProps {
   question: Question;
@@ -22,17 +23,43 @@ export function QuestionRenderer({
 }: QuestionRendererProps) {
   const codeRef = useRef<HTMLElement>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [usePlayground, setUsePlayground] = useState(false);
 
-  // Reset explanation state when question changes
+  // Reset explanation and playground state when question changes
   useEffect(() => {
     setShowExplanation(false);
+    setUsePlayground(false);
   }, [question.id]);
+
+  // Disable playground if question requires non-strict mode
+  useEffect(() => {
+    if (question.nonStrictMode && usePlayground) {
+      setUsePlayground(false);
+    }
+  }, [question.nonStrictMode, usePlayground]);
 
   useEffect(() => {
     if (question.code && codeRef.current) {
       Prism.highlightElement(codeRef.current);
     }
   }, [question.code]);
+
+  // Re-apply Prism highlighting when switching back to static view
+  useEffect(() => {
+    if (!usePlayground && question.code && codeRef.current) {
+      // Use requestAnimationFrame to ensure the element is rendered in the DOM
+      const frameId = requestAnimationFrame(() => {
+        if (codeRef.current) {
+          // Remove any existing Prism classes to force re-highlighting
+          const element = codeRef.current;
+          element.className = element.className.replace(/prism-[^\s]*/g, '').trim();
+          element.className = 'language-javascript text-sm';
+          Prism.highlightElement(element);
+        }
+      });
+      return () => cancelAnimationFrame(frameId);
+    }
+  }, [usePlayground, question.code]);
 
   // Difficulty badge color
   const getDifficultyBadge = (difficulty: string) => {
@@ -68,19 +95,82 @@ export function QuestionRenderer({
       {/* Code Block */}
       {question.code && (
         <div className="rounded-lg overflow-hidden border border-[var(--border-subtle)]">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-tertiary)] border-b border-[var(--border-subtle)]">
-            <div className="flex gap-1">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+          <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-[var(--bg-tertiary)] border-b border-[var(--border-subtle)]">
+            <div className="flex items-center gap-2">
+              <div className="flex gap-1">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+              </div>
+              <span className="text-xs text-[var(--text-muted)] font-mono ml-1">JavaScript</span>
             </div>
-            <span className="text-xs text-[var(--text-muted)] font-mono ml-1">JavaScript</span>
+            {question.nonStrictMode ? (
+              <div className="flex items-center gap-2 px-3 py-1 rounded-md text-xs text-[var(--text-muted)]" title="This code requires non-strict mode and cannot run in the interactive playground">
+                <svg 
+                  className="w-4 h-4" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span>Non-strict mode only</span>
+              </div>
+            ) : (
+              <button
+                onClick={() => setUsePlayground(!usePlayground)}
+                className={`flex items-center gap-2 px-3 py-1 rounded-md text-xs font-medium transition-all ${
+                  usePlayground
+                    ? 'bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]'
+                }`}
+                title={usePlayground ? 'Switch to static view' : 'Switch to interactive playground'}
+              >
+                {usePlayground ? (
+                  <>
+                    <svg 
+                      className="w-4 h-4" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>Static</span>
+                  </>
+                ) : (
+                  <>
+                    <svg 
+                      className="w-4 h-4" 
+                      fill="none" 
+                      viewBox="0 0 24 24" 
+                      stroke="currentColor" 
+                      strokeWidth={2}
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    <span>Interactive</span>
+                  </>
+                )}
+              </button>
+            )}
           </div>
-          <pre className="!m-0 !rounded-none !border-0 overflow-x-auto !py-3 !px-4">
-            <code ref={codeRef} className="language-javascript text-sm">
-              {question.code}
-            </code>
-          </pre>
+          {usePlayground && !question.nonStrictMode ? (
+            <CodePlayground key={question.id} code={question.code} />
+          ) : (
+            <pre className="!m-0 !rounded-none !border-0 overflow-x-auto !py-3 !px-4">
+              <code 
+                key={`${question.id}-static`}
+                ref={codeRef} 
+                className="language-javascript text-sm"
+              >
+                {question.code}
+              </code>
+            </pre>
+          )}
         </div>
       )}
 

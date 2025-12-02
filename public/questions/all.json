@@ -4526,6 +4526,7 @@
       "block",
       "function"
     ],
+    "nonStrictMode": true,
     "created_at": 1733047006000
   },
   {
@@ -5906,6 +5907,7 @@
       "freeze",
       "assignment"
     ],
+    "nonStrictMode": true,
     "created_at": 1733046516000
   },
   {
@@ -6137,6 +6139,7 @@
       "implicit-global",
       "non-strict"
     ],
+    "nonStrictMode": true,
     "created_at": 1733048006000
   },
   {
@@ -6275,6 +6278,7 @@
       "with",
       "legacy"
     ],
+    "nonStrictMode": true,
     "created_at": 1733048012000
   },
   {
@@ -6482,6 +6486,7 @@
       "context",
       "lost"
     ],
+    "nonStrictMode": true,
     "created_at": 1733046301000
   },
   {
@@ -7103,6 +7108,7 @@
       "call",
       "null"
     ],
+    "nonStrictMode": true,
     "created_at": 1733046328000
   },
   {

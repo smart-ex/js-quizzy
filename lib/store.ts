@@ -17,6 +17,7 @@ interface QuizState {
   selectAnswer: (questionId: string, answerIndex: number) => void;
   nextQuestion: () => void;
   previousQuestion: () => void;
+  goToQuestion: (index: number) => void;
   updateTimer: () => void;
   endQuiz: () => QuizSession | null;
   reset: () => void;
@@ -84,6 +85,17 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     set(state => {
       if (state.currentQuestionIndex > 0) {
         return { currentQuestionIndex: state.currentQuestionIndex - 1 };
+      }
+      return state;
+    });
+  },
+
+  goToQuestion: (index: number) => {
+    set(state => {
+      if (!state.currentSession) return state;
+      const maxIndex = state.currentSession.questions.length - 1;
+      if (index >= 0 && index <= maxIndex) {
+        return { currentQuestionIndex: index };
       }
       return state;
     });

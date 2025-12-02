@@ -35,6 +35,7 @@
     "correctAnswer": 1,
     "explanation": "When you extract a method and call it as a standalone function, this loses its binding. In strict mode, this is undefined. In non-strict mode, it's the global object.",
     "tags": ["this", "context", "lost"],
+    "nonStrictMode": true,
     "created_at": 1733046301000
   },
   {
@@ -548,6 +549,7 @@
     "correctAnswer": 2,
     "explanation": "In non-strict mode, call(null) sets this to global object (window). window.name is usually '' or the window name. In strict mode, it's null.",
     "tags": ["this", "call", "null"],
+    "nonStrictMode": true,
     "created_at": 1733046328000
   },
   {
