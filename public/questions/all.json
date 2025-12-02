@@ -3217,6 +3217,700 @@
     "created_at": 1733049019000
   },
   {
+    "id": "q1_es2025_json_modules",
+    "category": "es2025",
+    "difficulty": "easy",
+    "type": "multiple-choice",
+    "title": "JSON Modules Import",
+    "question": "How do you import a JSON file as a module in ES2025?",
+    "options": [
+      "import config from './config.json' with { type: 'json' };",
+      "import config from './config.json' as json;",
+      "import config from './config.json' type: 'json';",
+      "import config from './config.json' { type: 'json' };"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 introduces JSON modules with import attributes. Use 'with { type: 'json' }' syntax to import JSON files directly as modules.",
+    "tags": [
+      "es2025",
+      "json-modules",
+      "import"
+    ],
+    "created_at": 1734000000000
+  },
+  {
+    "id": "q2_es2025_iterator_filter",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator Helper Methods",
+    "question": "What will be logged?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconst result = iterator.filter(x => x % 2 === 0).map(x => x * 2).toArray();\nconsole.log(result);",
+    "options": [
+      "[4, 8]",
+      "[2, 4, 6, 8, 10]",
+      "[1, 2, 3, 4, 5]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 Iterator helpers chain operations. filter() keeps even numbers (2, 4), map() doubles them (4, 8), toArray() converts to array.",
+    "tags": [
+      "es2025",
+      "iterator",
+      "filter",
+      "map"
+    ],
+    "created_at": 1734000001000
+  },
+  {
+    "id": "q3_es2025_set_union",
+    "category": "es2025",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "Set Union Method",
+    "question": "What is the output?",
+    "code": "const set1 = new Set([1, 2, 3]);\nconst set2 = new Set([3, 4, 5]);\nconst union = set1.union(set2);\nconsole.log([...union]);",
+    "options": [
+      "[1, 2, 3, 4, 5]",
+      "[3]",
+      "[1, 2, 3, 3, 4, 5]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 Set.union() returns a new set containing all unique elements from both sets. Duplicates are automatically removed.",
+    "tags": [
+      "es2025",
+      "set",
+      "union"
+    ],
+    "created_at": 1734000002000
+  },
+  {
+    "id": "q4_es2025_set_intersection",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Set Intersection",
+    "question": "What will be logged?",
+    "code": "const set1 = new Set([1, 2, 3, 4]);\nconst set2 = new Set([3, 4, 5, 6]);\nconst intersection = set1.intersection(set2);\nconsole.log([...intersection]);",
+    "options": [
+      "[3, 4]",
+      "[1, 2, 3, 4, 5, 6]",
+      "[1, 2, 5, 6]",
+      "[]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Set.intersection() returns elements present in both sets. Only 3 and 4 are in both set1 and set2.",
+    "tags": [
+      "es2025",
+      "set",
+      "intersection"
+    ],
+    "created_at": 1734000003000
+  },
+  {
+    "id": "q5_es2025_set_difference",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Set Difference",
+    "question": "What is the output?",
+    "code": "const set1 = new Set([1, 2, 3, 4]);\nconst set2 = new Set([3, 4, 5]);\nconst diff = set1.difference(set2);\nconsole.log([...diff]);",
+    "options": [
+      "[1, 2]",
+      "[5]",
+      "[1, 2, 3, 4, 5]",
+      "[3, 4]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Set.difference() returns elements in set1 that are not in set2. Elements 1 and 2 are in set1 but not in set2.",
+    "tags": [
+      "es2025",
+      "set",
+      "difference"
+    ],
+    "created_at": 1734000004000
+  },
+  {
+    "id": "q6_es2025_set_symmetric_difference",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Set Symmetric Difference",
+    "question": "What will be logged?",
+    "code": "const set1 = new Set([1, 2, 3]);\nconst set2 = new Set([3, 4, 5]);\nconst symDiff = set1.symmetricDifference(set2);\nconsole.log([...symDiff]);",
+    "options": [
+      "[1, 2, 4, 5]",
+      "[3]",
+      "[1, 2, 3, 4, 5]",
+      "[1, 2]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "symmetricDifference() returns elements in either set but not in both. 1 and 2 are only in set1, 4 and 5 are only in set2. 3 is in both, so excluded.",
+    "tags": [
+      "es2025",
+      "set",
+      "symmetric-difference"
+    ],
+    "created_at": 1734000005000
+  },
+  {
+    "id": "q7_es2025_set_is_subset",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Set isSubsetOf",
+    "question": "What is the output?",
+    "code": "const set1 = new Set([1, 2]);\nconst set2 = new Set([1, 2, 3, 4]);\nconsole.log(set1.isSubsetOf(set2));\nconsole.log(set2.isSubsetOf(set1));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "isSubsetOf() checks if all elements of the calling set are in the other set. set1's elements (1, 2) are all in set2, but set2 has more elements, so only the first is true.",
+    "tags": [
+      "es2025",
+      "set",
+      "isSubsetOf"
+    ],
+    "created_at": 1734000006000
+  },
+  {
+    "id": "q8_es2025_regexp_escape",
+    "category": "es2025",
+    "difficulty": "easy",
+    "type": "code-output",
+    "title": "RegExp.escape()",
+    "question": "What will be logged?",
+    "code": "const str = 'Hello (world) [test]';\nconst escaped = RegExp.escape(str);\nconst regex = new RegExp(escaped);\nconsole.log(regex.test(str));",
+    "options": [
+      "true",
+      "false",
+      "Error",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "RegExp.escape() (ES2025) safely escapes special regex characters. After escaping, the regex matches the original string exactly.",
+    "tags": [
+      "es2025",
+      "regexp",
+      "escape"
+    ],
+    "created_at": 1734000007000
+  },
+  {
+    "id": "q9_es2025_regexp_inline_flags",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Inline Modifier Flags",
+    "question": "What is the output?",
+    "code": "const regex = /(?i)hello(?-i) world/;\nconsole.log(regex.test('HELLO world'));\nconsole.log(regex.test('hello WORLD'));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 inline flags: (?i) enables case-insensitive, (?-i) disables it. 'HELLO' matches case-insensitively, but 'WORLD' doesn't match 'world' after case-sensitivity is re-enabled.",
+    "tags": [
+      "es2025",
+      "regexp",
+      "inline-flags"
+    ],
+    "created_at": 1734000008000
+  },
+  {
+    "id": "q10_es2025_promise_try",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Promise.try()",
+    "question": "What will be logged?",
+    "code": "Promise.try(() => {\n  return 42;\n}).then(result => {\n  console.log(result);\n});\n\nPromise.try(() => {\n  throw new Error('Oops');\n}).catch(err => {\n  console.log(err.message);\n});",
+    "options": [
+      "42, Oops",
+      "Promise { 42 }, Error: Oops",
+      "undefined, undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.try() (ES2025) wraps synchronous code in a promise chain. Synchronous values become resolved promises, thrown errors become rejected promises.",
+    "tags": [
+      "es2025",
+      "promise",
+      "try"
+    ],
+    "created_at": 1734000009000
+  },
+  {
+    "id": "q11_es2025_promise_try_async",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.try() with Async",
+    "question": "What is the output?",
+    "code": "Promise.try(async () => {\n  return await Promise.resolve('async');\n}).then(result => {\n  console.log(result);\n});",
+    "options": [
+      "async",
+      "Promise { 'async' }",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.try() handles both sync and async functions. When an async function is passed, it unwraps the promise and resolves with the final value.",
+    "tags": [
+      "es2025",
+      "promise",
+      "try",
+      "async"
+    ],
+    "created_at": 1734000010000
+  },
+  {
+    "id": "q12_es2025_float16array",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Float16Array",
+    "question": "What will be logged?",
+    "code": "const f16 = new Float16Array([1.5, 2.7, 3.9]);\nconsole.log(f16.length);\nconsole.log(f16[0]);",
+    "options": [
+      "3, 1.5",
+      "3, 1.5 (approximate)",
+      "Error",
+      "0, undefined"
+    ],
+    "correctAnswer": 1,
+    "explanation": "Float16Array (ES2025) stores 16-bit floating-point numbers. Values may have precision loss compared to 32-bit floats, so 1.5 might be approximate.",
+    "tags": [
+      "es2025",
+      "float16array",
+      "typed-array"
+    ],
+    "created_at": 1734000011000
+  },
+  {
+    "id": "q13_es2025_iterator_take",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator take()",
+    "question": "What is the output?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconst taken = iterator.take(3);\nconsole.log([...taken]);",
+    "options": [
+      "[1, 2, 3]",
+      "[1, 2, 3, 4, 5]",
+      "[3, 4, 5]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.take(n) (ES2025) returns an iterator that yields the first n elements. It stops after 3 elements.",
+    "tags": [
+      "es2025",
+      "iterator",
+      "take"
+    ],
+    "created_at": 1734000012000
+  },
+  {
+    "id": "q14_es2025_iterator_drop",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator drop()",
+    "question": "What will be logged?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconst dropped = iterator.drop(2);\nconsole.log([...dropped]);",
+    "options": [
+      "[3, 4, 5]",
+      "[1, 2]",
+      "[1, 2, 3, 4, 5]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.drop(n) (ES2025) skips the first n elements and returns the rest. After dropping 2, we get [3, 4, 5].",
+    "tags": [
+      "es2025",
+      "iterator",
+      "drop"
+    ],
+    "created_at": 1734000013000
+  },
+  {
+    "id": "q15_es2025_iterator_chain",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Iterator Method Chaining",
+    "question": "What is the output?",
+    "code": "const iterator = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].values();\nconst result = iterator\n  .filter(x => x % 2 === 0)\n  .map(x => x * 2)\n  .drop(1)\n  .take(2)\n  .toArray();\nconsole.log(result);",
+    "options": [
+      "[8, 12]",
+      "[4, 8, 12, 16, 20]",
+      "[2, 4, 6, 8, 10]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Filter evens: [2, 4, 6, 8, 10]. Map *2: [4, 8, 12, 16, 20]. Drop 1: [8, 12, 16, 20]. Take 2: [8, 12].",
+    "tags": [
+      "es2025",
+      "iterator",
+      "chain"
+    ],
+    "created_at": 1734000014000
+  },
+  {
+    "id": "q16_es2025_set_operations_chain",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Set Operations Chain",
+    "question": "What will be logged?",
+    "code": "const set1 = new Set([1, 2, 3, 4, 5]);\nconst set2 = new Set([4, 5, 6, 7]);\nconst set3 = new Set([5, 6]);\nconst result = set1.union(set2).difference(set3);\nconsole.log([...result]);",
+    "options": [
+      "[1, 2, 3, 4, 7]",
+      "[1, 2, 3, 4, 5, 6, 7]",
+      "[5, 6]",
+      "[1, 2, 3]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Union: [1,2,3,4,5,6,7]. Difference with [5,6]: removes 5 and 6, leaving [1,2,3,4,7].",
+    "tags": [
+      "es2025",
+      "set",
+      "union",
+      "difference"
+    ],
+    "created_at": 1734000015000
+  },
+  {
+    "id": "q17_es2025_array_from_async",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Array.fromAsync()",
+    "question": "What will be logged? (Note: This may require async context)",
+    "code": "async function test() {\n  const asyncIter = [1, 2, 3].map(x => Promise.resolve(x * 2));\n  const arr = await Array.fromAsync(asyncIter);\n  console.log(arr);\n}\ntest();",
+    "options": [
+      "[2, 4, 6]",
+      "[Promise, Promise, Promise]",
+      "Error",
+      "[]"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Array.fromAsync() (ES2025) creates an array from an async iterable, awaiting all promises. All promises resolve to [2, 4, 6].",
+    "tags": [
+      "es2025",
+      "array",
+      "fromAsync"
+    ],
+    "created_at": 1734000016000
+  },
+  {
+    "id": "q18_es2025_regexp_escape_special",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "RegExp.escape() Special Characters",
+    "question": "What is the output?",
+    "code": "const special = '.*+?^${}()|[]\\\\';\nconst escaped = RegExp.escape(special);\nconst regex = new RegExp('^' + escaped + '$');\nconsole.log(regex.test(special));",
+    "options": [
+      "true",
+      "false",
+      "Error",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "RegExp.escape() escapes all regex special characters. After escaping, the regex will match the literal string containing those characters.",
+    "tags": [
+      "es2025",
+      "regexp",
+      "escape",
+      "special-characters"
+    ],
+    "created_at": 1734000017000
+  },
+  {
+    "id": "q19_es2025_set_superset",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Set isSupersetOf",
+    "question": "What will be logged?",
+    "code": "const set1 = new Set([1, 2, 3, 4]);\nconst set2 = new Set([2, 3]);\nconsole.log(set1.isSupersetOf(set2));\nconsole.log(set2.isSupersetOf(set1));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "isSupersetOf() checks if the calling set contains all elements of the other set. set1 contains all of set2, but set2 doesn't contain all of set1.",
+    "tags": [
+      "es2025",
+      "set",
+      "isSupersetOf"
+    ],
+    "created_at": 1734000018000
+  },
+  {
+    "id": "q20_es2025_iterator_find",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator find()",
+    "question": "What is the output?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconst found = iterator.find(x => x > 3);\nconsole.log(found);",
+    "options": [
+      "4",
+      "undefined",
+      "[4, 5]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.find() (ES2025) returns the first element that satisfies the predicate. The first element > 3 is 4.",
+    "tags": [
+      "es2025",
+      "iterator",
+      "find"
+    ],
+    "created_at": 1734000019000
+  },
+  {
+    "id": "q21_es2025_set_is_disjoint",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Set isDisjointFrom",
+    "question": "What will be logged?",
+    "code": "const set1 = new Set([1, 2, 3]);\nconst set2 = new Set([4, 5, 6]);\nconst set3 = new Set([3, 4]);\nconsole.log(set1.isDisjointFrom(set2));\nconsole.log(set1.isDisjointFrom(set3));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "isDisjointFrom() returns true if sets have no elements in common. set1 and set2 share no elements (true), but set1 and set3 share 3 (false).",
+    "tags": [
+      "es2025",
+      "set",
+      "isDisjointFrom"
+    ],
+    "created_at": 1734000020000
+  },
+  {
+    "id": "q22_es2025_iterator_from",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator.from() Static Method",
+    "question": "What is the output?",
+    "code": "const arr = [1, 2, 3];\nconst iter = Iterator.from(arr);\nconsole.log([...iter]);",
+    "options": [
+      "[1, 2, 3]",
+      "Error",
+      "Iterator {}",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.from() (ES2025) creates a new Iterator object from an iterable. It converts the array to an iterator, which can then be spread into an array.",
+    "tags": [
+      "es2025",
+      "iterator",
+      "from"
+    ],
+    "created_at": 1734000021000
+  },
+  {
+    "id": "q23_es2025_iterator_reduce",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Iterator reduce()",
+    "question": "What will be logged?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconst sum = iterator.reduce((acc, val) => acc + val, 0);\nconsole.log(sum);",
+    "options": [
+      "15",
+      "[1, 2, 3, 4, 5]",
+      "Error",
+      "undefined"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.reduce() (ES2025) applies a reducer function to accumulate values. Starting with 0, it sums all elements: 0+1+2+3+4+5 = 15.",
+    "tags": [
+      "es2025",
+      "iterator",
+      "reduce"
+    ],
+    "created_at": 1734000022000
+  },
+  {
+    "id": "q24_es2025_iterator_flatmap",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Iterator flatMap()",
+    "question": "What is the output?",
+    "code": "const iterator = [1, 2, 3].values();\nconst result = iterator.flatMap(x => [x, x * 2]).toArray();\nconsole.log(result);",
+    "options": [
+      "[1, 2, 2, 4, 3, 6]",
+      "[[1, 2], [2, 4], [3, 6]]",
+      "[1, 2, 3, 2, 4, 6]",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.flatMap() (ES2025) maps each element and flattens one level. Each x becomes [x, x*2], then flattened: [1,2, 2,4, 3,6].",
+    "tags": [
+      "es2025",
+      "iterator",
+      "flatmap"
+    ],
+    "created_at": 1734000023000
+  },
+  {
+    "id": "q25_es2025_iterator_some",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator some()",
+    "question": "What will be logged?",
+    "code": "const iterator = [1, 2, 3, 4, 5].values();\nconsole.log(iterator.some(x => x > 3));\nconsole.log(iterator.some(x => x > 10));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.some() (ES2025) checks if any value matches the predicate. 4 and 5 are > 3 (true), but no values are > 10 (false).",
+    "tags": [
+      "es2025",
+      "iterator",
+      "some"
+    ],
+    "created_at": 1734000024000
+  },
+  {
+    "id": "q26_es2025_iterator_every",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "Iterator every()",
+    "question": "What is the output?",
+    "code": "const iterator1 = [2, 4, 6, 8].values();\nconst iterator2 = [2, 3, 4, 5].values();\nconsole.log(iterator1.every(x => x % 2 === 0));\nconsole.log(iterator2.every(x => x % 2 === 0));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Iterator.every() (ES2025) checks if all values pass the test. All elements in iterator1 are even (true), but 3 and 5 in iterator2 are odd (false).",
+    "tags": [
+      "es2025",
+      "iterator",
+      "every"
+    ],
+    "created_at": 1734000025000
+  },
+  {
+    "id": "q27_es2025_regexp_inline_modifier",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Inline Pattern Modifiers",
+    "question": "What will be logged?",
+    "code": "const pattern = /^(?i:blogs) by Saeloun$/;\nconsole.log(pattern.test('blogs by Saeloun'));\nconsole.log(pattern.test('Blogs by Saeloun'));\nconsole.log(pattern.test('blogs by saeloun'));",
+    "options": [
+      "true, true, false",
+      "true, false, true",
+      "false, true, false",
+      "true, true, true"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 inline modifiers: (?i:blogs) makes only 'blogs' case-insensitive. 'blogs' and 'Blogs' match, but 'saeloun' must match exactly (case-sensitive).",
+    "tags": [
+      "es2025",
+      "regexp",
+      "inline-modifiers"
+    ],
+    "created_at": 1734000026000
+  },
+  {
+    "id": "q28_es2025_promise_try_sync_error",
+    "category": "es2025",
+    "difficulty": "hard",
+    "type": "code-output",
+    "title": "Promise.try() Catching Sync Errors",
+    "question": "What will be logged?",
+    "code": "function syncThrows() { throw new Error('Synchronous error!'); }\n\nPromise.try(() => syncThrows())\n  .catch(err => console.log('Caught:', err.message));",
+    "options": [
+      "Caught: Synchronous error!",
+      "Uncaught Error: Synchronous error!",
+      "undefined",
+      "Error"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Promise.try() (ES2025) catches synchronous errors and converts them to rejected promises, unlike Promise.resolve() which doesn't catch sync throws.",
+    "tags": [
+      "es2025",
+      "promise",
+      "try",
+      "error-handling"
+    ],
+    "created_at": 1734000027000
+  },
+  {
+    "id": "q29_es2025_json_import_dynamic",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "multiple-choice",
+    "title": "Dynamic JSON Import",
+    "question": "How do you dynamically import a JSON file in ES2025?",
+    "options": [
+      "await import('./config.json', { with: { type: 'json' } })",
+      "await import('./config.json', { type: 'json' })",
+      "await import('./config.json').with({ type: 'json' })",
+      "import('./config.json').then(m => m.json())"
+    ],
+    "correctAnswer": 0,
+    "explanation": "ES2025 dynamic imports use the 'with' option: await import('./config.json', { with: { type: 'json' } }). This tells the runtime to parse it as JSON.",
+    "tags": [
+      "es2025",
+      "json-modules",
+      "dynamic-import"
+    ],
+    "created_at": 1734000028000
+  },
+  {
+    "id": "q30_es2025_regexp_escape_usage",
+    "category": "es2025",
+    "difficulty": "medium",
+    "type": "code-output",
+    "title": "RegExp.escape() Practical Use",
+    "question": "What will be logged?",
+    "code": "const userInput = 'file.';\nconst text = 'Please open the file.txt now! Don\\'t open image files';\nconst pattern = new RegExp(RegExp.escape(userInput));\nconst newText = text.replace(pattern, 'sample.');\nconsole.log(newText.includes('sample.txt'));\nconsole.log(newText.includes('sample files'));",
+    "options": [
+      "true, false",
+      "false, true",
+      "true, true",
+      "false, false"
+    ],
+    "correctAnswer": 0,
+    "explanation": "RegExp.escape() escapes the dot, so it matches 'file.' literally, not 'file' followed by any character. Only 'file.txt' becomes 'sample.txt', not 'files'.",
+    "tags": [
+      "es2025",
+      "regexp",
+      "escape",
+      "practical"
+    ],
+    "created_at": 1734000029000
+  },
+  {
     "id": "q1_event_loop_basics",
     "category": "event-loop",
     "difficulty": "easy",

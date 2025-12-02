@@ -1,11 +1,11 @@
 # JS Quizzy
 
-A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, prototypes, and more.
+A 100% open source, offline-first Progressive Web App (PWA) for testing your JavaScript knowledge. Focus on deep concepts like event loop, closures, async/await, this binding, type coercion, prototypes, ES2025 features, and more.
 
 ## Features
 
 - **Offline-First**: Works completely offline after first visit
-- **220+ Questions**: Covering 11 core JavaScript categories
+- **310+ Questions**: Covering 12 core JavaScript categories including ES2025
 - **PWA Support**: Installable on mobile and desktop
 - **Statistics Tracking**: Track your progress and performance
 - **Share Results**: Share your quiz results with friends
@@ -27,6 +27,7 @@ A 100% open source, offline-first Progressive Web App (PWA) for testing your Jav
 | **Destructuring** | Object and array destructuring, rest/spread patterns |
 | **Arrays** | Array methods, iteration, and common gotchas |
 | **Objects** | Object manipulation, property descriptors, and edge cases |
+| **ES2025 Features** | ECMAScript 2025 features: Iterator helpers, Set methods, JSON modules, RegExp enhancements, Promise.try(), and Float16Array |
 
 ## Getting Started
 
@@ -100,6 +101,7 @@ Questions are stored in JSON files in `public/questions/`. Each category has its
 - `destructuring.json`
 - `arrays.json`
 - `objects.json`
+- `es2025.json`
 
 ## Deployment
 
