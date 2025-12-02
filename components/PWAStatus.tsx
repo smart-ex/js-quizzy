@@ -76,26 +76,29 @@ export function PWAStatus() {
         </div>
       )}
       {deferredPrompt && !dismissed && (
-        <div className="glass-card p-4 animate-fadeInUp max-w-xs">
+        <div className="glass-card p-4 animate-fadeInUp max-w-sm border border-[var(--accent-primary)]/20 shadow-lg">
           <div className="flex items-start gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center flex-shrink-0">
-              <span className="text-white font-bold text-sm">JS</span>
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-400 to-purple-500 flex items-center justify-center flex-shrink-0 shadow-md">
+              <span className="text-white font-bold text-base">JS</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-[var(--text-primary)] mb-1">Install JS Quizzy</p>
-              <p className="text-xs text-[var(--text-muted)] mb-3">Add to your home screen for quick access</p>
+              <p className="text-base font-bold text-[var(--text-primary)] mb-1">Установите JS Quizzy</p>
+              <p className="text-sm text-[var(--text-secondary)] mb-4">Добавьте приложение на главный экран для быстрого доступа</p>
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleInstall}
-                  className="px-3 py-1.5 bg-[var(--accent-primary)] text-[var(--bg-primary)] rounded-lg text-xs font-semibold hover:shadow-lg transition-all"
+                  className="px-4 py-2.5 bg-[var(--accent-primary)] text-white rounded-lg text-sm font-semibold hover:bg-[var(--accent-primary)]/90 hover:shadow-lg transition-all flex items-center gap-2"
                 >
-                  Install
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 10.5v6m3-3m-3 3l-3-3m3 3h6M3 13.5h10.5m-10.5 0V19.5A1.5 1.5 0 004.5 21h15a1.5 1.5 0 001.5-1.5V13.5m-16.5 0V6a1.5 1.5 0 011.5-1.5h15A1.5 1.5 0 0121 6v7.5" />
+                  </svg>
+                  Установить
                 </button>
                 <button
                   onClick={() => setDismissed(true)}
-                  className="px-3 py-1.5 text-[var(--text-muted)] hover:text-[var(--text-secondary)] text-xs font-medium transition-colors"
+                  className="px-4 py-2.5 text-[var(--text-muted)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-card)] rounded-lg text-sm font-medium transition-colors"
                 >
-                  Not now
+                  Не сейчас
                 </button>
               </div>
             </div>

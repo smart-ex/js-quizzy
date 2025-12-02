@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: "JS Quizzy Team" }],
   creator: "JS Quizzy",
   publisher: "JS Quizzy",
+  manifest: `${basePath}/manifest.webmanifest`,
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
