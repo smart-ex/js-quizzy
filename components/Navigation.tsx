@@ -13,25 +13,27 @@ export function Navigation() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
-  const [isInstalled, setIsInstalled] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [clientState, setClientState] = useState({
+    mounted: false,
+    isInstalled: false,
+  });
 
   useEffect(() => {
-    setMounted(true);
+    // Batch all initial client-side values in a single state update
+    // Note: Browser APIs (window.matchMedia, navigator) must be read after mount, requiring useEffect
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+    const isInStandaloneMode = (window.navigator as { standalone?: boolean }).standalone === true;
+    const installed = isStandalone || isInStandaloneMode;
     
-    // Check if already installed
-    const checkInstalled = () => {
-      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-      const isInStandaloneMode = (window.navigator as any).standalone === true;
-      const installed = isStandalone || isInStandaloneMode;
-      setIsInstalled(installed);
-      if (installed) {
-        console.log('PWA already installed');
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setClientState({
+      mounted: true,
+      isInstalled: installed,
+    });
+    
+    if (installed) {
+      console.log('PWA already installed');
       }
-      return installed;
-    };
-    
-    const installed = checkInstalled();
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
@@ -61,7 +63,7 @@ export function Navigation() {
       console.log('Install prompt outcome:', outcome);
       
       if (outcome === 'accepted') {
-        setIsInstalled(true);
+        setClientState(prev => ({ ...prev, isInstalled: true }));
       }
     } catch (error) {
       console.error('Error showing install prompt:', error);
@@ -73,20 +75,19 @@ export function Navigation() {
   // Show button if mounted, not installed, and prompt is available
   // Debug logging
   useEffect(() => {
-    if (mounted) {
+    if (clientState.mounted) {
       console.log('PWA Install Status:', {
-        mounted,
-        isInstalled,
+        mounted: clientState.mounted,
+        isInstalled: clientState.isInstalled,
         hasPrompt: deferredPrompt !== null,
-        showButton: mounted && !isInstalled && deferredPrompt !== null
+        showButton: clientState.mounted && !clientState.isInstalled && deferredPrompt !== null
       });
     }
-  }, [mounted, isInstalled, deferredPrompt]);
+  }, [clientState.mounted, clientState.isInstalled, deferredPrompt]);
 
-  const showInstallButton = mounted && !isInstalled && deferredPrompt !== null;
+  const showInstallButton = clientState.mounted && !clientState.isInstalled && deferredPrompt !== null;
 
   const links = [
-    { href: '/', label: 'Home', icon: HomeIcon },
     { href: '/quiz', label: 'Quiz', icon: QuizIcon },
     { href: '/questions', label: 'Questions', icon: QuestionsIcon },
     { href: '/stats', label: 'Stats', icon: StatsIcon },
@@ -226,14 +227,6 @@ export function Navigation() {
 }
 
 // Icon components
-function HomeIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-    </svg>
-  );
-}
-
 function QuizIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

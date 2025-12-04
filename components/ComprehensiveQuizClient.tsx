@@ -74,7 +74,7 @@ export function ComprehensiveQuizClient({ difficulty }: ComprehensiveQuizClientP
             </div>
             <h2 className="text-xl font-bold text-[var(--text-primary)] mb-2">Invalid Difficulty Level</h2>
             <p className="text-[var(--text-secondary)] mb-6">
-              The difficulty level "{difficulty}" is not valid. Please choose easy, medium, or hard.
+              The difficulty level &quot;{difficulty}&quot; is not valid. Please choose easy, medium, or hard.
             </p>
             <Link
               href="/"

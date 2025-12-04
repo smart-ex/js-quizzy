@@ -11,14 +11,25 @@ export default function StatsPage() {
   const { getStats, getAllSessions } = useStorage();
   
   // Defer localStorage access until after hydration to prevent mismatch
-  const [stats, setStats] = useState<UserStats | null>(null);
-  const [sessions, setSessions] = useState<QuizSession[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const [pageState, setPageState] = useState<{
+    mounted: boolean;
+    stats: UserStats | null;
+    sessions: QuizSession[];
+  }>({
+    mounted: false,
+    stats: null,
+    sessions: [],
+  });
 
   useEffect(() => {
-    setMounted(true);
-    setStats(getStats());
-    setSessions(getAllSessions());
+    // Batch all initial values in a single state update
+    // Note: localStorage must be read after mount to prevent hydration mismatch in Next.js
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPageState({
+      mounted: true,
+      stats: getStats(),
+      sessions: getAllSessions(),
+    });
   }, [getStats, getAllSessions]);
 
   return (
@@ -35,14 +46,14 @@ export default function StatsPage() {
           </p>
         </div>
         
-        {!mounted ? (
+        {!pageState.mounted ? (
           // Loading state during hydration
           <div className="glass-card p-12 text-center animate-fadeIn">
             <div className="spinner mx-auto mb-6" />
             <p className="text-[var(--text-secondary)]">Loading statistics...</p>
           </div>
-        ) : stats && stats.totalQuizzes > 0 ? (
-          <StatsDashboard stats={stats} sessions={sessions} />
+        ) : pageState.stats && pageState.stats.totalQuizzes > 0 ? (
+          <StatsDashboard stats={pageState.stats} sessions={pageState.sessions} />
         ) : (
           <div className="glass-card p-12 text-center animate-fadeIn">
             <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">

@@ -135,7 +135,7 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
             return (
               <Link
                 key={category}
-                href={`/quiz/${category}`}
+                href={category === 'comprehensive' ? '/quiz' : `/quiz/${category}`}
                 className="block p-3 rounded-lg bg-[var(--bg-tertiary)]/50 border border-[var(--border-subtle)] hover:border-[var(--accent-primary)] hover:bg-[var(--bg-tertiary)] transition-all cursor-pointer group"
               >
                 <div className="flex items-center justify-between mb-2">
@@ -370,7 +370,7 @@ function QuizHistoryItem({ session, accuracy, categoryLabel, iconPath }: QuizHis
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <Link
-            href={`/quiz/${session.category}`}
+            href={session.category === 'comprehensive' ? '/quiz' : `/quiz/${session.category}`}
             className="px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all text-sm font-medium flex items-center gap-2"
             title="View Quiz"
           >

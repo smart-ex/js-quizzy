@@ -14,7 +14,7 @@ interface QuestionRendererProps {
   disabled?: boolean;
 }
 
-export function QuestionRenderer({
+function QuestionRendererContent({
   question,
   selectedAnswer,
   onSelectAnswer,
@@ -23,20 +23,10 @@ export function QuestionRenderer({
 }: QuestionRendererProps) {
   const codeRef = useRef<HTMLElement>(null);
   const [showExplanation, setShowExplanation] = useState(false);
-  const [usePlayground, setUsePlayground] = useState(false);
-
-  // Reset explanation and playground state when question changes
-  useEffect(() => {
-    setShowExplanation(false);
-    setUsePlayground(false);
-  }, [question.id]);
-
-  // Disable playground if question requires non-strict mode
-  useEffect(() => {
-    if (question.nonStrictMode && usePlayground) {
-      setUsePlayground(false);
-    }
-  }, [question.nonStrictMode, usePlayground]);
+  const [usePlaygroundInternal, setUsePlaygroundInternal] = useState(false);
+  
+  // Derive usePlayground - disable if question requires non-strict mode
+  const usePlayground = question.nonStrictMode ? false : usePlaygroundInternal;
 
   useEffect(() => {
     if (question.code && codeRef.current) {
@@ -119,7 +109,7 @@ export function QuestionRenderer({
               </div>
             ) : (
               <button
-                onClick={() => setUsePlayground(!usePlayground)}
+                onClick={() => setUsePlaygroundInternal(!usePlaygroundInternal)}
                 className={`flex items-center gap-2 px-3 py-1 rounded-md text-xs font-medium transition-all ${
                   usePlayground
                     ? 'bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30'
@@ -257,4 +247,8 @@ export function QuestionRenderer({
       )}
     </div>
   );
+}
+
+export function QuestionRenderer(props: QuestionRendererProps) {
+  return <QuestionRendererContent key={props.question.id} {...props} />;
 }

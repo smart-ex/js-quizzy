@@ -9,21 +9,28 @@ interface BeforeInstallPromptEvent extends Event {
 
 export function PWAStatus() {
   // Initialize with safe defaults to prevent hydration mismatch
-  const [isOnline, setIsOnline] = useState(true);
-  const [isInstalled, setIsInstalled] = useState(false);
+  const [clientState, setClientState] = useState({
+    mounted: false,
+    isOnline: true,
+    isInstalled: false,
+  });
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [userAcceptedInstall, setUserAcceptedInstall] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     // Set actual values after mounting to avoid hydration mismatch
-    setMounted(true);
-    setIsOnline(navigator.onLine);
-    setIsInstalled(window.matchMedia('(display-mode: standalone)').matches);
+    // Batch all initial client-side values in a single state update
+    // Note: Browser APIs (navigator, window) must be read after mount, requiring useEffect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setClientState({
+      mounted: true,
+      isOnline: navigator.onLine,
+      isInstalled: window.matchMedia('(display-mode: standalone)').matches,
+    });
 
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
+    const handleOnline = () => setClientState(prev => ({ ...prev, isOnline: true }));
+    const handleOffline = () => setClientState(prev => ({ ...prev, isOnline: false }));
 
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
@@ -57,12 +64,12 @@ export function PWAStatus() {
   };
 
   // Don't render anything until mounted to prevent hydration mismatch
-  if (!mounted) return null;
-  if ((isInstalled || userAcceptedInstall) && isOnline) return null;
+  if (!clientState.mounted) return null;
+  if ((clientState.isInstalled || userAcceptedInstall) && clientState.isOnline) return null;
 
   return (
     <div className="fixed bottom-4 right-4 flex flex-col gap-3 z-50">
-      {!isOnline && (
+      {!clientState.isOnline && (
         <div className="glass-card px-4 py-3 flex items-center gap-3 border-[var(--accent-warning)]/30 animate-fadeIn">
           <div className="w-8 h-8 rounded-lg bg-[var(--accent-warning)]/20 flex items-center justify-center">
             <svg className="w-4 h-4 text-[var(--accent-warning)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

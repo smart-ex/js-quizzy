@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Question } from '@/lib/types';
@@ -33,8 +33,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const updateTimer = useQuizStore((state) => state.updateTimer);
   const endQuiz = useQuizStore((state) => state.endQuiz);
   const reset = useQuizStore((state) => state.reset);
-
-  const [showFeedback, setShowFeedback] = useState(false);
 
   useEffect(() => {
     if (questions.length > 0) {
@@ -71,25 +69,40 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     return () => clearInterval(interval);
   }, [isActive, updateTimer]);
 
-  // Restore feedback state when navigating to a question that already has an answer
-  useEffect(() => {
-    if (currentQuestion) {
-      const hasAnswer = answers.has(currentQuestion.id);
-      setShowFeedback(hasAnswer);
-    }
-  }, [currentQuestion?.id, currentQuestionIndex, answers]);
+  // Derive showFeedback directly from whether the current question has an answer
+  const showFeedback = currentQuestion ? answers.has(currentQuestion.id) : false;
 
   const handleSelectAnswer = (index: number) => {
     if (!currentQuestion) return;
     selectAnswer(currentQuestion.id, index);
-    setShowFeedback(true);
   };
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentQuestionIndex < (currentSession?.questions.length || 0) - 1) {
       nextQuestion();
     }
-  };
+  }, [currentQuestionIndex, currentSession?.questions.length, nextQuestion]);
+
+  // Handle keyboard shortcuts (Space for Next button)
+  useEffect(() => {
+    if (!currentSession || !currentQuestion) return;
+
+    const selectedAnswer = answers.get(currentQuestion.id);
+    const canFinish = currentQuestionIndex === currentSession.questions.length - 1 && selectedAnswer !== undefined;
+    const isNextButtonActive = !canFinish && selectedAnswer !== undefined && showFeedback;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle Space key when Next button is active
+      if (e.key === ' ' && isNextButtonActive) {
+        // Prevent default scrolling behavior
+        e.preventDefault();
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentSession, currentQuestion, currentQuestionIndex, answers, showFeedback, handleNext]);
 
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
@@ -137,7 +150,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const progress = ((currentQuestionIndex + 1) / currentSession.questions.length) * 100;
   const selectedAnswer = answers.get(currentQuestion.id);
   const canFinish = currentQuestionIndex === currentSession.questions.length - 1 && selectedAnswer !== undefined;
-  const answeredCount = answers.size;
 
   return (
     <div className="min-h-screen py-3 px-4">
@@ -182,6 +194,20 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
             {currentSession.questions.map((qId, idx) => {
               const isAnswered = answers.has(qId);
               const isCurrent = idx === currentQuestionIndex;
+              
+              // Check if answer is correct (for answered questions)
+              let isCorrect: boolean | null = null;
+              if (isAnswered) {
+                const question = questions.find(q => q.id === qId);
+                const userAnswer = answers.get(qId);
+                if (question && userAnswer !== undefined) {
+                  // For current question, only check correctness if feedback is shown
+                  if (!isCurrent || showFeedback) {
+                    isCorrect = userAnswer === question.correctAnswer;
+                  }
+                }
+              }
+              
               return (
                 <button
                   key={qId}
@@ -196,8 +222,10 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
                     w-7 h-7 rounded-md flex items-center justify-center font-mono text-xs font-semibold transition-all flex-shrink-0
                     ${isCurrent 
                       ? 'bg-[var(--accent-primary)] text-[var(--bg-primary)]' 
-                      : isAnswered 
-                        ? 'bg-[var(--accent-success)]/20 text-[var(--accent-success)] border border-[var(--accent-success)]/30' 
+                      : isAnswered && isCorrect !== null
+                        ? isCorrect === false
+                          ? 'bg-[var(--accent-error)]/20 text-[var(--accent-error)] border border-[var(--accent-error)]/30'
+                          : 'bg-[var(--accent-success)]/20 text-[var(--accent-success)] border border-[var(--accent-success)]/30'
                         : 'bg-[var(--bg-tertiary)] text-[var(--text-muted)]'
                     }
                     ${idx > currentQuestionIndex && !isAnswered ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:scale-105'}
