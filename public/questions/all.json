@@ -1044,8 +1044,8 @@
       "then called, before, after, 42",
       "before, then called, 42, after"
     ],
-    "correctAnswer": 1,
-    "explanation": "await works with any thenable. When await encounters thenable, it calls its then method synchronously. 'then called' logs before 'after' returns to the main flow.",
+    "correctAnswer": 0,
+    "explanation": "await works with any thenable, but the then method is called asynchronously as a microtask. The function returns control first, so 'after' logs before 'then called'. Then after 100ms, the promise resolves and logs 42.",
     "tags": [
       "async",
       "thenable",
