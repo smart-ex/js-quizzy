@@ -19,7 +19,6 @@ export function Navigation() {
   });
 
   useEffect(() => {
-    // Batch all initial client-side values in a single state update
     // Note: Browser APIs (window.matchMedia, navigator) must be read after mount, requiring useEffect
     const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
     const isInStandaloneMode = (window.navigator as { standalone?: boolean }).standalone === true;
@@ -42,7 +41,6 @@ export function Navigation() {
       console.log('PWA install prompt available');
     };
 
-    // Listen for beforeinstallprompt event
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     return () => {
@@ -72,8 +70,6 @@ export function Navigation() {
     setDeferredPrompt(null);
   };
 
-  // Show button if mounted, not installed, and prompt is available
-  // Debug logging
   useEffect(() => {
     if (clientState.mounted) {
       console.log('PWA Install Status:', {
@@ -126,9 +122,7 @@ export function Navigation() {
             </div>
           </div>
           
-          {/* PWA Install & GitHub links */}
           <div className="flex items-center gap-2">
-            {/* PWA Install Button */}
             {showInstallButton ? (
               <>
                 <button
@@ -149,7 +143,6 @@ export function Navigation() {
               </>
             ) : null}
             
-            {/* GitHub link */}
             <a
               href="https://github.com/smart-ex/js-quizzy"
               target="_blank"
@@ -172,7 +165,6 @@ export function Navigation() {
               <GitHubIcon className="w-5 h-5" />
             </a>
           
-            {/* Mobile menu button */}
             <button
               type="button"
               className="sm:hidden inline-flex items-center justify-center p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)] transition-colors"
@@ -195,7 +187,6 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileMenuOpen && (
         <div className="sm:hidden animate-fadeIn" id="mobile-menu">
           <div className="px-4 pt-2 pb-4 space-y-1 border-t border-[var(--border-subtle)]">
@@ -226,7 +217,6 @@ export function Navigation() {
   );
 }
 
-// Icon components
 function QuizIcon({ className }: { className?: string }) {
   return (
     <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

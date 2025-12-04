@@ -13,7 +13,6 @@ interface StatsDashboardProps {
 }
 
 export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
-  // Calculate total questions answered from all sessions
   const totalQuestions = sessions.reduce((sum, session) => sum + session.answers.length, 0);
   
   // Calculate total questions per category from actual sessions
@@ -30,12 +29,10 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
       ? Math.min(100, Math.round((stats.totalCorrect / totalQuestions) * 100))
       : 0;
 
-  // Sort sessions by date (newest first)
   const sortedSessions = [...sessions].sort((a, b) => b.date - a.date);
 
   return (
     <div className="space-y-8">
-      {/* Overall Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <div className="stats-card group">
           <div className="flex items-center gap-3">
@@ -103,7 +100,6 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         </div>
       </div>
 
-      {/* Category Performance */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">
@@ -194,7 +190,6 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         </div>
       </div>
 
-      {/* Difficulty Stats */}
       <div className="glass-card p-6">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-tertiary)]/20 to-[var(--accent-warning)]/20 flex items-center justify-center">
@@ -241,7 +236,6 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
                   {diffStats.correct}/{diffStats.attempted} correct
                 </div>
                 
-                {/* Mini progress ring */}
                 <div className="mt-4 mx-auto w-16 h-16 relative">
                   <svg className="w-full h-full -rotate-90">
                     <circle
@@ -271,7 +265,6 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         </div>
       </div>
 
-      {/* Quiz History */}
       {sortedSessions.length > 0 && (
         <div className="glass-card p-6">
           <div className="flex items-center gap-3 mb-6">

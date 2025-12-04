@@ -51,7 +51,6 @@ function QuestionRendererContent({
     }
   }, [usePlayground, question.code]);
 
-  // Difficulty badge color
   const getDifficultyBadge = (difficulty: string) => {
     switch (difficulty) {
       case 'easy':
@@ -67,7 +66,6 @@ function QuestionRendererContent({
 
   return (
     <div className="space-y-4">
-      {/* Question Header */}
       <div>
         <div className="flex items-start justify-between gap-3 mb-2">
           <h2 className="text-xl md:text-2xl font-bold text-[var(--text-primary)] leading-tight">
@@ -82,7 +80,6 @@ function QuestionRendererContent({
         </p>
       </div>
 
-      {/* Code Block */}
       {question.code && (
         <div className="rounded-lg overflow-hidden border border-[var(--border-subtle)]">
           <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-[var(--bg-tertiary)] border-b border-[var(--border-subtle)]">
@@ -164,7 +161,6 @@ function QuestionRendererContent({
         </div>
       )}
 
-      {/* Options */}
       <div className="space-y-2">
         {question.options.map((option, index) => {
           const isSelected = selectedAnswer === index;
@@ -214,7 +210,6 @@ function QuestionRendererContent({
         })}
       </div>
 
-      {/* Explanation - Collapsible */}
       {showCorrect && question.explanation && (
         <div className="mt-4">
           <button

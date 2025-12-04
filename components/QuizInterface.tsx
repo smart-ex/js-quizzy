@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useEffect, useLayoutEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import type { Question } from '@/lib/types';
@@ -18,6 +18,8 @@ interface QuizInterfaceProps {
 export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   const router = useRouter();
   const { saveSession, updateStats } = useStorage();
+  const questionNavigatorRef = useRef<HTMLDivElement>(null);
+  const currentQuestionButtonRef = useRef<HTMLButtonElement>(null);
   
   const currentSession = useQuizStore((state) => state.currentSession);
   const currentQuestionIndex = useQuizStore((state) => state.currentQuestionIndex);
@@ -69,8 +71,53 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     return () => clearInterval(interval);
   }, [isActive, updateTimer]);
 
-  // Derive showFeedback directly from whether the current question has an answer
   const showFeedback = currentQuestion ? answers.has(currentQuestion.id) : false;
+
+  useLayoutEffect(() => {
+    if (currentQuestionIndex === 0 && questionNavigatorRef.current) {
+      const container = questionNavigatorRef.current;
+      container.scrollLeft = 0;
+    }
+  }, [currentQuestionIndex]);
+
+  useEffect(() => {
+    if (currentQuestionIndex === 0) return;
+    
+    if (currentQuestionButtonRef.current && questionNavigatorRef.current) {
+      const button = currentQuestionButtonRef.current;
+      const container = questionNavigatorRef.current;
+      
+      const scrollToCurrent = () => {
+        const buttonRect = button.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const scrollLeft = container.scrollLeft;
+        
+        const buttonLeft = buttonRect.left - containerRect.left + scrollLeft;
+        const buttonWidth = buttonRect.width;
+        const containerWidth = containerRect.width;
+        
+        const margin = 10;
+        const isButtonVisible = 
+          buttonLeft >= scrollLeft - margin && 
+          buttonLeft + buttonWidth <= scrollLeft + containerWidth + margin;
+        
+        if (!isButtonVisible) {
+          const targetScroll = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+          container.scrollTo({
+            left: Math.max(0, targetScroll),
+            behavior: 'smooth'
+          });
+        }
+      };
+      
+      // Try multiple times to ensure it works after layout
+      requestAnimationFrame(() => {
+        scrollToCurrent();
+        setTimeout(scrollToCurrent, 50);
+        setTimeout(scrollToCurrent, 200);
+      });
+    }
+  }, [currentQuestionIndex, currentSession]);
 
   const handleSelectAnswer = (index: number) => {
     if (!currentQuestion) return;
@@ -92,9 +139,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     const isNextButtonActive = !canFinish && selectedAnswer !== undefined && showFeedback;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Only handle Space key when Next button is active
       if (e.key === ' ' && isNextButtonActive) {
-        // Prevent default scrolling behavior
         e.preventDefault();
         handleNext();
       }
@@ -116,7 +161,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     const session = endQuiz();
     if (!session) return;
 
-    // Calculate correct answers
     session.answers = session.answers.map(answer => {
       const question = questions.find(q => q.id === answer.questionId);
       const isCorrect = question ? answer.userAnswer === question.correctAnswer : false;
@@ -128,11 +172,9 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
 
     session.score = calculateScore(session);
 
-    // Save session and update stats
     saveSession(session);
     updateStats(session, questions);
 
-    // Navigate to results
     router.push('/quiz/results');
   };
 
@@ -154,7 +196,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
   return (
     <div className="min-h-screen py-3 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Quiz Header - Compact */}
         <div className="quiz-header mb-4 animate-fadeIn">
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
@@ -174,12 +215,10 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
               </span>
             </div>
             <div className="timer-display-compact">
-              <span className="text-xs text-[var(--text-muted)] mr-1">⏱</span>
               {formatTime(elapsedTime)}
             </div>
           </div>
           
-          {/* Progress Bar */}
           <div className="mt-2">
             <div className="progress-bar h-1.5">
               <div
@@ -189,19 +228,19 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
             </div>
           </div>
 
-          {/* Question Navigator */}
-          <div className="flex items-center justify-center gap-1.5 mt-2 overflow-x-auto pb-1">
+          <div 
+            ref={questionNavigatorRef}
+            className="flex items-center gap-1 sm:gap-1.5 mt-2 overflow-x-auto pb-1 question-navigator-scroll -mx-1 px-1 justify-start"
+          >
             {currentSession.questions.map((qId, idx) => {
               const isAnswered = answers.has(qId);
               const isCurrent = idx === currentQuestionIndex;
               
-              // Check if answer is correct (for answered questions)
               let isCorrect: boolean | null = null;
               if (isAnswered) {
                 const question = questions.find(q => q.id === qId);
                 const userAnswer = answers.get(qId);
                 if (question && userAnswer !== undefined) {
-                  // For current question, only check correctness if feedback is shown
                   if (!isCurrent || showFeedback) {
                     isCorrect = userAnswer === question.correctAnswer;
                   }
@@ -211,17 +250,17 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
               return (
                 <button
                   key={qId}
+                  ref={isCurrent ? currentQuestionButtonRef : null}
                   onClick={() => {
-                    // Allow backward navigation always, forward only if answered
                     if (idx < currentQuestionIndex || (idx > currentQuestionIndex && isAnswered)) {
                       goToQuestion(idx);
                     }
                   }}
                   disabled={idx > currentQuestionIndex && !isAnswered}
                   className={`
-                    w-7 h-7 rounded-md flex items-center justify-center font-mono text-xs font-semibold transition-all flex-shrink-0
+                    w-6 h-6 sm:w-7 sm:h-7 rounded-md flex items-center justify-center font-mono text-[10px] sm:text-xs font-semibold transition-all shrink-0
                     ${isCurrent 
-                      ? 'bg-[var(--accent-primary)] text-[var(--bg-primary)]' 
+                      ? 'bg-[var(--accent-primary)] text-[var(--bg-primary)] ring-1 ring-[var(--accent-primary)]' 
                       : isAnswered && isCorrect !== null
                         ? isCorrect === false
                           ? 'bg-[var(--accent-error)]/20 text-[var(--accent-error)] border border-[var(--accent-error)]/30'
@@ -238,7 +277,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
           </div>
         </div>
 
-        {/* Question Card */}
         <div className="glass-card p-4 md:p-6 mb-4 animate-fadeInUp">
           <QuestionRenderer
             question={currentQuestion}
@@ -249,7 +287,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
           />
         </div>
 
-        {/* Navigation Buttons */}
         <div className="flex items-center justify-between gap-4">
           <button
             onClick={handlePrevious}

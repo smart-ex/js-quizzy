@@ -14,7 +14,6 @@ interface CodePlaygroundProps {
 }
 
 export function CodePlayground({ code }: CodePlaygroundProps) {
-  // Create files object for Sandpack
   // Vanilla template expects /index.html and /index.js
   const files = useMemo(() => {
     return {

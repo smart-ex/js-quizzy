@@ -19,8 +19,6 @@ export function PWAStatus() {
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    // Set actual values after mounting to avoid hydration mismatch
-    // Batch all initial client-side values in a single state update
     // Note: Browser APIs (navigator, window) must be read after mount, requiring useEffect
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setClientState({
@@ -35,7 +33,6 @@ export function PWAStatus() {
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Listen for beforeinstallprompt
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);

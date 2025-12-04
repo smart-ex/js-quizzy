@@ -141,6 +141,31 @@ code, pre, .font-mono {
   background: var(--text-muted);
 }
 
+/* Thin Scrollbar for Question Navigator */
+.question-navigator-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-medium) transparent;
+}
+
+.question-navigator-scroll::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.question-navigator-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.question-navigator-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: 2px;
+  border: none;
+}
+
+.question-navigator-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
 /* Selection */
 ::selection {
   background: rgba(34, 211, 238, 0.3);
@@ -660,7 +685,7 @@ pre[class*="language-"] {
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   color: var(--accent-primary);
-  min-width: 3.5rem;
+  min-width: 4.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;

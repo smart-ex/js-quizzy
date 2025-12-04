@@ -21,7 +21,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
     return questions.find(q => q.id === questionId);
   };
 
-  // Determine performance level for animations
   const getPerformanceLevel = () => {
     if (accuracy >= 80) return { label: 'Excellent!', color: 'var(--accent-success)', emoji: '🎉' };
     if (accuracy >= 60) return { label: 'Good Job!', color: 'var(--accent-primary)', emoji: '👍' };
@@ -34,7 +33,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
   return (
     <div className="min-h-screen py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        {/* Results Summary Card */}
         <div className="glass-card p-8 md:p-10 mb-8 text-center animate-fadeInUp">
           <div className="text-6xl mb-4">{performance.emoji}</div>
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[var(--text-primary)]">
@@ -47,7 +45,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
             Category: {getCategoryLabel(session.category)}
           </p>
 
-          {/* Score Circle */}
           <div className="relative w-48 h-48 mx-auto mb-8">
             <svg className="w-full h-full -rotate-90">
               <circle
@@ -78,7 +75,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
             </div>
           </div>
 
-          {/* Stats Row */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             <div className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
               <div className="text-3xl font-bold text-[var(--accent-primary)] font-mono">
@@ -100,7 +96,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
             </div>
           </div>
 
-          {/* Share Section - Enhanced */}
           <div className="mb-6 p-6 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border-2 border-[var(--accent-primary)]/20">
             <div className="text-center mb-4">
               <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
@@ -113,7 +108,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
             <ShareButton session={session} />
           </div>
 
-          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/quiz"
@@ -136,7 +130,6 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
           </div>
         </div>
 
-        {/* Review Section */}
         <div className="glass-card p-6 md:p-8 mb-8 animate-fadeIn">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">

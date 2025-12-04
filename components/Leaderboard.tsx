@@ -25,7 +25,6 @@ export function Leaderboard() {
         for (const period of ['daily', 'weekly', 'allTime'] as const) {
           const entries = data[period] || [];
           
-          // Verify all entries in parallel
           const verificationPromises = entries.map(async (entry) => {
             // If entry has signature, verify it; otherwise include for backward compatibility
             if (entry.signature && entry.timestamp) {
@@ -37,7 +36,6 @@ export function Leaderboard() {
                 entry.signature
               );
               
-              // Only include entries with valid signatures and timestamps
               if (isValid && isTimestampValid(entry.timestamp)) {
                 return entry;
               }
@@ -52,7 +50,6 @@ export function Leaderboard() {
           const verifiedEntries = (await Promise.all(verificationPromises))
             .filter((entry): entry is LeaderboardEntry => entry !== null);
           
-          // Sort by score descending
           verifiedData[period] = verifiedEntries.sort((a, b) => {
             const aRatio = a.score / a.total;
             const bRatio = b.score / b.total;
@@ -65,7 +62,6 @@ export function Leaderboard() {
         setLoading(false);
       })
       .catch(() => {
-        // If leaderboard doesn't exist, use empty data
         setLeaderboard({
           daily: [],
           weekly: [],

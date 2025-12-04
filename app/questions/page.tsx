@@ -81,7 +81,6 @@ export default function QuestionsStatsPage() {
   // SVG pie chart segments
   const easyAngle = (easyPercent / 100) * 360;
   const mediumAngle = (mediumPercent / 100) * 360;
-  const hardAngle = (hardPercent / 100) * 360;
 
   function polarToCartesian(cx: number, cy: number, r: number, angle: number) {
     const rad = ((angle - 90) * Math.PI) / 180;

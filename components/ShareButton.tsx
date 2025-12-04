@@ -41,7 +41,6 @@ export function ShareButton({ session }: ShareButtonProps) {
           url: shareUrl,
         });
       } catch (err) {
-        // User cancelled or error occurred
         if ((err as Error).name !== 'AbortError') {
           console.error('Error sharing:', err);
         }
