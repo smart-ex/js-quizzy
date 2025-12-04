@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-javascript';
 import type { Question } from '@/lib/types';
 import { CodePlayground } from './CodePlayground';
+import { shuffleArray } from '@/lib/utils';
 
 interface QuestionRendererProps {
   question: Question;
@@ -27,6 +28,22 @@ function QuestionRendererContent({
   
   // Derive usePlayground - disable if question requires non-strict mode
   const usePlayground = question.nonStrictMode ? false : usePlaygroundInternal;
+
+  const { shuffledOptions, shuffledToOriginal, originalToShuffled } = useMemo(() => {
+    const indices = question.options.map((_, i) => i);
+    const shuffledIndices = shuffleArray(indices);
+    
+    const shuffledOptions = shuffledIndices.map(i => question.options[i]);
+    const shuffledToOriginal = new Map<number, number>();
+    const originalToShuffled = new Map<number, number>();
+    
+    shuffledIndices.forEach((originalIndex, shuffledIndex) => {
+      shuffledToOriginal.set(shuffledIndex, originalIndex);
+      originalToShuffled.set(originalIndex, shuffledIndex);
+    });
+    
+    return { shuffledOptions, shuffledToOriginal, originalToShuffled };
+  }, [question.options]);
 
   useEffect(() => {
     if (question.code && codeRef.current) {
@@ -162,9 +179,11 @@ function QuestionRendererContent({
       )}
 
       <div className="space-y-2">
-        {question.options.map((option, index) => {
-          const isSelected = selectedAnswer === index;
-          const isCorrect = index === question.correctAnswer;
+        {shuffledOptions.map((option, shuffledIndex) => {
+          const originalIndex = shuffledToOriginal.get(shuffledIndex)!;
+          const isSelected = selectedAnswer === originalIndex;
+          const correctShuffledIndex = originalToShuffled.get(question.correctAnswer);
+          const isCorrect = correctShuffledIndex !== undefined && shuffledIndex === correctShuffledIndex;
           
           let buttonClass = 'option-button-compact';
           
@@ -180,14 +199,21 @@ function QuestionRendererContent({
 
           return (
             <button
-              key={index}
-              onClick={() => !disabled && onSelectAnswer?.(index)}
+              key={shuffledIndex}
+              onClick={() => {
+                if (!disabled && onSelectAnswer) {
+                  const originalIdx = shuffledToOriginal.get(shuffledIndex);
+                  if (originalIdx !== undefined) {
+                    onSelectAnswer(originalIdx);
+                  }
+                }
+              }}
               disabled={disabled}
               className={buttonClass}
             >
               <div className="flex items-center gap-3">
                 <span className="option-letter-compact">
-                  {String.fromCharCode(65 + index)}
+                  {String.fromCharCode(65 + shuffledIndex)}
                 </span>
                 <span className="flex-1 text-left text-sm">{option}</span>
                 {showCorrect && isCorrect && (

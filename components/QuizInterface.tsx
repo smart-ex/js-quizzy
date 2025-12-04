@@ -230,7 +230,7 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
 
           <div 
             ref={questionNavigatorRef}
-            className="flex items-center gap-1 sm:gap-1.5 mt-2 overflow-x-auto pb-1 question-navigator-scroll -mx-1 px-1 justify-start"
+            className="flex items-center gap-1 sm:gap-1.5 mt-2 overflow-x-auto pb-1 question-navigator-scroll -mx-1 px-1 justify-start sm:justify-center"
           >
             {currentSession.questions.map((qId, idx) => {
               const isAnswered = answers.has(qId);

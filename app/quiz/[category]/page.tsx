@@ -3,9 +3,12 @@ import { getCategoriesForStaticGeneration } from '@/lib/getCategoriesStatic';
 
 export function generateStaticParams() {
   const categories = getCategoriesForStaticGeneration();
-  return categories.map(category => ({
-    category,
-  }));
+  return [
+    ...categories.map(category => ({
+      category,
+    })),
+    { category: 'comprehensive' },
+  ];
 }
 
 interface PageProps {
