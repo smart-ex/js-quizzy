@@ -3,7 +3,6 @@ import { JetBrains_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 import { ServiceWorkerRegistration } from "@/components/ServiceWorkerRegistration";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
-import { getIconPath } from "@/lib/paths";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -28,6 +27,16 @@ export const metadata: Metadata = {
   creator: "JS Quizzy",
   publisher: "JS Quizzy",
   manifest: `${basePath}/manifest.webmanifest`,
+  icons: {
+    icon: [
+      { url: `${basePath}/favicon.ico`, sizes: "64x64", type: "image/png" },
+      { url: `${basePath}/icons/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { url: `${basePath}/icons/icon-512.png`, sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: `${basePath}/icons/icon-192.png`, sizes: "192x192", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -84,13 +93,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const iconPath = `${basePath}/icons/icon-192.png`;
-  
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href={iconPath} />
-      </head>
       <body
         className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}
       >

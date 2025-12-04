@@ -660,6 +660,11 @@ pre[class*="language-"] {
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   color: var(--accent-primary);
+  min-width: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* Results Score Circle */
