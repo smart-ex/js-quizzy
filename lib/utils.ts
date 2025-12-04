@@ -1,5 +1,5 @@
 import type { QuizSession, UserStats, Question } from './types';
-import { getCategories } from './constants';
+import { getCategories, GITHUB_REPO_URL } from './constants';
 
 export function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -152,3 +152,51 @@ export const logger = {
   },
 };
 
+/**
+ * Creates a GitHub issue URL with pre-filled information about a question
+ */
+export function createQuestionIssueUrl(question: Question): string {
+  const title = encodeURIComponent(`Issue with question: ${question.title}`);
+  
+  const bodyParts = [
+    '## Question Information',
+    '',
+    `**Question ID:** \`${question.id}\``,
+    `**Category:** ${question.category}`,
+    `**Difficulty:** ${question.difficulty}`,
+    `**Type:** ${question.type}`,
+    '',
+    '## Description',
+    '',
+    '<!-- Please describe the issue you found with this question -->',
+    '',
+    '## Question Details',
+    '',
+    `**Title:** ${question.title}`,
+    '',
+    `**Question:** ${question.question}`,
+    '',
+  ];
+
+  if (question.code) {
+    bodyParts.push('**Code:**', '', '```javascript', question.code, '```', '');
+  }
+
+  bodyParts.push(
+    '**Options:**',
+    '',
+    ...question.options.map((opt, idx) => `${String.fromCharCode(65 + idx)}. ${opt}`),
+    '',
+    `**Correct Answer:** ${String.fromCharCode(65 + question.correctAnswer)}`,
+    '',
+    `**Explanation:** ${question.explanation}`,
+    '',
+    '---',
+    '',
+    '<!-- Feel free to provide additional context or suggestions for improvement -->'
+  );
+
+  const body = encodeURIComponent(bodyParts.join('\n'));
+  
+  return `${GITHUB_REPO_URL}/issues/new?title=${title}&body=${body}`;
+}

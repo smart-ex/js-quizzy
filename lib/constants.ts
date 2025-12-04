@@ -133,3 +133,4 @@ export const COMPREHENSIVE_QUIZ_QUESTIONS = 20;
 
 export const QUIZ_TIMER_DEFAULT = 600; // 10 minutes in seconds
 
+export const GITHUB_REPO_URL = 'https://github.com/smart-ex/js-quizzy';
