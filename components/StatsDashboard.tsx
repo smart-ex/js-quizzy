@@ -32,8 +32,8 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
   const sortedSessions = [...sessions].sort((a, b) => b.date - a.date);
 
   return (
-    <div className="space-y-8">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
         <div className="stats-card group">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-[var(--accent-primary)]/10 flex items-center justify-center flex-shrink-0">
@@ -100,19 +100,19 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         </div>
       </div>
 
-      <div className="glass-card p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">
-            <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <div className="glass-card p-4 sm:p-6">
+        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)]">
             Performance by Category
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {Object.entries(stats.byCategory)
             .map(([category, catStats]) => {
               // Use actual question count from sessions, not constant * attempts
@@ -190,19 +190,19 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
         </div>
       </div>
 
-      <div className="glass-card p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-tertiary)]/20 to-[var(--accent-warning)]/20 flex items-center justify-center">
-            <svg className="w-5 h-5 text-[var(--accent-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <div className="glass-card p-4 sm:p-6">
+        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[var(--accent-tertiary)]/20 to-[var(--accent-warning)]/20 flex items-center justify-center flex-shrink-0">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-tertiary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
           </div>
-          <h2 className="text-xl font-bold text-[var(--text-primary)]">
+          <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)]">
             Performance by Difficulty
           </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
           {(['easy', 'medium', 'hard'] as const).map(difficulty => {
             const diffStats = stats.difficulties[difficulty];
             const accuracy =
@@ -266,19 +266,19 @@ export function StatsDashboard({ stats, sessions }: StatsDashboardProps) {
       </div>
 
       {sortedSessions.length > 0 && (
-        <div className="glass-card p-6">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="glass-card p-4 sm:p-6">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-[var(--text-primary)]">
+            <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)]">
               Quiz History
             </h2>
           </div>
           
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {sortedSessions.map((session) => {
               const accuracy = calculateAccuracy(session);
               const categoryLabel = CATEGORY_LABELS[session.category as keyof typeof CATEGORY_LABELS] || session.category;
@@ -330,12 +330,12 @@ function QuizHistoryItem({ session, accuracy, categoryLabel, iconPath }: QuizHis
       : 'text-[var(--accent-error)]';
 
   return (
-    <div className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50 border border-[var(--border-subtle)] hover:border-[var(--border-medium)] transition-all">
-      <div className="flex items-start justify-between gap-4">
-        <div className="flex items-start gap-3 flex-1">
-          <div className="w-10 h-10 rounded-lg bg-[var(--bg-card)] flex items-center justify-center flex-shrink-0">
+    <div className="p-3 sm:p-4 rounded-xl bg-[var(--bg-tertiary)]/50 border border-[var(--border-subtle)] hover:border-[var(--border-medium)] transition-all">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+        <div className="flex items-start gap-2 sm:gap-3 flex-1 min-w-0">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[var(--bg-card)] flex items-center justify-center flex-shrink-0">
             <svg 
-              className="w-5 h-5 text-[var(--accent-primary)]" 
+              className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-primary)]" 
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
@@ -345,13 +345,13 @@ function QuizHistoryItem({ session, accuracy, categoryLabel, iconPath }: QuizHis
             </svg>
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-[var(--text-primary)] mb-1">
+            <h3 className="text-sm sm:text-base font-semibold text-[var(--text-primary)] mb-1 truncate">
               {categoryLabel}
             </h3>
             <p className="text-xs text-[var(--text-muted)] mb-2">
               {formattedDate}
             </p>
-            <div className="flex items-center gap-4 text-sm">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm">
               <span className={accuracyColor}>
                 {session.score}/{session.answers.length} ({accuracy}%)
               </span>
@@ -364,18 +364,18 @@ function QuizHistoryItem({ session, accuracy, categoryLabel, iconPath }: QuizHis
         <div className="flex items-center gap-2 flex-shrink-0">
           <Link
             href={session.category === 'comprehensive' ? '/quiz' : `/quiz/${session.category}`}
-            className="px-3 py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all text-sm font-medium flex items-center gap-2"
+            className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:border-[var(--accent-primary)] hover:text-[var(--accent-primary)] transition-all text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2"
             title="View Quiz"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
             </svg>
-            View
+            <span className="hidden sm:inline">View</span>
           </Link>
           <Link
             href={shareUrl || '#'}
-            className={`px-3 py-2 rounded-lg border transition-all text-sm font-medium flex items-center gap-2 ${
+            className={`px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border transition-all text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 ${
               loadingShare || !shareUrl
                 ? 'border-[var(--border-subtle)] text-[var(--text-muted)] cursor-not-allowed opacity-50'
                 : 'bg-[var(--accent-primary)]/10 border-[var(--accent-primary)]/30 text-[var(--accent-primary)] hover:bg-[var(--accent-primary)]/20'
@@ -387,10 +387,10 @@ function QuizHistoryItem({ session, accuracy, categoryLabel, iconPath }: QuizHis
               }
             }}
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
             </svg>
-            Share
+            <span className="hidden sm:inline">Share</span>
           </Link>
         </div>
       </div>

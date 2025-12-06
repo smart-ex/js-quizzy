@@ -31,21 +31,21 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
   const performance = getPerformanceLevel();
 
   return (
-    <div className="min-h-screen py-8 px-4">
+    <div className="min-h-screen py-4 sm:py-8 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="glass-card p-8 md:p-10 mb-8 text-center animate-fadeInUp">
-          <div className="text-6xl mb-4">{performance.emoji}</div>
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[var(--text-primary)]">
+        <div className="glass-card p-4 sm:p-6 md:p-10 mb-6 sm:mb-8 text-center animate-fadeInUp">
+          <div className="text-4xl sm:text-6xl mb-3 sm:mb-4">{performance.emoji}</div>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 text-[var(--text-primary)]">
             Quiz Complete!
           </h1>
-          <p className="text-xl mb-2" style={{ color: performance.color }}>
+          <p className="text-lg sm:text-xl mb-2" style={{ color: performance.color }}>
             {performance.label}
           </p>
-          <p className="text-[var(--text-muted)] mb-8">
+          <p className="text-sm sm:text-base text-[var(--text-muted)] mb-6 sm:mb-8">
             Category: {getCategoryLabel(session.category)}
           </p>
 
-          <div className="relative w-48 h-48 mx-auto mb-8">
+          <div className="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6 sm:mb-8">
             <svg className="w-full h-full -rotate-90">
               <circle
                 cx="96"
@@ -68,47 +68,47 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-5xl font-bold" style={{ color: performance.color }}>
+              <span className="text-3xl sm:text-5xl font-bold" style={{ color: performance.color }}>
                 {accuracy}%
               </span>
-              <span className="text-[var(--text-muted)] text-sm mt-1">Accuracy</span>
+              <span className="text-[var(--text-muted)] text-xs sm:text-sm mt-1">Accuracy</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
-              <div className="text-3xl font-bold text-[var(--accent-primary)] font-mono">
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
+            <div className="p-3 sm:p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-primary)] font-mono">
                 {correctCount}/{totalQuestions}
               </div>
-              <div className="text-sm text-[var(--text-muted)] mt-1">Correct</div>
+              <div className="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Correct</div>
             </div>
-            <div className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
-              <div className="text-3xl font-bold text-[var(--accent-secondary)] font-mono">
+            <div className="p-3 sm:p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-secondary)] font-mono">
                 {formatTime(session.totalTime)}
               </div>
-              <div className="text-sm text-[var(--text-muted)] mt-1">Time</div>
+              <div className="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Time</div>
             </div>
-            <div className="p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
-              <div className="text-3xl font-bold text-[var(--accent-tertiary)]">
+            <div className="p-3 sm:p-4 rounded-xl bg-[var(--bg-tertiary)]/50">
+              <div className="text-xl sm:text-2xl md:text-3xl font-bold text-[var(--accent-tertiary)]">
                 {totalQuestions - correctCount}
               </div>
-              <div className="text-sm text-[var(--text-muted)] mt-1">Missed</div>
+              <div className="text-xs sm:text-sm text-[var(--text-muted)] mt-1">Missed</div>
             </div>
           </div>
 
-          <div className="mb-6 p-6 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border-2 border-[var(--accent-primary)]/20">
+          <div className="mb-6 p-4 sm:p-6 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/10 to-[var(--accent-secondary)]/5 border-2 border-[var(--accent-primary)]/20">
             <div className="text-center mb-4">
-              <h3 className="text-lg font-bold text-[var(--text-primary)] mb-2">
+              <h3 className="text-base sm:text-lg font-bold text-[var(--text-primary)] mb-2">
                 🎯 Challenge Your Friends!
               </h3>
-              <p className="text-sm text-[var(--text-secondary)]">
+              <p className="text-xs sm:text-sm text-[var(--text-secondary)]">
                 Share your score and see if they can beat it!
               </p>
             </div>
             <ShareButton session={session} />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link
               href="/quiz"
               className="glow-button flex items-center justify-center gap-2 text-center"
@@ -130,19 +130,19 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
           </div>
         </div>
 
-        <div className="glass-card p-6 md:p-8 mb-8 animate-fadeIn">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center">
-              <svg className="w-5 h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="glass-card p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 animate-fadeIn">
+          <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 flex items-center justify-center flex-shrink-0">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--accent-primary)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
               </svg>
             </div>
-            <h2 className="text-xl font-bold text-[var(--text-primary)]">
+            <h2 className="text-lg sm:text-xl font-bold text-[var(--text-primary)]">
               Review Your Answers
             </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {session.answers.map((answer, index) => {
               const question = getQuestion(answer.questionId);
               if (!question) return null;
@@ -150,14 +150,14 @@ export function ResultsPanel({ session, questions }: ResultsPanelProps) {
               return (
                 <div
                   key={answer.questionId}
-                  className={`p-5 md:p-6 rounded-xl border-2 ${
+                  className={`p-4 sm:p-5 md:p-6 rounded-xl border-2 ${
                     answer.correct
                       ? 'bg-[var(--accent-success)]/5 border-[var(--accent-success)]/20'
                       : 'bg-[var(--accent-error)]/5 border-[var(--accent-error)]/20'
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-lg bg-[var(--bg-tertiary)] text-sm font-medium text-[var(--text-secondary)]">
+                  <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
+                    <span className="px-2 sm:px-3 py-1 rounded-lg bg-[var(--bg-tertiary)] text-xs sm:text-sm font-medium text-[var(--text-secondary)]">
                       Question {index + 1}
                     </span>
                     {answer.correct ? (

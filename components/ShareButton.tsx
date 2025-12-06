@@ -58,12 +58,12 @@ export function ShareButton({ session }: ShareButtonProps) {
           value={loading ? 'Generating link...' : shareUrl}
           readOnly
           disabled={loading}
-          className="flex-1 px-4 py-3 bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-lg border border-[var(--border-subtle)] text-sm font-mono focus:outline-none focus:border-[var(--accent-primary)] disabled:opacity-50"
+          className="flex-1 px-3 sm:px-4 py-2.5 sm:py-3 bg-[var(--bg-secondary)] text-[var(--text-primary)] rounded-lg border border-[var(--border-subtle)] text-xs sm:text-sm font-mono focus:outline-none focus:border-[var(--accent-primary)] disabled:opacity-50 break-all"
         />
         <button
           onClick={handleCopy}
           disabled={loading || !shareUrl}
-          className={`px-6 py-3 rounded-lg font-semibold text-sm transition-all flex items-center justify-center gap-2 flex-shrink-0 ${
+          className={`px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 flex-shrink-0 ${
             copied
               ? 'bg-[var(--accent-success)] text-white'
               : 'bg-[var(--accent-primary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25'
@@ -71,17 +71,19 @@ export function ShareButton({ session }: ShareButtonProps) {
         >
           {copied ? (
             <>
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              Copied!
+              <span className="hidden sm:inline">Copied!</span>
+              <span className="sm:hidden">Copied</span>
             </>
           ) : (
             <>
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
-              Copy Link
+              <span className="hidden sm:inline">Copy Link</span>
+              <span className="sm:hidden">Copy</span>
             </>
           )}
         </button>
@@ -89,9 +91,9 @@ export function ShareButton({ session }: ShareButtonProps) {
       {canUseNativeShare && (
         <button
           onClick={handleNativeShare}
-          className="w-full px-6 py-3 rounded-lg font-semibold text-sm bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25 transition-all flex items-center justify-center gap-2"
+          className="w-full px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)] text-white hover:shadow-lg hover:shadow-[var(--accent-primary)]/25 transition-all flex items-center justify-center gap-2"
         >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
           </svg>
           Share via...

@@ -130,7 +130,6 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     }
   }, [currentQuestionIndex, currentSession?.questions.length, nextQuestion]);
 
-  // Handle keyboard shortcuts (Space for Next button)
   useEffect(() => {
     if (!currentSession || !currentQuestion) return;
 
@@ -139,6 +138,17 @@ export function QuizInterface({ questions, category }: QuizInterfaceProps) {
     const isNextButtonActive = !canFinish && selectedAnswer !== undefined && showFeedback;
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      const activeElement = document.activeElement;
+      if (activeElement) {
+        const isInPlayground = activeElement.closest('.code-playground-wrapper') !== null ||
+                              activeElement.closest('.sp-wrapper') !== null ||
+                              activeElement.closest('[class*="sp-"]') !== null;
+        
+        if (isInPlayground) {
+          return; 
+        }
+      }
+
       if (e.key === ' ' && isNextButtonActive) {
         e.preventDefault();
         handleNext();
